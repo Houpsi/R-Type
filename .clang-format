@@ -1,0 +1,45 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+BreakBeforeBraces: Allman
+#AllowShortFunctionsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+ColumnLimit: 100
+PointerAlignment: Left
+
+SpacesBeforeTrailingComments: 2
+SpaceBeforeParens: ControlStatements
+SpaceAfterCStyleCast: true
+SpaceInEmptyParentheses: false
+SpaceAfterTemplateKeyword: true
+
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignOperands: true
+AlignTrailingComments: true
+AlignAfterOpenBracket: Align
+
+NamespaceIndentation: All
+IncludeBlocks: Preserve
+SortIncludes: true
+IncludeCategories:
+  - Regex: '^<.*\.h>'
+    Priority: 1
+  - Regex: '^<.*>'
+    Priority: 2
+  - Regex: '.*'
+    Priority: 3
+
+DerivePointerAlignment: false
+IndentCaseLabels: true
+AlwaysBreakTemplateDeclarations: true
+
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortLambdasOnASingleLine: false
+
+ReflowComments: true
+CommentPragmas: '^ IWYU pragma:'
+
+Standard: Cpp20
