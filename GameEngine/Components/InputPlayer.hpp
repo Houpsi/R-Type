@@ -1,24 +1,25 @@
-//
-// Created by aleks on 27/11/2025.
-//
+/*
+** EPITECH PROJECT, 2025
+** R_Type
+** File description:
+** InputPlayer
+*/
 
-#ifndef BOOTSTRAP_INPUTPLAYER_HPP
-#define BOOTSTRAP_INPUTPLAYER_HPP
+#ifndef INPUTPLAYER_HPP
+#define INPUTPLAYER_HPP
 #include "Component.hpp"
 
 
 class InputPlayer : public Component {
     public:
-    explicit InputPlayer(bool a) {
-        this->_down = a;
-    };
-    ~InputPlayer() override = default;
-public:
-    bool _up;
-    bool _down;
-    bool _left;
-    bool _right;
+        InputPlayer() = default;
+        ~InputPlayer() override = default;
+    private:
+        bool _up = false;
+        bool _down = false;
+        bool _left = false;
+        bool _right = false;
 };
 
 
-#endif //BOOTSTRAP_INPUTPLAYER_HPP
+#endif //INPUTPLAYER_HPP

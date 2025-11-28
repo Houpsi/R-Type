@@ -4,21 +4,24 @@
 
 #ifndef BOOTSTRAP_RENDERSYSTEM_HPP
 #define BOOTSTRAP_RENDERSYSTEM_HPP
+#include <iostream>
+
+
 #include "System.hpp"
+#include "GameEngine/EcsManager.hpp"
+#include "GameEngine/Components/Position.hpp"
+#include "GameEngine/Components/Sprite.hpp"
 #include "SFML/Graphics.hpp"
 
 
-class RenderSystem : public System {
-    private:
-    sf::RenderWindow &_window;
+class RenderSystem : public System
+{
     public:
-    explicit RenderSystem(sf::RenderWindow &window) : _window(window) {};
-    ~RenderSystem() override = default;
-
-    void update(EcsManager &ecs) override {
-        _window.clear(sf::Color::Black);
-    }
-
+        explicit RenderSystem(sf::RenderWindow &window) : _window(window) {};
+        ~RenderSystem() override = default;
+        void update(EcsManager &ecs) override;
+    private:
+        sf::RenderWindow &_window;
 };
 
 

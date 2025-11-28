@@ -1,24 +1,24 @@
-//
-// Created by aleks on 27/11/2025.
-//
+/*
+** EPITECH PROJECT, 2025
+** R_Type
+** File description:
+** MovementSystem
+*/
 
-#ifndef BOOTSTRAP_MOVEMENTSYSTEM_HPP
-#define BOOTSTRAP_MOVEMENTSYSTEM_HPP
-#include <memory>
-#include <vector>
 
+#ifndef MOVEMENTSYSTEM_HPP
+#define MOVEMENTSYSTEM_HPP
 #include "System.hpp"
 
-
-#include "../Entity.hpp"
-class MovementSystem : public System {
-    private:
-    float _movementSpeed;
+class MovementSystem : public System
+{
     public:
-    explicit MovementSystem(float test): _movementSpeed(test) {};
-    ~MovementSystem() = default;
-    void update(EcsManager &ecs) override;
+        explicit MovementSystem(): _movementSpeed(10) {};
+        ~MovementSystem() override = default;
+        void update(EcsManager &ecs) override;
+    private:
+        float _movementSpeed;
 };
 
 
-#endif //BOOTSTRAP_MOVEMENTSYSTEM_HPP
+#endif //MOVEMENTSYSTEM_HPP

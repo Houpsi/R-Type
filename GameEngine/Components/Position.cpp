@@ -1,5 +1,27 @@
-//
-// Created by aleks on 27/11/2025.
-//
+/*
+** EPITECH PROJECT, 2025
+** R_Type
+** File description:
+** Position
+*/
+
 
 #include "Position.hpp"
+
+Position::Position(const float x, const float y) {
+    this->_x = x;
+    this->_y = y;
+}
+
+float Position::getX() const {
+    return _x;
+}
+float Position::getY() const {
+    return _y;
+};
+void Position::setX(const float x) {
+    this->_x = x;
+};
+void Position::setY(const float y) {
+    this->_y = y;
+};

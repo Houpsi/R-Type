@@ -7,28 +7,18 @@
 #include "Component.hpp"
 
 
-class Position : public Component {
-    private:
-        float x;
-        float y;
+class Position : public Component
+{
     public:
-        explicit Position(int x, int y) {
-            this->x = x;
-            this->y = y;
-        };
-        ~Position() = default;
-        float getX() const {
-            return x;
-        };
-        float getY() const {
-            return y;
-        };
-        void setX(const float x) {
-            this->x = x;
-        };
-        void setY(const float y) {
-            this->y = y;
-        };
+        explicit Position(float x, float y);
+        ~Position() override = default;
+        float getX() const;
+        float getY() const;
+        void setX(float x);
+        void setY(float y);
+    private:
+        float _x;
+        float _y;
 };
 
 
