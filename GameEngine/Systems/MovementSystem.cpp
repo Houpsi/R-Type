@@ -1,18 +1,36 @@
-//
-// Created by aleks on 27/11/2025.
-//
+/*
+** EPITECH PROJECT, 2025
+** R_Type
+** File description:
+** MovementSystem
+*/
+
 
 #include "MovementSystem.hpp"
+#include "EcsManager.hpp"
+#include "Position.hpp"
+#include "Enemy.hpp"
+#include "InputPlayer.hpp"
 
-#include <iostream>
-#include <ostream>
-
-#include "../EcsManager.hpp"
-#include "../Components/Health.hpp"
-#include "../Components/Position.hpp"
-
-void MovementSystem::update(EcsManager &ecs) {
-    for (auto entity : ecs.getEntitiesWithComponent<Health>()) {
+void MovementSystem::update(EcsManager &ecs)
+{
+    float speed = 150.f;
+    float dt = ecs.deltaTime();
+    for (auto entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
         auto pos = entity->getComponent<Position>();
+        auto input = entity->getComponent<InputPlayer>();
+        if (input)
+        {
+            if (input->_down)
+                pos->setX(pos->getX() + (speed * dt));
+        }
+    }
+    for (auto enemy : ecs.getEntitiesWithComponent<Enemy>())
+    {
+        auto pos = enemy->getComponent<Position>();
+        if (pos)
+        {
+            pos->setX(pos->getX() + (speed * dt));
+        }
     }
 }
