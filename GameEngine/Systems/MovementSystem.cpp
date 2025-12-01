@@ -21,7 +21,7 @@ void MovementSystem::update(EcsManager &ecs)
         auto input = entity->getComponent<InputPlayer>();
         if (input)
         {
-            if (input->_down)
+            if (input->getDown())
                 pos->setX(pos->getX() + (speed * dt));
         }
     }
