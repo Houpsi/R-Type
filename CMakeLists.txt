@@ -6,41 +6,65 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(. GameEngine/Components GameEngine/Systems GameEngine/)
 
+add_subdirectory(GameEngine)
+
 add_executable(R_Type
         main.cpp
         main.hpp
-        GameEngine/Systems/System.cpp
-        GameEngine/Systems/System.hpp
-        GameEngine/Systems/RenderSystem.cpp
-        GameEngine/Systems/RenderSystem.hpp
-        GameEngine/Systems/MovementSystem.cpp
-        GameEngine/Systems/MovementSystem.hpp
-        GameEngine/Systems/InputSystem.cpp
-        GameEngine/Systems/InputSystem.hpp
-        GameEngine/Components/Sound.cpp
-        GameEngine/Components/Sound.hpp
-        GameEngine/Components/Collider.cpp
-        GameEngine/Components/Collider.hpp
-        GameEngine/Components/InputPlayer.cpp
-        GameEngine/Components/InputPlayer.hpp
-        GameEngine/Components/Health.cpp
-        GameEngine/Components/Health.hpp
-        GameEngine/Components/Position.cpp
-        GameEngine/Components/Position.hpp
-        GameEngine/Components/Component.cpp
-        GameEngine/Components/Component.hpp
-        GameEngine/Game.hpp
-        GameEngine/Game.cpp
-        GameEngine/Entity.cpp
-        GameEngine/Entity.hpp
-        GameEngine/EcsManager.cpp
-        GameEngine/EcsManager.hpp
-        GameEngine/Components/Sprite.cpp
-        GameEngine/Components/Sprite.hpp
-        GameEngine/Components/Sprite.hpp
-        GameEngine/Components/Enemy.cpp
-        GameEngine/Components/Enemy.hpp)
+)
 
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-target_link_libraries(R_Type PRIVATE sfml-graphics sfml-window sfml-system)
+target_link_libraries(R_Type PRIVATE
+        ECSLib
+        sfml-graphics
+        sfml-window
+        sfml-system
+)
+
+# ------------------------
+# TESTS - GOOGLE TESTS
+# ------------------------
+option(BUILD_TESTS "Build the tests" ON)
+if(BUILD_TESTS)
+
+    include(FetchContent)
+    FetchContent_Declare(
+            googletest
+            URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+    )
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+
+    file(COPY tests/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+    enable_testing()
+
+    add_executable(EngineTests
+        tests/EcsManager.cpp
+        tests/TestsHealth.cpp
+        tests/TestsPosition.cpp
+        tests/TestsSprite.cpp
+    )
+    target_link_libraries(EngineTests PRIVATE
+            gtest
+            gtest_main
+            ECSLib
+            sfml-graphics
+            sfml-window
+            sfml-system
+    )
+
+    set_target_properties(EngineTests PROPERTIES
+            COMPILE_FLAGS "--coverage -g -O0"
+            LINK_FLAGS "--coverage"
+    )
+
+    add_test(NAME EngineTests COMMAND EngineTests)
+
+    add_custom_target(run_tests
+            COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+            DEPENDS EngineTests
+    )
+
+endif()
