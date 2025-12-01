@@ -1,12 +1,15 @@
-//
-// Created by aleks on 27/11/2025.
-//
+/*
+** EPITECH PROJECT, 2025
+** R_Type
+** File description:
+** InputPlayer
+*/
 
 #include "InputPlayer.hpp"
 
 bool InputPlayer::getDown() const
 {
-    return _up;
+    return _down;
 }
 
 bool InputPlayer::getLeft() const

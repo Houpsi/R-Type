@@ -4,7 +4,6 @@
 
 #ifndef BOOTSTRAP_RENDERSYSTEM_HPP
 #define BOOTSTRAP_RENDERSYSTEM_HPP
-#include <iostream>
 
 
 #include "System.hpp"

@@ -10,18 +10,17 @@
 #define R_TYPE_SPRITE_HPP
 #include "Component.hpp"
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 
 class Sprite : public Component
 {
     public:
-        explicit Sprite(const std::string &sprite); 
+        explicit Sprite(const std::string &texturePath);
         ~Sprite() override = default;
         const sf::Sprite &getSprite() const; 
     private:
         sf::Sprite _sprite;
         sf::Texture _texture;
-
 };
 
 

@@ -5,17 +5,19 @@
 ** Sprite
 */
 
-
 #include "Sprite.hpp"
 
-Sprite::Sprite(const std::string &sprite)
+Sprite::Sprite(const std::string& texturePath)
+    : _texture()
+    , _sprite(_texture)
 {
-    if (!_texture.loadFromFile(sprite)) {
-        throw std::runtime_error("Failed to load sprite: " + sprite);
+    if (!_texture.loadFromFile(texturePath)) {
+        throw std::runtime_error("Failed to load texture: " + texturePath);
     }
-    _sprite.setTexture(_texture);
+    _sprite.setTexture(_texture, true);
 }
 
-const sf::Sprite& Sprite::getSprite() const{
+const sf::Sprite& Sprite::getSprite() const
+{
     return _sprite;
 }

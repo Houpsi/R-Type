@@ -17,8 +17,7 @@ void RenderSystem::update(EcsManager &ecs)
         if (spriteComp) {
             auto sprite = spriteComp->getSprite();
             if (positionComp) {
-                //std::cout << positionComp->getX() << positionComp->getY() << std::endl;
-                sprite.setPosition(positionComp->getX(), positionComp->getY());
+                sprite.setPosition({positionComp->getX(), positionComp->getY()});
             }
             _window.draw(sprite);
         }

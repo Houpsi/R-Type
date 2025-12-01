@@ -27,19 +27,18 @@ Game::~Game() {
 void Game::run() {
     auto player = _ecs.createEntity();
     auto enemy = _ecs.createEntity();
-    sf::RenderWindow window(sf::VideoMode(static_cast<int>(1000), static_cast<int>(800)), "SFML window");
+    sf::RenderWindow window(sf::VideoMode({1920, 1080}), "R-Type");
     sf::Clock clock;
-
 
     player->addComponent<Health>(100);
     player->addComponent<Position>(1, 2);
     player->addComponent<InputPlayer>();
-    player->addComponent<Sprite>("image.png");
+    player->addComponent<Sprite>("./assets/r-typesheet30a.gif");
 
     enemy->addComponent<Health>(100);
     enemy->addComponent<Position>(100, 100);
     enemy->addComponent<Enemy>();
-    enemy->addComponent<Sprite>("image.png");
+    enemy->addComponent<Sprite>("./assets/r-typesheet30a.gif");
 
 
     _ecs.addSystem<InputSystem>();
@@ -48,11 +47,21 @@ void Game::run() {
 
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
-        sf::Event event{};
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
+
+        while (const std::optional event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>())
                 window.close();
+            // -------- TODO remove that later - Dev and testing purpose only
+            if (const auto* keyEvent = event->getIf<sf::Event::KeyPressed>()) {
+                if (keyEvent->code == sf::Keyboard::Key::K) {
+                    auto newEnemy = _ecs.createEntity();
+                    newEnemy->addComponent<Health>(100);
+                    newEnemy->addComponent<Position>(200, 100);
+                    newEnemy->addComponent<Enemy>();
+                    newEnemy->addComponent<Sprite>("./assets/r-typesheet30a.gif");
+                }
+            }
+            // --------
         }
         _ecs.setDeltaTime(dt);
         _ecs.updateSystems();

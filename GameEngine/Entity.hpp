@@ -36,9 +36,10 @@ class Entity {
         }
         return nullptr;
     }
+        size_t _id;
+
     private:
         std::vector<std::shared_ptr<Component>> _components;
-        size_t _id;
 
 };
 

@@ -1,14 +1,24 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(R_Type)
+project(r-type_client)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
+include(FetchContent)
+FetchContent_Declare(SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 3.0.2
+        GIT_SHALLOW ON
+        EXCLUDE_FROM_ALL
+        SYSTEM)
+FetchContent_MakeAvailable(SFML)
 include_directories(. GameEngine/Components GameEngine/Systems GameEngine/)
 
-add_executable(R_Type
+add_executable(r-type_client
         main.cpp
         main.hpp
+        Game.cpp
+        Game.hpp
         GameEngine/Systems/System.cpp
         GameEngine/Systems/System.hpp
         GameEngine/Systems/RenderSystem.cpp
@@ -29,8 +39,6 @@ add_executable(R_Type
         GameEngine/Components/Position.hpp
         GameEngine/Components/Component.cpp
         GameEngine/Components/Component.hpp
-        GameEngine/Game.hpp
-        GameEngine/Game.cpp
         GameEngine/Entity.cpp
         GameEngine/Entity.hpp
         GameEngine/EcsManager.cpp
@@ -41,6 +49,4 @@ add_executable(R_Type
         GameEngine/Components/Enemy.cpp
         GameEngine/Components/Enemy.hpp)
 
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
-
-target_link_libraries(R_Type PRIVATE sfml-graphics sfml-window sfml-system)
+target_link_libraries(r-type_client PRIVATE sfml-graphics sfml-window sfml-system)

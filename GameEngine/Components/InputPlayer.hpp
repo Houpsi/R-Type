@@ -14,10 +14,10 @@ class InputPlayer : public Component {
     public:
         InputPlayer() = default;
         ~InputPlayer() override = default;
-        bool getUp() const;
-        bool getDown() const;
-        bool getLeft() const;
-        bool getRight() const;
+        [[nodiscard]] bool getUp() const;
+        [[nodiscard]] bool getDown() const;
+        [[nodiscard]] bool getLeft() const;
+        [[nodiscard]] bool getRight() const;
         void setUp(bool up);
         void setDown(bool down);
         void setLeft(bool left);
