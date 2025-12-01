@@ -3,3 +3,43 @@
 //
 
 #include "InputPlayer.hpp"
+
+bool InputPlayer::getDown() const
+{
+    return _up;
+}
+
+bool InputPlayer::getLeft() const
+{
+    return _left;
+}
+
+bool InputPlayer::getRight() const
+{
+    return _right;
+}
+
+bool InputPlayer::getUp() const
+{
+    return _up;
+}
+
+void InputPlayer::setDown(bool down)
+{
+    _down = down;
+}
+
+void InputPlayer::setLeft(bool left)
+{
+    _left = left;
+}
+
+void InputPlayer::setRight(bool right)
+{
+    _right = right;
+}
+
+void InputPlayer::setUp(bool up)
+{
+    _up = up;
+}
