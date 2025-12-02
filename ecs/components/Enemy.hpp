@@ -10,15 +10,18 @@
 #define R_TYPE_ENEMY_HPP
 #include "Component.hpp"
 
-class Enemy : public Component {
-    public:
-        explicit Enemy() = default;
-        ~Enemy() override = default;
-    private:
-        int _id;
-        int _type;
-};
+namespace ECS {
+class Enemy : public Component
+{
+  public:
+    explicit Enemy() = default;
+    ~Enemy() override = default;
 
+  private:
+    int _id;
+    int _type;
+};
+}
 
 
 #endif //R_TYPE_ENEMY_HPP

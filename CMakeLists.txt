@@ -12,41 +12,42 @@ FetchContent_Declare(SFML
         EXCLUDE_FROM_ALL
         SYSTEM)
 FetchContent_MakeAvailable(SFML)
-include_directories(. GameEngine/Components GameEngine/Systems GameEngine/)
+include_directories(. ecs/components ecs/systems ecs/)
 
 add_executable(r-type_client
         main.cpp
-        main.hpp
         Game.cpp
         Game.hpp
-        GameEngine/Systems/System.cpp
-        GameEngine/Systems/System.hpp
-        GameEngine/Systems/RenderSystem.cpp
-        GameEngine/Systems/RenderSystem.hpp
-        GameEngine/Systems/MovementSystem.cpp
-        GameEngine/Systems/MovementSystem.hpp
-        GameEngine/Systems/InputSystem.cpp
-        GameEngine/Systems/InputSystem.hpp
-        GameEngine/Components/Sound.cpp
-        GameEngine/Components/Sound.hpp
-        GameEngine/Components/Collider.cpp
-        GameEngine/Components/Collider.hpp
-        GameEngine/Components/InputPlayer.cpp
-        GameEngine/Components/InputPlayer.hpp
-        GameEngine/Components/Health.cpp
-        GameEngine/Components/Health.hpp
-        GameEngine/Components/Position.cpp
-        GameEngine/Components/Position.hpp
-        GameEngine/Components/Component.cpp
-        GameEngine/Components/Component.hpp
-        GameEngine/Entity.cpp
-        GameEngine/Entity.hpp
-        GameEngine/EcsManager.cpp
-        GameEngine/EcsManager.hpp
-        GameEngine/Components/Sprite.cpp
-        GameEngine/Components/Sprite.hpp
-        GameEngine/Components/Sprite.hpp
-        GameEngine/Components/Enemy.cpp
-        GameEngine/Components/Enemy.hpp)
+        ecs/systems/System.cpp
+        ecs/systems/System.hpp
+        ecs/systems/RenderSystem.cpp
+        ecs/systems/RenderSystem.hpp
+        ecs/systems/MovementSystem.cpp
+        ecs/systems/MovementSystem.hpp
+        ecs/systems/InputSystem.cpp
+        ecs/systems/InputSystem.hpp
+        ecs/components/Sound.cpp
+        ecs/components/Sound.hpp
+        ecs/components/Collider.cpp
+        ecs/components/Collider.hpp
+        ecs/components/InputPlayer.cpp
+        ecs/components/InputPlayer.hpp
+        ecs/components/Health.cpp
+        ecs/components/Health.hpp
+        ecs/components/Position.cpp
+        ecs/components/Position.hpp
+        ecs/components/Component.cpp
+        ecs/components/Component.hpp
+        ecs/Entity.cpp
+        ecs/Entity.hpp
+        ecs/EcsManager.cpp
+        ecs/EcsManager.hpp
+        ecs/components/Sprite.cpp
+        ecs/components/Sprite.hpp
+        ecs/components/Sprite.hpp
+        ecs/components/Enemy.cpp
+        ecs/components/Enemy.hpp
+        ecs/systems/ShootSystem.cpp
+        ecs/systems/ShootSystem.hpp)
 
 target_link_libraries(r-type_client PRIVATE sfml-graphics sfml-window sfml-system)

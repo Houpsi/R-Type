@@ -13,11 +13,13 @@
 #include "EcsManager.hpp"
 #include "InputPlayer.hpp"
 
+namespace ECS {
 class InputSystem : public System {
-    public:
-        InputSystem() = default;
-        void update(EcsManager &ecs) override;
+  public:
+    InputSystem() = default;
+    void update(EcsManager &ecs) override;
 };
+}
 
 
 #endif //INPUTSYSTEM_HPP

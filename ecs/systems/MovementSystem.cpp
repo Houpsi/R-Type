@@ -11,9 +11,10 @@
 #include "Enemy.hpp"
 #include "InputPlayer.hpp"
 
+namespace ECS {
 void MovementSystem::update(EcsManager &ecs)
 {
-    float speed = 150.f;
+    float speed = 250.f;
     float dt = ecs.deltaTime();
     for (auto const &entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
         auto pos = entity->getComponent<Position>();
@@ -32,7 +33,8 @@ void MovementSystem::update(EcsManager &ecs)
     for (auto const &enemy : ecs.getEntitiesWithComponent<Enemy>()) {
         auto pos = enemy->getComponent<Position>();
         if (pos) {
-            pos->setX(pos->getX() + (speed * dt));
+            pos->setX(pos->getX() + (-speed * dt));
         }
     }
+}
 }

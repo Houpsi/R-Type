@@ -10,15 +10,17 @@
 #define MOVEMENTSYSTEM_HPP
 #include "System.hpp"
 
+namespace ECS {
 class MovementSystem : public System
 {
-    public:
-        explicit MovementSystem(): _movementSpeed(10) {};
-        ~MovementSystem() override = default;
-        void update(EcsManager &ecs) override;
-    private:
-        float _movementSpeed;
+  public:
+    explicit MovementSystem(): _movementSpeed(10) {};
+    ~MovementSystem() override = default;
+    void update(EcsManager &ecs) override;
+  private:
+    float _movementSpeed;
 };
+}
 
 
 #endif //MOVEMENTSYSTEM_HPP

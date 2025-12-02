@@ -7,6 +7,7 @@
 
 #include "RenderSystem.hpp"
 
+namespace ECS {
 void RenderSystem::update(EcsManager &ecs)
 {
     _window.clear(sf::Color::Black);
@@ -23,4 +24,5 @@ void RenderSystem::update(EcsManager &ecs)
         }
     }
     _window.display();
+}
 }

@@ -7,11 +7,12 @@
 #include <memory>
 #include <vector>
 
-#include "Components/Component.hpp"
+#include "components/Component.hpp"
 
 
+namespace ECS {
 class Entity {
-    public:
+  public:
     Entity() = default;
     ~Entity() = default;
 
@@ -36,12 +37,13 @@ class Entity {
         }
         return nullptr;
     }
-        size_t _id;
+    size_t _id;
 
-    private:
-        std::vector<std::shared_ptr<Component>> _components;
+  private:
+    std::vector<std::shared_ptr<Component>> _components;
 
 };
+}
 
 
 #endif //BOOTSTRAP_ENTITY_HPP

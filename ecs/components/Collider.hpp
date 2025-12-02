@@ -6,8 +6,10 @@
 #define BOOTSTRAP_COLLIDER_HPP
 
 
+namespace ECS {
 class Collider {
 };
+}
 
 
 #endif //BOOTSTRAP_COLLIDER_HPP

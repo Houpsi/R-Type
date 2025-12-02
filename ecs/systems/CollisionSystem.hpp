@@ -6,8 +6,10 @@
 #define BOOTSTRAP_COLLISIONSYSTEM_HPP
 
 
+namespace ECS {
 class CollisionSystem {
 };
+}
 
 
 #endif //BOOTSTRAP_COLLISIONSYSTEM_HPP

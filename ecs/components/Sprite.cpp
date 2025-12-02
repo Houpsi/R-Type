@@ -7,9 +7,10 @@
 
 #include "Sprite.hpp"
 
+namespace ECS {
 Sprite::Sprite(const std::string& texturePath)
     : _texture()
-    , _sprite(_texture)
+      , _sprite(_texture)
 {
     if (!_texture.loadFromFile(texturePath)) {
         throw std::runtime_error("Failed to load texture: " + texturePath);
@@ -20,4 +21,5 @@ Sprite::Sprite(const std::string& texturePath)
 const sf::Sprite& Sprite::getSprite() const
 {
     return _sprite;
+}
 }

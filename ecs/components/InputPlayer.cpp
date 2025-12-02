@@ -7,6 +7,7 @@
 
 #include "InputPlayer.hpp"
 
+namespace ECS {
 bool InputPlayer::getDown() const
 {
     return _down;
@@ -27,6 +28,11 @@ bool InputPlayer::getUp() const
     return _up;
 }
 
+bool InputPlayer::getSpacebar() const
+{
+    return _spacebar;
+}
+
 void InputPlayer::setDown(bool down)
 {
     _down = down;
@@ -45,4 +51,10 @@ void InputPlayer::setRight(bool right)
 void InputPlayer::setUp(bool up)
 {
     _up = up;
+}
+
+void InputPlayer::setSpacebar(bool spacebar)
+{
+    _spacebar = spacebar;
+}
 }

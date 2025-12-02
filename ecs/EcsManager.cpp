@@ -7,6 +7,7 @@
 
 #include "EcsManager.hpp"
 
+namespace ECS {
 std::shared_ptr<Entity> EcsManager::createEntity() {
     auto entity = std::make_shared<Entity>();
     _entities.push_back(entity);
@@ -30,4 +31,5 @@ void EcsManager::updateSystems() {
     for (const auto& system : _systems) {
         system->update(*this);
     }
+}
 }
