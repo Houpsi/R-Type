@@ -26,7 +26,7 @@ void Game::run() {
     player->addComponent<ECS::Health>(100);
     player->addComponent<ECS::Position>(200, WINDOW_Y / 2);
     player->addComponent<ECS::InputPlayer>();
-    player->addComponent<ECS::Sprite>("./assets/r-typesheet30a.gif");
+    player->addComponent<ECS::Sprite>("./assets/r-typesheet42.gif", true);
 
     _ecs.addSystem<ECS::InputSystem>();
     _ecs.addSystem<ECS::MovementSystem>();
@@ -48,7 +48,7 @@ void Game::run() {
             newEnemy->addComponent<ECS::Health>(100);
             newEnemy->addComponent<ECS::Position>(2000, randNum);
             newEnemy->addComponent<ECS::Enemy>();
-            newEnemy->addComponent<ECS::Sprite>("./assets/r-typesheet28.gif");
+            newEnemy->addComponent<ECS::Sprite>("./assets/r-typesheet28.gif", false);
         }
         // --------
         _ecs.setDeltaTime(deltaTime);
