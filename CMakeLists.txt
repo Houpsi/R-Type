@@ -36,16 +36,16 @@ if(BUILD_TESTS)
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     FetchContent_MakeAvailable(googletest)
 
-    file(COPY tests/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+    file(COPY Tests/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
     enable_testing()
 
     add_executable(EngineTests
-        tests/TestsEcsManager.cpp
-        tests/TestsHealth.cpp
-        tests/TestsPosition.cpp
-        tests/TestsSprite.cpp
-        tests/TestsInputPlayer.cpp
+            Tests/TestsEcsManager.cpp
+            Tests/TestsHealth.cpp
+            Tests/TestsPosition.cpp
+            Tests/TestsSprite.cpp
+            Tests/TestsInputPlayer.cpp
     )
     target_link_libraries(EngineTests PRIVATE
             gtest
