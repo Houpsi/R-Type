@@ -10,7 +10,6 @@
 namespace ECS {
 void CollisionSystem::update(ECS::EcsManager &ecs)
 {
-
     for (auto& entity: ecs.getEntities()) {
         auto collision = entity->getComponent<Collision>();
         if (!collision) continue;
@@ -28,6 +27,8 @@ void CollisionSystem::update(ECS::EcsManager &ecs)
             if (collision->getTypeCollision() == ECS::TypeCollision::PLAYER && collision2->getTypeCollision() == ECS::TypeCollision::PLAYER) continue;
             if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && collision2->getTypeCollision() == ECS::TypeCollision::OBSTACLE) continue;
             if (collision->getTypeCollision() == ECS::TypeCollision::PLAYER && collision2->getTypeCollision() == ECS::TypeCollision::PLAYER_BULLET) continue;
+            if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && collision2->getTypeCollision() == ECS::TypeCollision::ENEMY_BULLET) continue;
+            if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && collision2->getTypeCollision() == ECS::TypeCollision::ENEMY) continue;
 
             if (X < (pos2->getX() + collision2->getLength()) &&
                 (X + length) > pos2->getX() &&
