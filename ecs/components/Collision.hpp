@@ -26,17 +26,17 @@ class Collision: public Component {
     explicit Collision(TypeCollision typeColision, float height, float length): _typeCollision(typeColision), _height(height), _length(length) {};
     ~Collision() = default;
 
-    [[nodiscard]] TypeCollision GetTypeCollision() const;
-    void SetTypeCollision(TypeCollision typeCollision);
+    [[nodiscard]] TypeCollision getTypeCollision() const;
+    void setTypeCollision(TypeCollision typeCollision);
 
-    [[nodiscard]] bool GetIsTrigger() const;
-    void SetIsTrigger(bool isTrigger);
+    [[nodiscard]] bool getIsTrigger() const;
+    void setIsTrigger(bool isTrigger);
 
-    [[nodiscard]] float GetHeight() const;
-    void SetHeight(float height);
+    [[nodiscard]] float getHeight() const;
+    void setHeight(float height);
 
-    [[nodiscard]] float GetLength() const;
-    void SetLength(float length);
+    [[nodiscard]] float getLength() const;
+    void setLength(float length);
 
   private:
     TypeCollision _typeCollision;
