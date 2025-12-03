@@ -26,6 +26,8 @@ add_executable(r-type_client
         ecs/systems/MovementSystem.hpp
         ecs/systems/InputSystem.cpp
         ecs/systems/InputSystem.hpp
+        ecs/systems/CollisionSystem.cpp
+        ecs/systems/CollisionSystem.hpp
         ecs/components/Sound.cpp
         ecs/components/Sound.hpp
         ecs/components/Collision.cpp
