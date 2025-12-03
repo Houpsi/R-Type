@@ -1,5 +1,6 @@
 cmake-build-debug
 .idea
+
 CMakeFiles
 cmake-build-debug
 cmake_install.cmake
@@ -7,3 +8,4 @@ R_Type
 Makefile
 CMakeCache.txt
 build
+r-type_client
