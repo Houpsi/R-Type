@@ -7,6 +7,8 @@
 
 
 #include "Game.hpp"
+#include "DestroySystem.hpp"
+#include "InputPlayer.hpp"
 #include "components/Enemy.hpp"
 #include "components/Health.hpp"
 #include "components/Position.hpp"
@@ -31,6 +33,7 @@ void Game::run() {
     _ecs.addSystem<ECS::InputSystem>();
     _ecs.addSystem<ECS::MovementSystem>();
     _ecs.addSystem<ECS::RenderSystem>(window);
+    _ecs.addSystem<ECS::DestroySystem>();
 
     while (window.isOpen()) {
         float const deltaTime = clock.restart().asSeconds();
@@ -41,7 +44,7 @@ void Game::run() {
             }
         }
         // -------- TODO remove that later - Dev and testing purpose only
-        if (enemyClock.getElapsedTime().asSeconds() > 1) {
+        if (enemyClock.getElapsedTime().asSeconds() > 5) {
             enemyClock.restart();
             int const randNum = generator() % (WINDOW_Y + 1);
             auto newEnemy = _ecs.createEntity();

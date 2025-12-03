@@ -19,7 +19,7 @@ class EcsManager {
     EcsManager() = default;
     ~EcsManager() = default;
     std::shared_ptr<Entity> createEntity();
-    std::vector<std::shared_ptr<Entity>> getEntities();
+    std::vector<std::shared_ptr<Entity>> &getEntities();
     void updateSystems();
     void setDeltaTime(float dt);
     float deltaTime() const;

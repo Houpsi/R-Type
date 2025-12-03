@@ -48,6 +48,10 @@ add_executable(r-type_client
         ecs/components/Enemy.cpp
         ecs/components/Enemy.hpp
         ecs/systems/ShootSystem.cpp
-        ecs/systems/ShootSystem.hpp)
+        ecs/systems/ShootSystem.hpp
+        ecs/components/Destroy.cpp
+        ecs/components/Destroy.hpp
+        ecs/systems/DestroySystem.cpp
+        ecs/systems/DestroySystem.hpp)
 
 target_link_libraries(r-type_client PRIVATE sfml-graphics sfml-window sfml-system)

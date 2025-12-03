@@ -6,10 +6,12 @@
 */
 
 #include "MovementSystem.hpp"
+#include "DestroySystem.hpp"
+#include "Destroy.hpp"
 #include "EcsManager.hpp"
-#include "Position.hpp"
 #include "Enemy.hpp"
 #include "InputPlayer.hpp"
+#include "Position.hpp"
 
 namespace ECS {
 void MovementSystem::update(EcsManager &ecs)
@@ -34,6 +36,9 @@ void MovementSystem::update(EcsManager &ecs)
         auto pos = enemy->getComponent<Position>();
         if (pos) {
             pos->setX(pos->getX() + (-speed * dt));
+        }
+        if (pos->getX() < DESTROY_THRESHOLD && !enemy->getComponent<Destroy>()) {
+            enemy->addComponent<Destroy>();
         }
     }
 }
