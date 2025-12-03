@@ -25,25 +25,25 @@ void CollisionSystem::update(ECS::EcsManager &ecs)
         auto height = collision->getHeight();
         auto length = collision->getWidth();
 
-        for (auto entity2: ecs.getEntities()) {
-            if (entity == entity2) continue;
-            auto collision2 = entity2->getComponent<Collision>();
-            auto pos2 = entity2->getComponent<Position>();
+        for (auto otherEntity: ecs.getEntities()) {
+            if (entity == otherEntity) continue;
+            auto otherCollision = otherEntity->getComponent<Collision>();
+            auto posOtherEntity = otherEntity->getComponent<Position>();
 
-            if (collision->getTypeCollision() == ECS::TypeCollision::PLAYER && collision2->getTypeCollision() == ECS::TypeCollision::PLAYER) continue;
-            if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && collision2->getTypeCollision() == ECS::TypeCollision::OBSTACLE) continue;
-            if (collision->getTypeCollision() == ECS::TypeCollision::PLAYER && collision2->getTypeCollision() == ECS::TypeCollision::PLAYER_BULLET) continue;
-            if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && collision2->getTypeCollision() == ECS::TypeCollision::ENEMY_BULLET) continue;
-            if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && collision2->getTypeCollision() == ECS::TypeCollision::ENEMY) continue;
+            if (collision->getTypeCollision() == ECS::TypeCollision::PLAYER && otherCollision->getTypeCollision() == ECS::TypeCollision::PLAYER) continue;
+            if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ECS::TypeCollision::OBSTACLE) continue;
+            if (collision->getTypeCollision() == ECS::TypeCollision::PLAYER && otherCollision->getTypeCollision() == ECS::TypeCollision::PLAYER_PROJECTILE) continue;
+            if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ECS::TypeCollision::ENEMY_PROJECTILE) continue;
+            if (collision->getTypeCollision() == ECS::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ECS::TypeCollision::ENEMY) continue;
 
-            if (X < (pos2->getX() + collision2->getWidth()) &&
-                (X + length) > pos2->getX() &&
-                Y < (pos2->getY() + collision2->getHeight()) &&
-                (Y + collision->getHeight()) > pos2->getY()
+            if (X < (posOtherEntity->getX() + otherCollision->getWidth()) &&
+                (X + length) > posOtherEntity->getX() &&
+                Y < (posOtherEntity->getY() + otherCollision->getHeight()) &&
+                (Y + collision->getHeight()) > posOtherEntity->getY()
                 ) {
                 std::cout << "COLLLLISION !!!!" << std::endl;
                 collision->setIsTrigger(true);
-                collision2->setIsTrigger(true);
+                otherCollision->setIsTrigger(true);
             }
         }
     }
