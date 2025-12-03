@@ -8,42 +8,42 @@
 #include "Collision.hpp"
 
 namespace ECS {
-    TypeCollision Collision::GetTypeCollision() const
+    TypeCollision Collision::getTypeCollision() const
     {
         return _typeCollision;
     }
 
-    void Collision::SetTypeCollision(ECS::TypeCollision typeCollision)
+    void Collision::setTypeCollision(TypeCollision typeCollision)
     {
         _typeCollision = typeCollision;
     }
 
-    bool Collision::GetIsTrigger() const
+    bool Collision::getIsTrigger() const
     {
         return _isTrigger;
     }
 
-    void Collision::SetIsTrigger(bool isTrigger)
+    void Collision::setIsTrigger(bool isTrigger)
     {
         _isTrigger = isTrigger;
     }
 
-    float Collision::GetHeight() const
+    float Collision::getHeight() const
     {
         return _height;
     }
 
-    void Collision::SetHeight(float height)
+    void Collision::setHeight(float height)
     {
         _height = height;
     }
 
-    float Collision::GetLength() const
+    float Collision::getLength() const
     {
         return _length;
     }
 
-    void Collision::SetLength(float length)
+    void Collision::setLength(float length)
     {
         _length = length;
     }
