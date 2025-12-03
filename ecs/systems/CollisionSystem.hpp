@@ -10,6 +10,7 @@
 #include "Sprite.hpp"
 #include "EcsManager.hpp"
 #include "Collision.hpp"
+#include "Position.hpp"
 
 namespace ECS {
 class CollisionSystem: public System {
