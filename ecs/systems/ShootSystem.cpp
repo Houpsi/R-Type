@@ -6,6 +6,7 @@
 */
 
 #include "ShootSystem.hpp"
+#include "Velocity.hpp"
 
 namespace ECS {
 /**
@@ -23,7 +24,7 @@ void ShootSystem::update(EcsManager &ecs)
                 auto projectile = ecs.createEntity();
 
                 projectile->addComponent<ECS::Position>(entity->getComponent<Position>()->getX(), entity->getComponent<Position>()->getY());
-//                projectile->addComponent<Velocity>(0, -10); TO DO when velocity is done
+                projectile->addComponent<Velocity>(25, 1);
                 projectile->addComponent<Shoot>(entity->getComponent<Shoot>()->getDamage(), entity->getComponent<Shoot>()->getCooldown());
                 projectile->addComponent<Sprite>("./assets/r-typesheet30a.gif");
                 projectile->addComponent<Collision>(ECS::TypeCollision::PLAYER_PROJECTILE, 10, 10);

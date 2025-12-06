@@ -5,7 +5,6 @@
 ** Game
 */
 
-
 #include "Game.hpp"
 #include "components/Enemy.hpp"
 #include "components/Health.hpp"
@@ -14,6 +13,7 @@
 #include "systems/InputSystem.hpp"
 #include "systems/MovementSystem.hpp"
 #include "systems/RenderSystem.hpp"
+#include "VelocitySystem.hpp"
 #include "systems/ShootSystem.hpp"
 #include "systems/CollisionSystem.hpp"
 #include "VelocitySystem.hpp"

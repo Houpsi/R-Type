@@ -12,25 +12,22 @@ namespace ECS {
     void VelocitySystem::update(EcsManager &ecs)
     {
         float dt = ecs.deltaTime();
-
         for (auto const &entity : ecs.getEntitiesWithComponent<Velocity>()) {
             auto pos = entity->getComponent<Position>();
             auto direction = entity->getComponent<Velocity>()->getDirection();
-//            if (input) {
+            auto velocity = entity->getComponent<Velocity>()->getVelocity();
                 if (direction == 0) {
-                    pos->setY(pos->getY() - (10 * dt));
+                    pos->setX(pos->getX() - (velocity * dt));
                 }
                 if (direction == 1) {
-                    pos->setY(pos->getY() + (10 * dt));
+                    pos->setX(pos->getX() + (velocity * dt));
                 }
                 if (direction == 2) {
-                    pos->setX(pos->getX() - (10 * dt));
+                    pos->setY(pos->getY() - (velocity * dt));
                 }
                 if (direction == 3) {
-                    pos->setX(pos->getX() + (10 * dt));
+                    pos->setY(pos->getY() + (velocity * dt));
                 }
-//            }
         }
-
     }
 }
