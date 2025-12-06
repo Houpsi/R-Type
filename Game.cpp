@@ -10,10 +10,12 @@
 #include "components/Enemy.hpp"
 #include "components/Health.hpp"
 #include "components/Position.hpp"
+#include "components/Velocity.hpp"
 #include "components/Sprite.hpp"
 #include "systems/InputSystem.hpp"
 #include "systems/MovementSystem.hpp"
 #include "systems/RenderSystem.hpp"
+#include "VelocitySystem.hpp"
 
 void Game::run() {
     auto player = _ecs.createEntity();
@@ -31,6 +33,7 @@ void Game::run() {
     _ecs.addSystem<ECS::InputSystem>();
     _ecs.addSystem<ECS::MovementSystem>();
     _ecs.addSystem<ECS::RenderSystem>(window);
+    _ecs.addSystem<ECS::VelocitySystem>();
 
     while (window.isOpen()) {
         float const deltaTime = clock.restart().asSeconds();
