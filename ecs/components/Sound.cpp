@@ -9,6 +9,10 @@
 #include "Sound.hpp"
 
 namespace ECS {
+    /**
+     * @bried Load the sound from a file
+     * @param filepath The path to the sound file
+     */
     Sound::Sound(const std::string& filepath)
     {
         if (!_buffer.loadFromFile(filepath))
@@ -17,11 +21,18 @@ namespace ECS {
         _sound->setVolume(100.f);
     }
 
+    /**
+     * @brief Gets Sound of the component
+     * @return the sound of the component
+     */
     const sf::Sound& Sound::getSound() const
     {
         return *_sound;
     }
 
+    /**
+     * @brief PLay the sound of the component
+     */
     void Sound::play()
     {
         if (_sound) {
