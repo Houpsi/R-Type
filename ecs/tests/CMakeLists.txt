@@ -14,39 +14,39 @@ if(BUILD_TESTS)
     enable_testing()
 
     add_library(ECSLib
-            ../Game.cpp
-            ../Game.hpp
+            ../../Game.cpp
+            ../../Game.hpp
 
             ../Entity.cpp
             ../Entity.hpp
             ../EcsManager.cpp
             ../EcsManager.hpp
 
-            ../Systems/System.cpp
-            ../Systems/System.hpp
-            ../Systems/RenderSystem.cpp
-            ../Systems/RenderSystem.hpp
-            ../Systems/MovementSystem.cpp
-            ../Systems/MovementSystem.hpp
-            ../Systems/InputSystem.cpp
-            ../Systems/InputSystem.hpp
+            ../systems/System.cpp
+            ../systems/System.hpp
+            ../systems/RenderSystem.cpp
+            ../systems/RenderSystem.hpp
+            ../systems/MovementSystem.cpp
+            ../systems/MovementSystem.hpp
+            ../systems/InputSystem.cpp
+            ../systems/InputSystem.hpp
 
-            ../Components/Sound.cpp
-            ../Components/Sound.hpp
-            ../Components/Collider.cpp
-            ../Components/Collider.hpp
-            ../Components/InputPlayer.cpp
-            ../Components/InputPlayer.hpp
-            ../Components/Health.cpp
-            ../Components/Health.hpp
-            ../Components/Position.cpp
-            ../Components/Position.hpp
-            ../Components/Component.cpp
-            ../Components/Component.hpp
-            ../Components/Sprite.cpp
-            ../Components/Sprite.hpp
-            ../Components/Enemy.cpp
-            ../Components/Enemy.hpp
+            ../components/Sound.cpp
+            ../components/Sound.hpp
+            ../components/Collider.cpp
+            ../components/Collider.hpp
+            ../components/InputPlayer.cpp
+            ../components/InputPlayer.hpp
+            ../components/Health.cpp
+            ../components/Health.hpp
+            ../components/Position.cpp
+            ../components/Position.hpp
+            ../components/Component.cpp
+            ../components/Component.hpp
+            ../components/Sprite.cpp
+            ../components/Sprite.hpp
+            ../components/Enemy.cpp
+            ../components/Enemy.hpp
     )
 
     add_executable(r-type_client_tests
@@ -57,15 +57,15 @@ if(BUILD_TESTS)
             TestsInputPlayer.cpp
     )
     target_link_libraries(r-type_client_tests PRIVATE
-            ECSLib
             gtest
             gtest_main
             sfml-graphics
             sfml-window
             sfml-system
+            ECSLib
     )
 
-    target_include_directories(r-type_client PRIVATE ../)
+    target_include_directories(r-type_client PRIVATE ../../GameEngine)
 
 #    set_target_properties(r-type_client_tests PROPERTIES
 #            COMPILE_FLAGS "--coverage -g -O0"
