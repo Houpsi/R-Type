@@ -2,11 +2,20 @@ cmake_minimum_required(VERSION 3.10)
 
 project(ECSLib)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
+
+include(FetchContent)
+FetchContent_Declare(SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 3.0.2
+        GIT_SHALLOW ON
+        EXCLUDE_FROM_ALL
+        SYSTEM)
+FetchContent_MakeAvailable(SFML)
 
 include_directories(. Components Systems )
 
-add_library(ECSLib SHARED
+add_executable(r-type_client
         Game.cpp
         Game.hpp
         Entity.cpp
@@ -39,6 +48,15 @@ add_library(ECSLib SHARED
         Components/Sprite.hpp
         Components/Enemy.cpp
         Components/Enemy.hpp
+
+        ../main.cpp
+        ../main.hpp
 )
 
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+target_link_libraries(r-type_client PRIVATE
+        sfml-graphics
+        sfml-window
+        sfml-system
+)
+
+add_subdirectory(tests)
