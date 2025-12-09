@@ -7,7 +7,7 @@
 
 #include "Velocity.hpp"
 
-namespace ECS {
+namespace ecs {
     float Velocity::getVelocity() const
     {
         return _velocity;

@@ -5,14 +5,13 @@
 ** Sprite
 */
 
-
 #ifndef R_TYPE_SPRITE_HPP
-#define R_TYPE_SPRITE_HPP
+    #define R_TYPE_SPRITE_HPP
 #include "Component.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-namespace ECS {
+namespace ecs {
 class Sprite : public Component
 {
   public:
@@ -24,7 +23,5 @@ class Sprite : public Component
     sf::Texture _texture;
 };
 }
-
-
 
 #endif //R_TYPE_SPRITE_HPP

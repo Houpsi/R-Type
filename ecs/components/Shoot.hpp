@@ -6,15 +6,14 @@
 */
 
 #ifndef R_TYPE_CLIENT_SHOOT_HPP
-#define R_TYPE_CLIENT_SHOOT_HPP
-
+    #define R_TYPE_CLIENT_SHOOT_HPP
 #include "Component.hpp"
 
-namespace ECS {
-/**
- * @class Shoot class with damage and cooldown
- */
-class Shoot : public Component {
+namespace ecs {
+    /**
+     * Velocity class in function of the speed and the direction
+     */
+    class Shoot : public Component {
     public:
         explicit Shoot(int damage, float cooldown): _damage(damage), _cooldown(cooldown) {};
         ~Shoot() override = default;
@@ -35,6 +34,5 @@ class Shoot : public Component {
         float _timeSinceLastShot = 0;
     };
 }
-
 
 #endif //R_TYPE_CLIENT_SHOOT_HPP

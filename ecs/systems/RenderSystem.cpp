@@ -7,7 +7,7 @@
 
 #include "RenderSystem.hpp"
 
-namespace ECS {
+namespace ecs {
 void RenderSystem::update(EcsManager &ecs)
 {
     _window.clear(sf::Color::Black);

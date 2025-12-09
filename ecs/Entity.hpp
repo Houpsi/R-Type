@@ -6,12 +6,12 @@
 */
 
 #ifndef BOOTSTRAP_ENTITY_HPP
-#define BOOTSTRAP_ENTITY_HPP
+    #define BOOTSTRAP_ENTITY_HPP
+#include "Component.hpp"
 #include <memory>
 #include <vector>
-#include "Component.hpp"
 
-namespace ECS {
+namespace ecs {
 class Entity {
   public:
     Entity() = default;
@@ -45,6 +45,5 @@ class Entity {
 
 };
 }
-
 
 #endif //BOOTSTRAP_ENTITY_HPP

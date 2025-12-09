@@ -6,11 +6,10 @@
 */
 
 #ifndef BOOTSTRAP_HEALTH_HPP
-#define BOOTSTRAP_HEALTH_HPP
+    #define BOOTSTRAP_HEALTH_HPP
 #include "Component.hpp"
 
-
-namespace ECS {
+namespace ecs {
 class Health : public Component {
   public:
     explicit Health(int const health) : _health(health) {};
@@ -23,6 +22,5 @@ class Health : public Component {
     int _health = 0;
 };
 }
-
 
 #endif //BOOTSTRAP_HEALTH_HPP

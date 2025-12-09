@@ -6,11 +6,10 @@
 */
 
 #ifndef INPUTPLAYER_HPP
-#define INPUTPLAYER_HPP
+    #define INPUTPLAYER_HPP
 #include "Component.hpp"
 
-
-namespace ECS {
+namespace ecs {
 class InputPlayer : public Component {
   public:
     InputPlayer() = default;
@@ -33,6 +32,5 @@ class InputPlayer : public Component {
     bool _spacebar = false;
 };
 }
-
 
 #endif //INPUTPLAYER_HPP

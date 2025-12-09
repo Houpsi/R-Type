@@ -6,12 +6,12 @@
 */
 
 #ifndef R_TYPE_CLIENT_VELOCITY_HPP
-#define R_TYPE_CLIENT_VELOCITY_HPP
+    #define R_TYPE_CLIENT_VELOCITY_HPP
 #include "Component.hpp"
 
-namespace ECS {
+namespace ecs {
 /**
- * Velocity class in function of the speed and the direction
+ * @class Velocity class in function of the speed and the direction
  */
 class Velocity : public Component {
     public:

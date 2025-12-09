@@ -6,8 +6,7 @@
 */
 
 #ifndef R_TYPE_CLIENT_SHOOTSYSTEM_HPP
-#define R_TYPE_CLIENT_SHOOTSYSTEM_HPP
-
+    #define R_TYPE_CLIENT_SHOOTSYSTEM_HPP
 #include "System.hpp"
 #include "Shoot.hpp"
 #include "InputPlayer.hpp"
@@ -15,14 +14,14 @@
 #include "Position.hpp"
 #include "Collision.hpp"
 #include "Sprite.hpp"
+#include "Velocity.hpp"
 
-namespace ECS {
+namespace ecs {
 class ShootSystem : public System {
   public:
     ShootSystem() = default;
     void update(EcsManager &ecs) override;
 };
 }
-
 
 #endif// R_TYPE_CLIENT_SHOOTSYSTEM_HPP
