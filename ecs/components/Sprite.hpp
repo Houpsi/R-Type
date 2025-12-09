@@ -16,14 +16,13 @@ namespace ECS {
 class Sprite : public Component
 {
   public:
-    explicit Sprite(const std::string &texturePath, bool const animated);
+    explicit Sprite(const std::string &texturePath);
     ~Sprite() override = default;
     const sf::Sprite &getSprite() const;
-    const bool isAnimated() const;
+    void setTextureRect(int x, int y, int width, int height);
   private:
     sf::Sprite _sprite;
     sf::Texture _texture;
-    bool _isAnimated = false;
 };
 }
 

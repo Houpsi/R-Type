@@ -8,24 +8,24 @@
 #include "Sprite.hpp"
 
 namespace ECS {
-Sprite::Sprite(const std::string& texturePath, const bool animated)
-    : _texture()
-      , _sprite(_texture)
+Sprite::Sprite(const std::string& texturePath) :
+      _sprite(_texture)
 {
     if (!_texture.loadFromFile(texturePath)) {
         throw std::runtime_error("Failed to load texture: " + texturePath);
     }
-    _sprite.setTexture(_texture, true);
-    _isAnimated = animated;
+    _sprite.setTexture(_texture);
 }
+
 
 const sf::Sprite& Sprite::getSprite() const
 {
     return _sprite;
 }
 
-const bool Sprite::isAnimated() const
+void Sprite::setTextureRect(int x, int y, int width, int height)
 {
-    return _isAnimated;
-}
+    _sprite.setTextureRect(sf::IntRect(sf::Vector2i(x, y), sf::Vector2i(width, height)));
+};
+
 }
