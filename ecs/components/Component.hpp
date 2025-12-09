@@ -6,16 +6,14 @@
 */
 
 #ifndef BOOTSTRAP_COMPONENT_HPP
-#define BOOTSTRAP_COMPONENT_HPP
+    #define BOOTSTRAP_COMPONENT_HPP
 
-
-namespace ECS {
+namespace ecs {
 class Component {
   public:
     Component() = default;
     virtual ~Component() = default;
 };
 }
-
 
 #endif //BOOTSTRAP_COMPONENT_HPP

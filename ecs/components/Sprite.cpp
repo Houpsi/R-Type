@@ -7,7 +7,7 @@
 
 #include "Sprite.hpp"
 
-namespace ECS {
+namespace ecs {
 Sprite::Sprite(const std::string& texturePath)
     : _texture()
       , _sprite(_texture)

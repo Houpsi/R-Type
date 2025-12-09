@@ -7,7 +7,7 @@
 
 #include "Health.hpp"
 
-namespace ECS {
+namespace ecs {
     /**
      * @breif Gets the health
      * @return the health of the component

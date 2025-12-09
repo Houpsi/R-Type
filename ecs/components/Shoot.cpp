@@ -7,7 +7,7 @@
 
 #include "Shoot.hpp"
 
-namespace ECS {
+namespace ecs {
     /**
      * @brief Gets the shoot damage
      * @return The damage of the shoot

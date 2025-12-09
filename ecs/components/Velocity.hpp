@@ -6,10 +6,10 @@
 */
 
 #ifndef R_TYPE_CLIENT_VELOCITY_HPP
-#define R_TYPE_CLIENT_VELOCITY_HPP
+    #define R_TYPE_CLIENT_VELOCITY_HPP
 #include "Component.hpp"
 
-namespace ECS {
+namespace ecs {
 class Velocity : public Component {
     public:
         explicit Velocity(float velocity, int direction): _velocity(velocity), _direction(direction) {};

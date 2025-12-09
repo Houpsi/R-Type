@@ -1,13 +1,15 @@
-//
-// Created by aleks on 27/11/2025.
-//
+/*
+** EPITECH PROJECT, 2025
+** r-type_client
+** File description:
+** Position
+*/
 
 #ifndef BOOTSTRAP_POSITION_HPP
-#define BOOTSTRAP_POSITION_HPP
+    #define BOOTSTRAP_POSITION_HPP
 #include "Component.hpp"
 
-
-namespace ECS {
+namespace ecs {
 class Position : public Component
 {
   public:
@@ -22,6 +24,5 @@ class Position : public Component
     float _y;
 };
 }
-
 
 #endif //BOOTSTRAP_POSITION_HPP

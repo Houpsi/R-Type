@@ -1,9 +1,12 @@
 /*
 ** EPITECH PROJECT, 2025
-** R_Type
+** r-type_client
 ** File description:
 ** Enemy
 */
 
-
 #include "Enemy.hpp"
+
+namespace ecs {
+
+}

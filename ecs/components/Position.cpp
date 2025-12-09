@@ -5,10 +5,9 @@
 ** Position
 */
 
-
 #include "Position.hpp"
 
-namespace ECS {
+namespace ecs {
 float Position::getX() const {
     return _x;
 }

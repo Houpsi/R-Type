@@ -6,14 +6,13 @@
 */
 
 #ifndef ECSMANAGER_HPP
-#define ECSMANAGER_HPP
-#include <memory>
-#include <vector>
+    #define ECSMANAGER_HPP
 #include "Entity.hpp"
 #include "System.hpp"
+#include <memory>
+#include <vector>
 
-
-namespace ECS {
+namespace ecs {
 class EcsManager {
   public:
     EcsManager() = default;
@@ -54,6 +53,5 @@ class EcsManager {
     std::vector<std::shared_ptr<Entity>> _entities;
 };
 }
-
 
 #endif //ECSMANAGER_HPP

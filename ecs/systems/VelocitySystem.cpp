@@ -7,7 +7,7 @@
 
 #include "VelocitySystem.hpp"
 
-namespace ECS {
+namespace ecs {
 
     void VelocitySystem::update(EcsManager &ecs)
     {
