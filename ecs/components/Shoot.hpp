@@ -21,8 +21,8 @@ namespace ecs {
         [[nodiscard]] int getDamage() const;
         void setDamage(int damage);
 
-        [[nodiscard]] int getCooldown() const;
-        void setCooldown(int cooldown);
+        [[nodiscard]] float getCooldown() const;
+        void setCooldown(float cooldown);
 
         float getTimeSinceLastShot() const;
         void setTimeSinceLastShot(float t);
