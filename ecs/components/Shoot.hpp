@@ -11,7 +11,7 @@
 
 namespace ecs {
     /**
-     * Velocity class in function of the speed and the direction
+     * @class Shoot class with damage and cooldown
      */
     class Shoot : public Component {
     public:
@@ -21,8 +21,8 @@ namespace ecs {
         [[nodiscard]] int getDamage() const;
         void setDamage(int damage);
 
-        [[nodiscard]] float getCooldown() const;
-        void setCooldown(float cooldown);
+        [[nodiscard]] int getCooldown() const;
+        void setCooldown(int cooldown);
 
         float getTimeSinceLastShot() const;
         void setTimeSinceLastShot(float t);
