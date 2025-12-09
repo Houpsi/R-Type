@@ -1,14 +1,15 @@
-//
-// Created by aleks on 27/11/2025.
-//
+/*
+** EPITECH PROJECT, 2025
+** r-type_client
+** File description:
+** Entity
+*/
 
 #ifndef BOOTSTRAP_ENTITY_HPP
 #define BOOTSTRAP_ENTITY_HPP
 #include <memory>
 #include <vector>
-
-#include "components/Component.hpp"
-
+#include "Component.hpp"
 
 namespace ECS {
 class Entity {
