@@ -14,6 +14,7 @@
 #include "systems/InputSystem.hpp"
 #include "systems/MovementSystem.hpp"
 #include "systems/RenderSystem.hpp"
+#include "systems/ShootSystem.hpp"
 #include "systems/CollisionSystem.hpp"
 #include "Collision.hpp"
 
@@ -30,10 +31,12 @@ void Game::run() {
     player->addComponent<ECS::InputPlayer>();
     player->addComponent<ECS::Sprite>("./assets/r-typesheet30a.gif");
     player->addComponent<ECS::Collision>(ECS::TypeCollision::PLAYER, 20, 50);
+    player->addComponent<ECS::Shoot>(50, 1);
 
     _ecs.addSystem<ECS::InputSystem>();
     _ecs.addSystem<ECS::MovementSystem>();
     _ecs.addSystem<ECS::CollisionSystem>();
+    _ecs.addSystem<ECS::ShootSystem>();
     _ecs.addSystem<ECS::RenderSystem>(window);
 
     while (window.isOpen()) {

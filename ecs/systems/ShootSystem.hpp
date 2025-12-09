@@ -9,7 +9,12 @@
 #define R_TYPE_CLIENT_SHOOTSYSTEM_HPP
 
 #include "System.hpp"
-
+#include "Shoot.hpp"
+#include "InputPlayer.hpp"
+#include "EcsManager.hpp"
+#include "Position.hpp"
+#include "Collision.hpp"
+#include "Sprite.hpp"
 
 namespace ECS {
 class ShootSystem : public System {

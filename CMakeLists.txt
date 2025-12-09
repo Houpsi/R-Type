@@ -38,6 +38,8 @@ add_executable(r-type_client
         ecs/components/Health.hpp
         ecs/components/Position.cpp
         ecs/components/Position.hpp
+        ecs/components/Shoot.cpp
+        ecs/components/Shoot.hpp
         ecs/components/Component.cpp
         ecs/components/Component.hpp
         ecs/Entity.cpp
