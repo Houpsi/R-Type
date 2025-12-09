@@ -5,7 +5,6 @@
 ** Game
 */
 
-
 #include "Game.hpp"
 #include "components/Enemy.hpp"
 #include "components/Health.hpp"
@@ -14,8 +13,10 @@
 #include "systems/InputSystem.hpp"
 #include "systems/MovementSystem.hpp"
 #include "systems/RenderSystem.hpp"
+#include "VelocitySystem.hpp"
 #include "systems/ShootSystem.hpp"
 #include "systems/CollisionSystem.hpp"
+#include "VelocitySystem.hpp"
 #include "Collision.hpp"
 
 void Game::run() {
@@ -38,6 +39,7 @@ void Game::run() {
     _ecs.addSystem<ECS::CollisionSystem>();
     _ecs.addSystem<ECS::ShootSystem>();
     _ecs.addSystem<ECS::RenderSystem>(window);
+    _ecs.addSystem<ECS::VelocitySystem>();
 
     while (window.isOpen()) {
         float const deltaTime = clock.restart().asSeconds();

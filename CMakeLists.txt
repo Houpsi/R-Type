@@ -38,6 +38,8 @@ add_executable(r-type_client
         ecs/components/Health.hpp
         ecs/components/Position.cpp
         ecs/components/Position.hpp
+        ecs/components/Velocity.cpp
+        ecs/components/Velocity.hpp
         ecs/components/Shoot.cpp
         ecs/components/Shoot.hpp
         ecs/components/Component.cpp
@@ -52,6 +54,9 @@ add_executable(r-type_client
         ecs/components/Enemy.cpp
         ecs/components/Enemy.hpp
         ecs/systems/ShootSystem.cpp
-        ecs/systems/ShootSystem.hpp)
+        ecs/systems/ShootSystem.hpp
+        ecs/systems/VelocitySystem.cpp
+        ecs/systems/VelocitySystem.hpp
+        )
 
 target_link_libraries(r-type_client PRIVATE sfml-graphics sfml-window sfml-system)
