@@ -1,13 +1,12 @@
 cmake_minimum_required(VERSION 3.30.8)
 
-project(
-        R_Type
-)
-
 if (NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 20)
 endif()
 
-add_subdirectory(server)
+project(
+        r-type_server
+)
 
-enable_testing()
+add_subdirectory(src)
+add_subdirectory(test)
