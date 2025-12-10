@@ -14,12 +14,6 @@ CPMAddPackage(
         GIT_TAG 3.0.2
 )
 
-#CPMAddPackage(
-#        NAME OPENSSL
-#        GITHUB_REPOSITORY openssl/openssl
-#        GIT_TAG openssl-3.6.0
-#)
-
 add_library(r-type_server_lib
         parser/Parser.cpp
         parser/Parser.hpp
