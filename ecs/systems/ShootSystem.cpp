@@ -17,13 +17,19 @@ void ShootSystem::update(EcsManager &ecs)
 {
     for (auto const &entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
         auto input = entity->getComponent<InputPlayer>();
+        if (!entity->getComponent<Shoot>()) continue;
         if (input) {
-            if (input->getSpacebar()) {
-                entity->getComponent<Shoot>()->setTimeSinceLastShot(0);
-                auto projectile = ecs.createEntity();
+            const auto shoot= entity->getComponent<Shoot>();
+            shoot->setTimeSinceLastShot(
+                shoot->getTimeSinceLastShot() + ecs.deltaTime());
 
+            if (input->getSpacebar()) {
+                if (shoot->getTimeSinceLastShot() >= shoot->getCooldown()) {
+                    auto projectile = ecs.createEntity();
+
+                shoot->setTimeSinceLastShot(0);
                 projectile->addComponent<ecs::Position>(entity->getComponent<Position>()->getX(), entity->getComponent<Position>()->getY());
-                projectile->addComponent<Velocity>(25, 1);
+                projectile->addComponent<Velocity>(400, 1);
                 projectile->addComponent<Shoot>(entity->getComponent<Shoot>()->getDamage(), entity->getComponent<Shoot>()->getCooldown());
                 projectile->addComponent<Sprite>("./assets/r-typesheet30a.gif");
                 projectile->addComponent<Collision>(ecs::TypeCollision::PLAYER_PROJECTILE, 10, 10);

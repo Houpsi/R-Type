@@ -10,6 +10,9 @@
 #include "Component.hpp"
 
 namespace ecs {
+/**
+ * @class Velocity class in function of the speed and the direction
+ */
 class Velocity : public Component {
     public:
         explicit Velocity(float velocity, int direction): _velocity(velocity), _direction(direction) {};

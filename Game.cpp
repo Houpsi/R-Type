@@ -18,12 +18,13 @@ void Game::run() {
     player->addComponent<ecs::Health>(100);
     player->addComponent<ecs::Position>(200, WINDOW_Y / 2);
     player->addComponent<ecs::InputPlayer>();
+
     player->addComponent<ecs::Sprite>("./assets/r-typesheet42.gif");
     player->addComponent<ecs::Animation>(std::pair<int, int>(36, 36), 0, 1); 
     player->addComponent<ecs::Sprite>("./assets/r-typesheet30a.gif");
     player->addComponent<ecs::Collision>(ECS::TypeCollision::PLAYER, 20, 50);
     player->addComponent<ecs::Sound>("./sound/shoot.wav");
-    player->addComponent<ecs::Shoot>(50, 1);
+    player->addComponent<ecs::Shoot>(50, 0.5);
 
     _ecs.addSystem<ecs::InputSystem>();
     _ecs.addSystem<ecs::MovementSystem>();
@@ -33,7 +34,6 @@ void Game::run() {
     _ecs.addSystem<ecs::SpriteAnimationSystem>();
     _ecs.addSystem<ecs::RenderSystem>(window);
     _ecs.addSystem<ecs::VelocitySystem>();
-
 
     while (window.isOpen()) {
         float const deltaTime = clock.restart().asSeconds();
@@ -55,6 +55,7 @@ void Game::run() {
             newEnemy->addComponent<ecs::Sprite>("./assets/r-typesheet5.gif");
             newEnemy->addComponent<ecs::Animation>(std::pair<int, int>(32, 36), 0, 8);
             newEnemy->addComponent<ecs::Collision>(ECS::TypeCollision::ENEMY, 10, 10);
+
 
         }
         // --------

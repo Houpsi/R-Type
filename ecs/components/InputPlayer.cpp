@@ -82,5 +82,4 @@ void InputPlayer::updateAnimation(const float dt)
         _animTimer = 0.f;
     }
 }
-
 }
