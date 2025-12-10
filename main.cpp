@@ -4,8 +4,11 @@
 ** File description:
 ** main
 */
-#include "main.hpp"
 
-int main() {
-    return 0;
+#include "Game.hpp"
+
+int main(int argc, char *argv[])
+{
+    Game game;
+    game.run();
 }
