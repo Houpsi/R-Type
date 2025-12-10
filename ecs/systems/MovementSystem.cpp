@@ -10,6 +10,7 @@
 #include "Destroy.hpp"
 #include "EcsManager.hpp"
 #include "Enemy.hpp"
+#include "Game.hpp"
 #include "InputPlayer.hpp"
 #include "Position.hpp"
 
@@ -38,6 +39,9 @@ void MovementSystem::update(EcsManager &ecs)
             pos->setX(pos->getX() + (-speed * dt));
         }
         if (pos->getX() < 0 - enemy->getComponent<Collision>()->getWidth()) {
+            enemy->addComponent<Destroy>();
+        }
+        if (pos->getX() < WINDOW_Y + enemy->getComponent<Collision>()->getWidth()) {
             enemy->addComponent<Destroy>();
         }
     }
