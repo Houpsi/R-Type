@@ -10,6 +10,8 @@
 namespace ecs {
 void MovementSystem::update(EcsManager &ecs)
 {
+    constexpr uint16_t windowWidth = 1080;
+
     const float speed = 250.f;
     const float dt = ecs.getDeltaTime();
     for (auto const &entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
@@ -34,7 +36,7 @@ void MovementSystem::update(EcsManager &ecs)
         if (pos->getX() < 0 - enemy->getComponent<Collision>()->getWidth()) {
             enemy->addComponent<Destroy>();
         }
-        if (pos->getX() < WINDOW_Y + enemy->getComponent<Collision>()->getWidth()) {
+        if (pos->getX() < windowWidth + enemy->getComponent<Collision>()->getWidth()) {
             enemy->addComponent<Destroy>();
         }
     }

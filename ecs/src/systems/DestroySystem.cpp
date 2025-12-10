@@ -6,9 +6,9 @@
 */
 
 #include "DestroySystem.hpp"
-#include "Destroy.hpp"
+#include "components/Destroy.hpp"
 
-namespace ECS {
+namespace ecs {
 
 void DestroySystem::update(EcsManager &ecs)
 {

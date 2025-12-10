@@ -10,7 +10,7 @@
 #define R_TYPE_CLIENT_SPRITEANIMATIONSYSTEM_HPP
 #include "System.hpp"
 
-namespace ECS {
+namespace ecs {
 
 class SpriteAnimationSystem : public System
 {

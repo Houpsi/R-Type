@@ -7,7 +7,7 @@
 
 #ifndef BOOTSTRAP_ENTITY_HPP
     #define BOOTSTRAP_ENTITY_HPP
-#include "Component.hpp"
+#include "components/Component.hpp"
 #include <memory>
 #include <vector>
 

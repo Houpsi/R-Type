@@ -12,7 +12,7 @@
 
 #include "EcsManager.hpp"
 
-namespace ECS {
+namespace ecs {
 class DestroySystem : public System
 {
   public:

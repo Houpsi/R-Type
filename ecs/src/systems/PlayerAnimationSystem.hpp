@@ -13,7 +13,7 @@
 #include "InputPlayer.hpp"
 #include "Sprite.hpp"
 
-namespace ECS {
+namespace ecs {
 class PlayerAnimationSystem : public System
 {
     public:

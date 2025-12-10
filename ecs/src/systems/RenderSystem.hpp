@@ -9,9 +9,9 @@
     #define BOOTSTRAP_RENDERSYSTEM_HPP
 #include "System.hpp"
 #include "../EcsManager.hpp"
-#include "InputPlayer.hpp"
-#include "Position.hpp"
-#include "Sprite.hpp"
+#include "components/InputPlayer.hpp"
+#include "components/Position.hpp"
+#include "components/Sprite.hpp"
 #include "SFML/Graphics.hpp"
 
 namespace ecs {

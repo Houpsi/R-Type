@@ -10,7 +10,7 @@
 
 #include "Component.hpp"
 
-namespace ECS {
+namespace ecs {
 class Destroy : public Component
 {
   public:

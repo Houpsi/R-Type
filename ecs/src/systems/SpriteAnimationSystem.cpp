@@ -12,7 +12,7 @@
 #include "InputPlayer.hpp"
 #include "Sprite.hpp"
 
-namespace ECS {
+namespace ecs {
 
 void SpriteAnimationSystem::update(EcsManager& ecs)
 {

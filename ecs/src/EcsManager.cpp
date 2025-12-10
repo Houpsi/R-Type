@@ -7,7 +7,7 @@
 
 #include "EcsManager.hpp"
 #include <memory>
-#include "../Entity.hpp"
+#include "Entity.hpp"
 
 namespace ecs {
 std::shared_ptr<Entity> EcsManager::createEntity() {
