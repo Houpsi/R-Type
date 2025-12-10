@@ -21,7 +21,7 @@ class EcsManager {
     std::vector<std::shared_ptr<Entity>> getEntities();
     void updateSystems();
     void setDeltaTime(float dt);
-    float deltaTime() const;
+    float getDeltaTime() const;
 
     template <typename T, typename... Args>
     std::shared_ptr<T> addSystem(Args&&... args) {

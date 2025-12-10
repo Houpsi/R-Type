@@ -1,17 +1,20 @@
 /*
 ** EPITECH PROJECT, 2025
-** R_Type
+** r-type_client
 ** File description:
 ** RenderSystem
 */
 
 #include "RenderSystem.hpp"
+#define SIZE_X_PLAYER 33
+#define SIZE_Y_PLAYER 17
 
 namespace ecs {
 void RenderSystem::update(EcsManager &ecs)
 {
     _window.clear(sf::Color::Black);
-    auto entities = ecs.getEntitiesWithComponent<Sprite>();
+    const auto entities = ecs.getEntitiesWithComponent<Sprite>();
+
     for (const auto& entity : entities) {
         auto spriteComp = entity->getComponent<Sprite>();
         auto positionComp = entity->getComponent<Position>();
@@ -25,4 +28,5 @@ void RenderSystem::update(EcsManager &ecs)
     }
     _window.display();
 }
-}
+
+} // namespace ECS

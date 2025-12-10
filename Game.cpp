@@ -18,8 +18,11 @@ void Game::run() {
     player->addComponent<ecs::Health>(100);
     player->addComponent<ecs::Position>(200, WINDOW_Y / 2);
     player->addComponent<ecs::InputPlayer>();
+
+    player->addComponent<ecs::Sprite>("./assets/r-typesheet42.gif");
+    player->addComponent<ecs::Animation>(std::pair<int, int>(36, 36), 0, 1); 
     player->addComponent<ecs::Sprite>("./assets/r-typesheet30a.gif");
-    player->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, 20, 50);
+    player->addComponent<ecs::Collision>(ECS::TypeCollision::PLAYER, 20, 50);
     player->addComponent<ecs::Sound>("./sound/shoot.wav");
     player->addComponent<ecs::Shoot>(50, 0.5);
 
@@ -27,6 +30,8 @@ void Game::run() {
     _ecs.addSystem<ecs::MovementSystem>();
     _ecs.addSystem<ecs::CollisionSystem>();
     _ecs.addSystem<ecs::ShootSystem>();
+    _ecs.addSystem<ecs::PlayerAnimationSystem>();
+    _ecs.addSystem<ecs::SpriteAnimationSystem>();
     _ecs.addSystem<ecs::RenderSystem>(window);
     _ecs.addSystem<ecs::VelocitySystem>();
 
@@ -43,11 +48,14 @@ void Game::run() {
             enemyClock.restart();
             int const randNum = generator() % (WINDOW_Y + 1);
             auto newEnemy = _ecs.createEntity();
+
             newEnemy->addComponent<ecs::Health>(100);
             newEnemy->addComponent<ecs::Position>(2000, randNum);
             newEnemy->addComponent<ecs::Enemy>();
-            newEnemy->addComponent<ecs::Sprite>("./assets/r-typesheet28.gif");
-            newEnemy->addComponent<ecs::Collision>(ecs::TypeCollision::ENEMY, 10, 10);
+            newEnemy->addComponent<ecs::Sprite>("./assets/r-typesheet5.gif");
+            newEnemy->addComponent<ecs::Animation>(std::pair<int, int>(32, 36), 0, 8);
+            newEnemy->addComponent<ecs::Collision>(ECS::TypeCollision::ENEMY, 10, 10);
+
 
         }
         // --------
