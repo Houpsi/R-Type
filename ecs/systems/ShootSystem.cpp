@@ -22,9 +22,9 @@ void ShootSystem::update(EcsManager &ecs)
             entity->getComponent<Shoot>()->setTimeSinceLastShot(
                 entity->getComponent<Shoot>()->getTimeSinceLastShot() + ecs.deltaTime());
 
+            auto shoot= entity->getComponent<Shoot>();
             if (input->getSpacebar()) {
-                if (entity->getComponent<Shoot>()->getTimeSinceLastShot() >= entity->getComponent<Shoot>()->getCooldown()) {
-                    auto shoot= entity->getComponent<Shoot>();
+                if (shoot->getTimeSinceLastShot() >= shoot->getCooldown()) {
                     auto projectile = ecs.createEntity();
 
                     shoot->setTimeSinceLastShot(0);
