@@ -9,7 +9,7 @@
 #include <memory>
 #include "Entity.hpp"
 
-namespace ECS {
+namespace ecs {
 std::shared_ptr<Entity> EcsManager::createEntity() {
     auto entity = std::make_shared<Entity>();
     _entities.push_back(entity);

@@ -7,7 +7,7 @@
 
 #include "InputPlayer.hpp"
 
-namespace ECS {
+namespace ecs {
 bool InputPlayer::getDown() const
 {
     return _down;

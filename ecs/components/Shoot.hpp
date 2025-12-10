@@ -6,11 +6,10 @@
 */
 
 #ifndef R_TYPE_CLIENT_SHOOT_HPP
-#define R_TYPE_CLIENT_SHOOT_HPP
-
+    #define R_TYPE_CLIENT_SHOOT_HPP
 #include "Component.hpp"
 
-namespace ECS {
+namespace ecs {
     class Shoot : public Component {
     public:
         explicit Shoot(int damage, int cooldown): _damage(damage), _cooldown(cooldown) {};
@@ -32,6 +31,5 @@ namespace ECS {
         int _timeSinceLastShot = 0;
     };
 }
-
 
 #endif //R_TYPE_CLIENT_SHOOT_HPP

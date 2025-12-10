@@ -9,8 +9,7 @@
 #define SIZE_X_PLAYER 33
 #define SIZE_Y_PLAYER 17
 
-namespace ECS {
-
+namespace ecs {
 void RenderSystem::update(EcsManager &ecs)
 {
     _window.clear(sf::Color::Black);

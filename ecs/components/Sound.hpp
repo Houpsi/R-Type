@@ -6,11 +6,12 @@
 */
 
 #ifndef BOOTSTRAP_SOUND_HPP
-#define BOOTSTRAP_SOUND_HPP
-#include <SFML/Audio.hpp>
+    #define BOOTSTRAP_SOUND_HPP
 #include "Component.hpp"
+#include <SFML/Audio.hpp>
+#include <iostream>
 
-namespace ECS {
+namespace ecs {
 class Sound : public Component {
   public:
     Sound(const std::string& filepath);

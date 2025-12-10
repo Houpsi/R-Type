@@ -6,12 +6,8 @@
 */
 
 #include "MovementSystem.hpp"
-#include "EcsManager.hpp"
-#include "Position.hpp"
-#include "Enemy.hpp"
-#include "InputPlayer.hpp"
 
-namespace ECS {
+namespace ecs {
 void MovementSystem::update(EcsManager &ecs)
 {
     const float speed = 250.f;

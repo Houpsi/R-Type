@@ -6,14 +6,13 @@
 */
 
 #ifndef R_TYPE_CLIENT_VELOCITYSYSTEM_HPP
-#define R_TYPE_CLIENT_VELOCITYSYSTEM_HPP
-
+    #define R_TYPE_CLIENT_VELOCITYSYSTEM_HPP
 #include "EcsManager.hpp"
 #include "System.hpp"
 #include "Velocity.hpp"
 #include "Position.hpp"
 
-namespace ECS {
+namespace ecs {
 class VelocitySystem : public System {
 public:
     explicit VelocitySystem() = default;

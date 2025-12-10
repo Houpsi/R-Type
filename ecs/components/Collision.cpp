@@ -7,7 +7,7 @@
 
 #include "Collision.hpp"
 
-namespace ECS {
+namespace ecs {
 
     /**
      * @brief Returns the collision type
