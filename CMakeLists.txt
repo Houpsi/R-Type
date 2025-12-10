@@ -42,6 +42,8 @@ add_executable(r-type_client
         ecs/components/Velocity.hpp
         ecs/components/Shoot.cpp
         ecs/components/Shoot.hpp
+        ecs/components/Score.cpp
+        ecs/components/Score.hpp
         ecs/components/Component.cpp
         ecs/components/Component.hpp
         ecs/Entity.cpp

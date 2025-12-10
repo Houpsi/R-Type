@@ -11,6 +11,7 @@
 #include "EcsManager.hpp"
 #include "Position.hpp"
 #include "Sprite.hpp"
+#include "Score.hpp"
 #include "SFML/Graphics.hpp"
 
 namespace ecs {

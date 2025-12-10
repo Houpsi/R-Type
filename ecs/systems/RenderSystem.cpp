@@ -15,12 +15,19 @@ void RenderSystem::update(EcsManager &ecs)
     for (const auto& entity : entities) {
         auto spriteComp = entity->getComponent<Sprite>();
         auto positionComp = entity->getComponent<Position>();
+        auto textComp = entity->getComponent<Score>();
+        auto text = entity->getComponent<Score>()->getText();
+
         if (spriteComp) {
             auto sprite = spriteComp->getSprite();
             if (positionComp) {
                 sprite.setPosition({positionComp->getX(), positionComp->getY()});
             }
             _window.draw(sprite);
+        }
+        if (textComp)
+        {
+            _window.draw(text);
         }
     }
     _window.display();

@@ -22,6 +22,7 @@ void Game::run() {
     player->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, 20, 50);
     player->addComponent<ecs::Sound>("./sound/shoot.wav");
     player->addComponent<ecs::Shoot>(50, 1);
+    player->addComponent<ecs::Score>(66, "./font/font.ttf");
 
     _ecs.addSystem<ecs::InputSystem>();
     _ecs.addSystem<ecs::MovementSystem>();
