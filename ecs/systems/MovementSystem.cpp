@@ -6,7 +6,7 @@
 */
 
 #include "MovementSystem.hpp"
-#include "DestroySystem.hpp"
+#include "Collision.hpp"
 #include "Destroy.hpp"
 #include "EcsManager.hpp"
 #include "Enemy.hpp"
@@ -37,7 +37,7 @@ void MovementSystem::update(EcsManager &ecs)
         if (pos) {
             pos->setX(pos->getX() + (-speed * dt));
         }
-        if (pos->getX() < DESTROY_THRESHOLD && !enemy->getComponent<Destroy>()) {
+        if (pos->getX() < 0 - enemy->getComponent<Collision>()->getWidth()) {
             enemy->addComponent<Destroy>();
         }
     }
