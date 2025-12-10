@@ -19,6 +19,7 @@ class Sprite : public Component
     explicit Sprite(const std::string &texturePath);
     ~Sprite() override = default;
     const sf::Sprite &getSprite() const;
+    void setTextureRect(int x, int y, int width, int height);
   private:
     sf::Sprite _sprite;
     sf::Texture _texture;

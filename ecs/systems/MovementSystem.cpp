@@ -14,8 +14,8 @@
 namespace ECS {
 void MovementSystem::update(EcsManager &ecs)
 {
-    float speed = 250.f;
-    float dt = ecs.deltaTime();
+    const float speed = 250.f;
+    const float dt = ecs.getDeltaTime();
     for (auto const &entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
         auto pos = entity->getComponent<Position>();
         auto input = entity->getComponent<InputPlayer>();

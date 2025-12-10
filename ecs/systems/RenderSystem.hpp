@@ -8,6 +8,7 @@
 
 #include "System.hpp"
 #include "EcsManager.hpp"
+#include "InputPlayer.hpp"
 #include "Position.hpp"
 #include "Sprite.hpp"
 #include "SFML/Graphics.hpp"

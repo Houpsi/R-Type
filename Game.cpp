@@ -6,6 +6,9 @@
 */
 
 #include "Game.hpp"
+
+#include "PlayerAnimationSystem.hpp"
+#include "SpriteAnimationSystem.hpp"
 #include "components/Enemy.hpp"
 #include "components/Health.hpp"
 #include "components/Position.hpp"
@@ -31,6 +34,8 @@ void Game::run() {
     player->addComponent<ECS::Health>(100);
     player->addComponent<ECS::Position>(200, WINDOW_Y / 2);
     player->addComponent<ECS::InputPlayer>();
+    player->addComponent<ECS::Sprite>("./assets/r-typesheet42.gif");
+    player->addComponent<ECS::Animation>(std::pair<int, int>(36, 36), 0, 1); 
     player->addComponent<ECS::Sprite>("./assets/r-typesheet30a.gif");
     player->addComponent<ECS::Collision>(ECS::TypeCollision::PLAYER, 20, 50);
     player->addComponent<ECS::Sound>("./sound/shoot.wav");
@@ -40,8 +45,11 @@ void Game::run() {
     _ecs.addSystem<ECS::MovementSystem>();
     _ecs.addSystem<ECS::CollisionSystem>();
     _ecs.addSystem<ECS::ShootSystem>();
+    _ecs.addSystem<ECS::PlayerAnimationSystem>();
+    _ecs.addSystem<ECS::SpriteAnimationSystem>();
     _ecs.addSystem<ECS::RenderSystem>(window);
     _ecs.addSystem<ECS::VelocitySystem>();
+
 
     while (window.isOpen()) {
         float const deltaTime = clock.restart().asSeconds();
@@ -59,9 +67,9 @@ void Game::run() {
             newEnemy->addComponent<ECS::Health>(100);
             newEnemy->addComponent<ECS::Position>(2000, randNum);
             newEnemy->addComponent<ECS::Enemy>();
-            newEnemy->addComponent<ECS::Sprite>("./assets/r-typesheet28.gif");
+            newEnemy->addComponent<ECS::Sprite>("./assets/r-typesheet5.gif");
+            newEnemy->addComponent<ECS::Animation>(std::pair<int, int>(32, 36), 0, 8);
             newEnemy->addComponent<ECS::Collision>(ECS::TypeCollision::ENEMY, 10, 10);
-
         }
         // --------
         _ecs.setDeltaTime(deltaTime);

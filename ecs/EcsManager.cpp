@@ -6,6 +6,8 @@
 */
 
 #include "EcsManager.hpp"
+#include <memory>
+#include "Entity.hpp"
 
 namespace ECS {
 std::shared_ptr<Entity> EcsManager::createEntity() {
@@ -22,7 +24,7 @@ void EcsManager::setDeltaTime(float dt)
 {
     _deltaTime = dt;
 }
-float EcsManager::deltaTime() const
+float EcsManager::getDeltaTime() const
 {
     return _deltaTime;
 }
