@@ -19,6 +19,7 @@ void Game::run() {
     player->addComponent<ecs::Position>(200, WINDOW_Y / 2);
     player->addComponent<ecs::InputPlayer>();
 
+
     player->addComponent<ecs::Sprite>("./assets/r-typesheet42.gif");
     player->addComponent<ecs::Animation>(std::pair<int, int>(36, 36), 0, 1); 
     player->addComponent<ecs::Sprite>("./assets/r-typesheet30a.gif");
@@ -44,7 +45,7 @@ void Game::run() {
             }
         }
         // -------- TODO remove that later - Dev and testing purpose only
-        if (enemyClock.getElapsedTime().asSeconds() > 1) {
+        if (enemyClock.getElapsedTime().asSeconds() > 5) {
             enemyClock.restart();
             int const randNum = generator() % (WINDOW_Y + 1);
             auto newEnemy = _ecs.createEntity();

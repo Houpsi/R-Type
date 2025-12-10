@@ -31,6 +31,12 @@ void MovementSystem::update(EcsManager &ecs)
         if (pos) {
             pos->setX(pos->getX() + (-speed * dt));
         }
+        if (pos->getX() < 0 - enemy->getComponent<Collision>()->getWidth()) {
+            enemy->addComponent<Destroy>();
+        }
+        if (pos->getX() < WINDOW_Y + enemy->getComponent<Collision>()->getWidth()) {
+            enemy->addComponent<Destroy>();
+        }
     }
 }
 }

@@ -13,6 +13,9 @@
 #include "Position.hpp"
 #include "Enemy.hpp"
 #include "InputPlayer.hpp"
+#include "Collision.hpp"
+#include "Destroy.hpp"
+#include "Game.hpp"
 
 namespace ecs {
 class MovementSystem : public System

@@ -16,7 +16,7 @@ std::shared_ptr<Entity> EcsManager::createEntity() {
     return entity;
 }
 
-std::vector<std::shared_ptr<Entity>> EcsManager::getEntities() {
+std::vector<std::shared_ptr<Entity>> &EcsManager::getEntities() {
     return _entities;
 }
 

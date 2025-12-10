@@ -11,7 +11,9 @@ namespace ecs {
 void InputSystem::update(EcsManager & ecs) {
     for (auto& entity : ecs.getEntities()) {
         auto inputPtr = entity->getComponent<InputPlayer>();
-        if (!inputPtr) continue;
+        if (!inputPtr) {
+            continue;
+        }
         inputPtr->setDown(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S));
         inputPtr->setUp(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z));
         inputPtr->setLeft(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q));
