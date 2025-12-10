@@ -6,13 +6,11 @@
 */
 
 #ifndef BOOTSTRAP_SYSTEM_HPP
-#define BOOTSTRAP_SYSTEM_HPP
+    #define BOOTSTRAP_SYSTEM_HPP
 #include <memory>
 #include <vector>
 
-
-
-namespace ECS {
+namespace ecs {
 
 class Entity;
 class EcsManager;
@@ -25,6 +23,5 @@ class System {
     virtual void update(EcsManager &ecs) = 0;
 };
 }
-
 
 #endif //BOOTSTRAP_SYSTEM_HPP

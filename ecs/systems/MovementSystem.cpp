@@ -14,7 +14,7 @@
 #include "InputPlayer.hpp"
 #include "Position.hpp"
 
-namespace ECS {
+namespace ecs {
 void MovementSystem::update(EcsManager &ecs)
 {
     const float speed = 250.f;

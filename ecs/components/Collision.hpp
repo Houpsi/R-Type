@@ -6,13 +6,11 @@
 */
 
 #ifndef BOOTSTRAP_COLLIDER_HPP
-#define BOOTSTRAP_COLLIDER_HPP
-
-#include <SFML/Graphics/Sprite.hpp>
+    #define BOOTSTRAP_COLLIDER_HPP
 #include "Component.hpp"
+#include <SFML/Graphics/Sprite.hpp>
 
-
-namespace ECS {
+namespace ecs {
     enum TypeCollision {
         PLAYER,
         ENEMY,

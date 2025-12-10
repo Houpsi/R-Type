@@ -7,7 +7,7 @@
 
 #include "InputSystem.hpp"
 
-namespace ECS {
+namespace ecs {
 void InputSystem::update(EcsManager & ecs) {
     for (auto& entity : ecs.getEntities()) {
         auto inputPtr = entity->getComponent<InputPlayer>();

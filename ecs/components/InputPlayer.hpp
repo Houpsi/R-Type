@@ -6,13 +6,11 @@
 */
 
 #ifndef INPUTPLAYER_HPP
-#define INPUTPLAYER_HPP
+    #define INPUTPLAYER_HPP
 #include "Component.hpp"
-
 #include <cstddef>
 
-
-namespace ECS {
+namespace ecs {
 class InputPlayer : public Component {
   public:
     InputPlayer()
@@ -45,6 +43,5 @@ class InputPlayer : public Component {
     float _animSpeed = 0.1f;
 };
 }
-
 
 #endif //INPUTPLAYER_HPP

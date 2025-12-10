@@ -7,10 +7,14 @@
 
 
 #ifndef MOVEMENTSYSTEM_HPP
-#define MOVEMENTSYSTEM_HPP
+    #define MOVEMENTSYSTEM_HPP
 #include "System.hpp"
+#include "EcsManager.hpp"
+#include "Position.hpp"
+#include "Enemy.hpp"
+#include "InputPlayer.hpp"
 
-namespace ECS {
+namespace ecs {
 class MovementSystem : public System
 {
   public:

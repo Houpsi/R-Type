@@ -1,11 +1,12 @@
-//
-// Created by aleks on 27/11/2025.
-//
+/*
+** EPITECH PROJECT, 2025
+** r-type_client
+** File description:
+** RenderSystem
+*/
 
 #ifndef BOOTSTRAP_RENDERSYSTEM_HPP
-#define BOOTSTRAP_RENDERSYSTEM_HPP
-
-
+    #define BOOTSTRAP_RENDERSYSTEM_HPP
 #include "System.hpp"
 #include "EcsManager.hpp"
 #include "InputPlayer.hpp"
@@ -13,8 +14,7 @@
 #include "Sprite.hpp"
 #include "SFML/Graphics.hpp"
 
-
-namespace ECS {
+namespace ecs {
 class RenderSystem : public System
 {
   public:
@@ -25,6 +25,5 @@ class RenderSystem : public System
     sf::RenderWindow &_window;
 };
 }
-
 
 #endif //BOOTSTRAP_RENDERSYSTEM_HPP

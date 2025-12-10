@@ -7,7 +7,7 @@
 
 #include "InputPlayer.hpp"
 
-namespace ECS {
+namespace ecs {
 bool InputPlayer::getDown() const
 {
     return _down;
@@ -82,5 +82,4 @@ void InputPlayer::updateAnimation(const float dt)
         _animTimer = 0.f;
     }
 }
-
 }

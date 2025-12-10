@@ -5,10 +5,9 @@
 ** Sound
 */
 
-#include <iostream>
 #include "Sound.hpp"
 
-namespace ECS {
+namespace ecs {
     /**
      * @bried Load the sound from a file
      * @param filepath The path to the sound file
@@ -41,7 +40,5 @@ namespace ECS {
             }
             _sound->play();
         }
-
     }
-
 }
