@@ -32,7 +32,7 @@ class InputPlayer : public Component {
     void setSpacebar(bool spacebar);
     [[nodiscard]] std::size_t getId() const;
     void updateAnimation(float dt);
-    int getAnimFrame() const { return _animFrame; }
+    int getAnimFrame() const;
   private:
     bool _up = false;
     bool _down = false;

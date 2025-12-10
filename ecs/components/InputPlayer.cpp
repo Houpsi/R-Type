@@ -62,6 +62,11 @@ std::size_t InputPlayer::getId() const {
     return _id;
 }
 
+int InputPlayer::getAnimFrame() const
+{
+    return _animFrame;
+}
+
 void InputPlayer::updateAnimation(const float dt)
 {
     if (getUp() || getDown()) {
