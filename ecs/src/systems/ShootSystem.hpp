@@ -10,7 +10,7 @@
 #include "System.hpp"
 #include "Shoot.hpp"
 #include "InputPlayer.hpp"
-#include "EcsManager.hpp"
+#include "../EcsManager.hpp"
 #include "Position.hpp"
 #include "Collision.hpp"
 #include "Sprite.hpp"

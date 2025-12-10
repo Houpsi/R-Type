@@ -10,7 +10,7 @@
     #define INPUTSYSTEM_HPP
 #include <SFML/Window/Keyboard.hpp>
 #include "System.hpp"
-#include "EcsManager.hpp"
+#include "../EcsManager.hpp"
 #include "InputPlayer.hpp"
 
 namespace ecs {

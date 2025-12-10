@@ -8,7 +8,7 @@
 #ifndef BOOTSTRAP_GAME_HPP
     #define BOOTSTRAP_GAME_HPP
 #include <random>
-#include "EcsManager.hpp"
+#include "ecs/src/EcsManager.hpp"
 #include "components/Enemy.hpp"
 #include "components/Health.hpp"
 #include "components/Position.hpp"
