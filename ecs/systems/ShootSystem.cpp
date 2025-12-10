@@ -19,10 +19,10 @@ void ShootSystem::update(EcsManager &ecs)
         auto input = entity->getComponent<InputPlayer>();
         if (!entity->getComponent<Shoot>()) continue;
         if (input) {
-            entity->getComponent<Shoot>()->setTimeSinceLastShot(
-                entity->getComponent<Shoot>()->getTimeSinceLastShot() + ecs.deltaTime());
+            const auto shoot= entity->getComponent<Shoot>();
+            shoot->setTimeSinceLastShot(
+                shoot->getTimeSinceLastShot() + ecs.deltaTime());
 
-            auto shoot= entity->getComponent<Shoot>();
             if (input->getSpacebar()) {
                 if (shoot->getTimeSinceLastShot() >= shoot->getCooldown()) {
                     auto projectile = ecs.createEntity();
