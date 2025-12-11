@@ -7,6 +7,7 @@
 #ifndef R_TYPE_SERVER_HPP
 #define R_TYPE_SERVER_HPP
 
+#include "game/Game.hpp"
 #include "SFML/Network/SocketSelector.hpp"
 #include "SFML/Network/UdpSocket.hpp"
 #include <SFML/Network/TcpListener.hpp>
@@ -33,6 +34,9 @@ namespace server {
         std::jthread _tcpThread;
         void _checkSocket();
         void _handleNewTcpPacket();
+
+        std::jthread _gameThread;
+        Game _game = Game();
     };
 
 }// namespace server

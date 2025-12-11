@@ -67,6 +67,21 @@ namespace server {
         }
     }
 
+    void Server::_acceptConnection()
+    {
+        auto client = std::make_unique<sf::TcpSocket>();
+
+        client->setBlocking(false);
+
+        if (_listener.accept(*client) != sf::Socket::Status::Done) {
+            std::cerr << "[ERROR]: failed to accept new TCP connection" << "\n";
+            return;
+        }
+        _socketSelector.add(*client);
+        _socketVector.push_back(std::move(client));
+        std::cout << "[CONNECTION]: TCP connection accepted" << "\n";
+    }
+
     void Server::run()
     {
         _socketSelector.add(_listener);
@@ -84,21 +99,6 @@ namespace server {
             // TODO -> handle received UDP packet
             std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
-    }
-
-    void Server::_acceptConnection()
-    {
-        auto client = std::make_unique<sf::TcpSocket>();
-
-        client->setBlocking(false);
-
-        if (_listener.accept(*client) != sf::Socket::Status::Done) {
-            std::cerr << "[ERROR]: failed to accept new TCP connection" << "\n";
-            return;
-        }
-        _socketSelector.add(*client);
-        _socketVector.push_back(std::move(client));
-        std::cout << "[CONNECTION]: TCP connection accepted" << "\n";
     }
 
 }// namespace server
