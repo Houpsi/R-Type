@@ -5,6 +5,9 @@
 ** Server
 */
 #include "Server.hpp"
+
+#include "EcsManager.hpp"
+#include "SFML/Network/Packet.hpp"
 #include "SFML/Network/TcpSocket.hpp"
 #include <iostream>
 #include <thread>
