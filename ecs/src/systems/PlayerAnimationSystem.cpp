@@ -18,7 +18,7 @@ void PlayerAnimationSystem::update(EcsManager& ecs)
 {
     const float deltaTime = ecs.getDeltaTime();
 
-    for (const auto & entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
+    for (const auto & entity : ecs.getEntitiesWithComponent<PlayerAnimation>()) {
         const auto player  = entity->getComponent<InputPlayer>();
         const auto sprite = entity->getComponent<Sprite>();
         auto anim   = entity->getComponent<PlayerAnimation>();
