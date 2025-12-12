@@ -15,6 +15,7 @@ target_link_libraries(r-type_server_lib
         PUBLIC
         SFML::Network
         r-type_ecs_lib
+        r-type_common_lib
 )
 
 add_executable(r-type_server

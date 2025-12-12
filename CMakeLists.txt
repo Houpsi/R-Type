@@ -33,5 +33,6 @@ endif()
 
 add_subdirectory(server)
 add_subdirectory(ecs)
+add_subdirectory(common)
 
 enable_testing()
