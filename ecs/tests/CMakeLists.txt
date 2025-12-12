@@ -4,6 +4,9 @@ add_executable(rtype_ecs_tests
         TestsInputPlayer.cpp
         TestsPosition.cpp
         TestsSprite.cpp
+        TestsAnimation.cpp
+        TestsCollision.cpp
+        TestsVelocity.cpp
 )
 
 target_link_libraries(rtype_ecs_tests

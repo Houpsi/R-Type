@@ -9,9 +9,9 @@
 
 namespace ecs {
     /**
- * @brief Shoot a project
- * If the player touch the key space a projectile is send
- * @param ecs
+    * @brief Shoot a project
+     * If the player touches the key space, a projectile is sent
+     * @param ecs
      */
     void ShootSystem::update(EcsManager &ecs)
     {
