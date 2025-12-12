@@ -6,7 +6,7 @@
 */
 #include "CustomPacket.hpp"
 
-namespace server {
+namespace cmn {
 
     const void *CustomPacket::onSend(size_t &size)
     {
@@ -14,7 +14,7 @@ namespace server {
         return Packet::onSend(size);
     }
 
-    void CustomPacket::onReceive(const void *data, std::size_t size) 
+    void CustomPacket::onReceive(const void *data, std::size_t size)
     {
         //TODO -> data decryption
         Packet::onReceive(data, size); 

@@ -1,5 +1,4 @@
 add_executable(rtype_common_tests
-        TestSharedData.cpp
 )
 
 target_link_libraries(rtype_common_tests

@@ -15,11 +15,11 @@ class AParser
         virtual ~AParser() = default;
         AParser() = default;
         virtual bool isEveryArgValid(int argc, char **args);
-        int checkHelp(int argc, char **argv);
+        int checkHelp(int argc, char **argv) const;
         [[nodiscard]] uint16_t getPort() const;
     protected:
-        std::uint16_t port;
-        virtual void _displayHelp();
+        std::uint16_t port = 0;
+        virtual void _displayHelp() const;
 };
 
 #endif //R_TYPE_APARSER_HPP

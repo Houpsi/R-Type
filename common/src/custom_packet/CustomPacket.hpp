@@ -9,7 +9,7 @@
 
 #include "SFML/Network/Packet.hpp"
 
-namespace server {
+namespace cmn {
 
     class CustomPacket : public sf::Packet
     {

@@ -6,7 +6,7 @@
 */
 #ifndef R_TYPE_SERVER_PARSER_HPP
 #define R_TYPE_SERVER_PARSER_HPP
-#include "../../../common/src/parser/AParser.hpp"
+#include "parser/AParser.hpp"
 
 namespace server {
     class Parser final : public AParser
@@ -15,7 +15,7 @@ namespace server {
         Parser() = default;
         bool isEveryArgValid(int argc, char **args) override;
       private:
-        void _displayHelp() override;
+        void _displayHelp() const override;
     };
 
 }// namespace server

@@ -31,7 +31,7 @@ namespace server {
          }
     }
 
-    void Parser::_displayHelp()
+    void Parser::_displayHelp() const
     {
         constexpr std::string_view programName{"r-type_server"};
 

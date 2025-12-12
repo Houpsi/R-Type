@@ -7,6 +7,7 @@
 #ifndef R_TYPE_SERVER_HPP
 #define R_TYPE_SERVER_HPP
 
+#include "custom_packet/CustomPacket.hpp"
 #include "game/Game.hpp"
 #include "SFML/Network/SocketSelector.hpp"
 #include "SFML/Network/UdpSocket.hpp"
@@ -20,9 +21,12 @@ namespace server {
     {
       public:
         Server() = default;
-        int bindPorts(uint16_t port);
+        [[nodiscard]]int bindPorts(uint16_t port);
         void close();
         [[noreturn]] void run();
+
+        int sendUdp(const cmn::CustomPacket& packet, const sf::IpAddress& recipient, uint16_t port);
+        int sendTcp(const cmn::CustomPacket& packet);
 
       private:
         sf::TcpListener _listener;
@@ -34,9 +38,6 @@ namespace server {
         std::jthread _tcpThread;
         void _checkSocket();
         void _handleNewTcpPacket();
-
-        std::jthread _gameThread;
-        Game _game = Game();
     };
 
 }// namespace server
