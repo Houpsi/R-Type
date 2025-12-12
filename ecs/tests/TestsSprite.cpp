@@ -25,7 +25,8 @@ namespace ecs {
 
     TEST(SpriteTest, GetSpriteReturnsReference)
     {
-        Sprite sprite("assets/image.png");
+        sf::Vector2f scale(2.0f, 2.0f);
+        Sprite sprite("assets/image.png", scale);
 
         const sf::Sprite &spr1 = sprite.getSprite();
         const sf::Sprite &spr2 = sprite.getSprite();
@@ -33,5 +34,9 @@ namespace ecs {
         ASSERT_EQ(&spr1, &spr2);
     }
 
-    TEST(SpriteTest, InvalidTextureDoesNotCrash) { ASSERT_NO_THROW(Sprite sprite("nope/not_found.png")); }
+    TEST(SpriteTest, InvalidTextureDoesNotCrash)
+    {
+        sf::Vector2f scale(2.0f, 2.0f);
+        ASSERT_NO_THROW(Sprite sprite("nope/not_found.png", scale));
+    }
 }
