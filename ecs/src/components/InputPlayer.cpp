@@ -58,28 +58,5 @@ void InputPlayer::setSpacebar(bool spacebar)
     _spacebar = spacebar;
 }
 
-std::size_t InputPlayer::getId() const {
-    return _id;
-}
 
-int InputPlayer::getAnimFrame() const
-{
-    return _animFrame;
-}
-
-void InputPlayer::updateAnimation(const float dt)
-{
-    if (getUp() || getDown()) {
-        _animTimer += dt;
-        if (_animTimer >= _animSpeed) {
-            _animTimer = 0.f;
-            _animFrame++;
-            if (_animFrame > 2)
-                _animFrame = 2;
-        }
-    } else {
-        _animFrame = 0;
-        _animTimer = 0.f;
-    }
-}
 }

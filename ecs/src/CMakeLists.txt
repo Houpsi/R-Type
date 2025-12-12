@@ -48,6 +48,8 @@ add_library(r-type_ecs_lib
         systems/SpriteAnimationSystem.hpp
         systems/VelocitySystem.hpp
         systems/VelocitySystem.cpp
+        components/PlayerAnimation.cpp
+        components/PlayerAnimation.hpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC

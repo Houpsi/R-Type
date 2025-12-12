@@ -7,8 +7,10 @@
 
 #include "PlayerAnimationSystem.hpp"
 
-#define SIZE_X_PLAYER 33
-#define SIZE_Y_PLAYER 17
+#include "components/PlayerAnimation.hpp"
+
+constexpr int  SIZE_X_PLAYER = 33;
+constexpr int SIZE_Y_PLAYER = 17;
 
 namespace ecs {
 
@@ -16,17 +18,18 @@ void PlayerAnimationSystem::update(EcsManager& ecs)
 {
     const float deltaTime = ecs.getDeltaTime();
 
-    for (const auto & entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
+    for (const auto & entity : ecs.getEntitiesWithComponent<PlayerAnimation>()) {
         const auto player  = entity->getComponent<InputPlayer>();
         const auto sprite = entity->getComponent<Sprite>();
-        auto anim   = entity->getComponent<Animation>();
+        auto anim   = entity->getComponent<PlayerAnimation>();
 
         if (!sprite || !player || !anim)
             continue;
 
-        player->updateAnimation(deltaTime);
-        int const animFrame = player->getAnimFrame();
-        const int playerId = player->getId();
+
+        anim->updateAnimation(deltaTime, player->getDown(), player->getUp());
+        int const animFrame = anim->getAnimFrame();
+        const int playerId = anim->getId();
         int x = 0;
 
         if (player->getUp()) {
