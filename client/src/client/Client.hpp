@@ -35,7 +35,7 @@ namespace client {
             sf::IpAddress _serverIp = sf::IpAddress::LocalHost;
             uint16_t _serverUdpPort = 0;
 
-            [[noreturn]] void _handleTcp();
+            void _handleTcp();
             std::jthread _tcpThread;
 
             std::shared_ptr<cmn::SharedData> _sharedData;

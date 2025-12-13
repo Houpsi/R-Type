@@ -13,6 +13,7 @@
 #include <optional>
 #include <queue>
 #include <unordered_map>
+#include <SFML/Network/IpAddress.hpp>
 
 namespace cmn {
     /**

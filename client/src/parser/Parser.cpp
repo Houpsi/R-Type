@@ -35,7 +35,7 @@ namespace client {
         int segmentCount = 0;
         while (std::getline(ss, part, '.'))
         {
-            if (!_validPart(part))
+            if (!_isValidIpPart(part))
                 return false;
             segmentCount++;
         }

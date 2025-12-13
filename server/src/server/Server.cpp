@@ -12,8 +12,6 @@
 #include <thread>
 
 namespace server {
-    Server::Server() {}
-
      Server::Server(const std::shared_ptr<cmn::SharedData> &data):
     _sharedData(data) {}
 
@@ -61,7 +59,7 @@ namespace server {
 
             if (_socketSelector.isReady(sock)) {
                 cmn::CustomPacket packet;
-                sf::Socket::Status status = sock.receive(packet);
+                sf::Socket::Status const status = sock.receive(packet);
                 if (status != sf::Socket::Status::Done) {
                     std::cerr << "[ERROR]: failed to receive TCP packet" << "\n";
                     if (status == sf::Socket::Status::Disconnected || status == sf::Socket::Status::Error) {
@@ -82,7 +80,7 @@ namespace server {
         cmn::CustomPacket custom_packet;
         custom_packet << packet;
 
-        sf::Socket::Status status = _udpSocket.send(custom_packet, clientIp, port);
+        sf::Socket::Status const status = _udpSocket.send(custom_packet, clientIp, port);
         if (status != sf::Socket::Status::Done) {
             std::cerr << "[ERROR]: failed to send UDP packet to:"
             << clientIp << ":" << port << "\n";
@@ -96,7 +94,7 @@ namespace server {
         cmn::CustomPacket custom_packet;
         custom_packet << packet;
 
-        sf::Socket::Status status = clientSocket.send(custom_packet);
+        sf::Socket::Status const status = clientSocket.send(custom_packet);
         if (status != sf::Socket::Status::Done) {
             std::cerr << "[ERROR]: failed to send TCP packet to server" << "\n";
             return 1;
@@ -106,9 +104,10 @@ namespace server {
 
     int Server::broadcastTcp(const cmn::packetData& packet) const
     {
-        for (auto &client : _socketVector) {
-            if (sendTcp(packet, *client) == 1)
+        for (const auto &client : _socketVector) {
+            if (sendTcp(packet, *client) == 1) {
                 return 1;
+            }
         }
         return 0;
     }
@@ -117,10 +116,12 @@ namespace server {
     {
         for (const auto &client : _socketVector) {
             auto ip = client->getRemoteAddress();
-            if (!ip.has_value())
+            if (!ip.has_value()) {
                 continue;
-            if (sendUdp(packet, ip.value(), port) == 1)
+            }
+            if (sendUdp(packet, ip.value(), port) == 1) {
                 return 1;
+            }
         }
         return 0;
     }
@@ -140,6 +141,7 @@ namespace server {
         _socketVector.push_back(std::move(client));
         _sharedData->addPlayer(idPlayer, client->getRemotePort(), client->getRemoteAddress().value());
         std::cout << "[CONNECTION]: TCP connection accepted" << "\n";
+        idPlayer++;
     }
 
     void Server::run()
@@ -161,4 +163,5 @@ namespace server {
             std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
     }
+
 }// namespace server
