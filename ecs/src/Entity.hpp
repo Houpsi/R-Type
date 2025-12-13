@@ -14,9 +14,9 @@
 namespace ecs {
 class Entity {
   public:
-    Entity() = default;
+    explicit Entity(std::size_t id) : _id(id) {};
     ~Entity() = default;
-
+    size_t getId() const;
     template <typename T, typename... Args>
     std::shared_ptr<T> addComponent(Args&&... args) {
         auto component = std::make_shared<T>(std::forward<Args>(args)...);
@@ -38,10 +38,10 @@ class Entity {
         }
         return nullptr;
     }
-    size_t _id;
 
   private:
     std::vector<std::shared_ptr<Component>> _components;
+    size_t _id;
 
 };
 }
