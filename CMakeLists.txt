@@ -50,7 +50,9 @@ add_executable(r-type_client
         ecs/src/components/Destroy.cpp
         ecs/src/components/Destroy.hpp
         ecs/src/systems/DestroySystem.cpp
-        ecs/src/systems/DestroySystem.hpp)
+        ecs/src/systems/DestroySystem.hpp
+        ecs/src/ResourceManager.cpp
+        ecs/src/ResourceManager.hpp)
 
 target_link_libraries(r-type_client PRIVATE sfml-graphics sfml-window sfml-system)
 enable_testing()
