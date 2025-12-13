@@ -11,8 +11,9 @@
 
 namespace ecs {
 std::shared_ptr<Entity> EcsManager::createEntity() {
-    auto entity = std::make_shared<Entity>();
+    auto entity = std::make_shared<Entity>(_nextEntityId);
     _entities.push_back(entity);
+    _nextEntityId++;
     return entity;
 }
 

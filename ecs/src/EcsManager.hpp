@@ -51,6 +51,7 @@ class EcsManager {
     float _deltaTime = 0.0f;
     std::vector<std::shared_ptr<System>> _systems;
     std::vector<std::shared_ptr<Entity>> _entities;
+    size_t _nextEntityId = 0;
 };
 }
 
