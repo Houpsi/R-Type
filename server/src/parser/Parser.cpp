@@ -31,28 +31,7 @@ namespace server {
          }
     }
 
-    uint16_t Parser::getPort() const
-    {
-        return this->port;
-    }
-
-    int Parser::checkHelp(int argc, char **args)
-    {
-        if (argc != 2) {
-            _displayHelp();
-            return EXIT_FAILURE;
-        }
-        auto arguments = std::span<char *>(args, argc);
-        std::string_view const stringView(arguments[1]);
-        if (stringView == "-h" || stringView == "-help" || stringView == "--help") {
-            _displayHelp();
-            return EXIT_SUCCESS;
-        }
-        _displayHelp();
-        return EXIT_FAILURE;
-    }
-
-    void Parser::_displayHelp()
+    void Parser::_displayHelp() const
     {
         constexpr std::string_view programName{"r-type_server"};
 

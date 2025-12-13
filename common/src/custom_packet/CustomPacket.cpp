@@ -14,7 +14,7 @@ namespace cmn {
         return Packet::onSend(size);
     }
 
-    void CustomPacket::onReceive(const void *data, std::size_t size) 
+    void CustomPacket::onReceive(const void *data, std::size_t size)
     {
         //TODO -> data decryption
         Packet::onReceive(data, size); 

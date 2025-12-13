@@ -70,10 +70,27 @@ namespace cmn {
      * @param port The connection port.
      * @param ipAddress The IP address.
      */
-    void SharedData::addPlayer(int playerId, int port, const std::string &ipAddress)
+    void SharedData::addPlayer(int playerId, int port, const sf::IpAddress &ipAddress)
     {
         const std::lock_guard lock(_mutex);
         _playerList.emplace(playerId, std::make_pair(port, ipAddress));
+    }
+
+    void SharedData::deletePlayer(int port, const sf::IpAddress &ipAddress)
+    {
+        int playerPort = 0;
+        sf::IpAddress playerAddress = sf::IpAddress::LocalHost;
+
+        for (auto it = _playerList.begin(); it != _playerList.end(); ) {
+            playerPort = it->second.first;
+            playerAddress = it->second.second;
+
+            if (playerPort == port && playerAddress == ipAddress) {
+                it = _playerList.erase(it);
+            } else {
+                ++it;
+            }
+        }
     }
 
      /**
@@ -81,7 +98,7 @@ namespace cmn {
      * @param playerId The player's identifier.
      * @return A pair (port, IP address) if the player is found, otherwise std::nullopt.
      */
-     std::optional<std::pair<int, std::string>> SharedData::getPlayer(const int playerId)
+     std::optional<std::pair<int, sf::IpAddress>> SharedData::getPlayer(const int playerId)
     {
         const std::lock_guard lock(_mutex);
         if (!_playerList.contains(playerId)) {

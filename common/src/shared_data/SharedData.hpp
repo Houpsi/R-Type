@@ -8,11 +8,11 @@
 #ifndef R_TYPE_SHAREDDATA_HPP
 #define R_TYPE_SHAREDDATA_HPP
 
+#include "packet_data/PacketData.hpp"
 #include <mutex>
 #include <optional>
 #include <queue>
 #include <unordered_map>
-#include "../packet_data/PacketData.hpp"
 
 namespace cmn {
     /**
@@ -53,14 +53,16 @@ namespace cmn {
              * @param port The connection port of the player.
              * @param ipAddress The IP address of the player.
              */
-            void addPlayer(int playerId, int port, const std::string &ipAddress);
+            void addPlayer(int playerId, int port, const sf::IpAddress &ipAddress);
+
+            void deletePlayer(int port, const sf::IpAddress &ipAddress);
 
             /**
              * @brief Retrieves the connection information (port and IP) of a player.
              * @param playerId The unique identifier of the player.
              * @return An optional containing a pair (port, IP address) if found, otherwise std::nullopt.
              */
-            std::optional<std::pair<int, std::string>> getPlayer(int playerId);
+            std::optional<std::pair<int, sf::IpAddress>> getPlayer(int playerId);
 
         private:
             std::queue<packetData> _receivedQueue; ///< Queue for received packets (to be processed).
@@ -70,7 +72,7 @@ namespace cmn {
              * @brief List of connected players.
              * The key is the player ID (int), the value is a pair (port, IP address).
              */
-            std::unordered_map<int, std::pair<int, std::string>> _playerList;
+            std::unordered_map<int, std::pair<int, sf::IpAddress>> _playerList;
     };
 }
 
