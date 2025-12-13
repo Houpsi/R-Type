@@ -56,7 +56,7 @@ namespace server {
             auto &sock = **it;
 
             if (_socketSelector.isReady(sock)) {
-                CustomPacket packet;
+                cmn::CustomPacket packet;
                 if (sock.receive(packet) != sf::Socket::Status::Done) {
                     std::cerr << "[ERROR]: failed to receive TCP packet" << "\n";
                     return;

@@ -6,7 +6,7 @@
 */
 #include "CustomPacket.hpp"
 
-namespace server {
+namespace cmn {
 
     const void *CustomPacket::onSend(size_t &size)
     {
