@@ -19,7 +19,8 @@ namespace test {
     {
         constexpr uint16_t port = 4444;
 
-        server::Server server{};
+        auto shared = std::make_shared<cmn::SharedData>();
+        server::Server server(shared);
         sf::TcpListener listener;
         if (listener.listen(port) != sf::Socket::Status::Done) {}
         EXPECT_EQ(server.bindPorts(port), 1);
@@ -30,7 +31,8 @@ namespace test {
     {
         constexpr uint16_t port = 4444;
 
-        server::Server server{};
+        auto shared = std::make_shared<cmn::SharedData>();
+        server::Server server(shared);
         sf::UdpSocket udpSocket;
         if (udpSocket.bind(port) != sf::Socket::Status::Done) {}
         EXPECT_EQ(server.bindPorts(port), 1);
@@ -41,7 +43,8 @@ namespace test {
     {
         constexpr uint16_t port = 1000;
 
-        server::Server server{};
+        auto shared = std::make_shared<cmn::SharedData>();
+        server::Server server(shared);
         EXPECT_EQ(server.bindPorts(port), 1);
     }
 
@@ -49,7 +52,8 @@ namespace test {
     {
         constexpr uint16_t port = 1000;
 
-        server::Server server{};
+        auto shared = std::make_shared<cmn::SharedData>();
+        server::Server server(shared);
         EXPECT_EQ(server.bindPorts(port), 1);
     }
 
@@ -57,7 +61,8 @@ namespace test {
     {
         constexpr uint16_t port = 4444;
 
-        server::Server server{};
+        auto shared = std::make_shared<cmn::SharedData>();
+        server::Server server(shared);
         EXPECT_EQ(server.bindPorts(port), 0);
     }
 

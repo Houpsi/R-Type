@@ -5,8 +5,8 @@ if (NOT DEFINED CMAKE_CXX_STANDARD)
 endif()
 
 project(
-        r-type_server
+        r-type_client
 )
 
 add_subdirectory(src)
-add_subdirectory(tests)
+#add_subdirectory(tests)

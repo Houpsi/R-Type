@@ -4,6 +4,8 @@
 ** File description:
 ** main
 */
+
+#include "game/Game.hpp"
 #include "parser/Parser.hpp"
 #include "server/Server.hpp"
 
@@ -15,13 +17,18 @@ int main(int argc, char **argv)
         return parser.checkHelp(argc, argv);
     }
 
-    server::Server server{};
+    const std::shared_ptr<cmn::SharedData> data;
+    server::Server server(data);
 
     uint16_t const port = parser.getPort();
     if (server.bindPorts(port) != 0) {
         return EXIT_FAILURE;
     }
-    server.run();
+
+    server::Game game(data);
+    auto  networkThread = std::jthread([&server] {server.run();});
+    game.run();
+    return EXIT_SUCCESS;
 }
 
 
