@@ -41,7 +41,6 @@ void CollisionSystem::update(ecs::EcsManager &ecs)
                 Y < (posOtherEntity->getY() + otherCollision->getHeight()) &&
                 (Y + collision->getHeight()) > posOtherEntity->getY()
                 ) {
-                std::cout << "COLLLLISION !!!!" << std::endl;
                 collision->setIsTrigger(true);
                 otherCollision->setIsTrigger(true);
             }

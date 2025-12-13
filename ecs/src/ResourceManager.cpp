@@ -12,7 +12,17 @@
 #include "SFML/Graphics/Texture.hpp"
 
 namespace ecs {
-    sf::Texture &ResourceManager::getTexture(std::string &path)
+    ResourceManager::ResourceManager()
+    {
+        try {
+            _textureMap.try_emplace("textureError.png", "assets/textureError.png");
+        } catch (const std::exception &e) {
+            std::cerr << "Texture loading failed: " << e.what() << '\n';
+            throw;
+        }
+    }
+
+    sf::Texture &ResourceManager::getTexture(const std::string &path)
     {
         if (_textureMap.contains(path)) {
             return _textureMap[path];
@@ -24,8 +34,11 @@ namespace ecs {
             return iterator->second;
         } catch (const std::exception &e) {
             std::cerr << "Texture loading failed: " << e.what() << '\n';
-            // TODO throw or return "error" texture
-            throw;
+            if (_textureMap.contains("textureError.png")) {
+                return _textureMap["textureError.png"];
+            } else {
+                throw;
+            }
         }
     }
 }

@@ -16,9 +16,9 @@ namespace ecs {
     class ResourceManager
     {
       public:
-        ResourceManager() = default;
+        ResourceManager();
 
-        sf::Texture &getTexture(std::string &);
+        sf::Texture &getTexture(const std::string &);
       private:
         std::unordered_map<std::string, sf::Texture> _textureMap;
     };
