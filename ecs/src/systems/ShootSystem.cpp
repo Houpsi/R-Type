@@ -28,11 +28,13 @@ namespace ecs {
 
                         shoot->setTimeSinceLastShot(0);
                         projectile->addComponent<ecs::Position>(
-                            entity->getComponent<Position>()->getX(), entity->getComponent<Position>()->getY());
-                        projectile->addComponent<Velocity>(400, 0.5);
+                            entity->getComponent<Position>()->getX() + entity->getComponent<Collision>()->getHeight(), entity->getComponent<Position>()->getY());
+                        projectile->addComponent<Velocity>(400, 1);
                         projectile->addComponent<Shoot>(
                             entity->getComponent<Shoot>()->getDamage(), entity->getComponent<Shoot>()->getCooldown());
-                        projectile->addComponent<Sprite>("./assets/r-typesheet30a.gif");
+                        sf::Vector2f scale(1.0f, 1.0f);
+                        projectile->addComponent<Sprite>("./assets/r-typesheet30a.gif", scale);
+                        projectile->addComponent<Animation>(std::pair<int, int>(34, 34), 0, 3);
                         projectile->addComponent<Collision>(ecs::TypeCollision::PLAYER_PROJECTILE, 10, 10);
                     }
                 }

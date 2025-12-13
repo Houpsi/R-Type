@@ -48,6 +48,8 @@ add_library(r-type_ecs_lib
         systems/SpriteAnimationSystem.hpp
         systems/VelocitySystem.hpp
         systems/VelocitySystem.cpp
+        systems/HealthSystem.cpp
+        systems/HealthSystem.hpp
         components/PlayerAnimation.cpp
         components/PlayerAnimation.hpp
 )

@@ -8,13 +8,15 @@
 #include "Sprite.hpp"
 
 namespace ecs {
-Sprite::Sprite(const std::string& texturePath) :
+Sprite::Sprite(const std::string& texturePath, sf::Vector2f scale) :
       _sprite(_texture)
 {
     if (!_texture.loadFromFile(texturePath)) {
         throw std::runtime_error("Failed to load texture: " + texturePath);
     }
+    _scale = scale;
     _sprite.setTexture(_texture);
+    _sprite.setScale(_scale);
 }
 
 
@@ -28,4 +30,8 @@ void Sprite::setTextureRect(int x, int y, int width, int height)
     _sprite.setTextureRect(sf::IntRect(sf::Vector2i(x, y), sf::Vector2i(width, height)));
 };
 
+sf::Vector2f Sprite::getScale() const
+{
+    return _scale;
+}
 }
