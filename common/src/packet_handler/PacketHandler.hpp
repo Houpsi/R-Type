@@ -12,6 +12,7 @@ namespace server {
     class PacketHandler
     {
       public:
+      private:
 
     };
 

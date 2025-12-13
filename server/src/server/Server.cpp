@@ -159,7 +159,9 @@ namespace server {
                 std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
-            // TODO -> handle received UDP packet
+            cmn::packetData data;
+            packet >> data;
+            _sharedData->addReceivedPacket(data);
             std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
     }

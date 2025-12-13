@@ -5,15 +5,63 @@
 ** PacketData
 */
 
-#include "InputPacket.hpp"
+
+#include "PacketData.hpp"
+
 namespace cmn {
-    sf::Packet &operator << (sf::Packet &packet, const inputPacket &packetStruct)
+    sf::Packet &operator << (sf::Packet &packet, const packetContent &content)
     {
-        return packet << packetStruct.key << packetStruct.keyState;
+        packet << content.index();
+
+        std::visit([&packet](auto &&arg) {
+            packet << arg;
+        }, content);
+
+        return packet;
     }
 
-    sf::Packet &operator >> (sf::Packet &packet, inputPacket &packetStruct)
+    sf::Packet &operator >> (sf::Packet &packet, packetContent &data)
     {
-        return packet >> packetStruct.key >> packetStruct.keyState;
+        std::size_t typeIndex = 0;
+        packet >> typeIndex;
+
+        switch (typeIndex) {
+            case 0: {
+                inputPacket input;
+                packet >> input;
+                data = input;
+                break;
+            }
+            case 1: {
+                positionPacket position;
+                packet >> position;
+                data = position;
+            }
+            case 2: {
+                newEntityPacket newEntity;
+                packet >> newEntity;
+                data = newEntity;
+            }
+            case 3: {
+                deleteEntityPacket deleteEntity;
+                packet >> deleteEntity;
+                data = deleteEntity;
+            }
+            default: {
+                throw std::exception();
+            }
+        }
+
+        return packet;
+    }
+
+    sf::Packet &operator << (sf::Packet &packet, const packetData &data)
+    {
+        return packet << data.packetId << data.entityId << data.content;
+    }
+
+    sf::Packet &operator >> (sf::Packet &packet, packetData &data)
+    {
+        return packet >> data.packetId >> data.entityId >> data.content;
     }
 }

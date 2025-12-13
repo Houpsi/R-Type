@@ -57,6 +57,9 @@ void InputPlayer::setSpacebar(bool spacebar)
 {
     _spacebar = spacebar;
 }
-
+void InputPlayer::setR(bool r)
+{
+    _r = r;
+}
 
 }

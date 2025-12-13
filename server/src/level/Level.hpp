@@ -17,17 +17,13 @@ namespace server {
       public:
         Level(
             uint8_t levelId,
-            std::string enemySpritePath,
             uint8_t enemySpawnRate,
             bool isBossPresent,
-            std::string bossSpritePath,
             uint32_t bossApparitionTime
         );
         [[nodiscard]] uint8_t getEnemySpawnRate() const;
         [[nodiscard]] bool getIsBossPresent() const;
         [[nodiscard]] uint32_t getBossApparitionTime() const;
-        [[nodiscard]] std::string getEnemySpritePath() const;
-        [[nodiscard]] std::string getBossSpritePath() const;
         [[nodiscard]] uint8_t getLevelId() const;
 
       private:
@@ -35,8 +31,6 @@ namespace server {
         uint8_t _enemySpawnRate;
         bool _isBossPresent;
         uint32_t _bossApparitionTime;
-        std::string _enemySpritePath;
-        std::string _bossSpritePath;
     };
 
 }// namespace server

@@ -1,0 +1,23 @@
+//
+// Created by theo on 12/13/25.
+//
+
+#ifndef R_TYPE_NEWENTITYPACKET_HPP
+#define R_TYPE_NEWENTITYPACKET_HPP
+
+#include <cstdint>
+namespace cmn {
+
+    struct newEntityPacket
+    {
+        uint8_t type;
+        uint16_t posX;
+        uint16_t posY;
+    };
+
+    sf::Packet &operator << (sf::Packet &packet, const newEntityPacket &packetStruct);
+    sf::Packet &operator >> (sf::Packet &packet, newEntityPacket &packetStruct);
+
+}// namespace cmn
+
+#endif// R_TYPE_NEWENTITYPACKET_HPP

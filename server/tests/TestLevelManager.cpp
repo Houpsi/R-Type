@@ -14,8 +14,8 @@ namespace test {
     TEST(ChangeToNextlevelTest, SuccessfulChange)
     {
         server::LevelManager levelManager;
-        server::Level firstLevel(1, "test", 10, false, "test", 0);
-        server::Level secondLevel(2, "test", 20, true, "test", 300);
+        server::Level firstLevel(1, 10, false, 0);
+        server::Level secondLevel(2, 20, true, 300);
 
         levelManager.addLevel(firstLevel);
         levelManager.addLevel(secondLevel);
@@ -27,7 +27,7 @@ namespace test {
     TEST(ChangeToNextLevelTest, ChangeFail)
     {
         server::LevelManager levelManager;
-        server::Level firstLevel(1, "test", 10, false, "test", 0);
+        server::Level firstLevel(1, 10, false, 0);
 
         levelManager.addLevel(firstLevel);
         levelManager.setCurrentLevelId(1);

@@ -25,13 +25,14 @@ class InputPlayer : public Component {
     void setLeft(bool left);
     void setRight(bool right);
     void setSpacebar(bool spacebar);
+    void setR(bool r);
   private:
     bool _up = false;
     bool _down = false;
     bool _left = false;
     bool _right = false;
     bool _spacebar = false;
-
+    bool _r = false;
 };
 }
 

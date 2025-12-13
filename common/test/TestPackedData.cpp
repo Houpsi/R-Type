@@ -7,8 +7,8 @@
 #include "custom_packet/CustomPacket.hpp"
 #include "enums/Key.hpp"
 #include "enums/KeyState.hpp"
-#include "packet_data/InputPacket.hpp"
 #include "packet_data/PacketData.hpp"
+#include "packet_data/input_packet/InputPacket.hpp"
 #include <gtest//gtest.h>
 #include <string>
 

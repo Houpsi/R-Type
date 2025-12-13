@@ -1,7 +1,7 @@
 add_library(r-type_common_lib
         shared_data/SharedData.cpp
         shared_data/SharedData.hpp
-        packet_data/InputPacket.hpp
+        packet_data/input_packet/InputPacket.hpp
         enums/Key.hpp
         enums/KeyState.hpp
         custom_packet/CustomPacket.cpp
@@ -12,10 +12,19 @@ add_library(r-type_common_lib
         packet_data/PacketData.cpp
         shared_data/SharedData.cpp
         shared_data/SharedData.hpp
-        packet_data/InputPacket.hpp
-        packet_data/InputPacket.cpp
+        packet_data/input_packet/InputPacket.hpp
+        packet_data/input_packet/InputPacket.cpp
         packet_handler/PacketHandler.cpp
         packet_handler/PacketHandler.hpp
+        packet_data/position_packet/PositionPacket.cpp
+        packet_data/position_packet/PositionPacket.hpp
+        packet_data/new_entity_packet/NewEntityPacket.cpp
+        packet_data/new_entity_packet/NewEntityPacket.hpp
+        packet_data/delete_entity_packet/DeleteEntityPacket.cpp
+        packet_data/delete_entity_packet/DeleteEntityPacket.hpp
+        enums/EntityType.hpp
+        data_translator/DataTranslator.cpp
+        data_translator/DataTranslator.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC
@@ -25,4 +34,5 @@ target_include_directories(r-type_common_lib PUBLIC
 target_link_libraries(r-type_common_lib
         PUBLIC
         sfml-network
+        r-type_ecs_lib
 )

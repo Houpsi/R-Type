@@ -9,6 +9,7 @@
 #define R_TYPE_GAME_HPP
 
 #include "EcsManager.hpp"
+#include "level_manager/LevelManager.hpp"
 #include "shared_data/SharedData.hpp"
 
 namespace server {
@@ -16,10 +17,13 @@ namespace server {
     public:
         explicit Game(const std::shared_ptr<cmn::SharedData>&);
         ~Game() = default;
-        [[noreturn]] static void run();
+        [[noreturn]] void run();
     private:
         ecs::EcsManager _ecs;
         std::shared_ptr<cmn::SharedData> _sharedData;
+        LevelManager _levelManager;
+        void _initLevels();
+        void _initEcsManager();
     };
 }
 

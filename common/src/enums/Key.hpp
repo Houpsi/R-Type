@@ -12,14 +12,7 @@ namespace cmn {
         Down,
         Left,
         Right,
-        LeftClick,
-        RightClick,
-        Z,
-        Q,
-        S,
-        D,
         Escape,
-        Enter,
     };
 
 }
