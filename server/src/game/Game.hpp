@@ -7,15 +7,14 @@
 
 #ifndef R_TYPE_GAME_HPP
 #define R_TYPE_GAME_HPP
-#define WINDOW_X 1920
-#define WINDOW_Y 1080
+
 #include "EcsManager.hpp"
 #include "shared_data/SharedData.hpp"
 
 namespace server {
     class Game {
     public:
-        explicit Game(std::shared_ptr<cmn::SharedData>);
+        explicit Game(const std::shared_ptr<cmn::SharedData>&);
         ~Game() = default;
         [[noreturn]] static void run();
     private:

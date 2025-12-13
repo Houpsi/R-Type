@@ -20,7 +20,7 @@ namespace server {
     class Server
     {
       public:
-        explicit Server(std::shared_ptr<cmn::SharedData> data);
+        explicit Server(const std::shared_ptr<cmn::SharedData> &data);
         Server();
         [[nodiscard]]int bindPorts(uint16_t port);
         void close();

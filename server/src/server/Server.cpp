@@ -14,8 +14,8 @@
 namespace server {
     Server::Server() {}
 
-     Server::Server(std::shared_ptr<cmn::SharedData> data):
-    _sharedData(std::move(data)) {}
+     Server::Server(const std::shared_ptr<cmn::SharedData> &data):
+    _sharedData(data) {}
 
 
     int Server::bindPorts(const uint16_t port)

@@ -17,8 +17,8 @@
 
 namespace client {
 
-     Client::Client(std::shared_ptr<cmn::SharedData> data):
-        _sharedData(std::move(data)) {}
+     Client::Client(const std::shared_ptr<cmn::SharedData> &data):
+        _sharedData(data) {}
 
     int Client::bindPorts(const uint16_t port)
     {

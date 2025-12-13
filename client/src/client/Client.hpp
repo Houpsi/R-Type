@@ -20,7 +20,7 @@ namespace client {
     class Client
     {
         public:
-            explicit Client(std::shared_ptr<cmn::SharedData> data);
+            explicit Client(const std::shared_ptr<cmn::SharedData> &data);
             [[nodiscard]]int bindPorts(uint16_t port);
             [[nodiscard]] int connectToHost(const std::string &address, uint16_t port);
             [[noreturn]] int run();

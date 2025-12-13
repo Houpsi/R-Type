@@ -11,8 +11,8 @@
 
 namespace client {
 
-     Game::Game(std::shared_ptr<cmn::SharedData> data):
-        _ecs(ecs::EcsManager()), _sharedData(std::move(data)) {}
+     Game::Game(const std::shared_ptr<cmn::SharedData> &data):
+        _ecs(ecs::EcsManager()), _sharedData(data) {}
 
     void Game::run()
     {
