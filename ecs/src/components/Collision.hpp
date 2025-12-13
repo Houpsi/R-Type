@@ -8,6 +8,9 @@
 #ifndef BOOTSTRAP_COLLIDER_HPP
     #define BOOTSTRAP_COLLIDER_HPP
 #include "Component.hpp"
+#include "components/Destroy.hpp"
+#include "components/Health.hpp"
+#include "components/Shoot.hpp"
 #include <SFML/Graphics/Sprite.hpp>
 
 namespace ecs {

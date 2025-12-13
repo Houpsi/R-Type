@@ -23,15 +23,22 @@ namespace ecs {
 //        EXPECT_GT(size.y, 0);
 //    }
 
-//    TEST(SpriteTest, GetSpriteReturnsReference)
-//    {
-//        Sprite sprite("assets/image.png");
-//
-//        const sf::Sprite &spr1 = sprite.getSprite();
-//        const sf::Sprite &spr2 = sprite.getSprite();
-//
-//        ASSERT_EQ(&spr1, &spr2);
-//    }
-//
-//    TEST(SpriteTest, InvalidTextureDoesNotCrash) { ASSERT_NO_THROW(Sprite sprite("nope/not_found.png")); }
+    TEST(SpriteTest, GetSpriteReturnsReference)
+    {
+        sf::Vector2f scale(2.0f, 2.0f);
+        sf::Texture texture("assets/textureError.png");
+        Sprite sprite(texture, scale);
+
+        const sf::Sprite &spr1 = sprite.getSprite();
+        const sf::Sprite &spr2 = sprite.getSprite();
+
+        ASSERT_EQ(&spr1, &spr2);
+    }
+
+    TEST(SpriteTest, InvalidTextureDoesNotCrash)
+    {
+        sf::Vector2f scale(2.0f, 2.0f);
+        sf::Texture texture("nope/not_found.png");
+        ASSERT_NO_THROW(Sprite sprite(texture, scale));
+    }
 }

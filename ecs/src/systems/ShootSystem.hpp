@@ -15,6 +15,7 @@
 #include "components/Collision.hpp"
 #include "components/Sprite.hpp"
 #include "components/Velocity.hpp"
+#include "components/Animation.hpp"
 
 namespace ecs {
 class ShootSystem : public System {

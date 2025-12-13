@@ -26,7 +26,6 @@ void PlayerAnimationSystem::update(EcsManager& ecs)
         if (!sprite || !player || !anim)
             continue;
 
-
         anim->updateAnimation(deltaTime, player->getDown(), player->getUp());
         int const animFrame = anim->getAnimFrame();
         const int playerId = anim->getId();

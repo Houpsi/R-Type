@@ -10,7 +10,7 @@
 namespace ecs {
 void MovementSystem::update(EcsManager &ecs)
 {
-    constexpr uint16_t windowWidth = 1080;
+    constexpr uint16_t windowWidth = 1920;
 
     const float speed = 250.f;
     const float dt = ecs.getDeltaTime();
@@ -36,7 +36,7 @@ void MovementSystem::update(EcsManager &ecs)
         if (pos->getX() < 0 - enemy->getComponent<Collision>()->getWidth()) {
             enemy->addComponent<Destroy>();
         }
-        if (pos->getX() < windowWidth + enemy->getComponent<Collision>()->getWidth()) {
+        if (pos->getX() > windowWidth + enemy->getComponent<Collision>()->getWidth() + 500) {
             enemy->addComponent<Destroy>();
         }
     }
