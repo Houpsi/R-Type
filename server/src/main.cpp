@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     server::Game game(data);
     auto  networkThread = std::jthread([&server] {server.run();});
     game.run();
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 

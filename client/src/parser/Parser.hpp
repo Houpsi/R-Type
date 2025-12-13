@@ -7,8 +7,8 @@
 
 #ifndef R_TYPE_PARSER_HPP
 #define R_TYPE_PARSER_HPP
-#include "../../../common/src/parser/AParser.hpp"
 
+#include "parser/AParser.hpp"
 
 #include <string>
 
@@ -22,7 +22,7 @@ namespace client {
     private:
         void _displayHelp() const override;
         static bool _isValidIp(const std::string &ip);
-        static bool _validPart(const std::string &s);
+        static bool _isValidIpPart(const std::string &s);
         std::string _ip;
     };
 }

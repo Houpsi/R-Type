@@ -8,12 +8,11 @@
 #ifndef R_TYPE_SHAREDDATA_HPP
 #define R_TYPE_SHAREDDATA_HPP
 
+#include "packet_data/PacketData.hpp"
 #include <mutex>
 #include <optional>
 #include <queue>
 #include <unordered_map>
-#include "../packet_data/PacketData.hpp"
-#include "SFML/Network/IpAddress.hpp"
 
 namespace cmn {
     /**

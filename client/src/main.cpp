@@ -40,5 +40,5 @@ int main(const int argc, char *argv[])
     std::jthread();
     auto  networkThread = std::jthread([&client] {client.run();});
     game.run();
-    return 0;
+    return EXIT_SUCCESS;
 }

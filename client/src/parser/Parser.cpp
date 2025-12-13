@@ -11,7 +11,7 @@
 #include <span>
 
 namespace client {
-    bool Parser::_validPart(const std::string &s)
+    bool Parser::_isValidIpPart(const std::string &s)
     {
         const int n = s.length();
         int num = 0;
