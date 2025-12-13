@@ -9,8 +9,8 @@
     #define R_TYPE_CLIENT_VELOCITYSYSTEM_HPP
 #include "EcsManager.hpp"
 #include "System.hpp"
-#include "Velocity.hpp"
-#include "Position.hpp"
+#include "components/Velocity.hpp"
+#include "components/Position.hpp"
 
 namespace ecs {
 class VelocitySystem : public System {

@@ -8,7 +8,7 @@
 #include "Animation.hpp"
 
 
-namespace ECS {
+namespace ecs {
 
 void Animation::updateAnimation(const float dt)
 {

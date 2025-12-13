@@ -11,7 +11,7 @@
 #include "Component.hpp"
 #include <SFML/Graphics.hpp>
 
-namespace ECS {
+namespace ecs {
 class Animation : public Component {
   public:
     explicit Animation(const std::pair<int, int> size, const int offsetX, const int numberFrame) : _sizeSprite(size), _offsetX(offsetX), _numberFrame(numberFrame) {}

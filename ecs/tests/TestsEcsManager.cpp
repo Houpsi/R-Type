@@ -8,66 +8,73 @@
 #include <gtest/gtest.h>
 
 #include "EcsManager.hpp"
-#include "System.hpp"
+#include "systems/System.hpp"
 
-class DummySystem : public System {
-public:
-    bool updated = false;
+namespace ecs {
+    class DummySystem : public System
+    {
+      public:
+        bool updated = false;
 
-    void update(EcsManager& manager) override {
-        updated = true;
+        void update(EcsManager &manager) override { updated = true; }
+    };
+
+    TEST(EcsManagerTest, CreateEntityIncreasesSize)
+    {
+        EcsManager manager;
+
+        auto e1 = manager.createEntity();
+        auto e2 = manager.createEntity();
+
+        EXPECT_EQ(manager.getEntities().size(), 2);
     }
-};
 
-TEST(EcsManagerTest, CreateEntityIncreasesSize) {
-    EcsManager manager;
+    TEST(EcsManagerTest, DeltaTimeSetAndGetWorks)
+    {
+        EcsManager manager;
 
-    auto e1 = manager.createEntity();
-    auto e2 = manager.createEntity();
+        manager.setDeltaTime(0.16f);
+        EXPECT_FLOAT_EQ(manager.getDeltaTime(), 0.16f);
+    }
 
-    EXPECT_EQ(manager.getEntities().size(), 2);
-}
+    TEST(EcsManagerTest, AddSystemStoresSystem)
+    {
+        EcsManager manager;
 
-TEST(EcsManagerTest, DeltaTimeSetAndGetWorks) {
-    EcsManager manager;
+        auto sys = manager.addSystem<DummySystem>();
 
-    manager.setDeltaTime(0.16f);
-    EXPECT_FLOAT_EQ(manager.deltaTime(), 0.16f);
-}
+        EXPECT_EQ(manager.getEntities().size(), 0);
+        EXPECT_FALSE(sys->updated);
+    }
 
-TEST(EcsManagerTest, AddSystemStoresSystem) {
-    EcsManager manager;
+    TEST(EcsManagerTest, UpdateSystemsCallsUpdate)
+    {
+        EcsManager manager;
 
-    auto sys = manager.addSystem<DummySystem>();
+        auto sys = manager.addSystem<DummySystem>();
 
-    EXPECT_EQ(manager.getEntities().size(), 0);
-    EXPECT_FALSE(sys->updated);
-}
+        manager.updateSystems();
 
-TEST(EcsManagerTest, UpdateSystemsCallsUpdate) {
-    EcsManager manager;
+        EXPECT_TRUE(sys->updated);
+    }
 
-    auto sys = manager.addSystem<DummySystem>();
+    class DummyComponent : public Component
+    {
+      public:
+        int value = 0;
+    };
 
-    manager.updateSystems();
+    TEST(EcsManagerTest, GetEntitiesWithComponentWorks)
+    {
+        EcsManager manager;
 
-    EXPECT_TRUE(sys->updated);
-}
+        auto entity1 = manager.createEntity();
+        auto entity2 = manager.createEntity();
 
-class DummyComponent : public Component {
-public:
-    int value = 0;
-};
+        entity1->addComponent<DummyComponent>();
 
-TEST(EcsManagerTest, GetEntitiesWithComponentWorks) {
-    EcsManager manager;
-
-    auto entity1 = manager.createEntity();
-    auto entity2 = manager.createEntity();
-
-    entity1->addComponent<DummyComponent>();
-
-    auto entitiesWithDummy = manager.getEntitiesWithComponent<DummyComponent>();
-    EXPECT_EQ(entitiesWithDummy.size(), 1);
+        auto entitiesWithDummy = manager.getEntitiesWithComponent<DummyComponent>();
+        EXPECT_EQ(entitiesWithDummy.size(), 1);
+    }
 }
 

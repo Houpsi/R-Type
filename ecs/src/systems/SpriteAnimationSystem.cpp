@@ -7,12 +7,12 @@
 
 #include "SpriteAnimationSystem.hpp"
 
-#include "Animation.hpp"
+#include "components/Animation.hpp"
 #include "EcsManager.hpp"
-#include "InputPlayer.hpp"
-#include "Sprite.hpp"
+#include "components/InputPlayer.hpp"
+#include "components/Sprite.hpp"
 
-namespace ECS {
+namespace ecs {
 
 void SpriteAnimationSystem::update(EcsManager& ecs)
 {

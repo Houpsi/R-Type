@@ -11,7 +11,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include "System.hpp"
 #include "../EcsManager.hpp"
-#include "InputPlayer.hpp"
+#include "components/InputPlayer.hpp"
 
 namespace ecs {
 class InputSystem : public System {

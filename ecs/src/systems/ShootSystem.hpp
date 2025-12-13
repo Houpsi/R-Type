@@ -8,13 +8,13 @@
 #ifndef R_TYPE_CLIENT_SHOOTSYSTEM_HPP
     #define R_TYPE_CLIENT_SHOOTSYSTEM_HPP
 #include "System.hpp"
-#include "Shoot.hpp"
-#include "InputPlayer.hpp"
-#include "../EcsManager.hpp"
-#include "Position.hpp"
-#include "Collision.hpp"
-#include "Sprite.hpp"
-#include "Velocity.hpp"
+#include "components/Shoot.hpp"
+#include "components/InputPlayer.hpp"
+#include "EcsManager.hpp"
+#include "components/Position.hpp"
+#include "components/Collision.hpp"
+#include "components/Sprite.hpp"
+#include "components/Velocity.hpp"
 
 namespace ecs {
 class ShootSystem : public System {

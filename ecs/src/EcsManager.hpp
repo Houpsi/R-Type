@@ -7,8 +7,8 @@
 
 #ifndef ECSMANAGER_HPP
     #define ECSMANAGER_HPP
-#include "../Entity.hpp"
-#include "System.hpp"
+#include "Entity.hpp"
+#include "systems/System.hpp"
 #include <memory>
 #include <vector>
 

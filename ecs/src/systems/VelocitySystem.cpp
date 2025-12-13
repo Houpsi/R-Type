@@ -11,7 +11,7 @@ namespace ecs {
 
     void VelocitySystem::update(EcsManager &ecs)
     {
-        float dt = ecs.deltaTime();
+        float dt = ecs.getDeltaTime();
         for (auto const &entity : ecs.getEntitiesWithComponent<Velocity>()) {
             auto pos = entity->getComponent<Position>();
             auto direction = entity->getComponent<Velocity>()->getDirection();

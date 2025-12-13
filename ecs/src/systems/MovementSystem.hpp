@@ -10,12 +10,11 @@
     #define MOVEMENTSYSTEM_HPP
 #include "System.hpp"
 #include "EcsManager.hpp"
-#include "Position.hpp"
-#include "Enemy.hpp"
-#include "InputPlayer.hpp"
-#include "Collision.hpp"
-#include "Destroy.hpp"
-#include "Game.hpp"
+#include "components/Position.hpp"
+#include "components/Enemy.hpp"
+#include "components/InputPlayer.hpp"
+#include "components/Collision.hpp"
+#include "components/Destroy.hpp"
 
 namespace ecs {
 class MovementSystem : public System
