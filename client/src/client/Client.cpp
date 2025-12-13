@@ -13,10 +13,14 @@
 #include <iostream>
 #include <SFML/Network/TcpSocket.hpp>
 #include <SFML/Network/IpAddress.hpp>
+#include <utility>
 
 namespace client {
 
-    int Client::bindPorts(uint16_t port)
+     Client::Client(std::shared_ptr<cmn::SharedData> data):
+        _sharedData(std::move(data)) {}
+
+    int Client::bindPorts(const uint16_t port)
     {
         _udpSocket.setBlocking(true);
         if (_udpSocket.bind(port) != sf::Socket::Status::Done) {
@@ -34,7 +38,7 @@ namespace client {
             return 1;
         }
         std::cout << "[CONNECTION]: Connecting to " << address << ":" << port << " (TCP)\n";
-        if (_socket.connect(ipAddress.value(), port) != sf::Socket::Status::Done) {
+        if (_tcpSocket.connect(ipAddress.value(), port) != sf::Socket::Status::Done) {
             std::cerr << "[ERROR]: Failed to connect to host via TCP.\n";
             return 1;
         }
@@ -44,8 +48,61 @@ namespace client {
         return 0;
     }
 
+    int Client::sendTcp(const cmn::packetData& dataPacket)
+    {
+        cmn::CustomPacket packet;
+        packet << dataPacket;
+
+        if (_tcpSocket.send(packet) != sf::Socket::Status::Done) {
+            std::cerr << "[ERROR]: Failed to send TCP packet.\n";
+            return 1;
+        }
+        return 0;
+    }
+
+    int Client::sendUdp(const cmn::packetData& dataPacket)
+    {
+        cmn::CustomPacket packet;
+        packet << dataPacket;
+
+        if (_udpSocket.send(packet, _serverIp, _serverUdpPort) != sf::Socket::Status::Done) {
+            std::cerr << "[ERROR]: Failed to send UDP packet.\n";
+            return 1;
+        }
+        return 0;
+    }
+
+    void Client::_handleTcp()
+    {
+        sf::SocketSelector selector;
+        selector.add(_tcpSocket);
+
+        cmn::CustomPacket packet;
+
+        while (true) {
+            if (!selector.wait(sf::milliseconds(50))) {
+                continue;
+            }
+            if (selector.isReady(_tcpSocket)) {
+                sf::Socket::Status const status = _tcpSocket.receive(packet);
+                if (status == sf::Socket::Status::Disconnected) {
+                    std::cerr << "[TCP]: Server disconnected.\n";
+                    break;
+                }
+                if (status != sf::Socket::Status::Done) {
+                    std::cerr << "[TCP]: Failed to receive TCP packet.\n";
+                    continue;
+                }
+                std::cout << "[RECEIVED]: TCP Packet received\n";
+            }
+        }
+    }
+
+
     int Client::run()
     {
+        _tcpThread = std::jthread{[this]{ _handleTcp(); }};
+
         std::optional<sf::IpAddress> sender;
         unsigned short port = 0;
         cmn::CustomPacket packet;
