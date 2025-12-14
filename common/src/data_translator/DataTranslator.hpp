@@ -11,15 +11,18 @@
 #include "EcsManager.hpp"
 #include "packet_data/PacketData.hpp"
 
+#include <optional>
+
 namespace cmn {
 
     class DataTranslator
     {
       public:
         void translate(ecs::EcsManager &ecs, packetData &data);
+        [[nodiscard]] std::optional<uint8_t> getYourPlayerId();
 
       private:
-        uint8_t _yourPlayerEntityId;
+        std::optional<uint8_t> _yourPlayerEntityId;
         static void _injectInput(ecs::EcsManager &ecs, inputPacket &input, int entityId);
         static void _injectPosition(ecs::EcsManager &ecs, positionPacket &position, int entityId);
         void _injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity, int entityId);

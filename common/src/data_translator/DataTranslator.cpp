@@ -124,4 +124,13 @@ namespace cmn {
             }, data.content);
     }
 
+    std::optional<uint8_t> DataTranslator::getYourPlayerId()
+    {
+        if (!_yourPlayerEntityId.value()) {
+            return std::nullopt;
+        }
+        return _yourPlayerEntityId.value();
+    }
+
+
 }// namespace cmn
