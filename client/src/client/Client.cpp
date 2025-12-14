@@ -19,10 +19,10 @@ namespace client {
      Client::Client(const std::shared_ptr<cmn::SharedData> &data):
         _sharedData(data) {}
 
-    int Client::bindPorts(const uint16_t port)
+    int Client::bindPorts()
     {
         _udpSocket.setBlocking(true);
-        if (_udpSocket.bind(port) != sf::Socket::Status::Done) {
+        if (_udpSocket.bind(sf::Socket::AnyPort) != sf::Socket::Status::Done) {
             return 1;
         }
         return 0;

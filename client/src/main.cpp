@@ -27,7 +27,7 @@ int main(const int argc, char *argv[])
     uint16_t const serverPort = parser.getPort();
     const std::string serverIp = parser.getIp();
 
-    if (client.bindPorts(0) != 0) {
+    if (client.bindPorts() != 0) {
         std::cerr << "Fatal Error: Client failed to bind local ports.\n";
         return EXIT_FAILURE;
     }
