@@ -25,6 +25,8 @@ add_library(r-type_ecs_lib
         Entity.hpp
         EcsManager.cpp
         EcsManager.hpp
+        ResourceManager.cpp
+        ResourceManager.hpp
         components/Sprite.cpp
         components/Sprite.hpp
         components/Sprite.hpp

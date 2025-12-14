@@ -8,6 +8,7 @@
 #include "EcsManager.hpp"
 #include <memory>
 #include "Entity.hpp"
+#include "ResourceManager.hpp"
 
 namespace ecs {
 std::shared_ptr<Entity> EcsManager::createEntity() {
@@ -41,5 +42,10 @@ void EcsManager::updateSystems() {
     for (const auto& system : _systems) {
         system->update(*this);
     }
+}
+
+ResourceManager &EcsManager::getResourceManager()
+{
+    return _resourceManager;
 }
 }
