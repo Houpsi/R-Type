@@ -43,25 +43,25 @@ namespace cmn {
      * @brief Adds a packet to the send queue using a lock_guard.
      * @param data The packet to add.
      */
-    void SharedData::addUdpPacketToSend(const packetData &data)
+    void SharedData::addUdpPacketToSend(const CustomPacket &packet)
     {
         std::lock_guard const lock(_mutex);
-        _udpSendQueue.push(data);
+        _udpSendQueue.push(packet);
     }
 
     /**
      * @brief Retrieves the next packet from the send queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<packetData> SharedData::getUdpPacketToSend()
+    std::optional<CustomPacket> SharedData::getUdpPacketToSend()
     {
         std::lock_guard const lock(_mutex);
         if (_udpSendQueue.empty()) {
             return std::nullopt;
         }
-        packetData packetData = _udpSendQueue.front();
+        CustomPacket packet = _udpSendQueue.front();
         _udpSendQueue.pop();
-        return packetData;
+        return packet;
     }
 
     /**
@@ -93,25 +93,25 @@ namespace cmn {
      * @brief Adds a packet to the send queue using a lock_guard.
      * @param data The packet to add.
      */
-    void SharedData::addTcpPacketToSend(const packetData &data)
+    void SharedData::addTcpPacketToSend(const CustomPacket &packet)
     {
         std::lock_guard const lock(_mutex);
-        _tcpSendQueue.push(data);
+        _tcpSendQueue.push(packet);
     }
 
     /**
      * @brief Retrieves the next packet from the send queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<packetData> SharedData::getTcpPacketToSend()
+    std::optional<CustomPacket> SharedData::getTcpPacketToSend()
     {
         std::lock_guard const lock(_mutex);
         if (_tcpSendQueue.empty()) {
             return std::nullopt;
         }
-        packetData packetData = _tcpSendQueue.front();
+        CustomPacket packet = _tcpSendQueue.front();
         _tcpSendQueue.pop();
-        return packetData;
+        return packet;
     }
 
     /**
