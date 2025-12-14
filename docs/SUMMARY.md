@@ -8,7 +8,7 @@
 ## Technical documentation
 * [API Reference](api/index_classes.md)
 * [Protocol](PROTOCOL.md)
-* [Architecture](ARCHITECTURE.md)
+* [Architecture](ARCHITECTURE_ECS.md)
 
 ## Contribute
 * [Ecs](HOWTOCONTRIBUTE_ECS.md)
