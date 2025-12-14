@@ -17,6 +17,7 @@
 #include "packet_data/PacketData.hpp"
 #include "packet_data/input_packet/InputPacket.hpp"
 #include <gtest/gtest.h>
+#include "Constants.hpp"
 
 namespace cmn {
 
@@ -24,18 +25,22 @@ namespace cmn {
     {
         ecs::EcsManager ecs;
         DataTranslator translator {};
+        std::unordered_map<int, uint64_t> playerIdEntityMap;
 
         auto entity = ecs.createEntity(1);
         entity->addComponent<ecs::InputPlayer>();
 
+        playerIdEntityMap[6] = 1;
+
         inputPacket packet = {
+            6,
             static_cast<uint8_t>(Keys::Down),
             static_cast<uint8_t>(KeyState::Pressed)
         };
         packetContent const content = packet;
-        packetData data = {1, 1, content};
+        packetData data = {inputProtocolId, content};
 
-        translator.translate(ecs, data);
+        translator.translate(ecs, data, playerIdEntityMap);
 
         auto input = entity->getComponent<ecs::InputPlayer>();
         EXPECT_TRUE(input->getDown());
@@ -48,15 +53,16 @@ namespace cmn {
     {
         ecs::EcsManager ecs;
         DataTranslator translator {};
+        std::unordered_map<int, uint64_t> playerIdEntityMap;
 
         auto entity = ecs.createEntity(42);
         entity->addComponent<ecs::Position>(0.F, 0.F);
 
-        positionPacket packet = {100, 200};
+        positionPacket packet = {42, 100, 200};
         packetContent const content = packet;
-        packetData data = {42, 42, content};
+        packetData data = {positionProtocolId, content};
 
-        translator.translate(ecs, data);
+        translator.translate(ecs, data, playerIdEntityMap);
 
         auto pos = entity->getComponent<ecs::Position>();
         EXPECT_EQ(pos->getX(), 100.F);
@@ -67,23 +73,25 @@ namespace cmn {
     {
         ecs::EcsManager ecs;
         DataTranslator translator {};
+        std::unordered_map<int, uint64_t> playerIdEntityMap;
 
         newEntityPacket packet = {
+            .entityId=42,
             .type=static_cast<uint8_t>(EntityType::Player),
             .posX=10.F,
             .posY=20.F
         };
 
         packetContent const content = packet;
-        packetData data = {7, 5, content};
+        packetData data = {newEntityProtocolId, content};
 
-        translator.translate(ecs, data);
+        translator.translate(ecs, data, playerIdEntityMap);
 
         auto entities = ecs.getEntitiesWithComponent<ecs::Position>();
         ASSERT_EQ(entities.size(), 1);
 
         const auto& entity = entities.front();
-        EXPECT_EQ(entity->getId(), 5);
+        EXPECT_EQ(entity->getId(), 42);
         EXPECT_TRUE(entity->getComponent<ecs::Sprite>());
         EXPECT_TRUE(entity->getComponent<ecs::Position>());
     }
@@ -92,15 +100,16 @@ namespace cmn {
     {
         ecs::EcsManager ecs;
         DataTranslator translator {};
+        std::unordered_map<int, uint64_t> playerIdEntityMap;
 
-        auto entity = ecs.createEntity(99);
+        auto entity = ecs.createEntity(42);
         entity->addComponent<ecs::Position>(0.F, 0.F);
 
         deleteEntityPacket packet = {42};
         packetContent const content = packet;
-        packetData data = {99, 99, content};
+        packetData data = {deleteEntityProtocolId, content};
 
-        translator.translate(ecs, data);
+        translator.translate(ecs, data, playerIdEntityMap);
 
         EXPECT_TRUE(entity->getComponent<ecs::Destroy>());
     }

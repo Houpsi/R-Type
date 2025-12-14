@@ -38,6 +38,8 @@ namespace cmn {
     constexpr uint8_t monsterAnimationNumberFrame = 8;
     constexpr uint8_t monsterCollisionHeight = 14;
     constexpr uint8_t monsterCollisionWidth = 18;
+    constexpr uint16_t monsterSpawnPositionWidth = 2020;
+    constexpr uint16_t monsterMaxSpawnPositionHeight = 1081;
 
     constexpr uint16_t playerProjectileSpeed = 400;
     constexpr int8_t playerProjectileDirection = 1;
@@ -49,6 +51,8 @@ namespace cmn {
     constexpr uint8_t playerProjectileCollisionHeight = 10;
     constexpr uint8_t playerProjectileCollisionWidth = 10;
 
+    constexpr uint16_t windowWidth = 1920;
+    constexpr uint16_t windowHeight = 1080;
 
 }
 

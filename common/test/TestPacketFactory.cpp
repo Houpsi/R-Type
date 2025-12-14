@@ -19,19 +19,19 @@
 #include "enums/Key.hpp"
 #include "enums/KeyState.hpp"
 #include "enums/EntityType.hpp"
+#include "Constants.hpp"
 
 namespace cmn {
 
     TEST(PacketFactoryTest, CreateInputPacket)
     {
         CustomPacket packet =
-            PacketFactory::createInputPacket(Keys::Up, KeyState::Pressed, 12);
+            PacketFactory::createInputPacket(8, Keys::Up, KeyState::Pressed);
 
         packetData data;
         packet >> data;
 
-        EXPECT_EQ(data.packetId, 0);
-        EXPECT_EQ(data.entityId, 12);
+        EXPECT_EQ(data.packetId, inputProtocolId);
 
         inputPacket input{};
         std::visit([&input](auto &&arg) {
@@ -41,6 +41,7 @@ namespace cmn {
             }
         }, data.content);
 
+        EXPECT_EQ(input.playerId, 8);
         EXPECT_EQ(input.key, static_cast<uint8_t>(Keys::Up));
         EXPECT_EQ(input.keyState, static_cast<uint8_t>(KeyState::Pressed));
     }
@@ -53,8 +54,7 @@ namespace cmn {
         packetData data;
         packet >> data;
 
-        EXPECT_EQ(data.packetId, 1);
-        EXPECT_EQ(data.entityId, 42);
+        EXPECT_EQ(data.packetId, positionProtocolId);
 
         positionPacket pos{};
         std::visit([&pos](auto &&arg) {
@@ -66,6 +66,7 @@ namespace cmn {
 
         EXPECT_FLOAT_EQ(pos.posX, 10.F);
         EXPECT_FLOAT_EQ(pos.posY, 20.F);
+        EXPECT_EQ(pos.entityId, 42);
     }
 
     TEST(PacketFactoryTest, CreateNewEntityPacket)
@@ -76,8 +77,7 @@ namespace cmn {
         packetData data;
         packet >> data;
 
-        EXPECT_EQ(data.packetId, 2);
-        EXPECT_EQ(data.entityId, 99);
+        EXPECT_EQ(data.packetId, newEntityProtocolId);
 
         newEntityPacket entity{};
         std::visit([&entity](auto &&arg) {
@@ -90,18 +90,18 @@ namespace cmn {
         EXPECT_EQ(entity.type, static_cast<uint8_t>(EntityType::Monster));
         EXPECT_FLOAT_EQ(entity.posX, 5.F);
         EXPECT_FLOAT_EQ(entity.posY, 8.F);
+        EXPECT_EQ(entity.entityId, 99);
     }
 
     TEST(PacketFactoryTest, CreateDeleteEntityPacket)
     {
         CustomPacket packet =
-            PacketFactory::createDeleteEntityPacket(77);
+            PacketFactory::createDeleteEntityPacket(42);
 
         packetData data;
         packet >> data;
 
-        EXPECT_EQ(data.packetId, 3);
-        EXPECT_EQ(data.entityId, 77);
+        EXPECT_EQ(data.packetId, deleteEntityProtocolId);
 
         deleteEntityPacket del{};
         std::visit([&del](auto &&arg) {
@@ -111,7 +111,7 @@ namespace cmn {
             }
         }, data.content);
 
-        EXPECT_EQ(del.easterEgg, 42);
+        EXPECT_EQ(del.entityId, 42);
     }
 
 } // namespace cmn

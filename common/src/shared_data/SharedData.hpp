@@ -8,12 +8,13 @@
 #ifndef R_TYPE_SHAREDDATA_HPP
 #define R_TYPE_SHAREDDATA_HPP
 
+#include "custom_packet/CustomPacket.hpp"
 #include "packet_data/PacketData.hpp"
+#include <SFML/Network/IpAddress.hpp>
 #include <mutex>
 #include <optional>
 #include <queue>
 #include <unordered_map>
-#include <SFML/Network/IpAddress.hpp>
 
 namespace cmn {
     /**
@@ -40,13 +41,13 @@ namespace cmn {
              * @brief Adds a packet to be sent to the queue.
              * @param data The packet data (PacketData) to send.
              */
-            void addUdpPacketToSend(const packetData &data);
+            void addUdpPacketToSend(const CustomPacket &packet);
 
             /**
              * @brief Retrieves and removes the first packet to be sent from the queue.
              * @return An optional containing the PacketData if available, otherwise std::nullopt.
              */
-            std::optional<packetData> getUdpPacketToSend();
+            std::optional<CustomPacket> getUdpPacketToSend();
 
             /**
              * @brief Adds a received packet to the queue.
@@ -64,13 +65,13 @@ namespace cmn {
              * @brief Adds a packet to be sent to the queue.
              * @param data The packet data (PacketData) to send.
              */
-            void addTcpPacketToSend(const packetData &data);
+            void addTcpPacketToSend(const CustomPacket &packet);
 
             /**
              * @brief Retrieves and removes the first packet to be sent from the queue.
              * @return An optional containing the PacketData if available, otherwise std::nullopt.
              */
-            std::optional<packetData> getTcpPacketToSend();
+            std::optional<CustomPacket> getTcpPacketToSend();
 
             /**
              * @brief Adds a new player to the list.
@@ -94,9 +95,9 @@ namespace cmn {
 
         private:
             std::queue<packetData> _udpReceivedQueue; ///< Queue for received packets (to be processed).
-            std::queue<packetData> _udpSendQueue;     ///< Queue for packets to be sent.
+            std::queue<CustomPacket> _udpSendQueue;     ///< Queue for packets to be sent.
             std::queue<packetData> _tcpReceivedQueue;  ///< Queue for packets to be sent.
-            std::queue<packetData> _tcpSendQueue;     ///< Queue for packets to be sent.
+            std::queue<CustomPacket> _tcpSendQueue;     ///< Queue for packets to be sent.
             std::mutex _mutex;                     ///< Mutex for synchronizing data access.
             /**
              * @brief List of connected players.
