@@ -16,14 +16,13 @@ namespace cmn {
     class DataTranslator
     {
       public:
-        void translate(ecs::EcsManager &ecs, packetData &data);
+        static void translate(ecs::EcsManager &ecs, packetData &data, const std::unordered_map<int, uint64_t>& playerIdEntityMap);
 
       private:
-        uint8_t _yourPlayerEntityId;
-        static void _injectInput(ecs::EcsManager &ecs, inputPacket &input, int entityId);
-        static void _injectPosition(ecs::EcsManager &ecs, positionPacket &position, int entityId);
-        void _injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity, int entityId);
-        static void _deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity, int entityId);
+        static void _injectInput(ecs::EcsManager &ecs, inputPacket &input, std::unordered_map<int, uint64_t> playerIdEntityMap);
+        static void _injectPosition(ecs::EcsManager &ecs, positionPacket &position);
+        static void _injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity);
+        static void _deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity);
     };
 
 }// namespace cmn

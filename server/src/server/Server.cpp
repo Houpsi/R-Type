@@ -10,8 +10,10 @@
 #include "SFML/Network/TcpSocket.hpp"
 #include <iostream>
 #include <thread>
+#include "packet_factory/PacketFactory.hpp"
 
 namespace server {
+
      Server::Server(const std::shared_ptr<cmn::SharedData> &data):
     _sharedData(data) {}
 
@@ -69,18 +71,17 @@ namespace server {
                         _sharedData->deletePlayer(sock.getRemotePort(), sock.getRemoteAddress().value());
                     }
                 }
-                // TODO -> handle received UDP packet
+                cmn::packetData data;
+                packet >> data;
+                _sharedData->addTcpReceivedPacket(data);
                 std::cout << "[RECEIVED]: TCP Packet received" << "\n";
             }
         }
     }
 
-    int Server::sendUdp(const cmn::packetData& packet, const sf::IpAddress& clientIp, uint16_t port)
+    int Server::sendUdp(cmn::CustomPacket packet, const sf::IpAddress& clientIp, uint16_t port)
     {
-        cmn::CustomPacket custom_packet;
-        custom_packet << packet;
-
-        sf::Socket::Status const status = _udpSocket.send(custom_packet, clientIp, port);
+        sf::Socket::Status const status = _udpSocket.send(packet, clientIp, port);
         if (status != sf::Socket::Status::Done) {
             std::cerr << "[ERROR]: failed to send UDP packet to:"
             << clientIp << ":" << port << "\n";
@@ -89,12 +90,9 @@ namespace server {
         return 0;
     }
 
-    int Server::sendTcp(const cmn::packetData& packet, sf::TcpSocket& clientSocket)
+    int Server::sendTcp(cmn::CustomPacket packet, sf::TcpSocket& clientSocket)
     {
-        cmn::CustomPacket custom_packet;
-        custom_packet << packet;
-
-        sf::Socket::Status const status = clientSocket.send(custom_packet);
+        sf::Socket::Status const status = clientSocket.send(packet);
         if (status != sf::Socket::Status::Done) {
             std::cerr << "[ERROR]: failed to send TCP packet to server" << "\n";
             return 1;
@@ -102,33 +100,32 @@ namespace server {
         return 0;
     }
 
-    int Server::broadcastTcp(const cmn::packetData& packet) const
+    void Server::broadcastTcp(const cmn::CustomPacket& packet) const
     {
         for (const auto &client : _socketVector) {
             if (sendTcp(packet, *client) == 1) {
-                return 1;
+                std::cerr << "[ERROR]: failed to send tcp message to a player" << "\n";
             }
         }
-        return 0;
     }
 
-    int Server::broadcastUdp(const cmn::packetData& packet, uint16_t port)
+    void Server::broadcastUdp(const cmn::CustomPacket& packet)
     {
         for (const auto &client : _socketVector) {
             auto ip = client->getRemoteAddress();
-            if (!ip.has_value()) {
+            const auto clientPort = client->getRemotePort();
+            if (!ip.has_value() || clientPort == 0) {
                 continue;
             }
-            if (sendUdp(packet, ip.value(), port) == 1) {
-                return 1;
+            if (sendUdp(packet, ip.value(), clientPort) == 1) {
+                std::cerr << "[ERROR]: failed to send udp message to a player" << "\n";
             }
         }
-        return 0;
     }
 
     void Server::_acceptConnection()
     {
-        static int idPlayer = 0;
+        static int idPlayer = 1;
         auto client = std::make_unique<sf::TcpSocket>();
 
         client->setBlocking(false);
@@ -141,6 +138,7 @@ namespace server {
         _socketVector.push_back(std::move(client));
         _sharedData->addPlayer(idPlayer, client->getRemotePort(), client->getRemoteAddress().value());
         std::cout << "[CONNECTION]: TCP connection accepted" << "\n";
+        sendTcp(cmn::PacketFactory::createConnectionPacket(idPlayer), *client);
         idPlayer++;
     }
 
@@ -155,13 +153,25 @@ namespace server {
         cmn::CustomPacket packet;
 
         while (true) {
+            auto sendPacket = _sharedData->getUdpPacketToSend();
+            if (sendPacket.has_value()) {
+                cmn::CustomPacket packetUdp;
+                packetUdp << sendPacket.value();
+                broadcastUdp(packetUdp);
+            }
+            auto send = _sharedData->getTcpPacketToSend();
+            if (send.has_value()) {
+                cmn::CustomPacket packetTcp;
+                packetTcp << send.value();
+                broadcastTcp(packetTcp);
+            }
             if (_udpSocket.receive(packet, sender, port) != sf::Socket::Status::Done) {
                 std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
             cmn::packetData data;
             packet >> data;
-            _sharedData->addReceivedPacket(data);
+            _sharedData->addUdpReceivedPacket(data);
             std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
     }

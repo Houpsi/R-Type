@@ -20,6 +20,7 @@ class InputPlayer : public Component {
     [[nodiscard]] bool getLeft() const;
     [[nodiscard]] bool getRight() const;
     [[nodiscard]] bool getSpacebar() const;
+    [[nodiscard]] bool getReady() const;
     void setUp(bool up);
     void setDown(bool down);
     void setLeft(bool left);

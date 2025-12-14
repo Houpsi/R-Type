@@ -13,7 +13,6 @@
 #include <iostream>
 #include <SFML/Network/TcpSocket.hpp>
 #include <SFML/Network/IpAddress.hpp>
-#include <utility>
 
 namespace client {
 
@@ -57,6 +56,7 @@ namespace client {
             std::cerr << "[ERROR]: Failed to send TCP packet.\n";
             return 1;
         }
+        std::cout << "[SEND]: TCP Packet send" << "\n";
         return 0;
     }
 
@@ -69,6 +69,7 @@ namespace client {
             std::cerr << "[ERROR]: Failed to send UDP packet.\n";
             return 1;
         }
+        std::cout << "[SEND]: UDP Packet send" << "\n";
         return 0;
     }
 
@@ -76,11 +77,11 @@ namespace client {
     {
         sf::SocketSelector selector;
         selector.add(_tcpSocket);
-
         cmn::CustomPacket packet;
+        constexpr int waitTime = 50;
 
         while (true) {
-            if (!selector.wait(sf::milliseconds(50))) {
+            if (!selector.wait(sf::milliseconds(waitTime))) {
                 continue;
             }
             if (selector.isReady(_tcpSocket)) {
@@ -93,6 +94,9 @@ namespace client {
                     std::cerr << "[TCP]: Failed to receive TCP packet.\n";
                     continue;
                 }
+                cmn::packetData data;
+                packet >> data;
+                _sharedData->addTcpReceivedPacket(data);
                 std::cout << "[RECEIVED]: TCP Packet received\n";
             }
         }
@@ -103,15 +107,23 @@ namespace client {
     {
         _tcpThread = std::jthread{[this]{ _handleTcp(); }};
 
-        std::optional<sf::IpAddress> sender;
+        std::optional sender = sf::IpAddress::LocalHost;
         unsigned short port = 0;
-        cmn::CustomPacket packet;
+        cmn::CustomPacket packet = {};
+        std::optional<cmn::packetData> receivedData = {};
 
         while (true) {
+            receivedData = _sharedData->getUdpPacketToSend();
+            if (receivedData.has_value()) {
+                sendUdp(receivedData.value());
+            }
             if (_udpSocket.receive(packet, sender, port) != sf::Socket::Status::Done) {
                 std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
+            cmn::packetData data;
+            packet >> data;
+            _sharedData->addUdpReceivedPacket(data);
             std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
     }

@@ -6,7 +6,7 @@
 */
 
 #include "client/Client.hpp"
-#include "game/Game.hpp"
+#include "game_renderer/GameRenderer.hpp"
 #include "parser/Parser.hpp"
 #include "shared_data/SharedData.hpp"
 
@@ -36,8 +36,7 @@ int main(const int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    client::Game game(data);
-    std::jthread();
+    client::GameRenderer game(data);
     auto  networkThread = std::jthread([&client] {client.run();});
     game.run();
     return EXIT_SUCCESS;

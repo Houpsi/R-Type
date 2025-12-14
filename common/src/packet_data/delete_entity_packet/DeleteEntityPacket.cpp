@@ -11,12 +11,12 @@ namespace cmn {
 
     sf::Packet &operator << (sf::Packet &packet, const deleteEntityPacket &packetStruct)
     {
-        return packet << packetStruct.easterEgg;
+        return packet << packetStruct.entityId;
     }
 
     sf::Packet &operator >> (sf::Packet &packet, deleteEntityPacket &packetStruct)
     {
-        return packet >> packetStruct.easterEgg;
+        return packet >> packetStruct.entityId;
     }
 
 }// namespace cmn

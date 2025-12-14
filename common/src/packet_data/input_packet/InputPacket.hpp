@@ -14,6 +14,7 @@ namespace cmn {
 
     using inputPacket = struct inputPacket
     {
+        uint32_t playerId;
         uint8_t key;
         uint8_t keyState;
     };
