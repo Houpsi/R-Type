@@ -23,6 +23,7 @@ class EcsManager {
     void updateSystems();
     void setDeltaTime(float dt);
     float getDeltaTime() const;
+    [[nodiscard]] std::shared_ptr<Entity> getEntityById(uint64_t id) const;
 
     template <typename T, typename... Args>
     std::shared_ptr<T> addSystem(Args&&... args) {
