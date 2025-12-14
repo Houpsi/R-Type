@@ -14,8 +14,6 @@ add_library(r-type_common_lib
         shared_data/SharedData.hpp
         packet_data/input_packet/InputPacket.hpp
         packet_data/input_packet/InputPacket.cpp
-        packet_handler/PacketHandler.cpp
-        packet_handler/PacketHandler.hpp
         packet_data/position_packet/PositionPacket.cpp
         packet_data/position_packet/PositionPacket.hpp
         packet_data/new_entity_packet/NewEntityPacket.cpp
@@ -26,6 +24,8 @@ add_library(r-type_common_lib
         data_translator/DataTranslator.cpp
         data_translator/DataTranslator.hpp
         Constants.hpp
+        packet_factory/PacketFactory.cpp
+        packet_factory/PacketFactory.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC

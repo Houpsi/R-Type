@@ -13,7 +13,7 @@
 
 namespace cmn {
 
-    struct positionPacket
+    using positionPacket = struct positionPacket
     {
         float posX;
         float posY;

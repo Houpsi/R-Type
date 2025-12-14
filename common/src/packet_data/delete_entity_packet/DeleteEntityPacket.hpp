@@ -12,7 +12,7 @@
 #include <cstdint>
 namespace cmn {
 
-    struct deleteEntityPacket
+    using deleteEntityPacket = struct deleteEntityPacket
     {
         uint8_t easterEgg;
     };

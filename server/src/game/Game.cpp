@@ -6,6 +6,7 @@
 */
 
 #include "Game.hpp"
+#include "Constants.hpp"
 #include "components/Collision.hpp"
 #include "components/Health.hpp"
 #include "components/InputPlayer.hpp"
@@ -61,22 +62,17 @@ namespace server {
 
     void Game::_initEcsManager()
     {
-        constexpr uint16_t playerHeight = 17;
-        constexpr uint16_t playerWidth = 33;
-        constexpr uint8_t playerHealth = 100;
         constexpr uint16_t playerPosX = 200;
         constexpr uint16_t playerPosY = 540;
-        constexpr uint8_t damage = 50;
-        constexpr float cooldown = 0.5;
 
         auto player = _ecs.createEntity();
 
-        player->addComponent<ecs::Health>(playerHealth);
+        player->addComponent<ecs::Health>(cmn::playerHealth);
         player->addComponent<ecs::Position>(playerPosX, playerPosY);
         player->addComponent<ecs::InputPlayer>();
 
-        player->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, playerWidth, playerHeight);
-        player->addComponent<ecs::Shoot>(damage, cooldown);
+        player->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
+        player->addComponent<ecs::Shoot>(cmn::playerDamage, cmn::playerCoolDown);
 
         _ecs.addSystem<ecs::MovementSystem>();
         _ecs.addSystem<ecs::CollisionSystem>();

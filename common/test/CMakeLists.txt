@@ -1,10 +1,8 @@
-file(COPY ${CMAKE_SOURCE_DIR}/assets
-        DESTINATION ${CMAKE_BINARY_DIR})
-
 add_executable(rtype_common_tests
         TestSharedData.cpp
         TestPackedData.cpp
         TestDataTranslator.cpp
+        TestPacketFactory.cpp
 )
 
 target_link_libraries(rtype_common_tests

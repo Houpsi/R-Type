@@ -27,25 +27,25 @@ namespace cmn {
 
         switch (typeIndex) {
             case 0: {
-                inputPacket input;
+                inputPacket input {};
                 packet >> input;
                 data = input;
                 break;
             }
             case 1: {
-                positionPacket position;
+                positionPacket position {};
                 packet >> position;
                 data = position;
                 break;
             }
             case 2: {
-                newEntityPacket newEntity;
+                newEntityPacket newEntity {};
                 packet >> newEntity;
                 data = newEntity;
                 break;
             }
             case 3: {
-                deleteEntityPacket deleteEntity;
+                deleteEntityPacket deleteEntity {};
                 packet >> deleteEntity;
                 data = deleteEntity;
                 break;
