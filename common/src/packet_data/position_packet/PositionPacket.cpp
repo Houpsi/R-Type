@@ -12,12 +12,12 @@ namespace cmn {
 
     sf::Packet &operator << (sf::Packet &packet, const positionPacket &packetStruct)
     {
-        return packet << packetStruct.posX << packetStruct.posY;
+        return packet << packetStruct.entityId << packetStruct.posX << packetStruct.posY;
     }
 
     sf::Packet &operator >> (sf::Packet &packet, positionPacket &packetStruct)
     {
-        return packet >> packetStruct.posX >> packetStruct.posY;
+        return packet >> packetStruct.entityId >> packetStruct.posX >> packetStruct.posY;
     }
 
 }// namespace cmn

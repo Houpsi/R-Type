@@ -26,6 +26,10 @@ add_library(r-type_common_lib
         Constants.hpp
         packet_factory/PacketFactory.cpp
         packet_factory/PacketFactory.hpp
+        packet_data/connection_packet/ConnectionPacket.cpp
+        packet_data/connection_packet/ConnectionPacket.hpp
+        packet_data/start_game_packet/StartGamePacket.cpp
+        packet_data/start_game_packet/StartGamePacket.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC

@@ -13,7 +13,6 @@ namespace cmn {
 
     enum class EntityType: uint8_t
     {
-        YourPlayer,
         Player,
         Monster,
         PlayerProjectile,

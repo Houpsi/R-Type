@@ -24,6 +24,11 @@ namespace server {
         LevelManager _levelManager;
         void _initLevels();
         void _initEcsManager();
+        std::vector<int> _readyPlayersId;
+        std::unordered_map<int, uint64_t> _playerIdEntityMap;
+        std::unordered_map<uint64_t , int> _entityIdPlayerMap;
+        void _createNewPlayers(const std::vector<int>& ids, size_t &currentNbPlayerEntities);
+        bool _isIdAlreadyPresent(int playerId);
     };
 }
 
