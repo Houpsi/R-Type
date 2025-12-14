@@ -81,7 +81,7 @@ Launch the client to join the game
 
 ## 📚 Documentation
 For more detailed information about the architecture and protocol, please refer to the documentation folder:
-- [Gitbook](http://inserer-un-lien)
+- [Gitbook](https://epitech-35.gitbook.io/r-type-save-gougougagaland/)
 
 ## 👥 Authors
 - [Axel Desert](https://github.com/AxelDesert)
