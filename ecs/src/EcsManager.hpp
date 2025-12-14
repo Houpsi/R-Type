@@ -57,7 +57,7 @@ class EcsManager {
     std::vector<std::shared_ptr<Entity>> _entities;
 
     ResourceManager _resourceManager;
-    size_t _nextEntityId = 0;
+    size_t _nextEntityId = 4;
 };
 }
 
