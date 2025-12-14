@@ -15,6 +15,7 @@ namespace cmn {
 
     using positionPacket = struct positionPacket
     {
+        uint64_t entityId;
         float posX;
         float posY;
     };

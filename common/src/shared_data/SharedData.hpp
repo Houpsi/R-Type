@@ -28,25 +28,49 @@ namespace cmn {
              * @brief Adds a received packet to the queue.
              * @param data The received packet data (PacketData).
              */
-            void addReceivedPacket(const packetData &data);
+            void addUdpReceivedPacket(const packetData &data);
 
             /**
              * @brief Retrieves and removes the first received packet from the queue.
              * @return An optional containing the PacketData if available, otherwise std::nullopt.
              */
-            std::optional<packetData> getReceivedPacket();
+            std::optional<packetData> getUdpReceivedPacket();
 
             /**
              * @brief Adds a packet to be sent to the queue.
              * @param data The packet data (PacketData) to send.
              */
-            void addSendPacket(const packetData &data);
+            void addUdpPacketToSend(const packetData &data);
 
             /**
              * @brief Retrieves and removes the first packet to be sent from the queue.
              * @return An optional containing the PacketData if available, otherwise std::nullopt.
              */
-            std::optional<packetData> getSendPacket();
+            std::optional<packetData> getUdpPacketToSend();
+
+            /**
+             * @brief Adds a received packet to the queue.
+             * @param data The received packet data (PacketData).
+             */
+            void addTcpReceivedPacket(const packetData &data);
+
+            /**
+             * @brief Retrieves and removes the first received packet from the queue.
+             * @return An optional containing the PacketData if available, otherwise std::nullopt.
+             */
+            std::optional<packetData> getTcpReceivedPacket();
+
+            /**
+             * @brief Adds a packet to be sent to the queue.
+             * @param data The packet data (PacketData) to send.
+             */
+            void addTcpPacketToSend(const packetData &data);
+
+            /**
+             * @brief Retrieves and removes the first packet to be sent from the queue.
+             * @return An optional containing the PacketData if available, otherwise std::nullopt.
+             */
+            std::optional<packetData> getTcpPacketToSend();
 
             /**
              * @brief Adds a new player to the list.
@@ -65,9 +89,14 @@ namespace cmn {
              */
             std::optional<std::pair<int, sf::IpAddress>> getPlayer(int playerId);
 
+            [[nodiscard]] size_t getPlayerListSize();
+            [[nodiscard]] std::vector<int> getAllPlayerIds();
+
         private:
-            std::queue<packetData> _receivedQueue; ///< Queue for received packets (to be processed).
-            std::queue<packetData> _sendQueue;     ///< Queue for packets to be sent.
+            std::queue<packetData> _udpReceivedQueue; ///< Queue for received packets (to be processed).
+            std::queue<packetData> _udpSendQueue;     ///< Queue for packets to be sent.
+            std::queue<packetData> _tcpReceivedQueue;  ///< Queue for packets to be sent.
+            std::queue<packetData> _tcpSendQueue;     ///< Queue for packets to be sent.
             std::mutex _mutex;                     ///< Mutex for synchronizing data access.
             /**
              * @brief List of connected players.

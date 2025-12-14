@@ -18,24 +18,24 @@ namespace cmn {
      * @brief Adds a packet to the received queue using a lock_guard for synchronization.
      * @param data The packet to add.
      */
-    void SharedData::addReceivedPacket(const packetData &data)
+    void SharedData::addUdpReceivedPacket(const packetData &data)
     {
         std::lock_guard const lock(_mutex);
-        _receivedQueue.push(data);
+        _udpReceivedQueue.push(data);
     }
 
     /**
      * @brief Retrieves the next packet from the received queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<packetData> SharedData::getReceivedPacket()
+    std::optional<packetData> SharedData::getUdpReceivedPacket()
     {
         std::lock_guard const lock(_mutex);
-        if (_receivedQueue.empty()) {
+        if (_udpReceivedQueue.empty()) {
             return std::nullopt;
         }
-        packetData packetData = _receivedQueue.front();
-        _receivedQueue.pop();
+        packetData packetData = _udpReceivedQueue.front();
+        _udpReceivedQueue.pop();
         return packetData;
     }
 
@@ -43,24 +43,74 @@ namespace cmn {
      * @brief Adds a packet to the send queue using a lock_guard.
      * @param data The packet to add.
      */
-    void SharedData::addSendPacket(const packetData &data)
+    void SharedData::addUdpPacketToSend(const packetData &data)
     {
         std::lock_guard const lock(_mutex);
-        _sendQueue.push(data);
+        _udpSendQueue.push(data);
     }
 
     /**
      * @brief Retrieves the next packet from the send queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<packetData> SharedData::getSendPacket()
+    std::optional<packetData> SharedData::getUdpPacketToSend()
     {
         std::lock_guard const lock(_mutex);
-        if (_sendQueue.empty()) {
+        if (_udpSendQueue.empty()) {
             return std::nullopt;
         }
-        packetData packetData = _sendQueue.front();
-        _sendQueue.pop();
+        packetData packetData = _udpSendQueue.front();
+        _udpSendQueue.pop();
+        return packetData;
+    }
+
+    /**
+     * @brief Adds a packet to the received queue using a lock_guard for synchronization.
+     * @param data The packet to add.
+     */
+    void SharedData::addTcpReceivedPacket(const packetData &data)
+    {
+        std::lock_guard const lock(_mutex);
+        _tcpReceivedQueue.push(data);
+    }
+
+    /**
+     * @brief Retrieves the next packet from the received queue using a lock_guard.
+     * @return The packet if the queue is not empty, otherwise std::nullopt.
+     */
+    std::optional<packetData> SharedData::getTcpReceivedPacket()
+    {
+        std::lock_guard const lock(_mutex);
+        if (_tcpReceivedQueue.empty()) {
+            return std::nullopt;
+        }
+        packetData packetData = _tcpReceivedQueue.front();
+        _tcpReceivedQueue.pop();
+        return packetData;
+    }
+
+    /**
+     * @brief Adds a packet to the send queue using a lock_guard.
+     * @param data The packet to add.
+     */
+    void SharedData::addTcpPacketToSend(const packetData &data)
+    {
+        std::lock_guard const lock(_mutex);
+        _tcpSendQueue.push(data);
+    }
+
+    /**
+     * @brief Retrieves the next packet from the send queue using a lock_guard.
+     * @return The packet if the queue is not empty, otherwise std::nullopt.
+     */
+    std::optional<packetData> SharedData::getTcpPacketToSend()
+    {
+        std::lock_guard const lock(_mutex);
+        if (_tcpSendQueue.empty()) {
+            return std::nullopt;
+        }
+        packetData packetData = _tcpSendQueue.front();
+        _tcpSendQueue.pop();
         return packetData;
     }
 
@@ -105,5 +155,22 @@ namespace cmn {
             return std::nullopt;
         }
         return _playerList.at(playerId);
+    }
+
+    size_t SharedData::getPlayerListSize()
+    {
+        const std::lock_guard lock(_mutex);
+        return _playerList.size();
+    }
+
+    std::vector<int> SharedData::getAllPlayerIds()
+    {
+        const std::lock_guard lock(_mutex);
+        std::vector<int> ids;
+
+        for (auto &it : _playerList) {
+            ids.push_back(it.first);
+        }
+        return ids;
     }
 }

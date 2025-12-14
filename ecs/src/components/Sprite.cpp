@@ -8,7 +8,7 @@
 #include "Sprite.hpp"
 
 namespace ecs {
-Sprite::Sprite(sf::Texture &texture, sf::Vector2f &scale) :
+Sprite::Sprite(sf::Texture &texture, const sf::Vector2f &scale) :
       _sprite(texture), _scale(scale)
 {
     _sprite.setScale(_scale);

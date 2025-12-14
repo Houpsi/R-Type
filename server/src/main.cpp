@@ -25,10 +25,14 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    server::Game game(data);
-    auto  networkThread = std::jthread([&server] {server.run();});
-    game.run();
-    return EXIT_SUCCESS;
+    try {
+        server::Game game(data);
+        auto  networkThread = std::jthread([&server] {server.run();});
+        game.run();
+    } catch (std::exception &e) {
+        return EXIT_FAILURE;
+    }
+
 }
 
 

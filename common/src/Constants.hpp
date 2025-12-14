@@ -14,8 +14,15 @@
 
 namespace cmn {
 
+    constexpr uint16_t connectionProtocolId = 0;
+    constexpr uint16_t inputProtocolId = 1;
+    constexpr uint16_t positionProtocolId = 2;
+    constexpr uint16_t newEntityProtocolId = 3;
+    constexpr uint16_t deleteEntityProtocolId = 4;
+    constexpr uint16_t startGameProtocolId = 5;
+
     constexpr float playerHealth = 100;
-    constexpr sf::Vector2f playerSpriteScale = {2.0f, 2.0f};
+    constexpr sf::Vector2f playerSpriteScale = {2.0F, 2.0F};
     constexpr std::string_view playerSpriteSheet = "./assets/r-typesheet42.gif";
     constexpr uint8_t playerHeight= 17;
     constexpr uint8_t playerWidth = 33;
@@ -24,7 +31,7 @@ namespace cmn {
     constexpr std::string_view playerShootSound = "./assets/sound/shoot.wav";
 
     constexpr uint8_t monsterHealth = 100;
-    constexpr sf::Vector2f monsterSpriteScale = {2.0f, 2.0f};
+    constexpr sf::Vector2f monsterSpriteScale = {2.0F, 2.0F};
     constexpr std::string_view monsterSpriteSheet = "./assets/r-typesheet5.gif";
     constexpr std::pair<uint8_t, uint8_t> monsterAnimationSize = {32, 36};
     constexpr uint8_t monsterAnimationOffset = 0;
@@ -34,7 +41,7 @@ namespace cmn {
 
     constexpr uint16_t playerProjectileSpeed = 400;
     constexpr int8_t playerProjectileDirection = 1;
-    constexpr sf::Vector2f playerProjectileScale = {1.0f, 1.0f};
+    constexpr sf::Vector2f playerProjectileScale = {1.0F, 1.0F};
     constexpr std::string_view playerProjectileSpriteSheet = "./assets/r-typesheet30a.gif";
     constexpr std::pair<uint8_t, uint8_t> playerProjectileAnimationSize = {32, 36};
     constexpr uint8_t playerProjectileAnimationOffset = 0;

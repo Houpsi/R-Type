@@ -18,7 +18,7 @@ namespace ecs {
             _textureMap.try_emplace("textureError.png", "assets/textureError.png");
         } catch (const std::exception &e) {
             std::cerr << "Texture loading failed: " << e.what() << '\n';
-            throw;
+            throw std::exception();
         }
     }
 
@@ -37,7 +37,7 @@ namespace ecs {
             if (_textureMap.contains("textureError.png")) {
                 return _textureMap["textureError.png"];
             } else {
-                throw;
+                throw std::exception();
             }
         }
     }

@@ -15,7 +15,7 @@ namespace ecs {
 class Sprite : public Component
 {
   public:
-    explicit Sprite(sf::Texture &texture, sf::Vector2f &scale);
+    explicit Sprite(sf::Texture &texture, const sf::Vector2f &scale);
     ~Sprite() override = default;
     const sf::Sprite &getSprite() const;
     void setTextureRect(int x, int y, int width, int height);

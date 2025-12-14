@@ -7,9 +7,10 @@
 #ifndef R_TYPE_SERVER_HPP
 #define R_TYPE_SERVER_HPP
 
-#include "packet_data/PacketData.hpp"
 #include "SFML/Network/SocketSelector.hpp"
 #include "SFML/Network/UdpSocket.hpp"
+#include "custom_packet/CustomPacket.hpp"
+#include "packet_data/PacketData.hpp"
 #include "shared_data/SharedData.hpp"
 #include <SFML/Network/TcpListener.hpp>
 #include <SFML/Network/TcpSocket.hpp>
@@ -25,11 +26,11 @@ namespace server {
         void close();
         [[noreturn]] void run();
 
-        int sendUdp(const cmn::packetData& packet, const sf::IpAddress& clientIp, uint16_t port);
-        static int sendTcp(const cmn::packetData& packet, sf::TcpSocket& clientSocket);
+        int sendUdp(cmn::CustomPacket packet, const sf::IpAddress& clientIp, uint16_t port);
+        static int sendTcp(cmn::CustomPacket packet, sf::TcpSocket& clientSocket);
 
-        int broadcastUdp(const cmn::packetData&packet, uint16_t port);
-        int broadcastTcp(const cmn::packetData& packet)const;
+        int broadcastUdp(const cmn::CustomPacket& packet, uint16_t port);
+        int broadcastTcp(const cmn::CustomPacket& packet)const;
 
       private:
         sf::TcpListener _listener;
