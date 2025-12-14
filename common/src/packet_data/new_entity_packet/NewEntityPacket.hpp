@@ -6,14 +6,15 @@
 #define R_TYPE_NEWENTITYPACKET_HPP
 
 #include <cstdint>
+#include "SFML/Network/Packet.hpp"
+
 namespace cmn {
 
     struct newEntityPacket
     {
         uint8_t type;
-        uint16_t posX;
-        uint16_t posY;
-        float velocity;
+        float posX;
+        float posY;
     };
 
     sf::Packet &operator << (sf::Packet &packet, const newEntityPacket &packetStruct);

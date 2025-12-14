@@ -20,31 +20,30 @@
 
 namespace server {
 
-     Game::Game(const std::shared_ptr<cmn::SharedData> &data):
-        _ecs(ecs::EcsManager()), _sharedData(data) {}
+     Game::Game(const std::shared_ptr<cmn::SharedData> &data): _sharedData(data) {}
 
     void Game::run()
     {
-        _initLevels();
-        _initEcsManager();
-
-        Level &currentLevel = _levelManager.getCurrentLevel();
-        sf::Clock clock;
-        sf::Clock enemyClock;
-
-         while (true) {
-             float const deltaTime = clock.restart().asSeconds();
-
-             _ecs.setDeltaTime(deltaTime);
-             _ecs.updateSystems();
-
-             for (auto &entity : )
-
-             std::optional<cmn::packetData> data = _sharedData->getReceivedPacket();
-             if (data.has_value()) {
-
-             }
-         }
+//        _initLevels();
+//        _initEcsManager();
+//
+//        Level &currentLevel = _levelManager.getCurrentLevel();
+//        sf::Clock clock;
+//        sf::Clock enemyClock;
+//
+//         while (true) {
+//             float const deltaTime = clock.restart().asSeconds();
+//
+//             _ecs.setDeltaTime(deltaTime);
+//             _ecs.updateSystems();
+//
+//             for (auto &entity : )
+//
+//             std::optional<cmn::packetData> data = _sharedData->getReceivedPacket();
+//             if (data.has_value()) {
+//
+//             }
+//         }
     }
 
     void Game::_initLevels()

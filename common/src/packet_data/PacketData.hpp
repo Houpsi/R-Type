@@ -18,8 +18,8 @@ namespace cmn {
     using packetContent = std::variant<inputPacket, positionPacket, newEntityPacket, deleteEntityPacket>;
 
     using packetData = struct packetData {
-        int packetId;
-        int entityId;
+        uint16_t packetId;
+        uint64_t entityId;
         packetContent content;
     };
 

@@ -20,23 +20,36 @@
 
 namespace cmn {
 
-    const std::list<std::function<void(Keys, std::shared_ptr<ecs::InputPlayer>)>> functionList = {
-        [](Keys key,std::shared_ptr<ecs::InputPlayer> component) {key == Keys::Down ? component->setDown(true) : component->setDown(false);},
-        [](Keys key,std::shared_ptr<ecs::InputPlayer> component) {key == Keys::Up ? component->setUp(true) : component->setUp(false);},
-        [](Keys key,std::shared_ptr<ecs::InputPlayer> component) {key == Keys::Left ? component->setLeft(true) : component->setLeft(false);},
-        [](Keys key,std::shared_ptr<ecs::InputPlayer> component) {key == Keys::Right ? component->setRight(true) : component->setRight(false);},
-        [](Keys key,std::shared_ptr<ecs::InputPlayer> component) {key == Keys::Space ? component->setSpacebar(true) : component->setSpacebar(false);},
-        [](Keys key,std::shared_ptr<ecs::InputPlayer> component) {key == Keys::R ? component->setR(true) : component->setR(false);},
+    using InputFn = void (*)(Keys, const std::shared_ptr<ecs::InputPlayer>&);
 
-    };
+    constexpr std::array<InputFn, 6> functionArray = {{
+        [](Keys key, const std::shared_ptr<ecs::InputPlayer>&component) {
+            component->setDown(key == Keys::Down);
+        },
+        [](Keys key, const std::shared_ptr<ecs::InputPlayer>&component) {
+            component->setUp(key == Keys::Up);
+        },
+        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
+            component->setLeft(key == Keys::Left);
+        },
+        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
+            component->setRight(key == Keys::Right);
+        },
+        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
+            component->setSpacebar(key == Keys::Space);
+        },
+        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
+            component->setR(key == Keys::R);
+        }
+    }};
 
-    void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputPacket &input, int id)
+    void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputPacket &input, int entityId)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
-            if (entity->getId() == id) {
+            if (entity->getId() == entityId) {
                 auto component = entity->getComponent<ecs::InputPlayer>();
-                Keys key = static_cast<Keys>(input.key);
-                for (auto &function : functionList) {
+                Keys const key = static_cast<Keys>(input.key);
+                for (const auto &function : functionArray) {
                     function(key, component);
                 }
                 break;
@@ -44,10 +57,10 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionPacket &position, int id)
+    void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionPacket &position, int entityId)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
-            if (entity->getId() == id) {
+            if (entity->getId() == entityId) {
                 auto component = entity->getComponent<ecs::Position>();
                 component->setX(position.posX);
                 component->setY(position.posY);
@@ -56,12 +69,12 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity, int id)
+    void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity, int entityId)
     {
-        auto entity = ecs.createEntity(id);
+        auto entity = ecs.createEntity(entityId);
 
         if (static_cast<EntityType>(newEntity.type) == EntityType::YourPlayer) {
-            _yourPlayerEntityId = id;
+            _yourPlayerEntityId = entityId;
         }
         entity->addComponent<ecs::Position>(newEntity.posX, newEntity.posY);
         if (static_cast<EntityType>(newEntity.type) == EntityType::Player) {
@@ -79,12 +92,12 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity, int id)
+    void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity, int entityId)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
-            if (entity->getId() == id) {
+            if (entity->getId() == entityId) {
                 entity->addComponent<ecs::Destroy>();
-                std::cout << "[EASTER_EGG]: " << deleteEntity.easterEgg << "\n";
+                std::cout << "[EASTER_EGG]: " << static_cast<unsigned int>(deleteEntity.easterEgg) << "\n";
                 break;
             }
         }

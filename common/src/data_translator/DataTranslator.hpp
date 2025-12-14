@@ -20,10 +20,10 @@ namespace cmn {
 
       private:
         uint8_t _yourPlayerEntityId;
-        void _injectInput(ecs::EcsManager &ecs, inputPacket &input, int id);
-        void _injectPosition(ecs::EcsManager &ecs, positionPacket &position, int id);
-        void _injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity, int id);
-        void _deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity, int id);
+        static void _injectInput(ecs::EcsManager &ecs, inputPacket &input, int entityId);
+        static void _injectPosition(ecs::EcsManager &ecs, positionPacket &position, int entityId);
+        void _injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity, int entityId);
+        static void _deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity, int entityId);
     };
 
 }// namespace cmn

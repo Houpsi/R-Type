@@ -21,7 +21,7 @@ namespace cmn {
     constexpr uint8_t playerWidth = 33;
     constexpr uint8_t playerDamage = 50;
     constexpr float playerCoolDown = 0.5;
-    constexpr std::string_view playerShootSound = "./sound/shoot.wav";
+    constexpr std::string_view playerShootSound = "./assets/sound/shoot.wav";
 
     constexpr uint8_t monsterHealth = 100;
     constexpr sf::Vector2f monsterSpriteScale = {2.0f, 2.0f};

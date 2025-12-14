@@ -17,18 +17,18 @@ namespace cmn {
     TEST(InputPacketTest, OperatorOverload)
     {
         CustomPacket customPacket;
-        const inputPacket packet = {static_cast<uint8_t>(Keys::Z), static_cast<uint8_t>(KeyState::Pressed)};
+        const inputPacket packet = {static_cast<uint8_t>(Keys::Up), static_cast<uint8_t>(KeyState::Pressed)};
         customPacket << packet;
         inputPacket tmp;
         customPacket >> tmp;
-        EXPECT_EQ(tmp.key, static_cast<uint8_t>(Keys::Z));
+        EXPECT_EQ(tmp.key, static_cast<uint8_t>(Keys::Up));
         EXPECT_EQ(tmp.keyState, static_cast<uint8_t>(KeyState::Pressed));
     }
 
     TEST(PacketContentTest, OperatorOverload)
     {
         CustomPacket customPacket;
-        const inputPacket packet = {static_cast<uint8_t>(Keys::Z), static_cast<uint8_t>(KeyState::Pressed)};
+        const inputPacket packet = {static_cast<uint8_t>(Keys::Up), static_cast<uint8_t>(KeyState::Pressed)};
         packetContent const content = packet;
         customPacket << content;
         packetContent tmp;
@@ -40,16 +40,16 @@ namespace cmn {
                 inputTmp = arg;
             }
         }, tmp);
-        EXPECT_EQ(inputTmp.key, static_cast<uint8_t>(Keys::Z));
+        EXPECT_EQ(inputTmp.key, static_cast<uint8_t>(Keys::Up));
         EXPECT_EQ(inputTmp.keyState, static_cast<uint8_t>(KeyState::Pressed));
     }
 
     TEST(PacketDataTest, OperatorOverload)
     {
         CustomPacket customPacket;
-        const inputPacket packet = {static_cast<uint8_t>(Keys::Z), static_cast<uint8_t>(KeyState::Pressed)};
+        const inputPacket packet = {static_cast<uint8_t>(Keys::Up), static_cast<uint8_t>(KeyState::Pressed)};
         packetContent const content = packet;
-        packetData data = {1, content};
+        packetData const data = {1, 1, content};
         customPacket << data;
         packetData tmpData;
         customPacket >> tmpData;
@@ -60,7 +60,7 @@ namespace cmn {
                 inputTmp = arg;
             }
         }, tmpData.content);
-        EXPECT_EQ(inputTmp.key, static_cast<uint8_t>(Keys::Z));
+        EXPECT_EQ(inputTmp.key, static_cast<uint8_t>(Keys::Up));
         EXPECT_EQ(inputTmp.keyState, static_cast<uint8_t>(KeyState::Pressed));
         EXPECT_EQ(tmpData.packetId, 1);
     }

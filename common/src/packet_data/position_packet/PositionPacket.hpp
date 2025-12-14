@@ -9,13 +9,14 @@
 #define R_TYPE_POSITIONPACKET_HPP
 
 #include <cstdint>
+#include "SFML/Network/Packet.hpp"
 
 namespace cmn {
 
     struct positionPacket
     {
-        uint16_t posX;
-        uint16_t posY;
+        float posX;
+        float posY;
     };
 
     sf::Packet &operator << (sf::Packet &packet, const positionPacket &packetStruct);
