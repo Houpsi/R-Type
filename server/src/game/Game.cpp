@@ -44,6 +44,11 @@ namespace server {
         _sharedData->addTcpPacketToSend(cmn::PacketFactory::createStartGamePacket());
         _sendPlayerEntities();
         _initEcsManager();
+
+        for (auto it = _playerIdEntityMap.begin(); it != _playerIdEntityMap.end(); it++) {
+            std::cout << "ID: " << it->first << " ENTITY: " << it->second << "\n";
+        }
+
         _startGame();
     }
 
@@ -73,8 +78,8 @@ namespace server {
             if (elapsedTime > frameTimer) {
                 fpsClock.restart();
                 _sendPositions();
-                _sendDestroy();
             }
+            _sendDestroy();
             _ecs.setDeltaTime(deltaTime);
             _ecs.updateSystems();
             elapsedTime = fpsClock.getElapsedTime().asSeconds();
@@ -231,7 +236,7 @@ namespace server {
 
     void Game::_initLevels()
     {
-        constexpr uint64_t level1SpawnRate = 10;
+        constexpr uint64_t level1SpawnRate = 1;
 
         uint8_t levelId = 1;
         uint8_t enemySpawnRate = level1SpawnRate;
