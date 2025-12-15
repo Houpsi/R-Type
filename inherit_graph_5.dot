@@ -1,0 +1,33 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="ecs::System",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1System.html",tooltip=" "];
+  Node0 -> Node1 [id="edge16_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="ecs::BackgroundSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1BackgroundSystem.html",tooltip="System responsible for the infinite scrolling logic of the background."];
+  Node0 -> Node2 [id="edge17_Node000000_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="ecs::CollisionSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1CollisionSystem.html",tooltip=" "];
+  Node0 -> Node3 [id="edge18_Node000000_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="ecs::DestroySystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1DestroySystem.html",tooltip=" "];
+  Node0 -> Node4 [id="edge19_Node000000_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="ecs::DummySystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1DummySystem.html",tooltip=" "];
+  Node0 -> Node5 [id="edge20_Node000000_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="ecs::HealthSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1HealthSystem.html",tooltip=" "];
+  Node0 -> Node6 [id="edge21_Node000000_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="ecs::InputSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1InputSystem.html",tooltip=" "];
+  Node0 -> Node7 [id="edge22_Node000000_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="ecs::MovementSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1MovementSystem.html",tooltip=" "];
+  Node0 -> Node8 [id="edge23_Node000000_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="ecs::PlayerAnimationSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1PlayerAnimationSystem.html",tooltip=" "];
+  Node0 -> Node9 [id="edge24_Node000000_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="ecs::RenderSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1RenderSystem.html",tooltip=" "];
+  Node0 -> Node10 [id="edge25_Node000000_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="ecs::ShootSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1ShootSystem.html",tooltip=" "];
+  Node0 -> Node11 [id="edge26_Node000000_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="ecs::SpriteAnimationSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1SpriteAnimationSystem.html",tooltip=" "];
+  Node0 -> Node12 [id="edge27_Node000000_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="ecs::VelocitySystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1VelocitySystem.html",tooltip=" "];
+}

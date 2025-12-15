@@ -1,0 +1,42 @@
+---
+title: ecs::ResourceManager
+
+---
+
+# ecs::ResourceManager
+
+
+
+
+
+
+`#include <ResourceManager.hpp>`
+
+## Public Functions
+
+|                | Name           |
+| -------------- | -------------- |
+| sf::Texture & | **[getTexture](Classes/classecs_1_1ResourceManager.md#function-gettexture)**(const std::string & path) |
+| | **[ResourceManager](Classes/classecs_1_1ResourceManager.md#function-resourcemanager)**() |
+
+## Public Functions Documentation
+
+### function getTexture
+
+```cpp
+sf::Texture & getTexture(
+    const std::string & path
+)
+```
+
+
+### function ResourceManager
+
+```cpp
+ResourceManager()
+```
+
+
+-------------------------------
+
+Updated on 2025-12-15 at 09:02:05 +0000

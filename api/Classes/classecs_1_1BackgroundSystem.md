@@ -1,0 +1,72 @@
+---
+title: ecs::BackgroundSystem
+summary: System responsible for the infinite scrolling logic of the background. 
+
+---
+
+# ecs::BackgroundSystem
+
+
+
+[System](Classes/classecs_1_1System.md) responsible for the infinite scrolling logic of the background. 
+
+
+`#include <BackgroundSystem.hpp>`
+
+Inherits from [ecs::System](Classes/classecs_1_1System.md)
+
+## Public Functions
+
+|                | Name           |
+| -------------- | -------------- |
+| | **[~BackgroundSystem](Classes/classecs_1_1BackgroundSystem.md#function-~backgroundsystem)**() override =default |
+| virtual void | **[update](Classes/classecs_1_1BackgroundSystem.md#function-update)**([EcsManager](Classes/classecs_1_1EcsManager.md) & ecs) override<br>Main update loop for the background logic.  |
+| | **[BackgroundSystem](Classes/classecs_1_1BackgroundSystem.md#function-backgroundsystem)**() =default |
+
+## Additional inherited members
+
+**Public Functions inherited from [ecs::System](Classes/classecs_1_1System.md)**
+
+|                | Name           |
+| -------------- | -------------- |
+| virtual | **[~System](Classes/classecs_1_1System.md#function-~system)**() =default |
+| | **[System](Classes/classecs_1_1System.md#function-system)**() =default |
+
+
+## Public Functions Documentation
+
+### function ~BackgroundSystem
+
+```cpp
+~BackgroundSystem() override =default
+```
+
+
+### function update
+
+```cpp
+virtual void update(
+    EcsManager & ecs
+) override
+```
+
+Main update loop for the background logic. 
+
+**Parameters**: 
+
+  * **ecs** Reference to the central [EcsManager](Classes/classecs_1_1EcsManager.md) to access entities and components. 
+
+
+**Reimplements**: [ecs::System::update](Classes/classecs_1_1System.md#function-update)
+
+
+### function BackgroundSystem
+
+```cpp
+BackgroundSystem() =default
+```
+
+
+-------------------------------
+
+Updated on 2025-12-15 at 09:02:05 +0000
