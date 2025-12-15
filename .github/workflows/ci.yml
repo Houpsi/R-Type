@@ -39,7 +39,8 @@ jobs:
           libxrandr-dev \
           libxcursor-dev \
           libxi-dev \
-          libgl1-mesa-dev
+          libgl1-mesa-dev \
+          libfreetype6-dev
 
       - name: Configure CMake
         run: cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
