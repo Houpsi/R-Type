@@ -6,21 +6,20 @@
 */
 
 #ifndef BOOTSTRAP_HEALTH_HPP
-    #define BOOTSTRAP_HEALTH_HPP
+#define BOOTSTRAP_HEALTH_HPP
 #include "Component.hpp"
 
 namespace ecs {
-class Health : public Component {
-  public:
-    explicit Health(int const health) : _health(health) {};
-    ~Health() override = default;
+    class Health : public Component {
+      public:
+        explicit Health(int const health);
+        ~Health() override = default;
+        [[nodiscard]] int getHealth() const;
+        void setHealth(int const health);
 
-    [[nodiscard]] int getHealth() const;
-    void setHealth(int const health);
-
-  private:
-    int _health = 0;
-};
+      private:
+        int _health = 0;
+    };
 }
 
 #endif //BOOTSTRAP_HEALTH_HPP

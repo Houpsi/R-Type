@@ -12,9 +12,8 @@
 #include <cstdint>
 namespace cmn {
 
-    struct deleteEntityPacket
-    {
-        uint8_t easterEgg;
+    using deleteEntityPacket = struct deleteEntityPacket {
+        uint64_t entityId;
     };
 
     sf::Packet &operator << (sf::Packet &packet, const deleteEntityPacket &packetStruct);

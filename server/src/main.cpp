@@ -8,6 +8,7 @@
 #include "game/Game.hpp"
 #include "parser/Parser.hpp"
 #include "server/Server.hpp"
+#include <iostream>
 
 int main(int argc, char **argv)
 {
@@ -17,18 +18,23 @@ int main(int argc, char **argv)
         return parser.checkHelp(argc, argv);
     }
 
-    const std::shared_ptr<cmn::SharedData> data;
+    auto data = std::make_shared<cmn::SharedData>();
     server::Server server(data);
+    std::cout << data.use_count() << "\n";
 
     uint16_t const port = parser.getPort();
     if (server.bindPorts(port) != 0) {
         return EXIT_FAILURE;
     }
 
-    server::Game game(data);
-    auto  networkThread = std::jthread([&server] {server.run();});
-    game.run();
-    return EXIT_SUCCESS;
+    try {
+        server::Game game(data);
+        auto  networkThread = std::jthread([&server] {server.run();});
+        game.run();
+    } catch (std::exception &e) {
+        return EXIT_FAILURE;
+    }
+
 }
 
 

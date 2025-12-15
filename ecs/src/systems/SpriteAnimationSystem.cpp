@@ -22,8 +22,9 @@ void SpriteAnimationSystem::update(EcsManager& ecs)
         auto anim = entity->getComponent<Animation>();
         auto inputPlayer = entity->getComponent<InputPlayer>();
 
-        if (!anim || !sprite || inputPlayer)
-            continue;
+        if (inputPlayer|| !anim || !sprite) {
+                continue;
+        }
         anim->updateAnimation(deltaTime);
         int const left = anim->getOffsetX()  + ( anim->getAnimFrame() * anim->getSpriteSize().first);
         sprite->setTextureRect(left, 0 ,  anim->getSpriteSize().first,  anim->getSpriteSize().second);

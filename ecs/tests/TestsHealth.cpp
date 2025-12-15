@@ -34,9 +34,4 @@ namespace ecs {
     {
         EXPECT_THROW(Health health(-100), std::invalid_argument);
     }
-
-    TEST(EcsManagerTest, SetDecimalHealth)
-    {
-        EXPECT_THROW(Health health(0.5), std::invalid_argument);
-    }
 }

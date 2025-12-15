@@ -1,6 +1,9 @@
-//
-// Created by theo on 12/13/25.
-//
+/*
+** EPITECH PROJECT, 2025
+** R_Type
+** File description:
+** NewEntityPacket
+*/
 
 #ifndef R_TYPE_NEWENTITYPACKET_HPP
 #define R_TYPE_NEWENTITYPACKET_HPP
@@ -10,8 +13,9 @@
 
 namespace cmn {
 
-    struct newEntityPacket
+    using newEntityPacket = struct newEntityPacket
     {
+        uint64_t entityId;
         uint8_t type;
         float posX;
         float posY;

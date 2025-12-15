@@ -20,57 +20,41 @@ namespace ecs
 
         for (const auto &entity : entities) {
             auto collision = entity->getComponent<Collision>();
-            auto position  = entity->getComponent<Position>();
-            auto sprite    = entity->getComponent<Sprite>();
+            if (!collision || !entity->getComponent<Position>()) continue;
+            auto pos = entity->getComponent<Position>();
+            auto X = pos->getX();
+            auto Y = pos->getY();
+            auto height = collision->getHeight();
+            auto length = collision->getWidth();
 
-            if (!collision || !position || !sprite)
-                continue;
+            for (auto otherEntity: ecs.getEntities()) {
+                if (!otherEntity->getComponent<Collision>() || !otherEntity->getComponent<Position>()) continue;
+                if (entity == otherEntity) continue;
+                auto otherCollision = otherEntity->getComponent<Collision>();
+                auto posOtherEntity = otherEntity->getComponent<Position>();
 
-            const float x = position->getX();
-            const float y = position->getY();
-            const float width  = collision->getWidth()  * sprite->getScale().x;
-            const float height = collision->getHeight() * sprite->getScale().y;
+                if (collision->getTypeCollision() == ecs::TypeCollision::PLAYER && otherCollision->getTypeCollision() == ecs::TypeCollision::PLAYER) continue;
+                if (collision->getTypeCollision() == ecs::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ecs::TypeCollision::OBSTACLE) continue;
+                if (collision->getTypeCollision() == ecs::TypeCollision::PLAYER && otherCollision->getTypeCollision() == ecs::TypeCollision::PLAYER_PROJECTILE) continue;
+                if (collision->getTypeCollision() == ecs::TypeCollision::PLAYER_PROJECTILE && otherCollision->getTypeCollision() == ecs::TypeCollision::PLAYER) continue;
+                if (collision->getTypeCollision() == ecs::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ecs::TypeCollision::ENEMY_PROJECTILE) continue;
+                if (collision->getTypeCollision() == ecs::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ecs::TypeCollision::ENEMY) continue;
+                if (collision->getTypeCollision() == ecs::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ecs::TypeCollision::PLAYER_PROJECTILE) continue;
+                if (collision->getTypeCollision() == ecs::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ecs::TypeCollision::PLAYER) continue;
 
-            for (const auto &other : entities) {
-                if (entity == other)
-                    continue;
-
-                auto otherCollision = other->getComponent<Collision>();
-                auto otherPosition  = other->getComponent<Position>();
-                auto otherSprite    = other->getComponent<Sprite>();
-
-                if (!otherCollision || !otherPosition || !otherSprite)
-                    continue;
-
-                if (shouldIgnoreCollision(
-                        collision->getTypeCollision(),
-                        otherCollision->getTypeCollision()))
-                    continue;
-
-                const float ox = otherPosition->getX();
-                const float oy = otherPosition->getY();
-                const float oWidth  = otherCollision->getWidth()  * otherSprite->getScale().x;
-                const float oHeight = otherCollision->getHeight() * otherSprite->getScale().y;
-
-                if (!isColliding(x, y, width, height, ox, oy, oWidth, oHeight))
-                    continue;
-
-                collision->setIsTrigger(true);
-                otherCollision->setIsTrigger(true);
-
-                const auto typeA = collision->getTypeCollision();
-                const auto typeB = otherCollision->getTypeCollision();
-
-                if (typeA == TypeCollision::PLAYER_PROJECTILE &&
-                    typeB == TypeCollision::ENEMY) {
-
-                    auto health = other->getComponent<Health>();
-                    auto shoot  = entity->getComponent<Shoot>();
-
-                    if (health && shoot)
-                        health->setHealth(health->getHealth() - shoot->getDamage());
-
-                    entity->addComponent<Destroy>();
+                if (X < (posOtherEntity->getX() + (otherCollision->getWidth())) &&
+                    (X + length) > posOtherEntity->getX() &&
+                    Y < (posOtherEntity->getY() + (otherCollision->getHeight())) &&
+                    (Y + height) > posOtherEntity->getY()
+                ) {
+                    otherCollision->setIsTrigger(true);
+                    collision->setIsTrigger(true);
+                    const auto& typeCollisionFirstEntity = collision->getTypeCollision();
+                    const auto& typeCollisionSecondEntity = otherCollision->getTypeCollision();
+                    if (typeCollisionFirstEntity == ecs::TypeCollision::PLAYER_PROJECTILE && typeCollisionSecondEntity == ecs::TypeCollision::ENEMY)
+                    {
+                        otherEntity->getComponent<Health>()->setHealth(otherEntity->getComponent<Health>()->getHealth() - entity->getComponent<Shoot>()->getDamage());
+                        entity->addComponent<Destroy>();
                     }
 
                 if (typeA == TypeCollision::PLAYER &&

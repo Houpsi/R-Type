@@ -1,0 +1,39 @@
+name: Generate Documentation
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Doxygen
+        run: sudo apt-get install -y doxygen
+
+      - name: Install Doxybook2
+        run: |
+          wget https://github.com/matusnovak/doxybook2/releases/download/v1.4.0/doxybook2-linux-amd64-v1.4.0.zip
+          unzip doxybook2-linux-amd64-v1.4.0.zip
+          chmod +x bin/doxybook2
+          sudo mv bin/doxybook2 /usr/local/bin/
+
+      - name: Generate XML (Doxygen)
+        run: doxygen Doxyfile
+
+      - name: Create output directory
+        run: mkdir -p docs/api
+
+      - name: Generate Markdown (Doxybook2)
+        run: doxybook2 --input xml --output docs/api --config doxybook-config.json
+
+      - name: Deploy to gitbook-content branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gitbook-content

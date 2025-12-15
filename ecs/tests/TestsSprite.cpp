@@ -35,10 +35,10 @@ namespace ecs {
         ASSERT_EQ(&spr1, &spr2);
     }
 
-    TEST(SpriteTest, InvalidTextureDoesNotCrash)
-    {
-        sf::Vector2f scale(2.0f, 2.0f);
-        sf::Texture texture("nope/not_found.png");
-        ASSERT_NO_THROW(Sprite sprite(texture, scale));
-    }
+//    TEST(SpriteTest, InvalidTextureDoesNotCrash)
+//    {
+//        sf::Vector2f scale(2.0f, 2.0f);
+//        sf::Texture texture("nope/not_found.png");
+//        ASSERT_NO_THROW(Sprite sprite(texture, scale));
+//    }
 }

@@ -1,0 +1,9 @@
+{
+  "engine": "gitbook",
+  "useFolders": true,
+  "linkSuffix": ".md",
+  "sort": true,
+  "firstLetterOfFolderIsCapital": true
+}
+
+

@@ -31,6 +31,9 @@ if (NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 20)
 endif()
 
+file(COPY ${CMAKE_SOURCE_DIR}/assets
+        DESTINATION ${CMAKE_BINARY_DIR})
+
 add_subdirectory(server)
 add_subdirectory(ecs)
 add_subdirectory(common)

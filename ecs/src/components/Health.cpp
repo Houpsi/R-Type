@@ -6,8 +6,16 @@
 */
 
 #include "Health.hpp"
+#include <stdexcept>
 
 namespace ecs {
+    Health::Health(const int health) : _health(health)
+    {
+        if (health < 0) {
+            throw std::invalid_argument("Health cannot be negative");
+        }
+    }
+
     /**
      * @breif Gets the health
      * @return the health of the component
