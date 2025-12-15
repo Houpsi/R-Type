@@ -81,6 +81,7 @@ namespace cmn {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
             entity->addComponent<ecs::PlayerAnimation>();
             entity->addComponent<ecs::Sound>(std::string(playerShootSound));
+            entity->addComponent<ecs::InputPlayer>();
         }
         if (static_cast<EntityType>(newEntity.type) == EntityType::Monster) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);

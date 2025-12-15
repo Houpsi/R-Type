@@ -47,7 +47,7 @@ namespace cmn {
     constexpr std::string_view playerProjectileSpriteSheet = "./assets/r-typesheet30a.gif";
     constexpr std::pair<uint8_t, uint8_t> playerProjectileAnimationSize = {32, 36};
     constexpr uint8_t playerProjectileAnimationOffset = 0;
-    constexpr uint8_t playerProjectileAnimationNumberFrame = 8;
+    constexpr uint8_t playerProjectileAnimationNumberFrame = 3;
     constexpr uint8_t playerProjectileCollisionHeight = 10;
     constexpr uint8_t playerProjectileCollisionWidth = 10;
 
