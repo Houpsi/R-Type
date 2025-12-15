@@ -22,7 +22,7 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 | void | **[updateAnimation](Classes/classecs_1_1PlayerAnimation.md#function-updateanimation)**(float dt, const bool isDown, const bool isUp) |
 | std::size_t | **[getId](Classes/classecs_1_1PlayerAnimation.md#function-getid)**() const |
 | int | **[getAnimFrame](Classes/classecs_1_1PlayerAnimation.md#function-getanimframe)**() const |
-| | **[PlayerAnimation](Classes/classecs_1_1PlayerAnimation.md#function-playeranimation)**() =default |
+| | **[PlayerAnimation](Classes/classecs_1_1PlayerAnimation.md#function-playeranimation)**() |
 
 ## Additional inherited members
 
@@ -71,10 +71,10 @@ int getAnimFrame() const
 ### function PlayerAnimation
 
 ```cpp
-PlayerAnimation() =default
+PlayerAnimation()
 ```
 
 
 -------------------------------
 
-Updated on 2025-12-15 at 10:01:35 +0000
+Updated on 2025-12-15 at 10:34:56 +0000
