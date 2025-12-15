@@ -1,0 +1,208 @@
+R-type Project                                                      Garcia Théo
+Request for Comments: XXXX                                              Epitech
+Category: Experimental                                              Desert Axel
+                                                                        Epitech
+                                                   Goncalves dos santos Raphaël
+                                                                        Epitech
+                                                              Racine Aleksandra
+                                                                        Epitech
+                                                                Houplain Hélène
+                                                                        Epitech
+                                                                       Dec 2025
+                            R-type Game Protocol
+
+Status of This Memo
+
+    This document is part of a student project and does not represent a
+    standard of any kind. It is published for educational purposes and as a
+    demonstration of protocol design. Distribution of this memo is
+    unrestricted.
+
+Abstract
+
+    This document specifies the textual protocol used for a simple multiplayer
+    game. It details the commands exchanged between client and server.
+    The protocol is binary and TCP/UDP based and designed for readability and
+    ease of implementation.
+
+Table of Contents
+
+1. Introduction ...................................................
+2. Data Types and Conventions .....................................
+3. Protocol Overview ..............................................
+4. Packet Structure ...............................................
+5. Command Reference ..............................................
+6. Entity Types ...................................................
+7. Security Considerations ........................................
+8. IANA Considerations ............................................
+9. References .....................................................
+
+1. Introduction
+
+    This document defines the R-Type Game Protocol, a binary-based protocol
+    designed to facilitate real-time communication between a server and
+    multiple clients. Unlike text-based protocols, this specification uses raw
+    byte streams to minimize payload size and processing time, suitable for a
+    high-paced arcade game.
+
+    The protocol handles player identification, input transmission, entity
+    synchronization (position, creation, deletion), and game state management.
+
+2. Data Types and Conventions
+
+    All multi-byte numeric values MUST be transmitted in Network Byte Order
+    (Big Endian), unless otherwise specified.
+
+    The following primitive types are used:
+
+    uint8_t: Unsigned 8-bit integer (1 byte)
+
+    uint16_t: Unsigned 16-bit integer (2 bytes)
+
+    uint32_t: Unsigned 32-bit integer (4 bytes)
+
+    uint64_t: Unsigned 64-bit integer (8 bytes)
+
+    float: IEEE 754 32-bit floating point (4 bytes)
+
+    Structure padding is disabled. All data is packed continuously.
+
+3. Protocol Overview
+
+    The communication flow begins with the client connecting to the server.
+    The server acknowledges the connection by assigning a unique Player ID
+    (Opcode 0).
+
+    Once the game loop begins (Opcode 5), the server streams entity updates
+    (Opcodes 2, 3, 4) to all clients. Clients are responsible for sending their
+    input states (Opcode 1) to the server to control their ship.
+
+4. Packet Structure
+
+    Every packet consists of a 1-byte Operation Code (Opcode), followed
+    immediately by the payload specific to that command.
+
+    [ Opcode (uint8) ] [ Payload (Variable Length) ... ]
+
+5. Command Reference
+
+    | Opcode   | Sender | Command Name       | Payload Structure            |
+    | -------- | ------ | ------------------ | ---------------------------- |
+    | 0        | server | ASSIGN_ID          | {uint32_t: playedId}         |
+    | 1        | client | INPUT              | {uint32_t: playerId,         |
+    |          |        |                    |  uint8_t: key,               |
+    |          |        |                    |  uint8_t: keyState}          |
+    | 2        | server | POS_UPDATE         | {uint64_t: entityId,         |
+    |          |        |                    |  float: posX,                |
+    |          |        |                    |  float: posY}                |
+    | 3        | server | ENTITY_SPAWN       | {uint64_t: entityId,         |
+    |          |        |                    |  uint8_t: type               |
+    |          |        |                    |  float: posX,                |
+    |          |        |                    |  float: posY}                |
+    | 4        | server | ENTITY_DESTROY     | {uint64_t: entityId}         |
+    | 5        | server | GAME_START         | {}                           |
+
+    Description:
+
+    ASSIGN_ID (Opcode 0) Sent by the server to a newly connected client to
+    assign their ID.
+
+        playerId (uint32_t): The unique identifier for the player.
+
+    INPUT (Opcode 1) Sent by the client to update the server on key presses.
+
+        playerId (uint32_t): The ID of the client sending input.
+
+        key (uint8_t): The key code (mapped in game logic).
+
+        state (uint8_t): 1 for Pressed, 0 for Released.
+
+    POS_UPDATE (Opcode 2) Sent by the server to update the position of any
+    entity (player or mob).
+
+        entityId (uint64_t): The unique ID of the entity to move.
+
+        posX (float): The new X coordinate.
+
+        posY (float): The new Y coordinate.
+
+    ENTITY_SPAWN (Opcode 3) Sent by the server when a new entity is created.
+
+        entityId (uint64_t): The unique ID for the new entity.
+
+        type (uint8_t): The type of entity (see Section 6).
+
+        posX (float): The starting X coordinate.
+
+        posY (float): The starting Y coordinate.
+
+    ENTITY_DESTROY (Opcode 4) Sent by the server when an entity is removed
+    (destroyed or out of bounds).
+
+        entityId (uint64_t): The ID of the entity to remove.
+
+    GAME_START (Opcode 5) Sent by the server to notify clients that the game
+    session is starting.
+
+        Payload: None.
+
+6. Entity Types
+
+    The type field in the ENTITY_SPAWN command corresponds to the following
+    values (uint8_t):
+
+    0x01 : Player
+    0x02 : Monster
+    0x03 : PlayerProjectile
+    0x04 : MonsterProjectile
+
+7. Security Considerations
+
+    This protocol does not implement encryption or authentication. Packets can
+    be easily intercepted or injected. It is designed for a controlled
+    environment (LAN or VPN). Input validation MUST be performed on the server
+    side to prevent out-of-bounds coordinates or invalid entity IDs.
+
+8. IANA Considerations
+
+    This document has no actions for IANA.
+
+9. References
+
+    [RFC7322] Flanagan, H., "RFC Style Guide", RFC 7322, September 2014.
+
+    [RFC5741] L. Daigle, O. Kolkman, "RFC Streams, Headers, and Boilerplates",
+              RFC 5741, December 2009.
+
+    [RFC0768] Postel, J., "User Datagram Protocol", RFC 768, August 1980.
+
+Authors' Addresses
+
+    Théo Garcia
+    Epitech Student, 3rd Year
+
+    EMail: theo.garcia@epitech.eu
+
+
+    Axel Desert
+    Epitech Student, 2rd Year
+
+    EMail: axel.desert@epitech.eu
+
+
+    Raphaël Goncalves dos santos
+    Epitech Student, 3rd Year
+
+    EMail: raphael.goncalves-dos-santos@epitech.eu
+
+
+    Aleksandra Racine
+    Epitech Student, 3rd Year
+
+    EMail: aleksandra.racine@epitech.eu
+
+
+    Hélène Houplain
+    Epitech Student, 3rd Year
+
+    EMail: helene.houplain@epitech.eu
