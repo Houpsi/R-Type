@@ -56,7 +56,6 @@ namespace ecs {
 
     void InputPlayer::setUp(bool up)
     {
-        std::cout << "FHOEUIGFVBIEGFVBIVEFH\n";
         _up = up;
     }
 

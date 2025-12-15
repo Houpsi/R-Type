@@ -56,7 +56,7 @@ namespace client {
             std::cerr << "[ERROR]: Failed to send TCP packet.\n";
             return 1;
         }
-        std::cout << "[SEND]: TCP Packet send" << "\n";
+        //std::cout << "[SEND]: TCP Packet send" << "\n";
         return 0;
     }
 
@@ -66,7 +66,7 @@ namespace client {
             std::cerr << "[ERROR]: Failed to send UDP packet.\n";
             return 1;
         }
-        std::cout << "[SEND]: UDP Packet send" << "\n";
+        //std::cout << "[SEND]: UDP Packet send" << "\n";
         return 0;
     }
 
@@ -94,7 +94,7 @@ namespace client {
                 cmn::packetData data;
                 packet >> data;
                 _sharedData->addTcpReceivedPacket(data);
-                std::cout << "[RECEIVED]: TCP Packet received\n";
+                //std::cout << "[RECEIVED]: TCP Packet received\n";
             }
         }
     }
@@ -120,7 +120,7 @@ namespace client {
             cmn::packetData data;
             packet >> data;
             _sharedData->addUdpReceivedPacket(data);
-            std::cout << "[RECEIVED]: UDP Packet received" << "\n";
+            //std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
     }
 }
