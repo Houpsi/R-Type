@@ -48,6 +48,8 @@ namespace cmn {
         uint32_t playerId = input.playerId;
         uint64_t const entityId = playerIdEntityMap[static_cast<int>(playerId)];
 
+        std::cout << "PLAYER ID: " << playerId << " ENTITY: " << entityId << "\n";
+
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
             if (entity->getId() == entityId) {
                 auto component = entity->getComponent<ecs::InputPlayer>();
