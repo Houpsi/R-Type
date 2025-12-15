@@ -36,8 +36,8 @@ namespace cmn {
     constexpr std::pair<uint8_t, uint8_t> monsterAnimationSize = {32, 36};
     constexpr uint8_t monsterAnimationOffset = 0;
     constexpr uint8_t monsterAnimationNumberFrame = 8;
-    constexpr uint8_t monsterCollisionHeight = 14;
-    constexpr uint8_t monsterCollisionWidth = 18;
+    constexpr uint8_t monsterCollisionHeight = 28;
+    constexpr uint8_t monsterCollisionWidth = 36;
     constexpr uint16_t monsterSpawnPositionWidth = 2020;
     constexpr uint16_t monsterMaxSpawnPositionHeight = 1081;
 

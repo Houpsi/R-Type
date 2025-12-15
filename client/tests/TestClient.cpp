@@ -21,7 +21,7 @@ TEST(ClientTest, BindPortsSuccess)
     client::Client client(sharedData);
 
     uint16_t port = 55001;
-    int result = client.bindPorts(port);
+    int result = client.bindPorts();
 
     EXPECT_EQ(result, 0);
 }
@@ -34,8 +34,8 @@ TEST(ClientTest, BindPortsFailWhenPortAlreadyUsed)
 
     uint16_t port = 55002;
 
-    ASSERT_EQ(client1.bindPorts(port), 0);
-    EXPECT_EQ(client2.bindPorts(port), 1);
+    ASSERT_EQ(client1.bindPorts(), 0);
+    EXPECT_EQ(client2.bindPorts(), 1);
 }
 
 TEST(ClientTest, ConnectToHostSuccess)
@@ -115,7 +115,7 @@ TEST(ClientTest, SendUdpSuccess)
     auto sharedData = std::make_shared<cmn::SharedData>();
     client::Client client(sharedData);
 
-    ASSERT_EQ(client.bindPorts(55031), 0);
+    ASSERT_EQ(client.bindPorts(), 0);
     ASSERT_EQ(client.connectToHost("127.0.0.1", port), 0);
 
     std::thread udpThread([&]() {

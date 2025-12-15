@@ -21,8 +21,8 @@ namespace client {
 
     int Client::bindPorts()
     {
-        _udpSocket.setBlocking(true);
-        if (_udpSocket.bind(sf::Socket::AnyPort) != sf::Socket::Status::Done) {
+        _udpSocket.setBlocking(false);
+        if (_udpSocket.bind(_tcpSocket.getLocalPort()) != sf::Socket::Status::Done) {
             return 1;
         }
         return 0;
@@ -106,7 +106,7 @@ namespace client {
 
         std::optional sender = sf::IpAddress::LocalHost;
         unsigned short port = 0;
-        cmn::CustomPacket packet = {};
+        cmn::CustomPacket packet {};
 
         while (true) {
             auto receivedData = _sharedData->getUdpPacketToSend();
@@ -114,7 +114,7 @@ namespace client {
                 sendUdp(receivedData.value());
             }
             if (_udpSocket.receive(packet, sender, port) != sf::Socket::Status::Done) {
-                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
+//                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
             cmn::packetData data;

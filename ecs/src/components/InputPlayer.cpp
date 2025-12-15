@@ -6,6 +6,7 @@
 */
 
 #include "InputPlayer.hpp"
+#include <iostream>
 
 namespace ecs {
     bool InputPlayer::getDown() const
@@ -55,6 +56,7 @@ namespace ecs {
 
     void InputPlayer::setUp(bool up)
     {
+        std::cout << "FHOEUIGFVBIEGFVBIVEFH\n";
         _up = up;
     }
 

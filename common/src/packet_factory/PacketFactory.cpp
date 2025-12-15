@@ -56,5 +56,13 @@ namespace cmn {
         packet << data;
         return packet;
     }
+    CustomPacket PacketFactory::createStartGamePacket()
+    {
+        startGamePacket startGame = {};
+        packetData const data = {startGameProtocolId, startGame};
+        CustomPacket packet;
+        packet << data;
+        return packet;
+    }
 
 }// namespace cmn

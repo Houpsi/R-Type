@@ -45,7 +45,7 @@ namespace server {
         size_t playerListSize = _sharedData->getPlayerListSize();
 
         while ((_readyPlayersId.size() != playerListSize) || (playerListSize == 0)) {
-            std::cout << _readyPlayersId.size() << " " << playerListSize << "\n";
+//            std::cout << _readyPlayersId.size() << " " << playerListSize << "\n";
             playerListSize = _sharedData->getPlayerListSize();
             if (currentNbPlayerEntities != playerListSize) {
                 _createNewPlayers(_sharedData->getAllPlayerIds(), currentNbPlayerEntities);
@@ -61,26 +61,32 @@ namespace server {
             auto entities = _ecs.getEntitiesWithComponent<ecs::InputPlayer>();
 
             for (auto &entity : entities) {
-                if (entity->getComponent<ecs::InputPlayer>()->getRight()
+                if (entity->getComponent<ecs::InputPlayer>()->getReady()
                     && !_isIdAlreadyPresent(_entityIdPlayerMap[entity->getId()])) {
+                    std::cout << "GOUGOUGAGA\n";
                     _readyPlayersId.push_back(_entityIdPlayerMap[entity->getId()]);
                 }
             }
         }
 
+        _sharedData->addTcpPacketToSend(cmn::PacketFactory::createStartGamePacket());
+
         for (auto &entity : _ecs.getEntities()) {
             auto component = entity->getComponent<ecs::Position>();
             std::pair<float, float> const pos = {component->getX(), component->getY()};
-            _sharedData->addTcpPacketToSend(cmn::PacketFactory::createNewEntityPacket(cmn::EntityType::Player, pos, entity->getId()));
+            _sharedData->addUdpPacketToSend(cmn::PacketFactory::createNewEntityPacket(cmn::EntityType::Player, pos, entity->getId()));
         }
 
         _initEcsManager();
 
         Level  const&currentLevel = _levelManager.getCurrentLevel();
+        sf::Clock fpsClock;
         sf::Clock clock;
         sf::Clock enemyClock;
         unsigned const seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::minstd_rand0 generator(seed);
+        float elapsedTime = 0;
+        constexpr float frameTimer = 1 / 60;
 
         while (true) {
             float const deltaTime = clock.restart().asSeconds();
@@ -128,16 +134,23 @@ namespace server {
                     }
                 }
             }
-            for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
-                auto component = entity->getComponent<ecs::Position>();
-                std::pair<float, float> const position = {component->getX(), component->getY()};
-                _sharedData->addUdpPacketToSend(cmn::PacketFactory::createPositionPacket(position, entity->getId()));
-            }
-            for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Destroy>()) {
-                _sharedData->addUdpPacketToSend(cmn::PacketFactory::createDeleteEntityPacket(entity->getId()));
+
+            if (elapsedTime > frameTimer) {
+                for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
+                    auto component = entity->getComponent<ecs::Position>();
+                    std::pair<float, float> const position = { component->getX(), component->getY() };
+                    _sharedData->addUdpPacketToSend(
+                        cmn::PacketFactory::createPositionPacket(position, entity->getId()));
+                }
+                for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Destroy>()) {
+                    _sharedData->addUdpPacketToSend(cmn::PacketFactory::createDeleteEntityPacket(entity->getId()));
+                }
+                elapsedTime = 0;
+                fpsClock.restart();
             }
             _ecs.setDeltaTime(deltaTime);
             _ecs.updateSystems();
+            elapsedTime = fpsClock.getElapsedTime().asSeconds();
         }
     }
 

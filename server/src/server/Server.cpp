@@ -21,7 +21,7 @@ namespace server {
     int Server::bindPorts(const uint16_t port)
     {
         _listener.setBlocking(false);
-        _udpSocket.setBlocking(true);
+        _udpSocket.setBlocking(false);
         if (_listener.listen(port) != sf::Socket::Status::Done) {
             return 1;
         }
@@ -63,18 +63,18 @@ namespace server {
                 cmn::CustomPacket packet;
                 sf::Socket::Status const status = sock.receive(packet);
                 if (status != sf::Socket::Status::Done) {
-                    std::cerr << "[ERROR]: failed to receive TCP packet" << "\n";
+//                    std::cerr << "[ERROR]: failed to receive TCP packet" << "\n";
                     if (status == sf::Socket::Status::Disconnected || status == sf::Socket::Status::Error) {
-                        std::cout << "[DISCONNECTION]: Client " << sock.getRemoteAddress().value() << ":" << sock.getRemotePort() << " disconnected." << "\n";
+//                        std::cout << "[DISCONNECTION]: Client " << sock.getRemoteAddress().value() << ":" << sock.getRemotePort() << " disconnected." << "\n";
                         _socketSelector.remove(sock);
-                        it = _socketVector.erase(it);
                         _sharedData->deletePlayer(sock.getRemotePort(), sock.getRemoteAddress().value());
+                        it = _socketVector.erase(it);
                     }
                 }
                 cmn::packetData data;
                 packet >> data;
                 _sharedData->addTcpReceivedPacket(data);
-                std::cout << "[RECEIVED]: TCP Packet received" << "\n";
+//                std::cout << "[RECEIVED]: TCP Packet received" << "\n";
             }
         }
     }
@@ -83,8 +83,8 @@ namespace server {
     {
         sf::Socket::Status const status = _udpSocket.send(packet, clientIp, port);
         if (status != sf::Socket::Status::Done) {
-            std::cerr << "[ERROR]: failed to send UDP packet to:"
-            << clientIp << ":" << port << "\n";
+//            std::cerr << "[ERROR]: failed to send UDP packet to:"
+//            << clientIp << ":" << port << "\n";
             return 1;
         }
         return 0;
@@ -94,7 +94,7 @@ namespace server {
     {
         sf::Socket::Status const status = clientSocket.send(packet);
         if (status != sf::Socket::Status::Done) {
-            std::cerr << "[ERROR]: failed to send TCP packet to server" << "\n";
+//            std::cerr << "[ERROR]: failed to send TCP packet to server" << "\n";
             return 1;
         }
         return 0;
@@ -104,7 +104,7 @@ namespace server {
     {
         for (const auto &client : _socketVector) {
             if (sendTcp(packet, *client) == 1) {
-                std::cerr << "[ERROR]: failed to send tcp message to a player" << "\n";
+//                std::cerr << "[ERROR]: failed to send tcp message to a player" << "\n";
             }
         }
     }
@@ -118,7 +118,7 @@ namespace server {
                 continue;
             }
             if (sendUdp(packet, ip.value(), clientPort) == 1) {
-                std::cerr << "[ERROR]: failed to send udp message to a player" << "\n";
+//                std::cerr << "[ERROR]: failed to send udp message to a player" << "\n";
             }
         }
     }
@@ -131,14 +131,14 @@ namespace server {
         client->setBlocking(false);
 
         if (_listener.accept(*client) != sf::Socket::Status::Done) {
-            std::cerr << "[ERROR]: failed to accept new TCP connection" << "\n";
+//            std::cerr << "[ERROR]: failed to accept new TCP connection" << "\n";
             return;
         }
         _socketSelector.add(*client);
-        _socketVector.push_back(std::move(client));
         _sharedData->addPlayer(idPlayer, client->getRemotePort(), client->getRemoteAddress().value());
-        std::cout << "[CONNECTION]: TCP connection accepted" << "\n";
         sendTcp(cmn::PacketFactory::createConnectionPacket(idPlayer), *client);
+        _socketVector.push_back(std::move(client));
+//        std::cout << "[CONNECTION]: TCP connection accepted" << "\n";
         idPlayer++;
     }
 
@@ -162,13 +162,13 @@ namespace server {
                 broadcastTcp(tcpPacket.value());
             }
             if (_udpSocket.receive(packet, sender, port) != sf::Socket::Status::Done) {
-                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
+//                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
             cmn::packetData data;
             packet >> data;
             _sharedData->addUdpReceivedPacket(data);
-            std::cout << "[RECEIVED]: UDP Packet received" << "\n";
+//            std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
     }
 

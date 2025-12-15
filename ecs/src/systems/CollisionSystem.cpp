@@ -22,8 +22,8 @@ namespace ecs {
             auto pos = entity->getComponent<Position>();
             auto X = pos->getX();
             auto Y = pos->getY();
-            auto height = collision->getHeight() * entity->getComponent<Sprite>()->getScale().x;
-            auto length = collision->getWidth() * entity->getComponent<Sprite>()->getScale().y;
+            auto height = collision->getHeight();
+            auto length = collision->getWidth();
 
             for (auto otherEntity: ecs.getEntities()) {
                 if (!otherEntity->getComponent<Collision>() || !otherEntity->getComponent<Position>()) continue;
@@ -40,9 +40,9 @@ namespace ecs {
                 if (collision->getTypeCollision() == ecs::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ecs::TypeCollision::PLAYER_PROJECTILE) continue;
                 if (collision->getTypeCollision() == ecs::TypeCollision::ENEMY && otherCollision->getTypeCollision() == ecs::TypeCollision::PLAYER) continue;
 
-                if (X < (posOtherEntity->getX() + (otherCollision->getWidth() * otherEntity->getComponent<Sprite>()->getScale().x)) &&
+                if (X < (posOtherEntity->getX() + (otherCollision->getWidth())) &&
                     (X + length) > posOtherEntity->getX() &&
-                    Y < (posOtherEntity->getY() + (otherCollision->getHeight() * otherEntity->getComponent<Sprite>()->getScale().x)) &&
+                    Y < (posOtherEntity->getY() + (otherCollision->getHeight())) &&
                     (Y + height) > posOtherEntity->getY()
                 ) {
                     otherCollision->setIsTrigger(true);

@@ -59,8 +59,8 @@ namespace client {
         constexpr sf::Vector2f veloSecondBackground(20.0F, 0.5F);
         constexpr int sizeFistBackground = 1920;
         constexpr int sizeSecondBackground = 3840;
-        const auto pathFistBackground = std::string("./assets/bg-stars2.png");
-        const auto pathSecondBackground = std::string("./assets/v.png");
+        const auto pathFistBackground = std::string("./assets/bg-stars.png");
+        const auto pathSecondBackground = std::string("./assets/planets_background.png");
         constexpr uint8_t firstId = 0;
         constexpr uint8_t secondId = 1;
         constexpr uint8_t thirdId = 2;
@@ -119,6 +119,8 @@ namespace client {
         for (const auto& [key, check] : bindings) {
             if (check(*inputComp)) {
                 _sharedData->addUdpPacketToSend(cmn::PacketFactory::createInputPacket(_playerId, key, cmn::KeyState::Pressed));
+            } else {
+                _sharedData->addUdpPacketToSend(cmn::PacketFactory::createInputPacket(_playerId, cmn::Keys::None, cmn::KeyState::Pressed));
             }
         }
     }
