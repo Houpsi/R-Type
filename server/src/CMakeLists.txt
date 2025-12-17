@@ -34,6 +34,16 @@ add_executable(r-type_server
         level/Level.hpp
         level_manager/LevelManager.cpp
         level_manager/LevelManager.hpp
+        factory/EntityProduct.cpp
+        factory/EntityProduct.hpp
+        factory/Player.cpp
+        factory/Player.hpp
+        factory/EntityFactory.cpp
+        factory/EntityFactory.hpp
+        factory/PlayerFactory.cpp
+        factory/PlayerFactory.hpp
+        factory/EnemyProduct.cpp
+        factory/EnemyProduct.hpp
 )
 
 target_link_libraries(r-type_server PRIVATE r-type_server_lib r-type_ecs_lib r-type_common_lib)
