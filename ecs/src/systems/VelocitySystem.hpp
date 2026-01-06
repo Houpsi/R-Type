@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_CLIENT_VELOCITYSYSTEM_HPP
     #define R_TYPE_CLIENT_VELOCITYSYSTEM_HPP
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "System.hpp"
 #include "components/Velocity.hpp"
 #include "components/Position.hpp"

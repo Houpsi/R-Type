@@ -14,6 +14,7 @@
 
 namespace cmn {
 
+    // Protocol
     constexpr uint16_t connectionProtocolId = 0;
     constexpr uint16_t inputProtocolId = 1;
     constexpr uint16_t positionProtocolId = 2;
@@ -21,6 +22,11 @@ namespace cmn {
     constexpr uint16_t deleteEntityProtocolId = 4;
     constexpr uint16_t startGameProtocolId = 5;
 
+    // Ecs
+    constexpr uint64_t MAX_ENTITIES = 5000;
+    constexpr uint16_t NB_COMPONENTS = 14;
+
+    // Game
     constexpr float playerHealth = 100;
     constexpr sf::Vector2f playerSpriteScale = {2.0F, 2.0F};
     constexpr std::string_view playerSpriteSheet = "./assets/r-typesheet42.gif";

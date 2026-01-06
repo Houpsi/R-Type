@@ -8,7 +8,7 @@
 #include "SpriteAnimationSystem.hpp"
 
 #include "components/Animation.hpp"
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Sprite.hpp"
 

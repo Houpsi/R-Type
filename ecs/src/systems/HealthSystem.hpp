@@ -8,7 +8,7 @@
 #ifndef R_TYPE_CLIENT_HEALTH_HPP
 	#define R_TYPE_CLIENT_HEALTH_HPP
 #include "System.hpp"
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "components/Health.hpp"
 #include "components/Destroy.hpp"
 

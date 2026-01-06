@@ -8,7 +8,7 @@
 #ifndef R_TYPE_GAME_HPP
 #define R_TYPE_GAME_HPP
 
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "SFML/Graphics/Font.hpp"
 #include "SFML/Graphics/Text.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"

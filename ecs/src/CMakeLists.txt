@@ -21,12 +21,10 @@ add_library(r-type_ecs_lib
         components/Position.hpp
         components/Component.cpp
         components/Component.hpp
-        Entity.cpp
-        Entity.hpp
-        EcsManager.cpp
-        EcsManager.hpp
-        ResourceManager.cpp
-        ResourceManager.hpp
+        managers/EcsManager.cpp
+        managers/EcsManager.hpp
+        managers/ResourceManager.cpp
+        managers/ResourceManager.hpp
         components/Sprite.cpp
         components/Sprite.hpp
         components/Sprite.hpp
@@ -58,6 +56,12 @@ add_library(r-type_ecs_lib
         components/Background.cpp
         systems/BackgroundSystem.hpp
         systems/BackgroundSystem.cpp
+        managers/EntityManager.cpp
+        managers/EntityManager.hpp
+        managers/ComponentManager.cpp
+        managers/ComponentManager.hpp
+        managers/SystemManager.cpp
+        managers/SystemManager.hpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC

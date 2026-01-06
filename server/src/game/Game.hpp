@@ -8,9 +8,9 @@
 #ifndef R_TYPE_GAME_HPP
 #define R_TYPE_GAME_HPP
 
-#include "EcsManager.hpp"
 #include "SFML/System/Clock.hpp"
 #include "level_manager/LevelManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "shared_data/SharedData.hpp"
 #include <random>
 

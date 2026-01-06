@@ -7,7 +7,7 @@
 
 #include "BackgroundSystem.hpp"
 #include "components/Position.hpp"
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "components/Background.hpp"
 
 namespace ecs {

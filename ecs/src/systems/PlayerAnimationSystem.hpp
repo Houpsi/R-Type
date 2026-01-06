@@ -9,7 +9,7 @@
 #define R_TYPE_CLIENT_PLAYERANIMATIONSYSTEM_HPP
 #include "System.hpp"
 #include "components/Animation.hpp"
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Sprite.hpp"
 

@@ -9,11 +9,9 @@
     #define BOOTSTRAP_SYSTEM_HPP
 #include <memory>
 #include <vector>
+#include "managers/EcsManager.hpp"
 
 namespace ecs {
-
-class Entity;
-class EcsManager;
 
 class System {
   public:

@@ -8,7 +8,7 @@
 #ifndef R_TYPE_DATATRANSLATOR_HPP
 #define R_TYPE_DATATRANSLATOR_HPP
 
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "packet_data/PacketData.hpp"
 
 namespace cmn {

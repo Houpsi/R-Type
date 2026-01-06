@@ -8,7 +8,7 @@
 #ifndef BOOTSTRAP_RENDERSYSTEM_HPP
     #define BOOTSTRAP_RENDERSYSTEM_HPP
 #include "System.hpp"
-#include "../EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
 #include "components/Sprite.hpp"

@@ -9,7 +9,7 @@
 #ifndef MOVEMENTSYSTEM_HPP
     #define MOVEMENTSYSTEM_HPP
 #include "System.hpp"
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "components/Position.hpp"
 #include "components/Enemy.hpp"
 #include "components/InputPlayer.hpp"

@@ -7,7 +7,7 @@
 
 #include <gtest/gtest.h>
 
-#include "EcsManager.hpp"
+#include "managers/EcsManager.hpp"
 #include "systems/System.hpp"
 
 namespace ecs {
