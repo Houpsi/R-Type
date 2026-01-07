@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_ENEMY_HPP
     #define R_TYPE_ENEMY_HPP
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 
 namespace ecs {
 class Enemy : public Component

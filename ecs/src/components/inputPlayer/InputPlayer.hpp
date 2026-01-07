@@ -7,7 +7,7 @@
 
 #ifndef INPUTPLAYER_HPP
     #define INPUTPLAYER_HPP
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 #include <cstddef>
 
 namespace ecs {

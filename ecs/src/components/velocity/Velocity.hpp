@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_CLIENT_VELOCITY_HPP
     #define R_TYPE_CLIENT_VELOCITY_HPP
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 
 namespace ecs {
 /**

@@ -7,7 +7,7 @@
 
 #ifndef BOOTSTRAP_POSITION_HPP
     #define BOOTSTRAP_POSITION_HPP
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 
 namespace ecs {
 class Position : public Component

@@ -7,8 +7,7 @@
 
 #ifndef R_TYPE_PLAYERANIMATION_HPP
 #define R_TYPE_PLAYERANIMATION_HPP
-#include "../component/Component.hpp"
-
+#include "components/component/Component.hpp"
 #include <cstddef>
 
 namespace ecs {

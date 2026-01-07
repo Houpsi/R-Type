@@ -7,7 +7,7 @@
 
 #ifndef BOOTSTRAP_COLLIDER_HPP
     #define BOOTSTRAP_COLLIDER_HPP
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 #include "components/health/Health.hpp"
 #include "components/shoot/Shoot.hpp"
 #include <SFML/Graphics/Sprite.hpp>

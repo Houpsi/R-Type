@@ -7,7 +7,7 @@
 
 #ifndef BOOTSTRAP_SOUND_HPP
     #define BOOTSTRAP_SOUND_HPP
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 #include <SFML/Audio.hpp>
 #include <iostream>
 

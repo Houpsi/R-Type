@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_SPRITE_HPP
     #define R_TYPE_SPRITE_HPP
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 

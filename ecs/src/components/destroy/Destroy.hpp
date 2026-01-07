@@ -8,7 +8,7 @@
 #ifndef R_TYPE_CLIENT_DESTROY_HPP
 #define R_TYPE_CLIENT_DESTROY_HPP
 
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 
 namespace ecs {
 class Destroy : public Component

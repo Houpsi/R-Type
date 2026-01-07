@@ -7,7 +7,7 @@
 
 #ifndef BOOTSTRAP_HEALTH_HPP
 #define BOOTSTRAP_HEALTH_HPP
-#include "../component/Component.hpp"
+#include "components/component/Component.hpp"
 
 namespace ecs {
     class Health : public Component {
