@@ -8,7 +8,7 @@
 
 #ifndef R_TYPE_CLIENT_ANIMATION_HPP
 #define R_TYPE_CLIENT_ANIMATION_HPP
-#include "../Component.hpp"
+#include "../component/Component.hpp"
 #include <SFML/Graphics.hpp>
 
 namespace ecs {

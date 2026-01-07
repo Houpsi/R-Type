@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_BACKGROUND_HPP
 #define R_TYPE_BACKGROUND_HPP
-#include "../Component.hpp"
+#include "../component/Component.hpp"
 
 namespace ecs {
     /**
