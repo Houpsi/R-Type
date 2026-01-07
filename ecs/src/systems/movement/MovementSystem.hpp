@@ -8,7 +8,7 @@
 
 #ifndef MOVEMENTSYSTEM_HPP
     #define MOVEMENTSYSTEM_HPP
-#include "systems/system/System.hpp"
+#include "systems/system/ASystem.hpp"
 #include "managers/EcsManager.hpp"
 #include "components/position/Position.hpp"
 #include "components/enemy/Enemy.hpp"
@@ -17,12 +17,13 @@
 #include "components/destroy/Destroy.hpp"
 
 namespace ecs {
-class MovementSystem : public System
+class MovementSystem : public ASystem
 {
   public:
     explicit MovementSystem(): _movementSpeed(10) {};
     ~MovementSystem() override = default;
     void update(EcsManager &ecs) override;
+
   private:
     float _movementSpeed;
 };

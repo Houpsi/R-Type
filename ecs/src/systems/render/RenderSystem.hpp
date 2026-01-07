@@ -7,7 +7,7 @@
 
 #ifndef BOOTSTRAP_RENDERSYSTEM_HPP
     #define BOOTSTRAP_RENDERSYSTEM_HPP
-#include "systems/system/System.hpp"
+#include "systems/system/ASystem.hpp"
 #include "managers/EcsManager.hpp"
 #include "components/inputPlayer/InputPlayer.hpp"
 #include "components/position/Position.hpp"
@@ -15,7 +15,7 @@
 #include "SFML/Graphics.hpp"
 
 namespace ecs {
-class RenderSystem : public System
+class RenderSystem : public ASystem
 {
   public:
     explicit RenderSystem(sf::RenderWindow &window) : _window(window) {};

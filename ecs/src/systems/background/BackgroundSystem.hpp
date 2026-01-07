@@ -8,7 +8,7 @@
 
 #ifndef R_TYPE_BACKGROUNDSYSTEM_HPP
 #define R_TYPE_BACKGROUNDSYSTEM_HPP
-#include "systems/system/System.hpp"
+#include "systems/system/ASystem.hpp"
 
 namespace ecs {
     /**
@@ -16,7 +16,7 @@ namespace ecs {
      * @brief System responsible for the infinite scrolling logic of the background.
      *
      */
-    class BackgroundSystem : public System
+    class BackgroundSystem : public ASystem
     {
         public:
             BackgroundSystem() = default;

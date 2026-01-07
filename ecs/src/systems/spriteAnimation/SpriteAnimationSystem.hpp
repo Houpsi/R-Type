@@ -8,14 +8,14 @@
 
 #ifndef R_TYPE_CLIENT_SPRITEANIMATIONSYSTEM_HPP
 #define R_TYPE_CLIENT_SPRITEANIMATIONSYSTEM_HPP
-#include "systems/system/System.hpp"
+#include "systems/system/ASystem.hpp"
 
 namespace ecs {
 
-class SpriteAnimationSystem : public System
+class SpriteAnimationSystem : public ASystem
 {
     public:
-        SpriteAnimationSystem() = default;
+        explicit SpriteAnimationSystem() {};
         ~SpriteAnimationSystem() override = default;
         void update(EcsManager &ecs) override;
 };
