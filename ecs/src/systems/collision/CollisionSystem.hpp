@@ -7,7 +7,7 @@
 
 #ifndef BOOTSTRAP_COLLISIONSYSTEM_HPP
     #define BOOTSTRAP_COLLISIONSYSTEM_HPP
-#include "../../components/collision/Collision.hpp"
+#include "components/collision/Collision.hpp"
 #include "components/position/Position.hpp"
 #include "components/sprite/Sprite.hpp"
 #include "managers/EcsManager.hpp"

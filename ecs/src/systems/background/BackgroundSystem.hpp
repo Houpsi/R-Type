@@ -8,7 +8,7 @@
 
 #ifndef R_TYPE_BACKGROUNDSYSTEM_HPP
 #define R_TYPE_BACKGROUNDSYSTEM_HPP
-#include "../system/System.hpp"
+#include "systems/system/System.hpp"
 
 namespace ecs {
     /**

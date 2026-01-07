@@ -9,7 +9,7 @@
 #ifndef INPUTSYSTEM_HPP
     #define INPUTSYSTEM_HPP
 #include <SFML/Window/Keyboard.hpp>
-#include "../system/System.hpp"
+#include "systems/system/System.hpp"
 #include "managers/EcsManager.hpp"
 #include "components/inputPlayer/InputPlayer.hpp"
 

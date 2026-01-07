@@ -8,7 +8,7 @@
 
 #ifndef R_TYPE_CLIENT_SPRITEANIMATIONSYSTEM_HPP
 #define R_TYPE_CLIENT_SPRITEANIMATIONSYSTEM_HPP
-#include "../system/System.hpp"
+#include "systems/system/System.hpp"
 
 namespace ecs {
 

@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_CLIENT_PLAYERANIMATIONSYSTEM_HPP
 #define R_TYPE_CLIENT_PLAYERANIMATIONSYSTEM_HPP
-#include "../system/System.hpp"
+#include "systems/system/System.hpp"
 #include "components/animation/Animation.hpp"
 #include "managers/EcsManager.hpp"
 #include "components/inputPlayer/InputPlayer.hpp"

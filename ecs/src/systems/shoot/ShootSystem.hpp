@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_CLIENT_SHOOTSYSTEM_HPP
     #define R_TYPE_CLIENT_SHOOTSYSTEM_HPP
-#include "../system/System.hpp"
+#include "systems/system/System.hpp"
 #include "components/shoot/Shoot.hpp"
 #include "components/inputPlayer/InputPlayer.hpp"
 #include "managers/EcsManager.hpp"
