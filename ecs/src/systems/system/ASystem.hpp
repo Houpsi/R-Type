@@ -21,7 +21,7 @@ namespace ecs
 		void pushEntity(ecs::Entity) override;
 
 	protected:
-		std::vector<ecs::Entity> entity;
+		std::vector<ecs::Entity> _entity;
 	};
 }
 

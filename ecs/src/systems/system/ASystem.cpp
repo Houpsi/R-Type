@@ -10,6 +10,6 @@ namespace ecs
 {
 	void ASystem::pushEntity(ecs::Entity newEntity)
 	{
-		entity.push_back(newEntity);
+		_entity.push_back(newEntity);
 	}
 }
