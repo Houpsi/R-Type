@@ -7,7 +7,7 @@
 
 #include "Game.hpp"
 #include "Constants.hpp"
-#include "../../../ecs/src/components/collision/Collision.hpp"
+#include "components/collision/Collision.hpp"
 #include "components/health/Health.hpp"
 #include "components/inputPlayer/InputPlayer.hpp"
 #include "components/position//Position.hpp"

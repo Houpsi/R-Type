@@ -8,7 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "managers/EcsManager.hpp"
-#include "../src/systems/system/System.hpp"
+#include "systems/system/System.hpp"
 
 namespace ecs {
     class DummySystem : public System
