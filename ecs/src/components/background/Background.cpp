@@ -6,7 +6,7 @@
 */
 
 
-#include "../Background.hpp"
+#include "Background.hpp"
 
 namespace ecs {
     bool Background::getIsLooping() const 
