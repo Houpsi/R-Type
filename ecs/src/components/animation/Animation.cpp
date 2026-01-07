@@ -5,7 +5,7 @@
 ** Animation
 */
 
-#include "../Animation.hpp"
+#include "Animation.hpp"
 
 
 namespace ecs {
