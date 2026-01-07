@@ -61,6 +61,7 @@ add_library(r-type_ecs_lib
         managers/ComponentManager.hpp
         managers/SystemManager.cpp
         managers/SystemManager.hpp
+        managers/IObserver.hpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC
