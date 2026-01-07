@@ -7,7 +7,7 @@
 
 #include "DataTranslator.hpp"
 #include "Constants.hpp"
-#include "../../../ecs/src/components/animation/Animation.hpp"
+#include "components/animation/Animation.hpp"
 #include "components/inputPlayer/InputPlayer.hpp"
 #include "components/playerAnimation/PlayerAnimation.hpp"
 #include "components/position/Position.hpp"
