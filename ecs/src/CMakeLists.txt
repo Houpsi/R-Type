@@ -1,6 +1,6 @@
 add_library(r-type_ecs_lib
-        systems/system/System.cpp
-        systems/system/System.hpp
+        systems/system/ISystem.hpp
+        systems/system/ASystem.hpp
         systems/render/RenderSystem.cpp
         systems/render/RenderSystem.hpp
         systems/movement/MovementSystem.cpp
