@@ -14,13 +14,13 @@
 #include "components/shoot/Shoot.hpp"
 #include "data_translator/DataTranslator.hpp"
 #include "packet_factory/PacketFactory.hpp"
-#include "../../../ecs/src/systems/collision/CollisionSystem.hpp"
-#include "../../../ecs/src/systems/destroy/DestroySystem.hpp"
-#include "../../../ecs/src/systems/health/HealthSystem.hpp"
-#include "../../../ecs/src/systems/input/InputSystem.hpp"
-#include "../../../ecs/src/systems/movement/MovementSystem.hpp"
-#include "../../../ecs/src/systems/shoot/ShootSystem.hpp"
-#include "../../../ecs/src/systems/velocity/VelocitySystem.hpp"
+#include "systems/collision/CollisionSystem.hpp"
+#include "systems/destroy/DestroySystem.hpp"
+#include "systems/health/HealthSystem.hpp"
+#include "systems/input/InputSystem.hpp"
+#include "systems/movement/MovementSystem.hpp"
+#include "systems/shoot/ShootSystem.hpp"
+#include "systems/velocity/VelocitySystem.hpp"
 #include <algorithm>
 #include <random>
 
