@@ -8,7 +8,7 @@
 #include "BackgroundSystem.hpp"
 #include "components/position/Position.hpp"
 #include "managers/EcsManager.hpp"
-#include "../../components/background/Background.hpp"
+#include "components/background/Background.hpp"
 
 namespace ecs {
     void BackgroundSystem::update(EcsManager &ecs)
