@@ -19,16 +19,10 @@ namespace server {
     class Level
     {
       public:
-        Level(
-            uint8_t levelId,
-            uint8_t enemySpawnRate,
-            bool isBossPresent,
-            uint32_t bossApparitionTime
-        );
         Level() = default;
         [[nodiscard]] uint8_t getEnemySpawnRate() const;
         [[nodiscard]] bool getIsBossPresent() const;
-        [[nodiscard]] uint32_t getBossApparitionTime() const;
+        void serIsBossPresent(bool isPresent);
         [[nodiscard]] uint8_t getLevelId() const;
         void setLevelId(uint8_t levelId);
         void setNameLevel(const std::string& _nameLevel);
@@ -43,8 +37,7 @@ namespace server {
       private:
         uint8_t _levelId;
         uint8_t _enemySpawnRate;
-        bool _isBossPresent;
-        uint32_t _bossApparitionTime;
+        bool _isBossPresent = false;
         std::string _nameLevel;
         uint32_t _playerSpeed = cmn::playerSpeed;
         uint8_t _numberWaves;

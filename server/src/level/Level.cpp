@@ -6,22 +6,10 @@
 */
 
 #include "Level.hpp"
-
 #include <iostream>
-#include <ostream>
 #include <utility>
 
 namespace server {
-
-    Level::Level(
-        uint8_t levelId,
-        uint8_t enemySpawnRate,
-        bool isBossPresent,
-        uint32_t bossApparitionTime
-    ) : _levelId(levelId),
-        _enemySpawnRate(enemySpawnRate),
-        _isBossPresent(isBossPresent),
-        _bossApparitionTime(bossApparitionTime) {}
 
     uint8_t Level::getEnemySpawnRate() const
     {
@@ -33,9 +21,9 @@ namespace server {
         return _isBossPresent;
     }
 
-    uint32_t Level::getBossApparitionTime() const
+    void Level::serIsBossPresent(bool isPresent)
     {
-        return _bossApparitionTime;
+        _isBossPresent = isPresent;
     }
 
     uint8_t Level::getLevelId() const
