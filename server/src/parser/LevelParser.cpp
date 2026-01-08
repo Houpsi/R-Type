@@ -7,7 +7,6 @@
 
 
 #include "LevelParser.hpp"
-
 #include <cstdint>
 #include <iostream>
 
@@ -37,7 +36,7 @@ namespace server {
 
     void LevelParser::_checkIdAExists(const int id)
     {
-        if (_idAlreadyExists.find(id) != _idAlreadyExists.end()) {
+        if (_idAlreadyExists.contains(id)) {
             throw std::out_of_range("Id already exists");
         }
         _idAlreadyExists.insert(id);
@@ -49,19 +48,20 @@ namespace server {
         const std::string name= root.lookup("name");
         const int scrollSpeed = root.lookup("scroll_speed");
 
-        if (id < 0 || id > 255)
+        if (id < 0 || id > 255) {
             throw std::out_of_range("Level ID out of range");
+        }
         _checkIdAExists(id);
         newLevel.setLevelId(static_cast<uint8_t>(id));
         newLevel.setNameLevel(name);
-        if (scrollSpeed <= 0)
+        if (scrollSpeed <= 0) {
             throw std::out_of_range("Scroll Speed out of range");
+        }
         newLevel.setPlayerSpeed(static_cast<uint16_t>(scrollSpeed));
     }
 
     void LevelParser::_parseWaves(const libconfig::Setting &root, Level &newLevel)
     {
-
         const libconfig::Setting& wavesSetting = root["waves"];
         const int repeatWaves = root.lookup("waves_repeat");
         const int numDifferentWaves = wavesSetting.getLength();
@@ -84,15 +84,17 @@ namespace server {
                 const libconfig::Setting& enemySetting = enemiesSetting[j];
                 const std::string type = enemySetting.lookup("type");
                 const int countEnemy = enemySetting.lookup("count");
-                if (countEnemy <= 0)
+                if (countEnemy <= 0) {
                     throw std::out_of_range("Number of Enemy out of range");
+                }
                 newEnemy.count = static_cast<uint8_t>(countEnemy);
                 _isValidEnemyType(type);
                 newEnemy.type = type;
                 enemies.push_back(newEnemy);
             }
-            if (timeOfWave <= 0)
+            if (timeOfWave <= 0) {
                 throw std::out_of_range("Time of wave out of range");
+            }
             newLevel.addWave(timeOfWave, enemies);
         }
     }
@@ -119,15 +121,18 @@ namespace server {
 
     void LevelParser::_parseBoss(const libconfig::Setting& root, Level &newLevel)
     {
+        if (!root.exists("boss")) {
+            newLevel.serIsBossPresent(false);
+            return;
+        }
+
         int const hp = root.lookup("boss.hp");
         std::string const type= root.lookup("boss.type");
-
         _isValidBossType(type);
+        newLevel.serIsBossPresent(true);
 
         if (hp <= 0)
             throw std::out_of_range("Health of boss out of range");
         newLevel.setBoss(type, static_cast<uint32_t>(hp));
     }
-
-
 }// namespace server
