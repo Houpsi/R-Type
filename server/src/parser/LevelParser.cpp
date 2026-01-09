@@ -37,7 +37,7 @@ namespace server {
         return false;
     }
 
-    void LevelParser::_checkIdAExists(const int id)
+    void LevelParser::_checkIdExists(const int id)
     {
         if (_idAlreadyExists.contains(id)) {
             throw LevelParserException("Id already exists");
@@ -47,14 +47,14 @@ namespace server {
 
     void LevelParser::_parsePrerequisites(const libconfig::Setting &root, Level &newLevel)
     {
-        const int id= root.lookup("id");
-        const std::string name= root.lookup("name");
+        const int id = root.lookup("id");
+        const std::string name = root.lookup("name");
         const int scrollSpeed = root.lookup("scroll_speed");
 
         if (id < 0 || id > 255) {
             throw LevelParserException("Level ID out of range");
         }
-        _checkIdAExists(id);
+        _checkIdExists(id);
         newLevel.setLevelId(static_cast<uint8_t>(id));
         newLevel.setNameLevel(name);
         if (scrollSpeed <= 0) {
@@ -125,14 +125,14 @@ namespace server {
     void LevelParser::_parseBoss(const libconfig::Setting& root, Level &newLevel)
     {
         if (!root.exists("boss")) {
-            newLevel.serIsBossPresent(false);
+            newLevel.setIsBossPresent(false);
             return;
         }
 
         int const hp = root.lookup("boss.hp");
-        std::string const type= root.lookup("boss.type");
+        std::string const type = root.lookup("boss.type");
         _isValidBossType(type);
-        newLevel.serIsBossPresent(true);
+        newLevel.setIsBossPresent(true);
 
         if (hp <= 0)
             throw LevelParserException("Health of boss out of range");

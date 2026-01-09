@@ -35,7 +35,7 @@ namespace server {
             void _parsePrerequisites(const libconfig::Setting& root, Level &newLevel);
             void _parseWaves(const libconfig::Setting& root, Level &newLevel);
             void _parseBoss(const libconfig::Setting& root, Level &newLevel);
-            void _checkIdAExists(const int id);
+            void _checkIdExists(const int id);
             void _isValidEnemyType(const std::string& type);
             void _isValidBossType(const std::string& type);
             std::unordered_set<int> _idAlreadyExists;
