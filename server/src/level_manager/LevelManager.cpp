@@ -22,7 +22,10 @@ namespace server {
 
         for (const auto& entry : std::filesystem::directory_iterator(cmn::folderLevels)) {
             if (std::filesystem::is_regular_file(entry.path())) {
-                const Level level = parser.createLevel(cmn::folderLevels + '/' + entry.path().filename().string());
+                Level level;
+                if (!parser.createLevel(cmn::folderLevels + '/' + entry.path().filename().string(), level)) {
+                    continue;
+                }
                 _levels.push_back(level);
             }
         }
@@ -45,19 +48,21 @@ namespace server {
 
     void LevelManager::changeToNextLevel()
     {
-        if (_currentLevelId == _levels.end()->getLevelId()) {
+        bool found = false;
+        uint8_t nextId = 0;
+
+        for (const auto &level : _levels) {
+            uint8_t id = level.getLevelId();
+            if (id > _currentLevelId) {
+                if (!found || id < nextId) {
+                    nextId = id;
+                    found = true;
+                }
+            }
+        }
+        if (!found) {
             throw std::exception();
         }
-
-        uint8_t previousLevelId = 0;
-
-        for (auto &level : _levels) {
-            if (previousLevelId == _currentLevelId) {
-                _currentLevelId = level.getLevelId();
-                return;
-            }
-            previousLevelId = level.getLevelId();
-        }
+        _currentLevelId = nextId;
     }
-
 }// namespace server

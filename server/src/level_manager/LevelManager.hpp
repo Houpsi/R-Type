@@ -23,7 +23,7 @@ namespace server {
 
       private:
         std::list<Level> _levels;
-        uint8_t _currentLevelId;
+        uint8_t _currentLevelId = 0;
     };
 
 }// namespace server
