@@ -17,7 +17,7 @@ namespace server {
     {
         public:
             LevelParser() = default;
-            Level createLevel(const std::string &fileConfigLevel);
+            bool createLevel(const std::string &fileConfigLevel, Level &baseLevel);
         private:
             void _parsePrerequisites(const libconfig::Setting& root, Level &newLevel);
             void _parseWaves(const libconfig::Setting& root, Level &newLevel);

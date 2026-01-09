@@ -11,9 +11,9 @@
 #include <iostream>
 
 namespace server {
-    Level LevelParser::createLevel(const std::string &fileConfigLevel)
+    bool LevelParser::createLevel(const std::string &fileConfigLevel, Level &baseLevel)
     {
-        Level newLevel{};
+        Level newLevel;
         libconfig::Config config;
 
         try {
@@ -22,16 +22,19 @@ namespace server {
             _parsePrerequisites(root, newLevel);
             _parseWaves(root, newLevel);
             _parseBoss(root, newLevel);
-
+            baseLevel = newLevel;
+            return true;
         } catch(const libconfig::ParseException &pex) {
             std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine() << " - " << pex.getError() << std::endl;
+            return false;
         } catch(const libconfig::FileIOException &fioex) {
             std::cerr << "I/O error while reading file." << std::endl;
+            return false;
         } catch(const std::exception &e) {
             std::cerr << e.what() << std::endl;
-            //TODO : make something
+            return false;
         }
-        return newLevel;
+        return false;
     }
 
     void LevelParser::_checkIdAExists(const int id)
