@@ -2,6 +2,7 @@ add_executable(rtype_server_tests
         TestParser.cpp
         TestServer.cpp
         TestLevelManager.cpp
+        TestLevelParser.cpp
 )
 
 target_link_libraries(rtype_server_tests

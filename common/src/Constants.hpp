@@ -9,8 +9,10 @@
 #define R_TYPE_CONSTANTS_HPP
 
 #include "SFML/System/Vector2.hpp"
-#include <string>
+
+#include <array>
 #include <cstdint>
+#include <string>
 
 namespace cmn {
 
@@ -42,6 +44,7 @@ namespace cmn {
     constexpr uint16_t monsterMaxSpawnPositionHeight = 1081;
 
     constexpr uint16_t playerProjectileSpeed = 400;
+    constexpr uint16_t playerSpeed = 100;
     constexpr int8_t playerProjectileDirection = 1;
     constexpr sf::Vector2f playerProjectileScale = {1.0F, 1.0F};
     constexpr std::string_view playerProjectileSpriteSheet = "./assets/r-typesheet30a.gif";
@@ -54,6 +57,9 @@ namespace cmn {
     constexpr uint16_t windowWidth = 1920;
     constexpr uint16_t windowHeight = 1080;
 
+    constexpr std::string_view folderLevels = "Levels";
+    constexpr std::array<std::string_view, 2> nameTypeEnemies = {"basic_enemy", "fast_enemy"};
+    constexpr std::array<std::string_view, 2> nameTypeBoss = {"boss_type_1", "boss_type_2"};
 }
 
 #endif// R_TYPE_CONSTANTS_HPP

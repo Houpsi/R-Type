@@ -4,6 +4,7 @@
 
 ## Guide
 * [User guide](USER_GUIDE.md)
+* [Levels](LEVELS.md)
 
 ## Technical documentation
 * [Comparative study](COMPARATIVE_STUDY.md)
