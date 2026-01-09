@@ -23,6 +23,6 @@ FormatStyle:     none
 
 CheckOptions:
   - key: readability-identifier-length.IgnoredVariableNames
-    value: 'x|y|z|ip|up'
+    value: 'x|y|z|ip|up|id|dt|it'
   - key: readability-identifier-length.IgnoredParameterNames
-    value: 'x|y|z|ip|up'
+    value: 'x|y|z|ip|up|id|dt|it'

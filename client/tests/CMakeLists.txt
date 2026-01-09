@@ -1,9 +1,12 @@
 add_executable(rtype_client_tests
+        TestClient.cpp
 )
 
 target_link_libraries(rtype_client_tests
         PRIVATE
         r-type_ecs_lib
+        r-type_common_lib
+        r-type_client_lib
         gtest
         gtest_main
 )

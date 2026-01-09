@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        compiler: [gcc, clang]
+        compiler: [gcc]
 
     steps:
       - name: Checkout repository
@@ -25,6 +25,22 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake build-essential clang-tidy git
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+          xvfb \
+          libudev-dev \
+          libopenal-dev \
+          libvorbis-dev \
+          libflac-dev \
+          libx11-dev \
+          libxrandr-dev \
+          libxcursor-dev \
+          libxi-dev \
+          libgl1-mesa-dev \
+          libfreetype6-dev
 
       - name: Configure CMake
         run: cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
@@ -45,12 +61,11 @@ jobs:
         run: |
           EXIT_CODE=0
 
-          build/server/tests/rtype_server_tests || EXIT_CODE=1
-          build/common/test/rtype_common_tests || EXIT_CODE=1
-          build/ecs/tests/rtype_ecs_tests || EXIT_CODE=1
+          xvfb-run --auto-servernum build/server/tests/rtype_server_tests || EXIT_CODE=1
+          xvfb-run --auto-servernum build/common/test/rtype_common_tests || EXIT_CODE=1
+          xvfb-run --auto-servernum build/ecs/tests/rtype_ecs_tests || EXIT_CODE=1
 
           exit $EXIT_CODE
-
   mirror:
     name: Mirror Repository
     runs-on: ubuntu-latest

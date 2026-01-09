@@ -18,10 +18,12 @@ namespace cmn {
     class PacketFactory
     {
       public:
-        static CustomPacket createInputPacket(Keys key, KeyState state, uint64_t entityId);
+        static CustomPacket createConnectionPacket(uint32_t playerId);
+        static CustomPacket createInputPacket(uint32_t playerId, Keys key, KeyState state);
         static CustomPacket createPositionPacket(std::pair<float, float> positions, uint64_t entityId);
         static CustomPacket createNewEntityPacket(EntityType type, std::pair<float, float> positions, uint64_t entityId);
         static CustomPacket createDeleteEntityPacket(uint64_t entityId);
+        static CustomPacket createStartGamePacket();
 
       private:
 

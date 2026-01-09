@@ -43,8 +43,11 @@ namespace cmn {
         }
     }};
 
-    void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputPacket &input, int entityId)
+    void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputPacket &input, std::unordered_map<int, uint64_t> playerIdEntityMap)
     {
+        uint32_t playerId = input.playerId;
+        uint64_t const entityId = playerIdEntityMap[static_cast<int>(playerId)];
+
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
             if (entity->getId() == entityId) {
                 auto component = entity->getComponent<ecs::InputPlayer>();
@@ -57,10 +60,10 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionPacket &position, int entityId)
+    void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionPacket &position)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
-            if (entity->getId() == entityId) {
+            if (entity->getId() == position.entityId) {
                 auto component = entity->getComponent<ecs::Position>();
                 component->setX(position.posX);
                 component->setY(position.posY);
@@ -69,58 +72,54 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity, int entityId)
+    void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity)
     {
-        auto entity = ecs.createEntity(entityId);
+        auto entity = ecs.createEntity(newEntity.entityId);
 
-        if (static_cast<EntityType>(newEntity.type) == EntityType::YourPlayer) {
-            _yourPlayerEntityId = entityId;
-        }
         entity->addComponent<ecs::Position>(newEntity.posX, newEntity.posY);
         if (static_cast<EntityType>(newEntity.type) == EntityType::Player) {
-
-            entity->addComponent<ecs::Sprite>( ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
+            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
             entity->addComponent<ecs::PlayerAnimation>();
             entity->addComponent<ecs::Sound>(std::string(playerShootSound));
+            entity->addComponent<ecs::InputPlayer>();
         }
         if (static_cast<EntityType>(newEntity.type) == EntityType::Monster) {
-            entity->addComponent<ecs::Sprite>( ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
+            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
             entity->addComponent<ecs::Animation>(monsterAnimationSize, monsterAnimationOffset, monsterAnimationNumberFrame);
         }
         if (static_cast<EntityType>(newEntity.type) == EntityType::PlayerProjectile) {
-            entity->addComponent<ecs::Sprite>( ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
+            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
             entity->addComponent<ecs::Animation>(playerProjectileAnimationSize, playerProjectileAnimationOffset, playerProjectileAnimationNumberFrame);
         }
     }
 
-    void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity, int entityId)
+    void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
-            if (entity->getId() == entityId) {
+            if (entity->getId() == deleteEntity.entityId) {
                 entity->addComponent<ecs::Destroy>();
-                std::cout << "[EASTER_EGG]: " << static_cast<unsigned int>(deleteEntity.easterEgg) << "\n";
                 break;
             }
         }
     }
 
-    void DataTranslator::translate(ecs::EcsManager &ecs, packetData &data)
+    void DataTranslator::translate(ecs::EcsManager &ecs, packetData &data, const std::unordered_map<int, uint64_t>& playerIdEntityMap)
     {
-        std::visit([data, this, &ecs](auto &&arg)
+        std::visit([&ecs, playerIdEntityMap](auto &&arg)
             {
                 using T = std::decay_t<decltype(arg)>;
                 if constexpr (std::is_same_v<T, inputPacket>) {
                     inputPacket &input = arg;
-                    _injectInput(ecs, input, data.entityId);
+                    _injectInput(ecs, input, playerIdEntityMap);
                 } else if constexpr (std::is_same_v<T, positionPacket>) {
                     positionPacket &position = arg;
-                    _injectPosition(ecs, position, data.entityId);
+                    _injectPosition(ecs, position);
                 } else if constexpr (std::is_same_v<T, newEntityPacket>) {
                     newEntityPacket &newEntity = arg;
-                    _injectNewEntity(ecs, newEntity, data.entityId);
+                    _injectNewEntity(ecs, newEntity);
                 } else if constexpr (std::is_same_v<T, deleteEntityPacket>) {
                     deleteEntityPacket &deleteEntity = arg;
-                    _deleteEntity(ecs, deleteEntity, data.entityId);
+                    _deleteEntity(ecs, deleteEntity);
                 }
             }, data.content);
     }

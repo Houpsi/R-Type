@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30.8)
+cmake_minimum_required(VERSION 3.28.3)
 
 project(
         R_Type
@@ -20,6 +20,8 @@ CPMAddPackage(
         GIT_TAG 3.0.2
 )
 
+
+
 include(FetchContent)
 FetchContent_Declare(
         googletest
@@ -39,4 +41,11 @@ add_subdirectory(ecs)
 add_subdirectory(common)
 add_subdirectory(client)
 
+set_target_properties(r-type_server PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}"
+)
+
+set_target_properties(r-type_client PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}"
+)
 enable_testing()

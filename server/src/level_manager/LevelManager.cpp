@@ -6,12 +6,30 @@
 */
 
 #include "LevelManager.hpp"
+#include "parser/LevelParser.hpp"
+#include <filesystem>
 
 namespace server {
 
     void LevelManager::addLevel(Level &level)
     {
         _levels.push_back(level);
+    }
+
+    void LevelManager::loadLevelFromFolder()
+    {
+        LevelParser parser;
+        const std::string nameFolder = static_cast<std::string>(cmn::folderLevels);
+
+        for (const auto& entry : std::filesystem::directory_iterator(cmn::folderLevels)) {
+            if (std::filesystem::is_regular_file(entry.path())) {
+                Level level;
+                if (!parser.createLevel(nameFolder + '/' + entry.path().filename().string(), level)) {
+                    continue;
+                }
+                _levels.push_back(level);
+            }
+        }
     }
 
     Level &LevelManager::getCurrentLevel()
@@ -31,19 +49,23 @@ namespace server {
 
     void LevelManager::changeToNextLevel()
     {
-        if (_currentLevelId == _levels.end()->getLevelId()) {
-            throw std::exception();
-        }
+        bool found = false;
+        uint8_t nextId = 0;
+        uint8_t tmpCurrent = _currentLevelId;
 
-        uint8_t previousLevelId = 0;
-
-        for (auto &level : _levels) {
-            if (previousLevelId == _currentLevelId) {
-                _currentLevelId = level.getLevelId();
-                return;
+        for (const auto &level : _levels) {
+            uint8_t id = level.getLevelId();
+            if (id > _currentLevelId) {
+                if (!found || id < nextId) {
+                    nextId = id;
+                    found = true;
+                }
             }
-            previousLevelId = level.getLevelId();
         }
+        if (!found) {
+            _currentLevelId = tmpCurrent;
+            return;
+        }
+        _currentLevelId = nextId;
     }
-
 }// namespace server

@@ -1,10 +1,5 @@
 # R-Type
 
-![R-Type Banner](https://lien-image-jeu)
-<!-- mettre image jeu -->
-
-[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows-blue)]()
-
 ## 🚀 Description
 
 This project is a networked implementation of the legendary horizontal shoot 'em up game **R-Type**. Developed in C++ as part of the Advanced C++ Knowledge Unit at Epitech, this game features a custom engine designed from scratch.
@@ -13,13 +8,22 @@ This version specifically focuses on **Advanced Gameplay** mechanics (Track #3),
 
 ## ✨ Features (Track 3 Highlights)
 
-### Core Engine
-- **Multi-threaded Server:** Authoritative server handling game logic and state.
-- **UDP Networking:** Fast binary protocol for real-time entity updates.
+### ⚙️ Core Engine
+- **Custom ECS:** A robust Entity-Component-System allowing for high modularity and "composition over inheritance."
+- **Decoupled Design:** Strict separation between the core Game Engine (systems, entities) and the Game Logic (R-Type rules).
 - **Cross-Platform:** Runs on Linux and Windows.
 
-### Gameplay & Content
-- **feature:** description
+### 🌐 Networking
+- **Authoritative Server:** The server holds the truth. It handles all logic and replications to prevent cheating.
+- **Binary Protocol:** Custom-designed binary protocol over UDP for low-latency gameplay updates.
+- **Multithreading:** Fully multithreaded server architecture to handle multiple clients without blocking.
+- **Scalability:** Support for up to 4 simultaneous players.
+
+### 🎮 Gameplay & Graphics
+- **Render Backend:** Powered by SFML.
+- **Classic Feel:** Smooth horizontal scrolling with parallax starfields.
+- **Audio System:** Integrated sound effects and music.
+- **Enemies:** Implementation of the classic "Bydos" alien fleet.
 
 ## 🛠️ Installation
 
@@ -33,8 +37,8 @@ This version specifically focuses on **Advanced Gameplay** mechanics (Track #3),
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/username/r-type.git
-    cd r-type
+    git clone https://github.com/EpitechPGE3-2025/G-CPP-500-LIL-5-2-rtype-10.git
+    cd G-CPP-500-LIL-5-2-rtype-10
     ```
 
 2.  Create a build directory and compile:
@@ -60,11 +64,11 @@ Start the server first to accept incoming connections.
 ./r-type_server [port]
 # Example: ./r-type_server 4242
 ```
-### Running the client
+### Running the Client
 Launch the client to join the game
 ```bash
-./r-type_client [port]
-# Example: ./r-type_server 4242
+./r-type_client [port] [server_ip]
+# Example: ./r-type_client 4242 localhost
 ```
 
 ## 🕹️ Controls
@@ -77,9 +81,7 @@ Launch the client to join the game
 
 ## 📚 Documentation
 For more detailed information about the architecture and protocol, please refer to the documentation folder:
-- [Developer Documentation](http://inserer-un-lien)
-- [Network Protocol](http://inserer-un-lien)
-- [Technical & Comparative Study](http://inserer-un-lien)
+- [Gitbook](https://epitech-35.gitbook.io/r-type-save-gougougagaland/)
 
 ## 👥 Authors
 - [Axel Desert](https://github.com/AxelDesert)

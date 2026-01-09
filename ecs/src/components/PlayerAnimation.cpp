@@ -9,6 +9,12 @@
 #include "PlayerAnimation.hpp"
 
 namespace ecs {
+    PlayerAnimation::PlayerAnimation()
+    {
+        static int count = 0;
+        _id = count;
+        count++;
+    }
     std::size_t PlayerAnimation::getId() const
     {
         return _id;

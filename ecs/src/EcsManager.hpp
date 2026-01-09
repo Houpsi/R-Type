@@ -25,6 +25,7 @@ class EcsManager {
     void setDeltaTime(float dt);
     float getDeltaTime() const;
     ResourceManager &getResourceManager();
+    [[nodiscard]] std::shared_ptr<Entity> getEntityById(uint64_t id) const;
 
     template <typename T, typename... Args>
     std::shared_ptr<T> addSystem(Args&&... args) {
@@ -56,7 +57,7 @@ class EcsManager {
     std::vector<std::shared_ptr<Entity>> _entities;
 
     ResourceManager _resourceManager;
-    size_t _nextEntityId = 0;
+    size_t _nextEntityId = 5;
 };
 }
 

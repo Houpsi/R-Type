@@ -15,7 +15,7 @@ namespace ecs {
     class PlayerAnimation : public Component
     {
         public:
-        PlayerAnimation() = default;
+        PlayerAnimation();
         ~PlayerAnimation() override = default;
         [[nodiscard]] std::size_t getId() const;
         void updateAnimation(float dt, const bool isDown, const bool isUp);

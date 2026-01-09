@@ -15,6 +15,7 @@ namespace cmn {
 
     using newEntityPacket = struct newEntityPacket
     {
+        uint64_t entityId;
         uint8_t type;
         float posX;
         float posY;

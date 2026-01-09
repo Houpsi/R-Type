@@ -6,60 +6,65 @@
 */
 
 #include "InputPlayer.hpp"
+#include <iostream>
 
 namespace ecs {
-bool InputPlayer::getDown() const
-{
-    return _down;
-}
+    bool InputPlayer::getDown() const
+    {
+        return _down;
+    }
 
-bool InputPlayer::getLeft() const
-{
-    return _left;
-}
+    bool InputPlayer::getLeft() const
+    {
+        return _left;
+    }
 
-bool InputPlayer::getRight() const
-{
-    return _right;
-}
+    bool InputPlayer::getRight() const
+    {
+        return _right;
+    }
 
-bool InputPlayer::getUp() const
-{
-    return _up;
-}
+    bool InputPlayer::getUp() const
+    {
+        return _up;
+    }
 
-bool InputPlayer::getSpacebar() const
-{
-    return _spacebar;
-}
+    bool InputPlayer::getSpacebar() const
+    {
+        return _spacebar;
+    }
 
-void InputPlayer::setDown(bool down)
-{
-    _down = down;
-}
+    bool InputPlayer::getReady() const
+    {
+        return _r;
+    }
 
-void InputPlayer::setLeft(bool left)
-{
-    _left = left;
-}
+    void InputPlayer::setDown(bool down)
+    {
+        _down = down;
+    }
 
-void InputPlayer::setRight(bool right)
-{
-    _right = right;
-}
+    void InputPlayer::setLeft(bool left)
+    {
+        _left = left;
+    }
 
-void InputPlayer::setUp(bool up)
-{
-    _up = up;
-}
+    void InputPlayer::setRight(bool right)
+    {
+        _right = right;
+    }
 
-void InputPlayer::setSpacebar(bool spacebar)
-{
-    _spacebar = spacebar;
-}
-void InputPlayer::setR(bool r)
-{
-    _r = r;
-}
+    void InputPlayer::setUp(bool up)
+    {
+        _up = up;
+    }
 
+    void InputPlayer::setSpacebar(bool spacebar)
+    {
+        _spacebar = spacebar;
+    }
+    void InputPlayer::setR(bool r)
+    {
+        _r = r;
+    }
 }
