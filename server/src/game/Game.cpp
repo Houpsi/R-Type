@@ -169,7 +169,7 @@ namespace server {
             std::pair<float, float> const position = {cmn::monsterSpawnPositionWidth, randNum};
             _sharedData->addUdpPacketToSend(
                 cmn::PacketFactory::createNewEntityPacket(
-                    cmn::EntityType::Monster,
+                    cmn::EntityType::Monster1,
                     position,
                     newEnemy->getId()
                 )

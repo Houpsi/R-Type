@@ -35,6 +35,7 @@ namespace server {
         [[nodiscard]] std::pair <std::string, uint32_t> getBoss() const;
         void addWave(uint16_t time, std::list<tmpEnemy> enemies);
         [[nodiscard]] std::list <std::pair <uint16_t, std::list<tmpEnemy>>> getWaves() const;
+        std::pair <uint16_t, std::list<tmpEnemy>> getCurrentWave() const;
       private:
         uint8_t _levelId = 0;
         uint8_t _enemySpawnRate;
@@ -44,6 +45,7 @@ namespace server {
         uint8_t _numberWaves;
         std::pair <std::string, uint32_t> _boss;
         std::list <std::pair <uint16_t, std::list<tmpEnemy>>> _waves;
+        std::pair <uint16_t, std::list<tmpEnemy>> _currentWave;
     };
 
 }// namespace server
