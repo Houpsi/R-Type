@@ -11,7 +11,7 @@ TEST(LevelParser, ValidLevelIsParsedCorrectly)
 {
     server::LevelParser parser;
     server::Level level;
-    parser.createLevel("Levels/valid-test.cfg", level);
+    parser.createLevel("L", level);
 
     EXPECT_EQ(level.getLevelId(), 1);
     EXPECT_EQ(level.getNameLevel(), "Level 1");
@@ -24,7 +24,7 @@ TEST(LevelParser, InvalidIdReturnsDefaultLevel)
 {
     server::LevelParser parser;
     server::Level level;
-    parser.createLevel("Levels/invalid_id.cfg",level);
+    parser.createLevel("LevelsForLevelParser/invalid_id.cfg",level);
 
     EXPECT_NE(level.getLevelId(), 999);
 }
@@ -33,7 +33,7 @@ TEST(LevelParser, UnknownEnemyTypeFailsParsing)
 {
     server::LevelParser parser;
     server::Level level;
-    parser.createLevel("Levels/invalid_test.cfg", level);
+    parser.createLevel("LevelsForLevelParser/invalid_test.cfg", level);
 
     EXPECT_EQ(level.getWaves().size(), 0);
 }
@@ -42,7 +42,7 @@ TEST(LevelParser, LevelWithoutBoss)
 {
     server::LevelParser parser;
     server::Level level;
-    parser.createLevel("Levels/no_boss.cfg", level);
+    parser.createLevel("LevelsForLevelParser/no_boss.cfg", level);
 
     EXPECT_FALSE(level.getIsBossPresent());
 }
@@ -51,7 +51,7 @@ TEST(LevelParser, InvalidScrollSpeed)
 {
     server::LevelParser parser;
     server::Level level;
-    parser.createLevel("Levels/invalid_speed.cfg", level);
+    parser.createLevel("LevelsForLevelParser/invalid-speed.cfg", level);
 
     EXPECT_EQ(level.getPlayerSpeed(), cmn::playerSpeed);
 }

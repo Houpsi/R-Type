@@ -10,6 +10,7 @@
 #define R_TYPE_LEVELPARSER_HPP
 #include "level/Level.hpp"
 #include <libconfig.h++>
+#include <stdexcept>
 #include <unordered_set>
 
 namespace server {
@@ -18,6 +19,18 @@ namespace server {
         public:
             LevelParser() = default;
             bool createLevel(const std::string &fileConfigLevel, Level &baseLevel);
+
+            class LevelParserException : public std::exception
+            {
+                private:
+                    std::string message;
+                public:
+                LevelParserException(const char* msg) : message(msg) {}
+
+                [[nodiscard]] const char* what() const noexcept {
+                    return message.c_str();
+                }
+            };
         private:
             void _parsePrerequisites(const libconfig::Setting& root, Level &newLevel);
             void _parseWaves(const libconfig::Setting& root, Level &newLevel);
