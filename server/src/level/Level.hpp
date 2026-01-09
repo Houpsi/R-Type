@@ -37,7 +37,7 @@ namespace server {
         [[nodiscard]] std::list <std::pair <uint16_t, std::list<tmpEnemy>>> getWaves() const;
       private:
         uint8_t _levelId = 0;
-        uint8_t _enemySpawnRate;
+        uint8_t _enemySpawnRate = 1; //temporary;
         bool _isBossPresent = false;
         std::string _nameLevel;
         uint32_t _playerSpeed = cmn::playerSpeed;
