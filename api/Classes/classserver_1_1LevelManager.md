@@ -17,6 +17,7 @@ title: server::LevelManager
 |                | Name           |
 | -------------- | -------------- |
 | void | **[setCurrentLevelId](Classes/classserver_1_1LevelManager.md#function-setcurrentlevelid)**(uint8_t id) |
+| void | **[loadLevelFromFolder](Classes/classserver_1_1LevelManager.md#function-loadlevelfromfolder)**() |
 | [Level](Classes/classserver_1_1Level.md) & | **[getCurrentLevel](Classes/classserver_1_1LevelManager.md#function-getcurrentlevel)**() |
 | void | **[changeToNextLevel](Classes/classserver_1_1LevelManager.md#function-changetonextlevel)**() |
 | void | **[addLevel](Classes/classserver_1_1LevelManager.md#function-addlevel)**([Level](Classes/classserver_1_1Level.md) & level) |
@@ -29,6 +30,13 @@ title: server::LevelManager
 void setCurrentLevelId(
     uint8_t id
 )
+```
+
+
+### function loadLevelFromFolder
+
+```cpp
+void loadLevelFromFolder()
 ```
 
 
@@ -57,4 +65,4 @@ void addLevel(
 
 -------------------------------
 
-Updated on 2025-12-15 at 12:23:13 +0000
+Updated on 2026-01-09 at 13:36:43 +0000

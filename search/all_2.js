@@ -11,5 +11,7 @@ var searchData=
   ['component_8',['component',['../classecs_1_1Component.html',1,'ecs::Component'],['../classecs_1_1Component.html#a03794632c30cbe13f476caacfd937b14',1,'ecs::Component::Component()']]],
   ['component_2ecpp_9',['Component.cpp',['../Component_8cpp.html',1,'']]],
   ['component_2ehpp_10',['Component.hpp',['../Component_8hpp.html',1,'']]],
-  ['createentity_11',['createentity',['../classecs_1_1EcsManager.html#a2a2e15d8e7a352cdb6ff1915bf60b7e8',1,'ecs::EcsManager::createEntity()'],['../classecs_1_1EcsManager.html#a7ad41c2a872c8b40cbb88708c8a47686',1,'ecs::EcsManager::createEntity(std::size_t id)']]]
+  ['count_11',['count',['../structtmpEnemy.html#a462f15b021376755ab5e15c8406a5966',1,'tmpEnemy']]],
+  ['createentity_12',['createentity',['../classecs_1_1EcsManager.html#a2a2e15d8e7a352cdb6ff1915bf60b7e8',1,'ecs::EcsManager::createEntity()'],['../classecs_1_1EcsManager.html#a7ad41c2a872c8b40cbb88708c8a47686',1,'ecs::EcsManager::createEntity(std::size_t id)']]],
+  ['createlevel_13',['createLevel',['../classserver_1_1LevelParser.html#aedd75c95fb917debd2408a156da11d54',1,'server::LevelParser']]]
 ];

@@ -85,10 +85,13 @@ title: Files
         * **dir [server/src/level](Files/dir_bb42df2f0e903765673454be575ec619.md#dir-server/src/level)** 
             * **file [server/src/level/Level.cpp](Files/Level_8cpp.md#file-level.cpp)** 
             * **file [server/src/level/Level.hpp](Files/Level_8hpp.md#file-level.hpp)** 
+            * **file [server/src/level/TmpEnemy.hpp](Files/TmpEnemy_8hpp.md#file-tmpenemy.hpp)** 
         * **dir [server/src/level_manager](Files/dir_1a61ab1baf9342b4b0090bc39c8718b8.md#dir-server/src/level-manager)** 
             * **file [server/src/level_manager/LevelManager.cpp](Files/LevelManager_8cpp.md#file-levelmanager.cpp)** 
             * **file [server/src/level_manager/LevelManager.hpp](Files/LevelManager_8hpp.md#file-levelmanager.hpp)** 
         * **dir [server/src/parser](Files/dir_0d2bd8aef9a1d5e03f22ed5477f85ed5.md#dir-server/src/parser)** 
+            * **file [server/src/parser/LevelParser.cpp](Files/LevelParser_8cpp.md#file-levelparser.cpp)** 
+            * **file [server/src/parser/LevelParser.hpp](Files/LevelParser_8hpp.md#file-levelparser.hpp)** 
             * **file [server/src/parser/Parser.cpp](Files/Parser_8cpp.md#file-parser.cpp)** 
             * **file [server/src/parser/Parser.hpp](Files/Parser_8hpp.md#file-parser.hpp)** 
         * **dir [server/src/server](Files/dir_79d66a5bc5e2c314a2c5007d4cb52c17.md#dir-server/src/server)** 
@@ -96,6 +99,7 @@ title: Files
             * **file [server/src/server/Server.hpp](Files/Server_8hpp.md#file-server.hpp)** 
     * **dir [server/tests](Files/dir_fe4d34db5c9ea517d0ce62f66f339b65.md#dir-server/tests)** 
         * **file [server/tests/TestLevelManager.cpp](Files/TestLevelManager_8cpp.md#file-testlevelmanager.cpp)** 
+        * **file [server/tests/TestLevelParser.cpp](Files/TestLevelParser_8cpp.md#file-testlevelparser.cpp)** 
         * **file [server/tests/TestParser.cpp](Files/TestParser_8cpp.md#file-testparser.cpp)** 
         * **file [server/tests/TestServer.cpp](Files/TestServer_8cpp.md#file-testserver.cpp)** 
 
@@ -103,4 +107,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2025-12-15 at 12:23:13 +0000
+Updated on 2026-01-09 at 13:36:43 +0000

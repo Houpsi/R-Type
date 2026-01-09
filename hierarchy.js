@@ -21,9 +21,13 @@ var hierarchy =
     ] ],
     [ "ecs::EcsManager", "classecs_1_1EcsManager.html", null ],
     [ "ecs::Entity", "classecs_1_1Entity.html", null ],
+    [ "std::exception", null, [
+      [ "server::LevelParser::LevelParserException", "classserver_1_1LevelParser_1_1LevelParserException.html", null ]
+    ] ],
     [ "server::Game", "classserver_1_1Game.html", null ],
     [ "server::Level", "classserver_1_1Level.html", null ],
     [ "server::LevelManager", "classserver_1_1LevelManager.html", null ],
+    [ "server::LevelParser", "classserver_1_1LevelParser.html", null ],
     [ "ecs::ResourceManager", "classecs_1_1ResourceManager.html", null ],
     [ "server::Server", "classserver_1_1Server.html", null ],
     [ "ecs::System", "classecs_1_1System.html", [
@@ -39,5 +43,6 @@ var hierarchy =
       [ "ecs::ShootSystem", "classecs_1_1ShootSystem.html", null ],
       [ "ecs::SpriteAnimationSystem", "classecs_1_1SpriteAnimationSystem.html", null ],
       [ "ecs::VelocitySystem", "classecs_1_1VelocitySystem.html", null ]
-    ] ]
+    ] ],
+    [ "tmpEnemy", "structtmpEnemy.html", null ]
 ];

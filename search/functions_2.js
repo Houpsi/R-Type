@@ -5,5 +5,6 @@ var searchData=
   ['collision_2',['Collision',['../classecs_1_1Collision.html#aca7f446002e8a18932bc1fa69d8d7671',1,'ecs::Collision']]],
   ['collisionsystem_3',['CollisionSystem',['../classecs_1_1CollisionSystem.html#acaf14161170c983bb5018d1a58265f32',1,'ecs::CollisionSystem']]],
   ['component_4',['Component',['../classecs_1_1Component.html#a03794632c30cbe13f476caacfd937b14',1,'ecs::Component']]],
-  ['createentity_5',['createentity',['../classecs_1_1EcsManager.html#a2a2e15d8e7a352cdb6ff1915bf60b7e8',1,'ecs::EcsManager::createEntity()'],['../classecs_1_1EcsManager.html#a7ad41c2a872c8b40cbb88708c8a47686',1,'ecs::EcsManager::createEntity(std::size_t id)']]]
+  ['createentity_5',['createentity',['../classecs_1_1EcsManager.html#a2a2e15d8e7a352cdb6ff1915bf60b7e8',1,'ecs::EcsManager::createEntity()'],['../classecs_1_1EcsManager.html#a7ad41c2a872c8b40cbb88708c8a47686',1,'ecs::EcsManager::createEntity(std::size_t id)']]],
+  ['createlevel_6',['createLevel',['../classserver_1_1LevelParser.html#aedd75c95fb917debd2408a156da11d54',1,'server::LevelParser']]]
 ];
