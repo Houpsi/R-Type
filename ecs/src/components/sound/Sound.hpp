@@ -12,18 +12,18 @@
 #include <iostream>
 
 namespace ecs {
-class Sound : public Component {
-  public:
-    Sound(const std::string& filepath);
-    ~Sound() override = default;
+    class Sound : public Component
+    {
+    public:
+        Sound(const std::string& filepath);
+        ~Sound() override = default;
+        const sf::Sound& getSound() const;
+        void play();
 
-    const sf::Sound& getSound() const;
-    void play();
-
-  private:
-    std::unique_ptr<sf::Sound> _sound;
-    sf::SoundBuffer _buffer;
-};
+    private:
+        std::unique_ptr<sf::Sound> _sound;
+        sf::SoundBuffer _buffer;
+    };
 }
 
 #endif //BOOTSTRAP_SOUND_HPP
