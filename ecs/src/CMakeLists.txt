@@ -62,6 +62,10 @@ add_library(r-type_ecs_lib
         managers/ComponentManager.hpp
         managers/SystemManager.cpp
         managers/SystemManager.hpp
+        components/IComponentArray.hpp
+        components/ComponentArray.cpp
+        components/ComponentArray.hpp
+        components/ComponentTypes.hpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC
