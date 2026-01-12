@@ -70,6 +70,7 @@ add_library(r-type_ecs_lib
 
 target_include_directories(r-type_ecs_lib PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ../../common
 )
 
 target_link_libraries(r-type_ecs_lib PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)
