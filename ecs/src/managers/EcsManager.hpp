@@ -7,7 +7,6 @@
 
 #ifndef ECSMANAGER_HPP
     #define ECSMANAGER_HPP
-#include "Entity.hpp"
 #include "ResourceManager.hpp"
 #include "systems/system/ISystem.hpp"
 #include "EntityManager.hpp"

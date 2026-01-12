@@ -16,11 +16,11 @@ namespace ecs {
      */
     void ShootSystem::update(EcsManager &ecs)
     {
-        for (auto const &entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
-            auto input = entity->getComponent<InputPlayer>();
+        for (auto const &entity : entity) {
+            auto input = ecs.getComponentManager()<InputPlayer>->get(entity);
             if (!entity->getComponent<Shoot>()) continue;
             if (input) {
-                const auto shoot = entity->getComponent<Shoot>();
+                const auto shoot = ecs.getComponentManager()<Shoot>->get(entity);
                 shoot->setTimeSinceLastShot(shoot->getTimeSinceLastShot() + ecs.getDeltaTime());
 
                 if (input->getSpacebar()) {

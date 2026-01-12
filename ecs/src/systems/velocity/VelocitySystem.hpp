@@ -15,7 +15,7 @@
 namespace ecs {
 class VelocitySystem : public ASystem {
 public:
-    explicit VelocitySystem() {};
+    explicit VelocitySystem() = default;
     ~VelocitySystem() override = default;
     void update(EcsManager &ecs) override;
 };
