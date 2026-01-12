@@ -13,13 +13,13 @@
 namespace ecs {
     class PlayerAnimation : public Component
     {
-        public:
+    public:
         PlayerAnimation();
         ~PlayerAnimation() override = default;
         [[nodiscard]] std::size_t getId() const;
         void updateAnimation(float dt, const bool isDown, const bool isUp);
         [[nodiscard]] int getAnimFrame() const;
-        private:
+    private:
         std::size_t _id = 0;
         int _animFrame = 0;
         float _animTimer = 0.f;
