@@ -7,15 +7,14 @@
 
 #ifndef R_TYPE_CLIENT_HEALTH_HPP
 	#define R_TYPE_CLIENT_HEALTH_HPP
-#include "systems/system/System.hpp"
+#include "systems/system/ASystem.hpp"
 #include "managers/EcsManager.hpp"
 #include "components/health/Health.hpp"
 #include "components/destroy/Destroy.hpp"
 
-
 namespace ecs
 {
-	class HealthSystem : public System
+	class HealthSystem : public ASystem
 	{
 		public:
 			HealthSystem() = default;

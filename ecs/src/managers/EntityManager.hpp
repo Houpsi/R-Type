@@ -12,7 +12,7 @@
 #include <queue>
 #include <array>
 #include <bitset>
-#include "Constants.hpp"
+#include "../../common/src/Constants.hpp"
 
 namespace ecs {
 

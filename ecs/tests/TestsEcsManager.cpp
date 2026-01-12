@@ -8,10 +8,10 @@
 #include <gtest/gtest.h>
 
 #include "managers/EcsManager.hpp"
-#include "systems/system/System.hpp"
+#include "systems/system/ASystem.hpp"
 
 namespace ecs {
-    class DummySystem : public System
+    class DummySystem : public ASystem
     {
       public:
         bool updated = false;

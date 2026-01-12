@@ -11,12 +11,13 @@ namespace ecs
 {
 	void HealthSystem::update(EcsManager& ecs)
 	{
-		for (const auto& entity : ecs.getEntitiesWithComponent<Health>())
+		for (const auto& entity : _entity)
 		{
-			auto health = entity->getComponent<Health>()->getHealth();
+			auto health = ecs.getComponentManager()<Health>->get(entity)->getHealth();
 			if (health <= 0)
 			{
-				entity->addComponent<Destroy>();
+				ecs.getComponentManager()<Health>->addComponent<Destroy>();
+				// entity->addComponent<Destroy>();
 			}
 		}
 	}

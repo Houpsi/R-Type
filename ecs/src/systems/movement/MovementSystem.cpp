@@ -15,9 +15,9 @@ void MovementSystem::update(EcsManager &ecs)
 
     const float speed = 250.0F;
     const float dt = ecs.getDeltaTime();
-    for (auto const &entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
-        auto pos = entity->getComponent<Position>();
-        auto input = entity->getComponent<InputPlayer>();
+    for (auto const &entity : _entity) {
+        auto pos = ecs.getComponentManager()<Position>->get(entity);
+        auto input = ecs.getComponentManager()<InputPlayer>->get(entity);
 
         if (input) {
             if (input->getUp()) {

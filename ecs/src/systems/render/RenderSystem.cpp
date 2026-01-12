@@ -15,9 +15,9 @@ void RenderSystem::update(EcsManager &ecs)
     _window.clear(sf::Color::Black);
     const auto entities = ecs.getEntitiesWithComponent<Sprite>();
 
-    for (const auto& entity : entities) {
-        auto spriteComp = entity->getComponent<Sprite>();
-        auto positionComp = entity->getComponent<Position>();
+    for (const auto& entity : _entity) {
+        auto spriteComp = ecs.getComponentManager()<Sprite>->get(entity);
+        auto positionComp = ecs.getComponentManager()<Position>->get(entity);
         if (spriteComp) {
             auto sprite = spriteComp->getSprite();
             if (positionComp) {

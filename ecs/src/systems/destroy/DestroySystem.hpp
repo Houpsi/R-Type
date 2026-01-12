@@ -11,9 +11,10 @@
 #define DESTROY_THRESHOLD (-50)
 
 #include "managers/EcsManager.hpp"
+#include "systems/system/ASystem.hpp"
 
 namespace ecs {
-class DestroySystem : public System
+class DestroySystem : public ASystem
 {
   public:
     DestroySystem() = default;

@@ -8,12 +8,12 @@
 #ifndef R_TYPE_CLIENT_VELOCITYSYSTEM_HPP
     #define R_TYPE_CLIENT_VELOCITYSYSTEM_HPP
 #include "managers/EcsManager.hpp"
-#include "systems/system/System.hpp"
+#include "systems/system/ASystem.hpp"
 #include "components/velocity/Velocity.hpp"
 #include "components/position/Position.hpp"
 
 namespace ecs {
-class VelocitySystem : public System {
+class VelocitySystem : public ASystem {
 public:
     explicit VelocitySystem() = default;
     ~VelocitySystem() override = default;

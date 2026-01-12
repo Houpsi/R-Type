@@ -11,9 +11,10 @@
 #include "components/position/Position.hpp"
 #include "components/sprite/Sprite.hpp"
 #include "managers/EcsManager.hpp"
+#include "systems/system/ASystem.hpp"
 
 namespace ecs {
-    class CollisionSystem: public System {
+    class CollisionSystem: public ASystem {
       public:
         CollisionSystem() = default;
         void update(EcsManager &ecs) override;

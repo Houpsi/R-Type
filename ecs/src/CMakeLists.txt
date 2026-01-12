@@ -1,6 +1,6 @@
 add_library(r-type_ecs_lib
-        systems/system/System.cpp
-        systems/system/System.hpp
+        systems/system/ISystem.hpp
+        systems/system/ASystem.hpp
         systems/render/RenderSystem.cpp
         systems/render/RenderSystem.hpp
         systems/movement/MovementSystem.cpp
@@ -61,6 +61,7 @@ add_library(r-type_ecs_lib
         managers/ComponentManager.hpp
         managers/SystemManager.cpp
         managers/SystemManager.hpp
+        managers/IObserver.hpp
         components/IComponentArray.hpp
         components/ComponentArray.cpp
         components/ComponentArray.hpp

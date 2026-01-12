@@ -7,18 +7,18 @@
 
 #ifndef BOOTSTRAP_SYSTEM_HPP
     #define BOOTSTRAP_SYSTEM_HPP
-#include <memory>
-#include <vector>
 #include "managers/EcsManager.hpp"
 
 namespace ecs {
 
-class System {
+class ISystem {
   public:
-    System() = default;
-    virtual ~System() = default;
+    ISystem() = default;
+    virtual ~ISystem() = default;
     
-    virtual void update(EcsManager &ecs) = 0;
+    virtual void update(ecs::EcsManager &ecs) = 0;
+	virtual void pushEntity(ecs::Entity) = 0;
+
 };
 }
 
