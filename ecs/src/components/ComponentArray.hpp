@@ -10,6 +10,7 @@
 
 #include "components/IComponentArray.hpp"
 #include <unordered_map>
+#include <stdexcept>
 
 namespace ecs {
     template <typename T>

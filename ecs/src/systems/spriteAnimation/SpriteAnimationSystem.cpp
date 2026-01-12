@@ -18,16 +18,16 @@ void SpriteAnimationSystem::update(EcsManager& ecs)
 {
     const float deltaTime = ecs.getDeltaTime();
     for (auto& entity : _entity) {
-        auto sprite = ecs.getComponentManager()<Sprite>->get(entity);
-        auto anim = ecs.getComponentManager()<Animation>->get(entity);
-        auto inputPlayer = ecs.getComponentManager()<InputPlayer>->get(entity);
+        auto sprite = ecs.getComponentManager().getComponent<Sprite>(entity);
+        auto anim = ecs.getComponentManager().getComponent<Animation>(entity);
+        auto inputPlayer = ecs.getComponentManager().getComponent<InputPlayer>(entity);
 
-        if (inputPlayer|| !anim || !sprite) {
-                continue;
-        }
-        anim->updateAnimation(deltaTime);
-        int const left = anim->getOffsetX()  + ( anim->getAnimFrame() * anim->getSpriteSize().first);
-        sprite->setTextureRect(left, 0 ,  anim->getSpriteSize().first,  anim->getSpriteSize().second);
+        // if (inputPlayer|| !anim || !sprite) {
+        //         continue;
+        // }
+        anim.updateAnimation(deltaTime);
+        int const left = anim.getOffsetX()  + ( anim.getAnimFrame() * anim.getSpriteSize().first);
+        sprite.setTextureRect(left, 0 ,  anim.getSpriteSize().first,  anim.getSpriteSize().second);
     }
 }
 

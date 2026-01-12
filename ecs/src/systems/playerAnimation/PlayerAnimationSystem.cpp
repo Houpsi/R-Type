@@ -19,19 +19,19 @@ void PlayerAnimationSystem::update(EcsManager& ecs)
     const float deltaTime = ecs.getDeltaTime();
 
     for (const auto & entity : _entity) {
-        const auto player = ecs.getComponentManager()<InputPlayer>->get(entity);
-        const auto sprite = ecs.getComponentManager()<Sprite>->get(entity);
-        auto anim = ecs.getComponentManager()<PlayerAnimation>->get(entity);
+        const auto player = ecs.getComponentManager().getComponent<InputPlayer>(entity);
+        auto sprite = ecs.getComponentManager().getComponent<Sprite>(entity);
+        auto anim = ecs.getComponentManager().getComponent<PlayerAnimation>(entity);
 
-        if (!sprite || !player || !anim)
-            continue;
+        // if (!sprite || !player || !anim)
+        //     continue;
 
-        anim->updateAnimation(deltaTime, player->getDown(), player->getUp());
-        int const animFrame = anim->getAnimFrame();
-        const int playerId = anim->getId();
+        anim.updateAnimation(deltaTime, player.getDown(), player.getUp());
+        int const animFrame = anim.getAnimFrame();
+        const int playerId = anim.getId();
         int x = 0;
 
-        if (player->getUp()) {
+        if (player.getUp()) {
             if (animFrame == 0) {
                 x = 2 * SIZE_X_PLAYER;
             }
@@ -40,7 +40,7 @@ void PlayerAnimationSystem::update(EcsManager& ecs)
             } else {
                 x = 4 * SIZE_X_PLAYER;
             }
-        } else if (player->getDown()) {
+        } else if (player.getDown()) {
             if (animFrame == 0) {
                 x = 2 * SIZE_X_PLAYER;
             }
@@ -52,7 +52,7 @@ void PlayerAnimationSystem::update(EcsManager& ecs)
         } else {
             x = 2 * SIZE_X_PLAYER;
         }
-        sprite->setTextureRect(x, playerId * SIZE_Y_PLAYER,SIZE_X_PLAYER, SIZE_Y_PLAYER);
+        sprite.setTextureRect(x, playerId * SIZE_Y_PLAYER,SIZE_X_PLAYER, SIZE_Y_PLAYER);
     }
 }
 

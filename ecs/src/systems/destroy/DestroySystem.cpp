@@ -12,11 +12,17 @@ namespace ecs {
 
 void DestroySystem::update(EcsManager &ecs)
 {
-    auto &entities = ecs.getEntities();
+    // auto &entities = ecs.getEntities();
 
-    erase_if(entities, [](std::shared_ptr<Entity> &entity) {
-        return entity->getComponent<Destroy>();
+    std::erase_if(_entity, [&ecs](Entity entity) {
+        auto &destroy = ecs.getComponentManager().getComponent<Destroy>(entity);
+        return true;
     });
+
+
+    // std::erase_if(entities, [](std::shared_ptr<Entity> &entity) {
+        // return entity->getComponent<Destroy>();
+    // });
 }
 
 }

@@ -31,4 +31,13 @@ namespace ecs {
     ResourceManager &EcsManager::getResourceManager() {
         return _resourceManager;
     }
+
+    void EcsManager::setDeltaTime(float dt)
+    {
+        _deltaTime = dt;
+    }
+    float EcsManager::getDeltaTime() const
+    {
+        return _deltaTime;
+    }
 }

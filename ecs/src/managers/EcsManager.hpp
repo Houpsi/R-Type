@@ -22,11 +22,15 @@ namespace ecs {
         ComponentManager &getComponentManager();
         SystemManager &getSystemManager();
         ResourceManager &getResourceManager();
+        float getDeltaTime() const;
+        void setDeltaTime(float dt);
     private:
         EntityManager _entityManager;
         ComponentManager _componentManager;
         SystemManager _systemManager;
         ResourceManager _resourceManager;
+        float _deltaTime = 0.0f;
+
     };
 }
 

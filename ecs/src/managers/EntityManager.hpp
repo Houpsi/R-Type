@@ -12,7 +12,7 @@
 #include <queue>
 #include <array>
 #include <bitset>
-#include "../../common/src/Constants.hpp"
+#include "src/Constants.hpp"
 
 namespace ecs {
 
@@ -22,6 +22,7 @@ namespace ecs {
     public:
         Entity createEntity();
         void deleteEntity(Entity id);
+
     private:
         std::queue<Entity> _availableEntities;
         std::array<std::bitset<cmn::NB_COMPONENTS>, cmn::MAX_ENTITIES> _signatures;

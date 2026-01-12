@@ -9,15 +9,18 @@
 
 namespace ecs
 {
-	void SystemManager::onSignatureChanged(ecs::Entity entity, const std::bitset<cmn::NB_COMPONENTS>& signature)
+	void SystemManager::onSignatureChanged(Entity entity, const std::bitset<cmn::NB_COMPONENTS>& signature)
 	{
-		for (auto &[_, system]: _systems)
+		for (auto &system: _systems)
 		{
 			auto targetSignature = system.getSignature();
-			if ((targetSignature & signature) == signature)
-			{
+			if ((targetSignature & signature) == signature) {
 				system.setEntity(entity);
 			}
 		}
+	}
+
+	void SystemManager::addSystem(std::shared_ptr<ASystem> system) {
+		_systems.push_back(std::move(system));
 	}
 }

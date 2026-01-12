@@ -20,10 +20,12 @@ namespace ecs
 		virtual ~ASystem() = default;
 
 		virtual void update(ecs::EcsManager &ecs) = 0;
-		void pushEntity(ecs::Entity) override;
+		void pushEntity(Entity) override;
+		std::bitset<cmn::NB_COMPONENTS> getSignature() override;
 
 	protected:
-		std::vector<ecs::Entity> _entity;
+		std::vector<Entity> _entity;
+		std::bitset<cmn::NB_COMPONENTS> _targetSignature;
 	};
 }
 

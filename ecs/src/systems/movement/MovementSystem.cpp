@@ -16,35 +16,35 @@ void MovementSystem::update(EcsManager &ecs)
     const float speed = 250.0F;
     const float dt = ecs.getDeltaTime();
     for (auto const &entity : _entity) {
-        auto pos = ecs.getComponentManager()<Position>->get(entity);
-        auto input = ecs.getComponentManager()<InputPlayer>->get(entity);
+        auto pos = ecs.getComponentManager().getComponent<Position>(entity);
+        auto input = ecs.getComponentManager().getComponent<InputPlayer>(entity);
 
-        if (input) {
-            if (input->getUp()) {
-                pos->setY(pos->getY() - (speed * dt));
+        // if (input) {
+            if (input.getUp()) {
+                pos.setY(pos.getY() - (speed * dt));
             }
-            if (input->getDown()) {
-                pos->setY(pos->getY() + (speed * dt));
+            if (input.getDown()) {
+                pos.setY(pos.getY() + (speed * dt));
             }
-            if (input->getLeft()) {
-                pos->setX(pos->getX() - (speed * dt));
+            if (input.getLeft()) {
+                pos.setX(pos.getX() - (speed * dt));
             }
-            if (input->getRight()) {
-                pos->setX(pos->getX() + (speed * dt));
+            if (input.getRight()) {
+                pos.setX(pos.getX() + (speed * dt));
             }
-        }
+        // }
     }
-    for (auto const &enemy : ecs.getEntitiesWithComponent<Enemy>()) {
-        auto pos = enemy->getComponent<Position>();
-        if (pos) {
-            pos->setX(pos->getX() + (-speed * dt));
-        }
-        if (pos->getX() < 0 - enemy->getComponent<Collision>()->getWidth()) {
-            enemy->addComponent<Destroy>();
-        }
-        if (pos->getX() > windowWidth + enemy->getComponent<Collision>()->getWidth() + 500) {
-            enemy->addComponent<Destroy>();
-        }
-    }
+    // for (auto const &enemy : ecs.getEntitiesWithComponent<Enemy>()) {
+    //     auto pos = enemy->getComponent<Position>();
+    //     if (pos) {
+    //         pos->setX(pos->getX() + (-speed * dt));
+    //     }
+    //     if (pos->getX() < 0 - enemy->getComponent<Collision>()->getWidth()) {
+    //         enemy->addComponent<Destroy>();
+    //     }
+    //     if (pos->getX() > windowWidth + enemy->getComponent<Collision>()->getWidth() + 500) {
+    //         enemy->addComponent<Destroy>();
+    //     }
+    // }
 }
 }

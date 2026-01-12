@@ -7,11 +7,12 @@
 
 #ifndef R_TYPE_COMPONENTMANAGER_HPP
 #define R_TYPE_COMPONENTMANAGER_HPP
-#include "Constants.hpp"
+#include "src/Constants.hpp"
 #include "components/IComponentArray.hpp"
 #include "components/ComponentArray.hpp"
 #include <type_traits>
 #include <typeindex>
+#include <memory>
 
 namespace ecs {
     class ComponentManager {

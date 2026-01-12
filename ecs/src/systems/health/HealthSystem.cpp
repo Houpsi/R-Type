@@ -13,10 +13,10 @@ namespace ecs
 	{
 		for (const auto& entity : _entity)
 		{
-			auto health = ecs.getComponentManager()<Health>->get(entity)->getHealth();
+			auto health = ecs.getComponentManager().getComponent<Health>(entity).getHealth();
 			if (health <= 0)
 			{
-				ecs.getComponentManager()<Health>->addComponent<Destroy>();
+				ecs.getComponentManager().addComponent(entity, Destroy{});
 				// entity->addComponent<Destroy>();
 			}
 		}

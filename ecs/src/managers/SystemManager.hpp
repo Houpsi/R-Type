@@ -9,17 +9,20 @@
 	#define R_TYPE_SYSTEMMANAGER_HPP
 #include "EntityManager.hpp"
 #include "IObserver.hpp"
-#include "systems/system/ASystem.hpp"
+#include <memory>
 
 namespace ecs
 {
+	class ASystem;
+
 	class SystemManager : public ecs::IObserver {
 	public:
-		void onSignatureChanged(ecs::Entity entity, const std::bitset<cmn::NB_COMPONENTS>& signature) override;
 		// to call in the function addComponent
-// vector d'entity
+		void onSignatureChanged(Entity entity, const std::bitset<cmn::NB_COMPONENTS>& signature) override;
+		void addSystem(std::shared_ptr<ASystem> system);
+
 		private:
-			std::vector<ASystem> _systems;
+			std::vector<std::shared_ptr<ASystem>> _systems;
 	};
 }
 

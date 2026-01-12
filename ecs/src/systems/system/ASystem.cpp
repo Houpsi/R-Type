@@ -12,4 +12,9 @@ namespace ecs
 	{
 		_entity.push_back(newEntity);
 	}
+
+	std::bitset<cmn::NB_COMPONENTS> ASystem::getSignature()
+	{
+		return _targetSignature;
+	};
 }
