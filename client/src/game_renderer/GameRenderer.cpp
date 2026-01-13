@@ -49,6 +49,12 @@ namespace client {
         _keyboard = keyboard;
     }
 
+    void GameRenderer::_initSound()
+    {
+        const auto sound = _ecs.createEntity(5);
+        _sound = sound;
+    }
+
     void GameRenderer::_initBackground()
     {
         constexpr sf::Vector2f scale(1.0F, 1.0F);

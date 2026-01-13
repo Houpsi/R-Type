@@ -8,6 +8,7 @@
 #ifndef R_TYPE_RESOURCEMANAGER_HPP
     #define R_TYPE_RESOURCEMANAGER_HPP
 
+#include "SFML/Audio/SoundBuffer.hpp"
 #include "SFML/Graphics/Texture.hpp"
 #include <string>
 #include <unordered_map>

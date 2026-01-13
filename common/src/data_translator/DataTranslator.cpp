@@ -98,6 +98,8 @@ namespace cmn {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
             if (entity->getId() == deleteEntity.entityId) {
                 entity->addComponent<ecs::Destroy>();
+                std::shared_ptr<ecs::Entity> _sound = ecs.getEntityById(5);
+                _sound->addComponent<ecs::Sound>(1);
                 break;
             }
         }

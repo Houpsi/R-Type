@@ -14,15 +14,19 @@
 namespace ecs {
 class Sound : public Component {
   public:
-    Sound(const std::string& filepath);
+    explicit Sound(std::string& id): idMusic(id) {};
     ~Sound() override = default;
 
-    const sf::Sound& getSound() const;
-    void play();
-
-  private:
-    std::unique_ptr<sf::Sound> _sound;
-    sf::SoundBuffer _buffer;
+    std::string idMusic;
+  //   Sound(const std::string& filepath);
+  //   ~Sound() override = default;
+  //
+  //   const sf::Sound& getSound() const;
+  //   void play();
+  //
+  // private:
+  //   std::unique_ptr<sf::Sound> _sound;
+  //   sf::SoundBuffer _buffer;
 };
 }
 
