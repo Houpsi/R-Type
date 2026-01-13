@@ -8,12 +8,17 @@
 #include "Game.hpp"
 #include "Constants.hpp"
 #include "components/Collision.hpp"
+#include "components/Enemy.hpp"
 #include "components/Health.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
 #include "components/Shoot.hpp"
-#include "components/Enemy.hpp"
 #include "data_translator/DataTranslator.hpp"
+#include "enums/EnemyType.hpp"
+#include "factory/EnemyFactory.hpp"
+#include "factory/EnemyProduct.hpp"
+#include "factory/EntityFactory.hpp"
+#include "factory/PlayerFactory.hpp"
 #include "packet_factory/PacketFactory.hpp"
 #include "systems/CollisionSystem.hpp"
 #include "systems/DestroySystem.hpp"
@@ -50,7 +55,7 @@ namespace server {
 
     [[noreturn]] void Game::_startGame()
     {
-        Level  const&currentLevel = _levelManager.getCurrentLevel();
+        Level &currentLevel = _levelManager.getCurrentLevel();
         sf::Clock fpsClock;
         sf::Clock clock;
         sf::Clock enemyClock;
@@ -151,31 +156,57 @@ namespace server {
         }
     }
 
-    void Game::_createEnemy(Level const &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator)
-    {
-        if (enemyClock.getElapsedTime().asSeconds() > static_cast<float>(currentLevel.getEnemySpawnRate())) {
-            enemyClock.restart();
-            auto randNum = generator() % (cmn::monsterMaxSpawnPositionHeight);
-            auto newEnemy = _ecs.createEntity();
+    void Game::_createEnemy(Level &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator)
+     {
+         auto &waves = currentLevel.getWaves();
+         int waveId = currentLevel.getCurrentWaveId();
 
-            newEnemy->addComponent<ecs::Position>(cmn::monsterSpawnPositionWidth, randNum);
-            newEnemy->addComponent<ecs::Enemy>();
-            newEnemy->addComponent<ecs::Health>(cmn::monsterHealth);
-            newEnemy->addComponent<ecs::Collision>(
-                ecs::TypeCollision::ENEMY,
-                cmn::monsterCollisionWidth,
-                cmn::monsterCollisionHeight
-            );
-            std::pair<float, float> const position = {cmn::monsterSpawnPositionWidth, randNum};
-            _sharedData->addUdpPacketToSend(
-                cmn::PacketFactory::createNewEntityPacket(
-                    cmn::EntityType::Monster1,
-                    position,
-                    newEnemy->getId()
-                )
-            );
-        }
-    }
+         if (waveId >= waves.size())
+             return;
+
+         auto &[waveDuration, enemies] = waves[waveId];
+
+         float elapsed = enemyClock.getElapsedTime().asSeconds();
+
+         if (currentLevel.isFinished()) {
+                return;
+         }
+
+         for (auto &enemy : enemies) {
+             if (elapsed - enemy.lastSpawnTime >= enemy.spawnRate) {
+                 auto randNum = generator() % cmn::monsterMaxSpawnPositionHeight;
+                 auto newEnemy = _ecs.createEntity();
+
+                 newEnemy->addComponent<ecs::Position>(cmn::monsterSpawnPositionWidth, randNum);
+                 newEnemy->addComponent<ecs::Enemy>();
+                 newEnemy->addComponent<ecs::Health>(cmn::monsterHealth);
+                 newEnemy->addComponent<ecs::Collision>(
+                     ecs::TypeCollision::ENEMY,
+                     cmn::monsterCollisionWidth,
+                     cmn::monsterCollisionHeight
+                 );
+
+                 std::pair<float, float> const position = {
+                     cmn::monsterSpawnPositionWidth,
+                     randNum
+                 };
+
+                 _sharedData->addUdpPacketToSend(
+                     cmn::PacketFactory::createNewEntityPacket(
+                         enemy.type,
+                         position,
+                         newEnemy->getId()
+                     )
+                     );
+                 enemy.lastSpawnTime = elapsed;
+             }
+         }
+
+         if (elapsed >= waveDuration) {
+             currentLevel.nextWave();
+             enemyClock.restart();
+         }
+     }
 
     void Game::_sendPlayerEntities()
     {
