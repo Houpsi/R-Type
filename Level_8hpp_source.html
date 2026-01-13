@@ -138,7 +138,7 @@ $(document).ready(function(){initNavTree('Level_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        [[nodiscard]] std::list &lt;std::pair &lt;uint16_t, std::list&lt;tmpEnemy&gt;&gt;&gt; <a class="code hl_function" href="classserver_1_1Level.html#a717352565976f1581d12307ff360d288">getWaves</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>      <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        uint8_t _levelId = 0;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        uint8_t _enemySpawnRate;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        uint8_t _enemySpawnRate = 1; <span class="comment">//temporary;</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">bool</span> _isBossPresent = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        std::string _nameLevel;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        uint32_t _playerSpeed = cmn::playerSpeed;</div>
