@@ -26,7 +26,8 @@
 
 namespace server {
 
-     Game::Game(const std::shared_ptr<cmn::SharedData> &data): _sharedData(data)
+     Game::Game(const std::shared_ptr<ServerSharedData> &data, int lobbyId, cmn::LobbyType type)
+    : _sharedData(data), _lobbyId(lobbyId), _lobbyType(type)
      {
          try {
              ecs::EcsManager const manager {};
@@ -41,7 +42,7 @@ namespace server {
     {
         _initLevels();
         _waitForPlayers();
-        _sharedData->addTcpPacketToSend(cmn::PacketFactory::createStartGamePacket());
+        _sharedData->addLobbyTcpPacketToSend(_lobbyId, cmn::PacketFactory::createStartGamePacket());
         _sendPlayerEntities();
         _initEcsManager();
         _startGame();
@@ -60,7 +61,7 @@ namespace server {
 
         while (true) {
             float const deltaTime = clock.restart().asSeconds();
-            std::optional<cmn::packetData> data = _sharedData->getUdpReceivedPacket();
+            std::optional<cmn::packetData> data = _sharedData->getLobbyUdpReceivedPacket(_lobbyId);
 
             if (data.has_value()) {
                 cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
@@ -84,7 +85,7 @@ namespace server {
     void Game::_sendDestroy()
     {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Destroy>()) {
-            _sharedData->addUdpPacketToSend(cmn::PacketFactory::createDeleteEntityPacket(entity->getId()));
+            _sharedData->addLobbyUdpPacketToSend(_lobbyId, cmn::PacketFactory::createDeleteEntityPacket(entity->getId()));
         }
     }
 
@@ -93,7 +94,7 @@ namespace server {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
             auto component = entity->getComponent<ecs::Position>();
             std::pair<float, float> const position = { component->getX(), component->getY() };
-            _sharedData->addUdpPacketToSend(
+            _sharedData->addLobbyUdpPacketToSend( _lobbyId,
                 cmn::PacketFactory::createPositionPacket(position, entity->getId()));
         }
     }
@@ -137,7 +138,7 @@ namespace server {
 
                         std::pair<float, float> const position = {posX, posY};
 
-                        _sharedData->addUdpPacketToSend(
+                        _sharedData->addLobbyUdpPacketToSend(_lobbyId,
                             cmn::PacketFactory::createNewEntityPacket(
                                 cmn::EntityType::PlayerProjectile,
                                 position,
@@ -166,7 +167,7 @@ namespace server {
                 cmn::monsterCollisionHeight
             );
             std::pair<float, float> const position = {cmn::monsterSpawnPositionWidth, randNum};
-            _sharedData->addUdpPacketToSend(
+            _sharedData->addLobbyUdpPacketToSend(_lobbyId,
                 cmn::PacketFactory::createNewEntityPacket(
                     cmn::EntityType::Monster,
                     position,
@@ -182,7 +183,7 @@ namespace server {
             auto component = entity->getComponent<ecs::Position>();
             std::pair<float, float> const pos = {component->getX(), component->getY()};
 
-            _sharedData->addUdpPacketToSend(
+            _sharedData->addLobbyUdpPacketToSend(_lobbyId,
                 cmn::PacketFactory::createNewEntityPacket(
                     cmn::EntityType::Player,
                     pos,
@@ -195,15 +196,19 @@ namespace server {
     void Game::_waitForPlayers()
     {
         size_t currentNbPlayerEntities = 0;
-        size_t playerListSize = _sharedData->getPlayerListSize();
+        std::vector<int> listPlayerIds = _sharedData->getLobbyPlayers(_lobbyId);
 
-        while ((_readyPlayersId.size() != playerListSize) || (playerListSize == 0)) {
-            playerListSize = _sharedData->getPlayerListSize();
-            if (currentNbPlayerEntities != playerListSize) {
-                _createNewPlayers(_sharedData->getAllPlayerIds(), currentNbPlayerEntities);
+         if (_lobbyType != cmn::LobbyType::Lobby) {
+             _createNewPlayers(_sharedData->getLobbyPlayers(_lobbyId), currentNbPlayerEntities);
+             return;
+         }
+        while ((_readyPlayersId.size() != listPlayerIds.size())) {
+            listPlayerIds = _sharedData->getLobbyPlayers(_lobbyId);
+            if (currentNbPlayerEntities != listPlayerIds.size()) {
+                _createNewPlayers(listPlayerIds, currentNbPlayerEntities);
             }
 
-            std::optional<cmn::packetData> data = _sharedData->getUdpReceivedPacket();
+            std::optional<cmn::packetData> data = _sharedData->getLobbyUdpReceivedPacket(_lobbyId);
 
             if (!data.has_value()) {
                 continue;
@@ -238,7 +243,7 @@ namespace server {
         bool isBossPresent = false;
         uint32_t bossApparitionTiming = 0;
 
-        server::Level firstLevel(levelId, enemySpawnRate, isBossPresent, bossApparitionTiming);
+        Level firstLevel(levelId, enemySpawnRate, isBossPresent, bossApparitionTiming);
 
         _levelManager.addLevel(firstLevel);
         _levelManager.setCurrentLevelId(1);
