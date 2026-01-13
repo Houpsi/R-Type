@@ -8,7 +8,7 @@
 #ifndef BOOTSTRAP_SYSTEM_HPP
     #define BOOTSTRAP_SYSTEM_HPP
 #include <bitset>
-#include "Constants.hpp"
+#include "src/Constants.hpp"
 #include "managers/EcsManager.hpp"
 
 namespace ecs {
