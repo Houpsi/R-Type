@@ -30,6 +30,8 @@ add_library(r-type_common_lib
         packet_data/connection_packet/ConnectionPacket.hpp
         packet_data/start_game_packet/StartGamePacket.cpp
         packet_data/start_game_packet/StartGamePacket.hpp
+        enums/LobbyType.hpp
+        enums/LobbyState.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC

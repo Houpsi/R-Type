@@ -213,7 +213,7 @@ namespace cmn {
         _mapLobbiesPlayers[lobbyId].remove(playerId);
     }
 
-    void SharedData::addMessageUDPToSend(int lobbyId, CustomPacket &message)
+    void SharedData::addMessageUDPToSend(int lobbyId, const CustomPacket &message)
     {
         const std::lock_guard lock(_mutex);
         _mapLobbiesPacketListReceived[lobbyId].push(message);
@@ -229,6 +229,12 @@ namespace cmn {
         auto packet = _mapLobbiesPacketListSend[lobbyId].front();
         _mapLobbiesPacketListSend[lobbyId].pop();
         return packet;
+    }
+
+    int SharedData::getNumberPlayerLobby(const int id)
+    {
+        const std::lock_guard lock(_mutex);
+        return static_cast<int>(_mapLobbiesPlayers[id].size());
     }
 
 }

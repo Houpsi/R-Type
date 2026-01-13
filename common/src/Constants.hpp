@@ -14,6 +14,8 @@
 
 namespace cmn {
 
+    constexpr u_int8_t max_players = 4;
+
     constexpr uint16_t connectionProtocolId = 0;
     constexpr uint16_t inputProtocolId = 1;
     constexpr uint16_t positionProtocolId = 2;

@@ -94,13 +94,14 @@ namespace cmn {
 
             [[nodiscard]] size_t getPlayerListSize();
             [[nodiscard]] std::vector<int> getAllPlayerIds();
+            [[nodiscard]] int getNumberPlayerLobby(int id);
 
             void deleteLobby(int lobbyId);
 
             void addPlayerToLobby(int playerId, int lobbyId);
             void deletePlayerToLobby(int playerId, int lobbyId);
 
-            void addMessageUDPToSend(int lobbyId, CustomPacket &message);
+            void addMessageUDPToSend(int lobbyId, const CustomPacket &message);
             std::optional<CustomPacket> getMessageUDPToSend(int lobbyId);
 
         private:
