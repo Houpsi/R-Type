@@ -21,6 +21,7 @@ namespace cmn {
         }
 
         int maxCompressedSize = LZ4_compressBound(static_cast<int>(srcSize));
+
         _compressedBuffer.resize(maxCompressedSize + sizeof(std::uint32_t));
 
         std::uint32_t originalSize = static_cast<std::uint32_t>(srcSize);
