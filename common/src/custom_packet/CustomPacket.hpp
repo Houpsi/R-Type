@@ -18,6 +18,8 @@ namespace cmn {
         void onReceive(const void *data, std::size_t size) override;
 
       private:
+        std::vector<char> _compressedBuffer;
+        std::vector<char> _decompressedBuffer;
     };
 
 }// namespace server

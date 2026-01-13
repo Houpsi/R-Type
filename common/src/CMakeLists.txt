@@ -35,10 +35,12 @@ add_library(r-type_common_lib
 
 target_include_directories(r-type_common_lib PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
+        ${LZ4_SOURCE_DIR}/lib
 )
 
 target_link_libraries(r-type_common_lib
         PUBLIC
         sfml-network
         r-type_ecs_lib
+        lz4_static
 )
