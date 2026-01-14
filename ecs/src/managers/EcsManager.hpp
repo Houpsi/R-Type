@@ -67,10 +67,10 @@ namespace ecs {
         }
 
         template <typename T>
-        std::vector<std::shared_ptr<Entity>> getEntitiesWithComponent()
+        std::vector<Entity> getEntitiesWithComponent()
         {
             auto entities =  _entityManager.getAvailableEntities();
-            std::vector<std::shared_ptr<Entity>> result;
+            std::vector<Entity> result;
 
             for (int i = 0; i <entities.size(); i++) {
                 if (_componentManager.getComponent<T>(entities.emplace(i))) {
