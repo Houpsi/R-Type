@@ -13,15 +13,14 @@ namespace ecs {
         _window.clear(sf::Color::Black);
 
         for (const auto& entity : _entities) {
+            if (!ecs.entityHasComponent<Sprite, Position>(entity)) {
+                continue;
+            }
             auto spriteComp = ecs.getComponent<Sprite>(entity);
             auto positionComp = ecs.getComponent<Position>(entity);
-            // if (spriteComp) {
                 auto sprite = spriteComp.getSprite();
-                // if (positionComp) {
                     sprite.setPosition({positionComp.getX(), positionComp.getY()});
-                // }
                 _window.draw(sprite);
-            // }
         }
         _window.display();
     }

@@ -34,6 +34,7 @@ namespace client {
 
     void GameRenderer::_initEcsSystem()
     {
+        _ecs.initComponents();
         _ecs.addSystem<ecs::InputSystem>();
         _ecs.addSystem<ecs::PlayerAnimationSystem>();
         _ecs.addSystem<ecs::SpriteAnimationSystem>();
@@ -75,22 +76,22 @@ namespace client {
 
 
         const auto backgroundNext = _ecs.createEntity(secondId);
-        _ecs.addComponentToEntity(background, ecs::Position(posOne.x, posOne.y));
-        _ecs.addComponentToEntity(background, ecs::Velocity(veloFirstBackground.x, veloFirstBackground.y));
-        _ecs.addComponentToEntity(background, ecs::Sprite(_ecs.getResourceManager().getTexture(pathFistBackground), scale));
-        _ecs.addComponentToEntity(background, ecs::Background(sizeFistBackground));
+        _ecs.addComponentToEntity(backgroundNext, ecs::Position(posOne.x, posOne.y));
+        _ecs.addComponentToEntity(backgroundNext, ecs::Velocity(veloFirstBackground.x, veloFirstBackground.y));
+        _ecs.addComponentToEntity(backgroundNext, ecs::Sprite(_ecs.getResourceManager().getTexture(pathFistBackground), scale));
+        _ecs.addComponentToEntity(backgroundNext, ecs::Background(sizeSecondBackground));
 
         const auto start = _ecs.createEntity(thirdId);
-        _ecs.addComponentToEntity(background, ecs::Position(posZero.x, posZero.y));
-        _ecs.addComponentToEntity(background, ecs::Velocity(veloSecondBackground.x, veloSecondBackground.y));
-        _ecs.addComponentToEntity(background, ecs::Sprite(_ecs.getResourceManager().getTexture(pathSecondBackground), scale));
-        _ecs.addComponentToEntity(background, ecs::Background(sizeFistBackground));
+        _ecs.addComponentToEntity(start, ecs::Position(posZero.x, posZero.y));
+        _ecs.addComponentToEntity(start, ecs::Velocity(veloSecondBackground.x, veloSecondBackground.y));
+        _ecs.addComponentToEntity(start, ecs::Sprite(_ecs.getResourceManager().getTexture(pathSecondBackground), scale));
+        _ecs.addComponentToEntity(start, ecs::Background(sizeFistBackground));
 
         const auto startNext = _ecs.createEntity(fourId);
-        _ecs.addComponentToEntity(background, ecs::Position(posTwo.x, posTwo.y));
-        _ecs.addComponentToEntity(background, ecs::Velocity(veloSecondBackground.x, veloSecondBackground.y));
-        _ecs.addComponentToEntity(background, ecs::Sprite(_ecs.getResourceManager().getTexture(pathSecondBackground), scale));
-        _ecs.addComponentToEntity(background, ecs::Background(sizeFistBackground));
+        _ecs.addComponentToEntity(startNext, ecs::Position(posTwo.x, posTwo.y));
+        _ecs.addComponentToEntity(startNext, ecs::Velocity(veloSecondBackground.x, veloSecondBackground.y));
+        _ecs.addComponentToEntity(startNext, ecs::Sprite(_ecs.getResourceManager().getTexture(pathSecondBackground), scale));
+        _ecs.addComponentToEntity(startNext, ecs::Background(sizeFistBackground));
     }
 
 

@@ -25,6 +25,8 @@ namespace ecs {
         void deleteEntity(Entity entity);
         void destroyEntities(std::vector<ecs::Entity> &entitiesToDestroy);
         void updateSystems();
+        void initComponents();
+
 
         template <typename T>
         void registerComponent()

@@ -6,7 +6,6 @@
 */
 
 #include "InputPlayer.hpp"
-#include <iostream>
 
 namespace ecs {
     bool InputPlayer::getDown() const

@@ -23,7 +23,6 @@ namespace ecs {
             inputPtr.setSpacebar(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space));
             inputPtr.setR(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R));
         }
-
     }
 
     void InputSystem::configure(EcsManager &ecs)

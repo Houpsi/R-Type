@@ -21,6 +21,9 @@ namespace ecs {
     void BackgroundSystem::update(EcsManager &ecs)
     {
         for (const auto& entity : _entities) {
+            if (!ecs.entityHasComponent<Position, Background>(entity)) {
+                continue;
+            }
             auto pos = ecs.getComponent<Position>(entity);
             auto parallax = ecs.getComponent<Background>(entity);
 

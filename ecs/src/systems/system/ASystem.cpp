@@ -16,6 +16,8 @@ namespace ecs
 
     void ASystem::addEntity(ecs::Entity entity)
     {
+        if (std::find(_entities.begin(), _entities.end(), entity) != _entities.end())
+            return;
         _entities.push_back(entity);
     }
 

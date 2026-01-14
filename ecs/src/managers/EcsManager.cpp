@@ -10,6 +10,17 @@
 #include "EntityManager.hpp"
 #include "ResourceManager.hpp"
 #include "SystemManager.hpp"
+#include "components/ComponentTypes.hpp"
+#include "components/animation/Animation.hpp"
+#include "components/background/Background.hpp"
+#include "components/destroy/Destroy.hpp"
+#include "components/enemy/Enemy.hpp"
+#include "components/inputPlayer/InputPlayer.hpp"
+#include "components/playerAnimation/PlayerAnimation.hpp"
+#include "components/sound/Sound.hpp"
+#include "components/sprite/Sprite.hpp"
+#include "components/velocity/Velocity.hpp"
+#include "components/position/Position.hpp"
 
 namespace ecs {
 
@@ -55,4 +66,22 @@ namespace ecs {
     void EcsManager::updateSystems() {
         _systemManager.updateSystems(*this);
     }
+
+    void EcsManager::initComponents()
+    {
+        _componentManager.registerComponentType<ecs::Animation>();
+        _componentManager.registerComponentType<ecs::Background>();
+        _componentManager.registerComponentType<ecs::Collision>();
+        _componentManager.registerComponentType<ecs::Destroy>();
+        _componentManager.registerComponentType<ecs::Enemy>();
+        _componentManager.registerComponentType<ecs::Health>();
+        _componentManager.registerComponentType<ecs::InputPlayer>();
+        _componentManager.registerComponentType<ecs::PlayerAnimation>();
+        _componentManager.registerComponentType<ecs::Shoot>();
+        _componentManager.registerComponentType<ecs::Sound>();
+        _componentManager.registerComponentType<ecs::Sprite>();
+        _componentManager.registerComponentType<ecs::Velocity>();
+        _componentManager.registerComponentType<ecs::Position>();
+    }
+
 }

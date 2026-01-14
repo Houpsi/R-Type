@@ -260,6 +260,7 @@ namespace server {
 
     void Game::_initEcsManager()
     {
+        _ecs.initComponents();
         _ecs.addSystem<ecs::DestroySystem>();
         _ecs.addSystem<ecs::MovementSystem>();
         _ecs.addSystem<ecs::CollisionSystem>();
