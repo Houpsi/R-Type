@@ -117,7 +117,7 @@ namespace client {
             { cmn::Keys::R,         [](const auto& keyboard){ return keyboard.getReady(); } },
         }};
 
-        const auto inputComp = _ecs.getComponent<ecs::InputPlayer>(_keyboard);
+        ecs::InputPlayer &inputComp = _ecs.getComponent<ecs::InputPlayer>(_keyboard);
 
         bool isPressed = false;
         for (const auto& [key, check] : bindings) {

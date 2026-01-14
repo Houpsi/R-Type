@@ -10,7 +10,7 @@
 namespace ecs {
     void InputSystem::update(EcsManager & ecs) {
         for (auto &entity: _entities) {
-            auto inputPtr = ecs.getComponent<InputPlayer>(entity);
+            auto &inputPtr = ecs.getComponent<InputPlayer>(entity);
 
             inputPtr.setDown(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)
                              || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down));
