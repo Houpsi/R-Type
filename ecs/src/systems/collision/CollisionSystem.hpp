@@ -12,6 +12,7 @@
 #include "components/sprite/Sprite.hpp"
 #include "managers/EcsManager.hpp"
 #include "systems/system/ASystem.hpp"
+#include "components/destroy/Destroy.hpp"
 
 namespace ecs {
     struct AABB {
@@ -38,8 +39,6 @@ namespace ecs {
 
     private:
         void subdivide();
-        // bool intersects(const AABB& a, const AABB& b) const;
-        // bool contains(const AABB& container, const AABB& item) const;
 
         static constexpr int MAX_ENTITIES = 6;
         static constexpr int MAX_DEPTH = 6;
@@ -48,7 +47,6 @@ namespace ecs {
         int _depth;
 
         std::vector<std::pair<Entity, AABB>> _entities;
-        // std::vector<Entity> _entities;
 
         std::unique_ptr<QuadTree> _northWest;
         std::unique_ptr<QuadTree> _northEast;
@@ -58,14 +56,14 @@ namespace ecs {
 
     class CollisionSystem: public ASystem {
       public:
-        CollisionSystem() = default;
+        explicit CollisionSystem();
         void update(EcsManager &ecs) override;
 
     private:
         // static bool shouldIgnoreCollision(TypeCollision a, TypeCollision b);
         static bool isColliding( float x1, float y1, float w1, float h1,
             float x2, float y2, float w2, float h2);
-        // void builQuadTree();
+        void buildQuadTree(EcsManager &ecs);
         // void detectCollisions();
         static bool checkCollision(EcsManager& ecs, Entity a, Entity b);
 

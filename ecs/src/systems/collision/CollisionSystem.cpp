@@ -4,13 +4,20 @@
 ** File description:
 ** CollisionSystem
 */
-
 #include "CollisionSystem.hpp"
-
-#include "components/destroy/Destroy.hpp"
 
 namespace ecs
 {
+    void CollisionSystem::buildQuadTree(EcsManager &ecs)
+    {
+        for (const auto &entity : _entity) {
+            auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
+            auto position = ecs.getComponentManager().getComponent<Position>(entity);
+            AABB bound = {position.getX(), position.getY(), collision.getWidth(), collision.getWidth()};
+            _quadTree.insert(entity, bound);
+        }
+    }
+
     /**
     * Check if the entity can have a collision, and is there is one
     * check if there is a collision with another entity
@@ -19,13 +26,8 @@ namespace ecs
     void CollisionSystem::update(EcsManager &ecs)
     {
         // QuadTree tree(AABB{0,0,16,16});
+        buildQuadTree(ecs);
 
-        for (const auto &entity : _entity) {
-            auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
-            auto position = ecs.getComponentManager().getComponent<Position>(entity);
-            AABB bound = {position.getX(), position.getY(), collision.getWidth(), collision.getWidth()};
-            _quadTree.insert(entity, bound);
-        }
          for (const auto &entity : _entity)
          {
              auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
