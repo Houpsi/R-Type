@@ -36,6 +36,11 @@ ehthumbs.db
 Thumbs.db
 cmake-build-debug
 .idea
-build
+
+#binaries
 r-type_client
 r-type_server
+
+# perf files
+perf.data
+perf.data.old

@@ -8,5 +8,12 @@ project(
         r-type_common
 )
 
+CPMAddPackage(
+        NAME LZ4
+        GITHUB_REPOSITORY lz4/lz4
+        GIT_TAG v1.10.0
+        SOURCE_SUBDIR build/cmake
+)
+
 add_subdirectory(src)
 add_subdirectory(test)

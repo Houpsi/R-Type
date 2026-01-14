@@ -6,63 +6,87 @@
 */
 
 #include "PacketFactory.hpp"
-#include "packet_data/PacketData.hpp"
-#include "packet_data/input_packet/InputPacket.hpp"
-#include "Constants.hpp"
+#include "constants/ProtocolConstants.hpp"
+#include "constants/GameConstants.hpp"
+#include "constants/BitPackingConstants.hpp"
 
 namespace cmn {
 
+    CustomPacket PacketFactory::_putInPacket(BitPacker &packer)
+    {
+        auto buffer = packer.getBuffer();
+        CustomPacket packet;
+
+        for (auto &data : buffer) {
+            packet << data;
+        }
+        return packet;
+    }
+
     CustomPacket PacketFactory::createConnectionPacket(uint32_t playerId)
     {
-        connectionPacket connection = {playerId};
-        packetData const data = {connectionProtocolId, connection};
-        CustomPacket packet;
-        packet << data;
-        return packet;
+        BitPacker packer;
+
+        packer.writeUInt16(connectionProtocolId);
+        packer.writeUInt32(playerId);
+
+        return _putInPacket(packer);
     }
 
     CustomPacket PacketFactory::createInputPacket(uint32_t playerId, Keys key, KeyState state)
     {
-        inputPacket input = {playerId, static_cast<uint8_t>(key), static_cast<uint8_t>(state)};
-        packetData const data = {inputProtocolId, input};
-        CustomPacket packet;
-        packet << data;
-        return packet;
+        BitPacker packer;
+
+        packer.writeUInt16(inputProtocolId);
+        packer.writeUInt32(playerId);
+        packer.writeUInt8(static_cast<uint8_t>(key));
+        packer.writeUInt8(static_cast<uint8_t>(state));
+
+        return _putInPacket(packer);
     }
 
     CustomPacket PacketFactory::createPositionPacket(std::pair<float, float> positionPair, uint64_t entityId)
     {
-        positionPacket position = {entityId, positionPair.first, positionPair.second};
-        packetData const data = {positionProtocolId, position};
-        CustomPacket packet;
-        packet << data;
-        return packet;
+        BitPacker packer;
+
+        packer.writeUInt16(positionProtocolId);
+        packer.writeUInt32(entityId);
+        packer.writeFloat(positionPair.first, 0, windowWidth, xPositionFloatPrecision);
+        packer.writeFloat(positionPair.second, 0, windowHeight, yPositionFloatPrecision);
+
+        return _putInPacket(packer);
     }
 
     CustomPacket PacketFactory::createNewEntityPacket(EntityType type, std::pair<float, float> positionPair, uint64_t entityId)
     {
-        newEntityPacket newEntity = {entityId, static_cast<uint8_t>(type), positionPair.first, positionPair.second};
-        packetData const data = {newEntityProtocolId, newEntity};
-        CustomPacket packet;
-        packet << data;
-        return packet;
+        BitPacker packer;
+
+        packer.writeUInt16(newEntityProtocolId);
+        packer.writeUInt32(entityId);
+        packer.writeUInt8(static_cast<uint8_t>(type));
+        packer.writeFloat(positionPair.first, 0, windowWidth, xPositionFloatPrecision);
+        packer.writeFloat(positionPair.second, 0, windowHeight, yPositionFloatPrecision);
+
+        return _putInPacket(packer);
     }
 
     CustomPacket PacketFactory::createDeleteEntityPacket(uint64_t entityId)
     {
-        deleteEntityPacket deleteEntity = {entityId};
-        packetData const data = {deleteEntityProtocolId, deleteEntity};
-        CustomPacket packet;
-        packet << data;
-        return packet;
+        BitPacker packer;
+
+        packer.writeUInt16(deleteEntityProtocolId);
+        packer.writeUInt32(entityId);
+
+        return _putInPacket(packer);
     }
+
     CustomPacket PacketFactory::createStartGamePacket()
     {
-        startGamePacket startGame = {};
-        packetData const data = {startGameProtocolId, startGame};
-        CustomPacket packet;
-        packet << data;
-        return packet;
+        BitPacker packer;
+
+        packer.writeUInt16(startGameProtocolId);
+
+        return _putInPacket(packer);
     }
 
 }// namespace cmn
