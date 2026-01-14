@@ -18,29 +18,33 @@ namespace ecs
      */
     void CollisionSystem::update(EcsManager &ecs)
     {
-        QuadTree tree(AABB{0,0,16,16}, 4);
+        // QuadTree tree(AABB{0,0,16,16});
 
         for (const auto &entity : _entity) {
             auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
             auto position = ecs.getComponentManager().getComponent<Position>(entity);
             AABB bound = {position.getX(), position.getY(), collision.getWidth(), collision.getWidth()};
-            tree.insert(entity, bound);
+            _quadTree.insert(entity, bound);
         }
          for (const auto &entity : _entity)
          {
-            auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
+             auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
+             auto position = ecs.getComponentManager().getComponent<Position>(entity);
+             const AABB& bound = {position.getX(), position.getY(), collision.getWidth(), collision.getWidth()};
+             auto closeEntities = _quadTree.getEntities(bound);
 
-             for (const auto &other : _entity) {
+
+             for (const auto &other : closeEntities) {
                  auto otherCollision= ecs.getComponentManager().getComponent<Collision>(other);
 
+                 if (entity == other)
+                     continue;
                  if (checkCollision(ecs, entity, other)) {
-                     if (entity == other)
-                         continue;
                      const auto typeA = collision.getTypeCollision();
                      const auto typeB = otherCollision.getTypeCollision();
 
-                     if (typeA == TypeCollision::PLAYER_PROJECTILE &&
-                         typeB == TypeCollision::ENEMY) {
+                     if (typeA == PLAYER_PROJECTILE &&
+                         typeB == ENEMY) {
 
                          auto health = ecs.getComponentManager().getComponent<Health>(other);
                          auto shoot  = ecs.getComponentManager().getComponent<Shoot>(entity);
@@ -50,8 +54,8 @@ namespace ecs
                          ecs.getComponentManager().addComponent(entity, Destroy());
                      }
 
-                     if (typeA == TypeCollision::PLAYER &&
-                         typeB == TypeCollision::ENEMY) {
+                     if (typeA == PLAYER &&
+                         typeB == ENEMY) {
 
                          ecs.getComponentManager().addComponent(entity, Destroy());
                      }
@@ -125,28 +129,28 @@ namespace ecs
         // }
     }
 
-    bool CollisionSystem::shouldIgnoreCollision(const TypeCollision a, const TypeCollision b)
-    {
-        if (a == TypeCollision::PLAYER && b == TypeCollision::PLAYER)
-            return true;
-        if (a == TypeCollision::ENEMY && b == TypeCollision::OBSTACLE)
-            return true;
-        if (a == TypeCollision::PLAYER && b == TypeCollision::PLAYER_PROJECTILE)
-            return true;
-        if (a == TypeCollision::PLAYER_PROJECTILE && b == TypeCollision::PLAYER)
-            return true;
-        if (a == TypeCollision::ENEMY && b == TypeCollision::ENEMY_PROJECTILE)
-            return true;
-        if (a == TypeCollision::ENEMY && b == TypeCollision::ENEMY)
-            return true;
-        if (a == TypeCollision::ENEMY && b == TypeCollision::PLAYER_PROJECTILE)
-            return true;
-        if (a == TypeCollision::ENEMY && b == TypeCollision::PLAYER)
-            return true;
-
-        return false;
-    }
-
+    // bool CollisionSystem::shouldIgnoreCollision(const TypeCollision a, const TypeCollision b)
+    // {
+    //     if (a == TypeCollision::PLAYER && b == TypeCollision::PLAYER)
+    //         return true;
+    //     if (a == TypeCollision::ENEMY && b == TypeCollision::OBSTACLE)
+    //         return true;
+    //     if (a == TypeCollision::PLAYER && b == TypeCollision::PLAYER_PROJECTILE)
+    //         return true;
+    //     if (a == TypeCollision::PLAYER_PROJECTILE && b == TypeCollision::PLAYER)
+    //         return true;
+    //     if (a == TypeCollision::ENEMY && b == TypeCollision::ENEMY_PROJECTILE)
+    //         return true;
+    //     if (a == TypeCollision::ENEMY && b == TypeCollision::ENEMY)
+    //         return true;
+    //     if (a == TypeCollision::ENEMY && b == TypeCollision::PLAYER_PROJECTILE)
+    //         return true;
+    //     if (a == TypeCollision::ENEMY && b == TypeCollision::PLAYER)
+    //         return true;
+    //
+    //     return false;
+    // }
+    //
     bool CollisionSystem::isColliding(
         float x1, float y1, float w1, float h1,
         float x2, float y2, float w2, float h2)

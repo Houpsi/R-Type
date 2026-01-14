@@ -30,7 +30,7 @@ namespace ecs {
 
     class QuadTree {
     public:
-        QuadTree(const AABB& bound, const int depth): _bound(bound), _depth(depth) {};
+        QuadTree(const AABB& bound, const int depth = 0): _bound(bound), _depth(depth) {};
         ~QuadTree() = default;
 
         void insert(Entity entity, AABB &bound);
@@ -38,8 +38,8 @@ namespace ecs {
 
     private:
         void subdivide();
-        bool intersects(const AABB& a, const AABB& b) const;
-        bool contains(const AABB& container, const AABB& item) const;
+        // bool intersects(const AABB& a, const AABB& b) const;
+        // bool contains(const AABB& container, const AABB& item) const;
 
         static constexpr int MAX_ENTITIES = 6;
         static constexpr int MAX_DEPTH = 6;
@@ -60,7 +60,7 @@ namespace ecs {
       public:
         CollisionSystem() = default;
         void update(EcsManager &ecs) override;
-        static bool shouldIgnoreCollision(TypeCollision a, TypeCollision b);
+        // static bool shouldIgnoreCollision(TypeCollision a, TypeCollision b);
         static bool isColliding( float x1, float y1, float w1, float h1,
             float x2, float y2, float w2, float h2);
         // void builQuadTree();
