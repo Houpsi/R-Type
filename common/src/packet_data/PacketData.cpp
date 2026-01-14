@@ -8,6 +8,7 @@
 
 #include "PacketData.hpp"
 #include "Constants.hpp"
+#include "sound_packet/SoundPacket.hpp"
 
 namespace cmn {
 
@@ -64,6 +65,13 @@ namespace cmn {
                 data = startGame;
                 break;
             }
+            case soundProtocolId: {
+                soundPacket collision{};
+                packet >> collision;
+                data = collision;
+                break;
+        }
+
             default: {
                 return packet;
             }

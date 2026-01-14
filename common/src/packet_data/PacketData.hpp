@@ -13,11 +13,13 @@
 #include "packet_data/new_entity_packet/NewEntityPacket.hpp"
 #include "packet_data/position_packet/PositionPacket.hpp"
 #include "packet_data/start_game_packet/StartGamePacket.hpp"
+#include "sound_packet/SoundPacket.hpp"
+
 #include <variant>
 
 namespace cmn {
 
-    using packetContent = std::variant<connectionPacket, inputPacket, positionPacket, newEntityPacket, deleteEntityPacket, startGamePacket>;
+    using packetContent = std::variant<connectionPacket, inputPacket, positionPacket, newEntityPacket, deleteEntityPacket, startGamePacket, soundPacket>;
 
     using packetData = struct packetData {
         uint16_t packetId;

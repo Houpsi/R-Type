@@ -6,9 +6,10 @@
 */
 
 #include "PacketFactory.hpp"
+#include "Constants.hpp"
 #include "packet_data/PacketData.hpp"
 #include "packet_data/input_packet/InputPacket.hpp"
-#include "Constants.hpp"
+#include "packet_data/sound_packet/SoundPacket.hpp"
 
 namespace cmn {
 
@@ -56,6 +57,16 @@ namespace cmn {
         packet << data;
         return packet;
     }
+
+    CustomPacket PacketFactory::createSoundPacket(uint64_t entityId, uint8_t soundId)
+    {
+        soundPacket soundEntity =  {soundId};
+        packetData const data = {soundProtocolId, soundEntity};
+        CustomPacket packet;
+        packet << data;
+        return packet;
+    }
+
     CustomPacket PacketFactory::createStartGamePacket()
     {
         startGamePacket startGame = {};
