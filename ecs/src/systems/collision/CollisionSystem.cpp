@@ -207,10 +207,14 @@ namespace ecs
             if (p.second.intersects(bound))
                 targetEntity.push_back(p.first);
 
-        // targetEntity.appendArray(_northWest->queryRange(bound));
-        // targetEntity.appendArray(_northEast->queryRange(bound));
-        // targetEntity.appendArray(_southWest->queryRange(bound));
-        // targetEntity.appendArray(_southEast->queryRange(bound));
+        auto nw = _northWest->getEntities(bound);
+        targetEntity.insert(targetEntity.end(), nw.begin(), nw.end());
+        auto ne = _northEast->getEntities(bound);
+        targetEntity.insert(targetEntity.end(), ne.begin(), ne.end());
+        auto sw = _southWest->getEntities(bound);
+        targetEntity.insert(targetEntity.end(), sw.begin(), sw.end());
+        auto se = _southEast->getEntities(bound);
+        targetEntity.insert(targetEntity.end(), se.begin(), se.end());
         return targetEntity;
     }
 
