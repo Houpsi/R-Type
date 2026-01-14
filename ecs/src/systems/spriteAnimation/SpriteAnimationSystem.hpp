@@ -11,14 +11,14 @@
 #include "systems/system/ASystem.hpp"
 
 namespace ecs {
-
-class SpriteAnimationSystem : public ASystem
-{
+    class SpriteAnimationSystem : public ASystem
+    {
     public:
         explicit SpriteAnimationSystem() {};
         ~SpriteAnimationSystem() override = default;
         void update(EcsManager &ecs) override;
-};
+        void configure(EcsManager &ecs) override;
+    };
 }
 
 

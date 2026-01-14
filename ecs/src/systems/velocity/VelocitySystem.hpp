@@ -13,12 +13,12 @@
 #include "components/position/Position.hpp"
 
 namespace ecs {
-class VelocitySystem : public ASystem {
-public:
-    explicit VelocitySystem() = default;
-    ~VelocitySystem() override = default;
-    void update(EcsManager &ecs) override;
-};
+    class VelocitySystem : public ASystem {
+    public:
+        ~VelocitySystem() override = default;
+        void update(EcsManager &ecs) override;
+        void configure(EcsManager &ecs) override;
+    };
 }
 
 

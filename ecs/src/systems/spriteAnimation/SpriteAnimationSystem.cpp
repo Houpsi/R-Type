@@ -17,10 +17,10 @@ namespace ecs {
 void SpriteAnimationSystem::update(EcsManager& ecs)
 {
     const float deltaTime = ecs.getDeltaTime();
-    for (auto& entity : _entity) {
-        auto sprite = ecs.getComponentManager().getComponent<Sprite>(entity);
-        auto anim = ecs.getComponentManager().getComponent<Animation>(entity);
-        auto inputPlayer = ecs.getComponentManager().getComponent<InputPlayer>(entity);
+    for (auto& entity : _entities) {
+        auto sprite = ecs.getComponent<Sprite>(entity);
+        auto anim = ecs.getComponent<Animation>(entity);
+        auto inputPlayer = ecs.getComponent<InputPlayer>(entity);
 
         // if (inputPlayer|| !anim || !sprite) {
         //         continue;
@@ -31,4 +31,10 @@ void SpriteAnimationSystem::update(EcsManager& ecs)
     }
 }
 
+    void SpriteAnimationSystem::configure(EcsManager &ecs)
+    {
+        _targetSignature.set(ecs.getComponentType<Sprite>());
+        _targetSignature.set(ecs.getComponentType<Animation>());
+        _targetSignature.set(ecs.getComponentType<InputPlayer>());
+    }
 }

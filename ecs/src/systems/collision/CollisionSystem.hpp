@@ -14,13 +14,18 @@
 #include "systems/system/ASystem.hpp"
 
 namespace ecs {
-    class CollisionSystem: public ASystem {
-      public:
+    class CollisionSystem: public ASystem
+    {
+    public:
         CollisionSystem() = default;
         void update(EcsManager &ecs) override;
+        void configure(EcsManager &ecs) override;
         static bool shouldIgnoreCollision(TypeCollision a, TypeCollision b);
         static bool isColliding( float x1, float y1, float w1, float h1,
             float x2, float y2, float w2, float h2);
+
+    private:
+        ecs::Signature _targetSignature;
     };
 }
 

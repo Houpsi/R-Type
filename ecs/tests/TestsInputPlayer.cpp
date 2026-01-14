@@ -6,7 +6,7 @@
 */
 #include <gtest/gtest.h>
 
-#include "components/InputPlayer.hpp"
+#include "components/inputPlayer/InputPlayer.hpp"
 
 namespace ecs {
     // TEST(InputPlayerTest, SetValueToLeft)

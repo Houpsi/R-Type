@@ -8,21 +8,22 @@
 #ifndef BOOTSTRAP_SYSTEM_HPP
     #define BOOTSTRAP_SYSTEM_HPP
 #include <bitset>
-#include "Constants.hpp"
-#include "managers/EcsManager.hpp"
+#include "src/Constants.hpp"
+#include "managers/EntityManager.hpp"
 
 namespace ecs {
 	class EcsManager;
-	using Entity = uint32_t;
 
-class ISystem {
-  public:
-    ISystem() = default;
-    virtual ~ISystem() = default;
-    
-    virtual void update(EcsManager &ecs) = 0;
-	virtual void pushEntity(Entity) = 0;
-	virtual std::bitset<cmn::NB_COMPONENTS> getSignature() = 0;
+    class ISystem {
+    public:
+        ISystem() = default;
+        virtual ~ISystem() = default;
+
+        virtual void update(EcsManager &ecs) = 0;
+        virtual void configure(EcsManager &ecs) = 0;
+        virtual Signature getSignature() = 0;
+        virtual void addEntity(ecs::Entity entity) = 0;
+        virtual void removeEntity(ecs::Entity entity) = 0;
 
 };
 }

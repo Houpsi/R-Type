@@ -10,19 +10,14 @@
 
 namespace ecs {
 
-void DestroySystem::update(EcsManager &ecs)
-{
-    // auto &entities = ecs.getEntities();
 
-    std::erase_if(_entity, [&ecs](Entity entity) {
-        auto &destroy = ecs.getComponentManager().getComponent<Destroy>(entity);
-        return true;
-    });
+    void DestroySystem::update(EcsManager &ecs)
+    {
+        ecs.destroyEntities(_entities);
+    }
 
-
-    // std::erase_if(entities, [](std::shared_ptr<Entity> &entity) {
-        // return entity->getComponent<Destroy>();
-    // });
-}
-
+    void DestroySystem::configure(EcsManager &ecs)
+    {
+        _targetSignature.set(ecs.getComponentType<Destroy>());
+    }
 }

@@ -5,16 +5,28 @@
 ** ASystem
 */
 #include "ASystem.hpp"
+#include <algorithm>
 
 namespace ecs
 {
-	void ASystem::pushEntity(ecs::Entity newEntity)
-	{
-		_entity.push_back(newEntity);
-	}
-
-	std::bitset<cmn::NB_COMPONENTS> ASystem::getSignature()
+    ecs::Signature ASystem::getSignature()
 	{
 		return _targetSignature;
-	};
+	}
+
+    void ASystem::addEntity(ecs::Entity entity)
+    {
+        _entities.push_back(entity);
+    }
+
+    void ASystem::removeEntity(ecs::Entity entity)
+    {
+        auto it = std::find(_entities.begin(), _entities.end(), entity);
+
+        if (it == _entities.end()) {
+            return;
+        }
+        *it = _entities.back();
+        _entities.pop_back();
+    }
 }

@@ -66,6 +66,7 @@ add_library(r-type_ecs_lib
         components/ComponentArray.cpp
         components/ComponentArray.hpp
         components/ComponentTypes.hpp
+        systems/system/ASystem.cpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC

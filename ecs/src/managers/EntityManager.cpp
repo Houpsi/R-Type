@@ -22,8 +22,27 @@ namespace ecs {
 
     void EntityManager::deleteEntity(Entity id)
     {
-        _signatures[id].reset();
+        if (id >= cmn::MAX_ENTITIES) {
+            return;
+        }
+        _signatures.at(id).reset();
         _availableEntities.push(id);
+    }
+
+    void EntityManager::setSignature(Entity entity, Signature newSignature)
+    {
+        if (entity >= cmn::MAX_ENTITIES) {
+            return;
+        }
+        _signatures.at(entity) = newSignature;
+    }
+
+    Signature EntityManager::getSignature(Entity entity)
+    {
+        if (entity >= cmn::MAX_ENTITIES) {
+            return {};
+        }
+        return _signatures.at(entity);
     }
 
 }

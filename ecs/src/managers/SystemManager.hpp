@@ -10,19 +10,29 @@
 #include "EntityManager.hpp"
 #include "IObserver.hpp"
 #include <memory>
+#include <vector>
+#include <unordered_map>
+#include <typeindex>
+#include "systems/system/ASystem.hpp"
 
 namespace ecs
 {
-	class ASystem;
+    class ASystem;
 
 	class SystemManager : public ecs::IObserver {
 	public:
-		// to call in the function addComponent
-		void onSignatureChanged(Entity entity, const std::bitset<cmn::NB_COMPONENTS>& signature) override;
-		void addSystem(std::shared_ptr<ASystem> system);
+		void onSignatureChanged(Entity entity, const Signature& signature) override;
+        // TODO entityDestroyed -> pour enlever tous les entity dans le cache des systems
+        template <typename T>
+        void addSystem(ecs::EcsManager &ecsManager)
+        {
+            auto system = std::make_shared<T>();
+            _systems[std::type_index(typeid(T))] = system;
+            system->configure(ecsManager);
+        }
 
-		private:
-			std::vector<std::shared_ptr<ASystem>> _systems;
+    private:
+        std::unordered_map<std::type_index, std::shared_ptr<ASystem>> _systems;
 	};
 }
 

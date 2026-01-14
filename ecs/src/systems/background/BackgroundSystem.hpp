@@ -26,10 +26,10 @@ namespace ecs {
              * @param ecs Reference to the central EcsManager to access entities and components.
              */
             void update(EcsManager& ecs) override;
+            void configure(EcsManager &ecs) override;
 
     private:
-        const std::bitset<cmn::NB_COMPONENTS> _targetSignature = 10000000000000;
-
+        ecs::Signature _targetSignature;
     };
 }
 

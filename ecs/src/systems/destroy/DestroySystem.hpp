@@ -14,12 +14,13 @@
 #include "systems/system/ASystem.hpp"
 
 namespace ecs {
-class DestroySystem : public ASystem
-{
-  public:
-    DestroySystem() = default;
-    void update(EcsManager &ecs) override;
-};
+    class DestroySystem : public ASystem
+    {
+    public:
+        DestroySystem() = default;
+        void update(EcsManager &ecs) override;
+        void configure(EcsManager &ecs) override;
+    };
 }
 
 

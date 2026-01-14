@@ -10,34 +10,34 @@
 
 namespace ecs {
     /**
- * @brief Shoot a project
- * If the player touches the key space, a projectile is sent
- * @param ecs
-     */
+     * @brief Shoot a project
+     * If the player touches the key space, a projectile is sent
+     * @param ecs
+    */
     void ShootSystem::update(EcsManager &ecs)
     {
-        for (auto const &entity : _entity) {
-            auto input = ecs.getComponentManager().getComponent<InputPlayer>(entity);
+        for (auto const &entity : _entities) {
+            auto input = ecs.getComponent<InputPlayer>(entity);
             // if (!ecs.getComponentManager().getComponent<Shoot>(entity)) continue;
             // if (input) {
-                auto shoot = ecs.getComponentManager().getComponent<Shoot>(entity);
+                auto shoot = ecs.getComponent<Shoot>(entity);
                 shoot.setTimeSinceLastShot(shoot.getTimeSinceLastShot() + ecs.getDeltaTime());
 
                 if (input.getSpacebar()) {
                     if (shoot.getTimeSinceLastShot() >= shoot.getCooldown()) {
-                        auto projectile = ecs.getEntityManager().createEntity();
+                        auto projectile = ecs.createEntity();
 
                         shoot.setTimeSinceLastShot(0);
 
-                        ecs.getComponentManager().addComponent<Position>(
-                            projectile, Position(ecs.getComponentManager().getComponent<Position>(entity).getX() + ecs.getComponentManager().getComponent<Collision>(entity).getHeight(), ecs.getComponentManager().getComponent<Position>(entity).getY()));
+                        ecs.addComponentToEntity<Position>(
+                            projectile, Position(ecs.getComponent<Position>(entity).getX() + ecs.getComponent<Collision>(entity).getHeight(), ecs.getComponent<Position>(entity).getY()));
 
-                        ecs.getComponentManager().addComponent<Velocity>(projectile, Velocity(400, 1));
-                        ecs.getComponentManager().addComponent<Shoot>(projectile, Shoot(ecs.getComponentManager().getComponent<Shoot>(entity).getDamage(), ecs.getComponentManager().getComponent<Shoot>(entity).getCooldown()));
+                        ecs.addComponentToEntity<Velocity>(projectile, Velocity(400, 1));
+                        ecs.addComponentToEntity<Shoot>(projectile, Shoot(ecs.getComponent<Shoot>(entity).getDamage(), ecs.getComponent<Shoot>(entity).getCooldown()));
                         sf::Vector2f scale(1.0f, 1.0f);
-                        ecs.getComponentManager().addComponent<Sprite>(projectile, Sprite(ecs.getResourceManager().getTexture("./assets/r-typesheet30a.gif"), scale));
-                        ecs.getComponentManager().addComponent<Animation>(projectile, Animation(std::pair<int, int>(32, 36), 0, 3));
-                        ecs.getComponentManager().addComponent<Collision>(projectile, Collision(PLAYER_PROJECTILE, 10, 10));
+                        ecs.addComponentToEntity<Sprite>(projectile, Sprite(ecs.getResourceManager().getTexture("./assets/r-typesheet30a.gif"), scale));
+                        ecs.addComponentToEntity<Animation>(projectile, Animation(std::pair<int, int>(32, 36), 0, 3));
+                        ecs.addComponentToEntity<Collision>(projectile, Collision(PLAYER_PROJECTILE, 10, 10));
 
                         // projectile->addComponent<ecs::Position>(
                         // ecs.getComponentManager().getComponent<Position>(entity).getX() + ecs.getComponentManager().getComponent<Collision>(entity).getHeight(), ecs.getComponentManager().getComponent<Position>(entity).getY());
@@ -52,5 +52,13 @@ namespace ecs {
                 }
             // }
         }
+    }
+
+    void ShootSystem::configure(EcsManager &ecs)
+    {
+        _targetSignature.set(ecs.getComponentType<InputPlayer>());
+        _targetSignature.set(ecs.getComponentType<Shoot>());
+        _targetSignature.set(ecs.getComponentType<Position>());
+        _targetSignature.set(ecs.getComponentType<Collision>());
     }
 }

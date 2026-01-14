@@ -19,6 +19,7 @@ namespace ecs
 		public:
 			HealthSystem() = default;
 			void update(EcsManager &ecs) override;
+            void configure(EcsManager &ecs) override;
 	};
 } // ecs
 

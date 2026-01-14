@@ -14,11 +14,13 @@
 #include "components/inputPlayer/InputPlayer.hpp"
 
 namespace ecs {
-class InputSystem : public ASystem {
-  public:
-    InputSystem() = default;
-    void update(EcsManager &ecs) override;
-};
+    class InputSystem : public ASystem
+    {
+    public:
+        InputSystem() = default;
+        void update(EcsManager &ecs) override;
+        void configure(EcsManager &ecs) override;
+    };
 }
 
 #endif //INPUTSYSTEM_HPP

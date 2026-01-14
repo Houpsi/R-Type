@@ -14,14 +14,13 @@
 #include "components/sprite/Sprite.hpp"
 
 namespace ecs {
-class PlayerAnimationSystem : public ASystem
-{
+    class PlayerAnimationSystem : public ASystem
+    {
     public:
-        explicit PlayerAnimationSystem() {};
         ~PlayerAnimationSystem() override = default;
         void update(EcsManager &ecs) override;
-
-};
+        void configure(EcsManager &ecs) override;
+    };
 }
 
 

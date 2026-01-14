@@ -18,11 +18,12 @@
 #include "components/animation/Animation.hpp"
 
 namespace ecs {
-class ShootSystem : public ASystem {
-  public:
-    ShootSystem() = default;
-    void update(EcsManager &ecs) override;
-};
+    class ShootSystem : public ASystem {
+    public:
+        ShootSystem() = default;
+        void update(EcsManager &ecs) override;
+        void configure(EcsManager &ecs) override;
+    };
 }
 
 #endif// R_TYPE_CLIENT_SHOOTSYSTEM_HPP

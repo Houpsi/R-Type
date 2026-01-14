@@ -20,9 +20,9 @@ namespace ecs
     {
         // const auto &entities = ecs.getEntities();
 
-        for (const auto &entity : _entity) {
-            auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
-            auto position = ecs.getComponentManager().getComponent<Position>(entity);
+        for (const auto &entity : _entities) {
+            auto collision = ecs.getComponent<Collision>(entity);
+            auto position = ecs.getComponent<Position>(entity);
             // entity->getComponent<Collision>();
             // auto position  = entity->getComponent<Position>();
 
@@ -34,12 +34,12 @@ namespace ecs
             const float width  = collision.getWidth();
             const float height = collision.getHeight();
 
-            for (const auto &other : _entity) {
+            for (const auto &other : _entities) {
                 if (entity == other)
                     continue;
 
-                auto otherCollision = ecs.getComponentManager().getComponent<Collision>(entity);
-                auto otherPosition = ecs.getComponentManager().getComponent<Position>(entity);
+                auto otherCollision = ecs.getComponent<Collision>(entity);
+                auto otherPosition = ecs.getComponent<Position>(entity);
                 // auto otherCollision = other->getComponent<Collision>();
                 // auto otherPosition  = other->getComponent<Position>();
 
@@ -68,18 +68,18 @@ namespace ecs
                 if (typeA == TypeCollision::PLAYER_PROJECTILE &&
                     typeB == TypeCollision::ENEMY) {
 
-                    auto health = ecs.getComponentManager().getComponent<Health>(other);
-                    auto shoot  = ecs.getComponentManager().getComponent<Shoot>(entity);
+                    auto health = ecs.getComponent<Health>(other);
+                    auto shoot  = ecs.getComponent<Shoot>(entity);
 
                     health.setHealth(health.getHealth() - shoot.getDamage());
 
-                    ecs.getComponentManager().addComponent(entity, Destroy());
+                    ecs.addComponentToEntity<Destroy>(entity, Destroy());
                 }
 
                 if (typeA == TypeCollision::PLAYER &&
                     typeB == TypeCollision::ENEMY) {
 
-                    ecs.getComponentManager().addComponent(entity, Destroy());
+                    ecs.addComponentToEntity<Destroy>(entity, Destroy());
                 }
             }
         }
@@ -115,5 +115,11 @@ namespace ecs
                x1 + w1 > x2 &&
                y1 < y2 + h2 &&
                y1 + h1 > y2;
+    }
+
+    void CollisionSystem::configure(EcsManager &ecs)
+    {
+        _targetSignature.set(ecs.getComponentType<Collision>());
+        _targetSignature.set(ecs.getComponentType<Position>());
     }
 }

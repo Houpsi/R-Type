@@ -17,16 +17,13 @@
 #include "components/destroy/Destroy.hpp"
 
 namespace ecs {
-class MovementSystem : public ASystem
-{
-  public:
-    explicit MovementSystem(): _movementSpeed(10) {};
-    ~MovementSystem() override = default;
-    void update(EcsManager &ecs) override;
-
-  private:
-    float _movementSpeed;
-};
+    class MovementSystem : public ASystem
+    {
+    public:
+        ~MovementSystem() override = default;
+        void update(EcsManager &ecs) override;
+        void configure(EcsManager &ecs) override;
+    };
 }
 
 

@@ -27,6 +27,7 @@ namespace cmn {
     constexpr uint16_t NB_COMPONENTS = 14;
 
     // Game
+    constexpr float playerSpeed = 250.f;
     constexpr float playerHealth = 100;
     constexpr sf::Vector2f playerSpriteScale = {2.0F, 2.0F};
     constexpr std::string_view playerSpriteSheet = "./assets/r-typesheet42.gif";

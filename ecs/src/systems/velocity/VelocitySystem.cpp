@@ -12,10 +12,10 @@ namespace ecs {
     void VelocitySystem::update(EcsManager &ecs)
     {
         float dt = ecs.getDeltaTime();
-        for (auto const &entity : _entity) {
-            auto pos = ecs.getComponentManager().getComponent<Position>(entity);
-            auto direction = ecs.getComponentManager().getComponent<Velocity>(entity).getDirection();
-            auto velocity = ecs.getComponentManager().getComponent<Velocity>(entity).getVelocity();
+        for (auto const &entity : _entities) {
+            auto pos = ecs.getComponent<Position>(entity);
+            auto direction = ecs.getComponent<Velocity>(entity).getDirection();
+            auto velocity = ecs.getComponent<Velocity>(entity).getVelocity();
 
             if (direction == 0) {
                 pos.setX(pos.getX() - (velocity * dt));
@@ -30,5 +30,11 @@ namespace ecs {
                 pos.setY(pos.getY() + (velocity * dt));
             }
         }
+    }
+
+    void VelocitySystem::configure(EcsManager &ecs)
+    {
+        _targetSignature.set(ecs.getComponentType<Position>());
+        _targetSignature.set(ecs.getComponentType<Velocity>());
     }
 }

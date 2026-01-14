@@ -13,22 +13,8 @@
 
 namespace ecs {
 
-    EntityManager &EcsManager::getEntityManager()
+    ResourceManager& EcsManager::getResourceManager()
     {
-        return _entityManager;
-    }
-
-    ComponentManager &EcsManager::getComponentManager()
-    {
-        return _componentManager;
-    }
-
-    SystemManager &EcsManager::getSystemManager()
-    {
-        return _systemManager;
-    }
-
-    ResourceManager &EcsManager::getResourceManager() {
         return _resourceManager;
     }
 
@@ -39,5 +25,25 @@ namespace ecs {
     float EcsManager::getDeltaTime() const
     {
         return _deltaTime;
+    }
+
+    void EcsManager::destroyEntities(std::vector<ecs::Entity> &entitiesToDestroy)
+    {
+        for (auto &entity : entitiesToDestroy) {
+            _componentManager.entityDestroyed(entity);
+            _entityManager.deleteEntity(entity);
+        }
+        entitiesToDestroy.clear();
+    }
+
+    Entity EcsManager::createEntity()
+    {
+        return _entityManager.createEntity();
+    }
+
+    void EcsManager::deleteEntity(Entity entity)
+    {
+        _componentManager.entityDestroyed(entity);
+        _entityManager.deleteEntity(entity);
     }
 }

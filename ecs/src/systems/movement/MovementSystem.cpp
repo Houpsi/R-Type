@@ -6,38 +6,34 @@
 */
 
 #include "MovementSystem.hpp"
-#include <iostream>
 
 namespace ecs {
-void MovementSystem::update(EcsManager &ecs)
-{
-    constexpr uint16_t windowWidth = 1920;
+    void MovementSystem::update(EcsManager &ecs)
+    {
+        const float dt = ecs.getDeltaTime();
+        for (auto const &entity : _entities) {
+            auto pos = ecs.getComponent<Position>(entity);
+            auto input = ecs.getComponent<InputPlayer>(entity);
 
-    const float speed = 250.0F;
-    const float dt = ecs.getDeltaTime();
-    for (auto const &entity : _entity) {
-        auto pos = ecs.getComponentManager().getComponent<Position>(entity);
-        auto input = ecs.getComponentManager().getComponent<InputPlayer>(entity);
-
-        // if (input) {
+            // if (input) {
             if (input.getUp()) {
-                pos.setY(pos.getY() - (speed * dt));
+                pos.setY(pos.getY() - (cmn::playerSpeed * dt));
             }
             if (input.getDown()) {
-                pos.setY(pos.getY() + (speed * dt));
+                pos.setY(pos.getY() + (cmn::playerSpeed * dt));
             }
             if (input.getLeft()) {
-                pos.setX(pos.getX() - (speed * dt));
+                pos.setX(pos.getX() - (cmn::playerSpeed * dt));
             }
             if (input.getRight()) {
-                pos.setX(pos.getX() + (speed * dt));
+                pos.setX(pos.getX() + (cmn::playerSpeed * dt));
             }
-        // }
-    }
+            // }
+        }
     // for (auto const &enemy : ecs.getEntitiesWithComponent<Enemy>()) {
     //     auto pos = enemy->getComponent<Position>();
     //     if (pos) {
-    //         pos->setX(pos->getX() + (-speed * dt));
+    //         pos->setX(pos->getX() + (-playerSpeed * dt));
     //     }
     //     if (pos->getX() < 0 - enemy->getComponent<Collision>()->getWidth()) {
     //         enemy->addComponent<Destroy>();
@@ -46,5 +42,11 @@ void MovementSystem::update(EcsManager &ecs)
     //         enemy->addComponent<Destroy>();
     //     }
     // }
-}
+    }
+
+    void MovementSystem::configure(EcsManager &ecs)
+    {
+        _targetSignature.set(ecs.getComponentType<InputPlayer>());
+        _targetSignature.set(ecs.getComponentType<Position>());
+    }
 }

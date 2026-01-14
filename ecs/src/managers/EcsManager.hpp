@@ -16,12 +16,63 @@
 #include <vector>
 
 namespace ecs {
+    class SystemManager;
+
     class EcsManager {
     public:
-        EntityManager &getEntityManager();
-        ComponentManager &getComponentManager();
-        SystemManager &getSystemManager();
-        ResourceManager &getResourceManager();
+        Entity createEntity();
+        void deleteEntity(Entity entity);
+        void destroyEntities(std::vector<ecs::Entity> &entitiesToDestroy);
+
+        template <typename T>
+        void registerComponent()
+        {
+            _componentManager.registerComponentType<T>();
+        }
+
+        template <typename T>
+        void addComponentToEntity(Entity entity, T comp)
+        {
+            _componentManager.addComponent<T>(entity, comp);
+
+            auto entitySignature = _entityManager.getSignature(entity);
+            auto bitIndex = _componentManager.getComponentBitId<T>();
+            entitySignature.set(bitIndex, true);
+            _entityManager.setSignature(entity, entitySignature);
+            _systemManager.onSignatureChanged(entity, entitySignature);
+        }
+
+        template <typename T>
+        void removeComponentFromEntity(Entity entity, T comp)
+        {
+            _componentManager.removeComponent<T>(entity, comp);
+
+            auto entitySignature = _entityManager.getSignature(entity);
+            auto bitIndex = _componentManager.getComponentBitId<T>();
+            entitySignature.set(bitIndex, false);
+            _entityManager.setSignature(entity, entitySignature);
+            _systemManager.onSignatureChanged(entity, entitySignature);
+        }
+
+        template <typename T>
+        T& getComponent(Entity entity)
+        {
+            return _componentManager.getComponent<T>(entity);
+        }
+
+        template <typename T>
+        uint8_t getComponentType()
+        {
+            return _componentManager.getComponentBitId<T>();
+        }
+
+        template <typename T>
+        std::shared_ptr<T> addSystem()
+        {
+            return _systemManager.addSystem<T>(*this);
+        }
+
+        ResourceManager& getResourceManager();
         float getDeltaTime() const;
         void setDeltaTime(float dt);
     private:
@@ -30,7 +81,6 @@ namespace ecs {
         SystemManager _systemManager;
         ResourceManager _resourceManager;
         float _deltaTime = 0.0f;
-
     };
 }
 
