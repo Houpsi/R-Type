@@ -8,26 +8,26 @@
 #ifndef BOOTSTRAP_SOUND_HPP
     #define BOOTSTRAP_SOUND_HPP
 #include "Component.hpp"
-#include <SFML/Audio.hpp>
-#include <iostream>
+
 
 namespace ecs {
-class Sound : public Component {
-  public:
-    explicit Sound(std::string& id): idMusic(id) {};
-    ~Sound() override = default;
 
-    std::string idMusic;
-  //   Sound(const std::string& filepath);
-  //   ~Sound() override = default;
-  //
-  //   const sf::Sound& getSound() const;
-  //   void play();
-  //
-  // private:
-  //   std::unique_ptr<sf::Sound> _sound;
-  //   sf::SoundBuffer _buffer;
-};
+    class Sound : public Component {
+      public:
+        explicit Sound(int id, bool loop): _idMusic(id) , _isLooping(loop) {};
+        ~Sound() override = default;
+        void setIsPlayed(bool played);
+        bool getIsPlayed() const;
+        int getIdMusic() const;
+        void setIsLoopping(bool loop);
+        int getIsLoopping();
+
+
+        private:
+            int _idMusic;
+            bool _isPlayed = false;
+            bool _isLooping = false;
+    };
 }
 
 #endif //BOOTSTRAP_SOUND_HPP
