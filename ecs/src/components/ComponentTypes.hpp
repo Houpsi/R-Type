@@ -10,7 +10,7 @@
 
 #include <utility>
 #include <memory>
-#include "components/Collision.hpp"
+#include "components/collision//Collision.hpp"
 #include "SFML/Audio/Sound.hpp"
 #include "SFML/Audio/SoundBuffer.hpp"
 
