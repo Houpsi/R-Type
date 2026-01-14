@@ -10,6 +10,7 @@
 
 #include "EcsManager.hpp"
 #include "packet_data/PacketData.hpp"
+#include "packet_data/sound_packet/SoundPacket.hpp"
 
 namespace cmn {
 
@@ -23,6 +24,8 @@ namespace cmn {
         static void _injectPosition(ecs::EcsManager &ecs, positionPacket &position);
         static void _injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity);
         static void _deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity);
+        static void _soundEntity(ecs::EcsManager &ecs, soundPacket &sound);
+
     };
 
 }// namespace cmn

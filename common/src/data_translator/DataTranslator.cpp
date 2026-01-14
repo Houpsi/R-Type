@@ -8,7 +8,9 @@
 #include "DataTranslator.hpp"
 #include "Constants.hpp"
 #include "components/Animation.hpp"
+#include "components/Collision.hpp"
 #include "components/Destroy.hpp"
+#include "components/Enemy.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/PlayerAnimation.hpp"
 #include "components/Position.hpp"
@@ -16,7 +18,6 @@
 #include "components/Sprite.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
-#include <list>
 
 namespace cmn {
 
@@ -80,7 +81,6 @@ namespace cmn {
         if (static_cast<EntityType>(newEntity.type) == EntityType::Player) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
             entity->addComponent<ecs::PlayerAnimation>();
-            entity->addComponent<ecs::Sound>(std::string(playerShootSound));
             entity->addComponent<ecs::InputPlayer>();
         }
         if (static_cast<EntityType>(newEntity.type) == EntityType::Monster) {
@@ -98,8 +98,16 @@ namespace cmn {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
             if (entity->getId() == deleteEntity.entityId) {
                 entity->addComponent<ecs::Destroy>();
-                std::shared_ptr<ecs::Entity> _sound = ecs.getEntityById(5);
-                _sound->addComponent<ecs::Sound>(1);
+                break;
+            }
+        }
+    }
+
+    void DataTranslator::_soundEntity(ecs::EcsManager &ecs, soundPacket &collision)
+    {
+        for (auto &entity : ecs.getEntities()) {
+            if (entity->getId() == idEntityForMusic) {
+                entity->addComponent<ecs::Sound>(static_cast<int>(collision.soundId), false);
                 break;
             }
         }
@@ -122,6 +130,9 @@ namespace cmn {
                 } else if constexpr (std::is_same_v<T, deleteEntityPacket>) {
                     deleteEntityPacket &deleteEntity = arg;
                     _deleteEntity(ecs, deleteEntity);
+                }  else if constexpr (std::is_same_v<T, soundPacket>) {
+                    soundPacket &collision = arg;
+                    _soundEntity(ecs, collision);
                 }
             }, data.content);
     }
