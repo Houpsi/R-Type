@@ -20,14 +20,44 @@ namespace ecs
     {
         QuadTree tree(AABB{0,0,16,16}, 4);
 
-        for (const auto &entity : _entity)
-        {
+        for (const auto &entity : _entity) {
             auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
             auto position = ecs.getComponentManager().getComponent<Position>(entity);
             AABB bound = {position.getX(), position.getY(), collision.getWidth(), collision.getWidth()};
             tree.insert(entity, bound);
         }
+         for (const auto &entity : _entity)
+         {
+            auto collision = ecs.getComponentManager().getComponent<Collision>(entity);
 
+             for (const auto &other : _entity) {
+                 auto otherCollision= ecs.getComponentManager().getComponent<Collision>(other);
+
+                 if (checkCollision(ecs, entity, other)) {
+                     if (entity == other)
+                         continue;
+                     const auto typeA = collision.getTypeCollision();
+                     const auto typeB = otherCollision.getTypeCollision();
+
+                     if (typeA == TypeCollision::PLAYER_PROJECTILE &&
+                         typeB == TypeCollision::ENEMY) {
+
+                         auto health = ecs.getComponentManager().getComponent<Health>(other);
+                         auto shoot  = ecs.getComponentManager().getComponent<Shoot>(entity);
+
+                         health.setHealth(health.getHealth() - shoot.getDamage());
+
+                         ecs.getComponentManager().addComponent(entity, Destroy());
+                     }
+
+                     if (typeA == TypeCollision::PLAYER &&
+                         typeB == TypeCollision::ENEMY) {
+
+                         ecs.getComponentManager().addComponent(entity, Destroy());
+                     }
+                 }
+             }
+         }
         // const auto &entities = ecs.getEntities();
 
         // for (const auto &entity : _entity) {
@@ -127,12 +157,30 @@ namespace ecs
                y1 + h1 > y2;
     }
 
+    bool CollisionSystem::checkCollision(EcsManager& ecs, Entity a, Entity b)
+    {
+        const auto& posA = ecs.getComponentManager().getComponent<Position>(a);
+        const auto& colA = ecs.getComponentManager().getComponent<Collision>(a);
+
+        const auto& posB = ecs.getComponentManager().getComponent<Position>(b);
+        const auto& colB = ecs.getComponentManager().getComponent<Collision>(b);
+
+        // if (shouldIgnoreCollision(colA..getType(), colB.getType()))
+            // return false;
+
+        return isColliding(
+            posA.getX(), posA.getY(), colA.getWidth(), colA.getHeight(),
+            posB.getX(), posB.getY(), colB.getWidth(), colB.getHeight()
+        );
+    }
+
+
     void QuadTree::insert(Entity entity, AABB& bound)
     {
         if (!_bound.intersects(bound)) {
             return;
         }
-        if (_depth < MAX_ENTITIES) {
+        if (_entities.size() < MAX_ENTITIES || _depth >= MAX_DEPTH) {
             _entities.push_back({entity, bound});
             return;
         }
