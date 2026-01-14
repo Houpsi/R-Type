@@ -47,11 +47,8 @@ namespace client {
         return 0;
     }
 
-    int Client::sendTcp(const cmn::packetData& dataPacket)
+    int Client::sendTcp(cmn::CustomPacket &packet)
     {
-        cmn::CustomPacket packet;
-        packet << dataPacket;
-
         if (_tcpSocket.send(packet) != sf::Socket::Status::Done) {
             std::cerr << "[ERROR]: Failed to send TCP packet.\n";
             return 1;
@@ -91,9 +88,7 @@ namespace client {
                     std::cerr << "[TCP]: Failed to receive TCP packet.\n";
                     continue;
                 }
-                cmn::packetData data;
-                packet >> data;
-                _sharedData->addTcpReceivedPacket(data);
+                _sharedData->addTcpReceivedPacket(packet);
                 //std::cout << "[RECEIVED]: TCP Packet received\n";
             }
         }
@@ -117,9 +112,7 @@ namespace client {
 //                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
-            cmn::packetData data;
-            packet >> data;
-            _sharedData->addUdpReceivedPacket(data);
+            _sharedData->addUdpReceivedPacket(packet);
             //std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
     }

@@ -6,13 +6,14 @@
 */
 
 #include "DataTranslator.hpp"
-#include "Constants.hpp"
+#include "constants/GameConstants.hpp"
 #include "components/animation/Animation.hpp"
 #include "components/inputPlayer/InputPlayer.hpp"
 #include "components/playerAnimation/PlayerAnimation.hpp"
 #include "components/position/Position.hpp"
 #include "components/sound/Sound.hpp"
 #include "components/sprite/Sprite.hpp"
+#include "components/destroy/Destroy.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
 #include <list>
@@ -42,7 +43,7 @@ namespace cmn {
         }
     }};
 
-    void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputPacket &input, std::unordered_map<int, uint64_t> playerIdEntityMap)
+    void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputData &input, std::unordered_map<int, uint64_t> playerIdEntityMap)
     {
         uint32_t playerId = input.playerId;
         uint64_t const entityId = playerIdEntityMap[static_cast<int>(playerId)];
@@ -59,7 +60,7 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionPacket &position)
+    void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionData &position)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
             if (entity->getId() == position.entityId) {
@@ -71,7 +72,7 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity)
+    void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityData &newEntity)
     {
         auto entity = ecs.createEntity(newEntity.entityId);
 
@@ -92,7 +93,7 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity)
+    void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityData &deleteEntity)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
             if (entity->getId() == deleteEntity.entityId) {
@@ -107,20 +108,20 @@ namespace cmn {
         std::visit([&ecs, playerIdEntityMap](auto &&arg)
             {
                 using T = std::decay_t<decltype(arg)>;
-                if constexpr (std::is_same_v<T, inputPacket>) {
-                    inputPacket &input = arg;
+                if constexpr (std::is_same_v<T, inputData>) {
+                    inputData &input = arg;
                     _injectInput(ecs, input, playerIdEntityMap);
-                } else if constexpr (std::is_same_v<T, positionPacket>) {
-                    positionPacket &position = arg;
+                } else if constexpr (std::is_same_v<T, positionData>) {
+                    positionData &position = arg;
                     _injectPosition(ecs, position);
-                } else if constexpr (std::is_same_v<T, newEntityPacket>) {
-                    newEntityPacket &newEntity = arg;
+                } else if constexpr (std::is_same_v<T, newEntityData>) {
+                    newEntityData &newEntity = arg;
                     _injectNewEntity(ecs, newEntity);
-                } else if constexpr (std::is_same_v<T, deleteEntityPacket>) {
-                    deleteEntityPacket &deleteEntity = arg;
+                } else if constexpr (std::is_same_v<T, deleteEntityData>) {
+                    deleteEntityData &deleteEntity = arg;
                     _deleteEntity(ecs, deleteEntity);
                 }
-            }, data.content);
+            }, data);
     }
 
 }// namespace cmn

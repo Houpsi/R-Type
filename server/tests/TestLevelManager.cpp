@@ -14,20 +14,17 @@ namespace test {
     TEST(ChangeToNextlevelTest, SuccessfulChange)
     {
         server::LevelManager levelManager;
-        server::Level firstLevel(1, 10, false, 0);
-        server::Level secondLevel(2, 20, true, 300);
+        levelManager.loadLevelFromFolder();
 
-        levelManager.addLevel(firstLevel);
-        levelManager.addLevel(secondLevel);
         levelManager.setCurrentLevelId(1);
         levelManager.changeToNextLevel();
-        ASSERT_EQ(levelManager.getCurrentLevel().getLevelId(), 2);
+        ASSERT_EQ(static_cast<int>(levelManager.getCurrentLevel().getLevelId()), 2);
     }
 
     TEST(ChangeToNextLevelTest, ChangeFail)
     {
         server::LevelManager levelManager;
-        server::Level firstLevel(1, 10, false, 0);
+        server::Level firstLevel;
 
         levelManager.addLevel(firstLevel);
         levelManager.setCurrentLevelId(1);

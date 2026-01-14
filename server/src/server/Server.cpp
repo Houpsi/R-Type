@@ -71,9 +71,7 @@ namespace server {
                         it = _socketVector.erase(it);
                     }
                 }
-                cmn::packetData data;
-                packet >> data;
-                _sharedData->addTcpReceivedPacket(data);
+                _sharedData->addTcpReceivedPacket(packet);
 //                std::cout << "[RECEIVED]: TCP Packet received" << "\n";
             }
         }
@@ -165,9 +163,7 @@ namespace server {
 //                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
-            cmn::packetData data;
-            packet >> data;
-            _sharedData->addUdpReceivedPacket(data);
+            _sharedData->addUdpReceivedPacket(packet);
 //            std::cout << "[RECEIVED]: UDP Packet received" << "\n";
         }
     }
