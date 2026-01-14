@@ -5,22 +5,16 @@
 ** Constants
 */
 
-#ifndef R_TYPE_CONSTANTS_HPP
-#define R_TYPE_CONSTANTS_HPP
+#ifndef R_TYPE_GAMECONSTANTS_HPP
+#define R_TYPE_GAMECONSTANTS_HPP
 
 #include "SFML/System/Vector2.hpp"
-#include <string>
+
+#include <array>
 #include <cstdint>
+#include <string>
 
 namespace cmn {
-
-    // Protocol
-    constexpr uint16_t connectionProtocolId = 0;
-    constexpr uint16_t inputProtocolId = 1;
-    constexpr uint16_t positionProtocolId = 2;
-    constexpr uint16_t newEntityProtocolId = 3;
-    constexpr uint16_t deleteEntityProtocolId = 4;
-    constexpr uint16_t startGameProtocolId = 5;
 
     // Ecs
     constexpr uint64_t MAX_ENTITIES = 5000;
@@ -48,6 +42,7 @@ namespace cmn {
     constexpr uint16_t monsterMaxSpawnPositionHeight = 1081;
 
     constexpr uint16_t playerProjectileSpeed = 400;
+    constexpr uint16_t playerSpeed = 100;
     constexpr int8_t playerProjectileDirection = 1;
     constexpr sf::Vector2f playerProjectileScale = {1.0F, 1.0F};
     constexpr std::string_view playerProjectileSpriteSheet = "./assets/r-typesheet30a.gif";
@@ -60,6 +55,9 @@ namespace cmn {
     constexpr uint16_t windowWidth = 1920;
     constexpr uint16_t windowHeight = 1080;
 
+    constexpr std::string_view folderLevels = "Levels";
+    constexpr std::array<std::string_view, 2> nameTypeEnemies = {"basic_enemy", "fast_enemy"};
+    constexpr std::array<std::string_view, 2> nameTypeBoss = {"boss_type_1", "boss_type_2"};
 }
 
-#endif// R_TYPE_CONSTANTS_HPP
+#endif// R_TYPE_GAMECONSTANTS_HPP

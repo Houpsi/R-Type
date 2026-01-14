@@ -16,13 +16,14 @@ namespace server {
     {
       public:
         void addLevel(Level &level);
+        void loadLevelFromFolder();
         Level &getCurrentLevel();
         void changeToNextLevel();
         void setCurrentLevelId(uint8_t id);
 
       private:
         std::list<Level> _levels;
-        uint8_t _currentLevelId;
+        uint8_t _currentLevelId = 0;
     };
 
 }// namespace server

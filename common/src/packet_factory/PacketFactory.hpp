@@ -12,6 +12,7 @@
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
 #include "enums/KeyState.hpp"
+#include "bit_packer/BitPacker.hpp"
 
 namespace cmn {
 
@@ -26,7 +27,7 @@ namespace cmn {
         static CustomPacket createStartGamePacket();
 
       private:
-
+        static CustomPacket _putInPacket(BitPacker &packer);
     };
 
 }// namespace cmn

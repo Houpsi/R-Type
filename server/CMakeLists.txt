@@ -8,5 +8,11 @@ project(
         r-type_server
 )
 
+CPMAddPackage(
+        NAME LIBCONFIG
+        GITHUB_REPOSITORY hyperrealm/libconfig
+        GIT_TAG v1.8.2
+)
+
 add_subdirectory(src)
 add_subdirectory(tests)

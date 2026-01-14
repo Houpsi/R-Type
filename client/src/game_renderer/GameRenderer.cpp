@@ -20,6 +20,7 @@
 #include "systems/spriteAnimation/SpriteAnimationSystem.hpp"
 #include "systems/velocity/VelocitySystem.hpp"
 #include "packet_factory/PacketFactory.hpp"
+#include "packet_disassembler/PacketDisassembler.hpp"
 
 #include <functional>
 
@@ -134,19 +135,24 @@ namespace client {
 
         if (_isRunning) {
             while (auto packet = _sharedData->getUdpReceivedPacket()) {
-                _translator.translate(_ecs, *packet, emptyMap);
+                if (auto data = cmn::PacketDisassembler::disassemble(packet.value())) {
+                    _translator.translate(_ecs, data.value(), emptyMap);
+                }
             }
         } else {
             if (auto packet = _sharedData->getTcpReceivedPacket()) {
-                std::visit([this](auto &&arg) {
-                    using T = std::decay_t<decltype(arg)>;
-
-                    if constexpr (std::is_same_v<T, cmn::connectionPacket>) {
-                        _playerId = arg.playerId;
-                    } else if constexpr (std::is_same_v<T, cmn::startGamePacket>) {
-                        _isRunning = true;
-                    }
-                }, packet->content);
+                if (auto data = cmn::PacketDisassembler::disassemble(packet.value())) {
+                    std::visit(
+                        [this](auto &&arg) {
+                            using T = std::decay_t<decltype(arg)>;
+                            if constexpr (std::is_same_v<T, cmn::connectionData>) {
+                                _playerId = arg.playerId;
+                            } else if constexpr (std::is_same_v<T, cmn::startGameData>) {
+                                _isRunning = true;
+                            }
+                        },
+                        data.value());
+                }
             }
         }
     }
@@ -168,7 +174,7 @@ namespace client {
     void GameRenderer::run()
     {
         sf::Clock inputClock;
-        constexpr float inputCooldown = 0.016f;
+        constexpr float inputCooldown = 0.016F;
         float elapsedTime = 0;
 
         _initEcsSystem();
