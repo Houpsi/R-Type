@@ -45,4 +45,8 @@ namespace ecs {
         return _signatures.at(entity);
     }
 
+    std::queue<Entity> EntityManager::getAvailableEntities() const
+    {
+        return _availableEntities;
+    }
 }
