@@ -33,7 +33,6 @@ namespace ecs
              const AABB& bound = {position.getX(), position.getY(), collision.getWidth(), collision.getWidth()};
              auto closeEntities = _quadTree.getEntities(bound);
 
-
              for (const auto &other : closeEntities) {
                  auto otherCollision= ecs.getComponentManager().getComponent<Collision>(other);
 
@@ -45,16 +44,13 @@ namespace ecs
 
                      if (typeA == PLAYER_PROJECTILE &&
                          typeB == ENEMY) {
-
                          auto health = ecs.getComponentManager().getComponent<Health>(other);
                          auto shoot  = ecs.getComponentManager().getComponent<Shoot>(entity);
 
                          health.setHealth(health.getHealth() - shoot.getDamage());
-
                          ecs.getComponentManager().addComponent(entity, Destroy());
                      }
-
-                     if (typeA == PLAYER &&
+                     else if (typeA == PLAYER &&
                          typeB == ENEMY) {
 
                          ecs.getComponentManager().addComponent(entity, Destroy());
@@ -213,6 +209,7 @@ namespace ecs
         // targetEntity.appendArray(_northEast->queryRange(bound));
         // targetEntity.appendArray(_southWest->queryRange(bound));
         // targetEntity.appendArray(_southEast->queryRange(bound));
+        return targetEntity;
     }
 
     void QuadTree::subdivide()
