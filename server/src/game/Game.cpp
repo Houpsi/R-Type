@@ -18,7 +18,6 @@
 #include "systems/collision/CollisionSystem.hpp"
 #include "systems/destroy/DestroySystem.hpp"
 #include "systems/health/HealthSystem.hpp"
-#include "systems/input/InputSystem.hpp"
 #include "systems/movement/MovementSystem.hpp"
 #include "systems/shoot/ShootSystem.hpp"
 #include "systems/velocity/VelocitySystem.hpp"
@@ -29,15 +28,10 @@
 
 namespace server {
 
-     Game::Game(const std::shared_ptr<cmn::SharedData> &data): _sharedData(data)
-     {
-         try {
-             ecs::EcsManager const manager {};
-             _ecs = manager;
-         } catch (std::exception &e) {
-             throw std::exception();
-         }
-     }
+    Game::Game(const std::shared_ptr<cmn::SharedData> &data) : _sharedData(data), _ecs()
+    {
+
+    }
 
 
     void Game::run()
