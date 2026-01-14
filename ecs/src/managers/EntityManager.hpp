@@ -22,6 +22,7 @@ namespace ecs {
     class EntityManager {
     public:
         Entity createEntity();
+        Entity createEntity(std::size_t id);
         void deleteEntity(Entity id);
         void setSignature(Entity entity, Signature newSignature);
         Signature getSignature(Entity entity);

@@ -41,9 +41,18 @@ namespace ecs {
         return _entityManager.createEntity();
     }
 
+    Entity EcsManager::createEntity(std::size_t id)
+    {
+        return _entityManager.createEntity(id);
+    }
+
     void EcsManager::deleteEntity(Entity entity)
     {
         _componentManager.entityDestroyed(entity);
         _entityManager.deleteEntity(entity);
+    }
+
+    void EcsManager::updateSystems() {
+        _systemManager.updateSystems(*this);
     }
 }

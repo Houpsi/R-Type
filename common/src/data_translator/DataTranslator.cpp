@@ -16,30 +16,31 @@
 #include "components/destroy/Destroy.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
+#include "components/ComponentTypes.hpp"
 #include <list>
 
 namespace cmn {
 
-    using InputFn = void (*)(Keys, const std::shared_ptr<ecs::InputPlayer>&);
+    using InputFn = void (*)(Keys, ecs::InputPlayer&);
 
     constexpr std::array<InputFn, 6> functionArray = {{
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>&component) {
-            component->setDown(key == Keys::Down);
+        [](Keys key, ecs::InputPlayer&component) {
+            component.setDown(key == Keys::Down);
         },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>&component) {
-            component->setUp(key == Keys::Up);
+        [](Keys key, ecs::InputPlayer&component) {
+            component.setUp(key == Keys::Up);
         },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
-            component->setLeft(key == Keys::Left);
+        [](Keys key, ecs::InputPlayer& component) {
+            component.setLeft(key == Keys::Left);
         },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
-            component->setRight(key == Keys::Right);
+        [](Keys key, ecs::InputPlayer& component) {
+            component.setRight(key == Keys::Right);
         },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
-            component->setSpacebar(key == Keys::Space);
+        [](Keys key, ecs::InputPlayer& component) {
+            component.setSpacebar(key == Keys::Space);
         },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
-            component->setR(key == Keys::R);
+        [](Keys key, ecs::InputPlayer& component) {
+            component.setR(key == Keys::R);
         }
     }};
 
@@ -48,9 +49,10 @@ namespace cmn {
         uint32_t playerId = input.playerId;
         uint64_t const entityId = playerIdEntityMap[static_cast<int>(playerId)];
 
-        for (auto &entity : ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
-            if (entity->getId() == entityId) {
-                auto component = entity->getComponent<ecs::InputPlayer>();
+        for (auto entity : ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
+            if (entity == entityId) {
+                // auto component = entity->getComponent<ecs::InputPlayer>();
+                auto component = ecs.getComponent<ecs::InputPlayer>(entity);
                 Keys const key = static_cast<Keys>(input.key);
                 for (const auto &function : functionArray) {
                     function(key, component);
@@ -63,10 +65,11 @@ namespace cmn {
     void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionData &position)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
-            if (entity->getId() == position.entityId) {
-                auto component = entity->getComponent<ecs::Position>();
-                component->setX(position.posX);
-                component->setY(position.posY);
+            if (entity == position.entityId) {
+                // auto component = entity->getComponent<ecs::Position>();
+                auto component = ecs.getComponent<ecs::Position>(entity);
+                component.setX(position.posX);
+                component.setY(position.posY);
                 break;
             }
         }
@@ -74,30 +77,40 @@ namespace cmn {
 
     void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityData &newEntity)
     {
-        auto entity = ecs.createEntity(newEntity.entityId);
+        // auto entity = ecs.createEntity(newEntity.entityId);
+        auto entity = ecs.createEntity();
 
-        entity->addComponent<ecs::Position>(newEntity.posX, newEntity.posY);
+        ecs.addComponentToEntity(entity, ecs::Position(newEntity.posX, newEntity.posY));
+        // entity->addComponent<ecs::Position>(newEntity.posX, newEntity.posY);
         if (static_cast<EntityType>(newEntity.type) == EntityType::Player) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
-            entity->addComponent<ecs::PlayerAnimation>();
-            entity->addComponent<ecs::Sound>(std::string(playerShootSound));
-            entity->addComponent<ecs::InputPlayer>();
+            ecs.addComponentToEntity(entity, ecs::Sprite(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale));
+            ecs.addComponentToEntity(entity, ecs::PlayerAnimation());
+            ecs.addComponentToEntity(entity, ecs::Sound(std::string(playerShootSound)));
+            ecs.addComponentToEntity(entity, ecs::InputPlayer());
+            // entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
+            // entity->addComponent<ecs::PlayerAnimation>();
+            // entity->addComponent<ecs::Sound>(std::string(playerShootSound));
+            // entity->addComponent<ecs::InputPlayer>();
         }
         if (static_cast<EntityType>(newEntity.type) == EntityType::Monster) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
-            entity->addComponent<ecs::Animation>(monsterAnimationSize, monsterAnimationOffset, monsterAnimationNumberFrame);
+            ecs.addComponentToEntity(entity, ecs::Sprite(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale));
+            ecs.addComponentToEntity(entity, ecs::Animation(monsterAnimationSize, monsterAnimationOffset, monsterAnimationNumberFrame));
+            // entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
+            // entity->addComponent<ecs::Animation>(monsterAnimationSize, monsterAnimationOffset, monsterAnimationNumberFrame);
         }
         if (static_cast<EntityType>(newEntity.type) == EntityType::PlayerProjectile) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
-            entity->addComponent<ecs::Animation>(playerProjectileAnimationSize, playerProjectileAnimationOffset, playerProjectileAnimationNumberFrame);
+            ecs.addComponentToEntity(entity, ecs::Sprite(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale));
+            ecs.addComponentToEntity(entity, ecs::Animation(playerProjectileAnimationSize, playerProjectileAnimationOffset, playerProjectileAnimationNumberFrame));
+            // entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
+            // entity->addComponent<ecs::Animation>(playerProjectileAnimationSize, playerProjectileAnimationOffset, playerProjectileAnimationNumberFrame);
         }
     }
 
     void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityData &deleteEntity)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
-            if (entity->getId() == deleteEntity.entityId) {
-                entity->addComponent<ecs::Destroy>();
+            if (entity == deleteEntity.entityId) {
+                ecs.addComponentToEntity(entity, ecs::types::Destroy());
                 break;
             }
         }

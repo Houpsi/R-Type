@@ -20,6 +20,17 @@ namespace ecs {
         return _livingEntityCount;
     }
 
+    Entity EntityManager::createEntity(std::size_t id)
+    {
+        if (!_availableEntities.empty()) {
+            Entity newEntity = id;
+            _availableEntities.pop();
+            return newEntity;
+        }
+        _livingEntityCount++;
+        return _livingEntityCount;
+    }
+
     void EntityManager::deleteEntity(Entity id)
     {
         if (id >= cmn::MAX_ENTITIES) {

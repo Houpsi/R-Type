@@ -31,6 +31,21 @@ namespace ecs
             system->configure(ecsManager);
         }
 
+		template <typename T, typename... Args>
+		void addSystem(ecs::EcsManager &ecsManager, Args&&... args)
+        {
+            auto system = std::make_shared<T>(std::forward<Args>(args)...);
+            _systems[std::type_index(typeid(T))] = system;
+            system->configure(ecsManager);
+        }
+
+		void updateSystems(ecs::EcsManager &ecsManager)
+        {
+        	for (auto &[_, system] : _systems) {
+        		system->update(ecsManager);
+        	}
+        }
+
     private:
         std::unordered_map<std::type_index, std::shared_ptr<ASystem>> _systems;
 	};

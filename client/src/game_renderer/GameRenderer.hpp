@@ -27,7 +27,7 @@ namespace client {
         sf::Clock _clock;
         sf::Clock enemyClock;
         cmn::DataTranslator _translator{};
-        std::shared_ptr<ecs::Entity> _keyboard;
+        ecs::Entity _keyboard;
 
         void _handleEvents();
         void _initEcsSystem();

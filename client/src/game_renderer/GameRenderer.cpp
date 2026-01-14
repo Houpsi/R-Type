@@ -46,7 +46,7 @@ namespace client {
     void GameRenderer::_initKeyboard()
     {
         const auto keyboard = _ecs.createEntity(4);
-        keyboard->addComponent<ecs::InputPlayer>();
+        _ecs.addComponentToEntity(keyboard, ecs::InputPlayer());
         _keyboard = keyboard;
     }
 
@@ -68,27 +68,29 @@ namespace client {
         constexpr uint8_t fourId = 3;
 
         const auto background = _ecs.createEntity(firstId);
-        background->addComponent<ecs::Position>(posZero.x, posZero.y);
-        background->addComponent<ecs::Velocity>(veloFirstBackground.x, veloFirstBackground.y);
-        background->addComponent<ecs::Sprite>(_ecs.getResourceManager().getTexture(pathFistBackground), scale);
-        background->addComponent<ecs::Background>(sizeFistBackground);
+        _ecs.addComponentToEntity(background, ecs::Position(posZero.x, posZero.y));
+        _ecs.addComponentToEntity(background, ecs::Velocity(veloFirstBackground.x, veloFirstBackground.y));
+        _ecs.addComponentToEntity(background, ecs::Sprite(_ecs.getResourceManager().getTexture(pathFistBackground), scale));
+        _ecs.addComponentToEntity(background, ecs::Background(sizeFistBackground));
+
 
         const auto backgroundNext = _ecs.createEntity(secondId);
-        backgroundNext->addComponent<ecs::Position>(posOne.x, posOne.y);
-        backgroundNext->addComponent<ecs::Velocity>(veloFirstBackground.x, veloFirstBackground.y);
-        backgroundNext->addComponent<ecs::Sprite>(_ecs.getResourceManager().getTexture(pathFistBackground), scale);
-        backgroundNext->addComponent<ecs::Background>(sizeFistBackground);
+        _ecs.addComponentToEntity(background, ecs::Position(posOne.x, posOne.y));
+        _ecs.addComponentToEntity(background, ecs::Velocity(veloFirstBackground.x, veloFirstBackground.y));
+        _ecs.addComponentToEntity(background, ecs::Sprite(_ecs.getResourceManager().getTexture(pathFistBackground), scale));
+        _ecs.addComponentToEntity(background, ecs::Background(sizeFistBackground));
 
         const auto start = _ecs.createEntity(thirdId);
-        start->addComponent<ecs::Position>(posZero.x, posZero.y);
-        start->addComponent<ecs::Velocity>(veloSecondBackground.x, veloSecondBackground.y);
-        start->addComponent<ecs::Sprite>(_ecs.getResourceManager().getTexture(pathSecondBackground), scale);
-        start->addComponent<ecs::Background>(sizeSecondBackground);
+        _ecs.addComponentToEntity(background, ecs::Position(posZero.x, posZero.y));
+        _ecs.addComponentToEntity(background, ecs::Velocity(veloSecondBackground.x, veloSecondBackground.y));
+        _ecs.addComponentToEntity(background, ecs::Sprite(_ecs.getResourceManager().getTexture(pathSecondBackground), scale));
+        _ecs.addComponentToEntity(background, ecs::Background(sizeFistBackground));
+
         const auto startNext = _ecs.createEntity(fourId);
-        startNext->addComponent<ecs::Position>(posTwo.x, posTwo.y);
-        startNext->addComponent<ecs::Velocity>(veloSecondBackground.x, veloSecondBackground.y);
-        startNext->addComponent<ecs::Sprite>(_ecs.getResourceManager().getTexture(pathSecondBackground), scale);
-        startNext->addComponent<ecs::Background>(sizeSecondBackground);
+        _ecs.addComponentToEntity(background, ecs::Position(posTwo.x, posTwo.y));
+        _ecs.addComponentToEntity(background, ecs::Velocity(veloSecondBackground.x, veloSecondBackground.y));
+        _ecs.addComponentToEntity(background, ecs::Sprite(_ecs.getResourceManager().getTexture(pathSecondBackground), scale));
+        _ecs.addComponentToEntity(background, ecs::Background(sizeFistBackground));
     }
 
 
@@ -114,11 +116,11 @@ namespace client {
             { cmn::Keys::R,         [](const auto& keyboard){ return keyboard.getReady(); } },
         }};
 
-        const auto inputComp = _keyboard->getComponent<ecs::InputPlayer>();
+        const auto inputComp = _ecs.getComponent<ecs::InputPlayer>(_keyboard);
 
         bool isPressed = false;
         for (const auto& [key, check] : bindings) {
-            if (check(*inputComp)) {
+            if (check(inputComp)) {
                 _sharedData->addUdpPacketToSend(cmn::PacketFactory::createInputPacket(_playerId, key, cmn::KeyState::Pressed));
                 isPressed = true;
             }
@@ -164,11 +166,7 @@ namespace client {
 
     void GameRenderer::_updateGame()
     {
-        // if (_inputClock.getElapsedTime().asSeconds() < _inputCooldown) {
-        //     return;
-        // }
         _checkPlayerInput();
-        //_inputClock.restart();
     }
 
     void GameRenderer::run()

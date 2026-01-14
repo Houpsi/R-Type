@@ -87,56 +87,53 @@ namespace server {
     void Game::_sendDestroy()
     {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Destroy>()) {
-            _sharedData->addUdpPacketToSend(cmn::PacketFactory::createDeleteEntityPacket(entity->getId()));
+            _sharedData->addUdpPacketToSend(cmn::PacketFactory::createDeleteEntityPacket(entity));
         }
     }
 
     void Game::_sendPositions()
     {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
-            auto component = entity->getComponent<ecs::Position>();
-            std::pair<float, float> const position = { component->getX(), component->getY() };
+            auto component = _ecs.getComponent<ecs::Position>(entity);
+            std::pair<float, float> const position = { component.getX(), component.getY() };
             _sharedData->addUdpPacketToSend(
-                cmn::PacketFactory::createPositionPacket(position, entity->getId()));
+                cmn::PacketFactory::createPositionPacket(position, entity));
         }
     }
 
     void Game::_checkSpaceBar()
     {
         for (auto const &entity : _ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
-            auto input = entity->getComponent<ecs::InputPlayer>();
 
-            if (!entity->getComponent<ecs::Shoot>()) {
-                continue;
-            }
-            if (input) {
-                const auto shoot = entity->getComponent<ecs::Shoot>();
+            if (_ecs.entityHasComponent<ecs::Shoot, ecs::InputPlayer>(entity)) {
+                auto input = _ecs.getComponent<ecs::InputPlayer>(entity);
+                auto shoot = _ecs.getComponent<ecs::Shoot>(entity);
 
-                shoot->setTimeSinceLastShot(shoot->getTimeSinceLastShot() + _ecs.getDeltaTime());
+                shoot.setTimeSinceLastShot(shoot.getTimeSinceLastShot() + _ecs.getDeltaTime());
 
-                if (input->getSpacebar()) {
-                    if (shoot->getTimeSinceLastShot() >= shoot->getCooldown()) {
+                if (input.getSpacebar()) {
+                    if (shoot.getTimeSinceLastShot() >= shoot.getCooldown()) {
                         auto projectile = _ecs.createEntity();
-                        auto positionCpn = entity->getComponent<ecs::Position>();
-                        auto collisionCpn = entity->getComponent<ecs::Collision>();
+                        auto positionCpn = _ecs.getComponent<ecs::Position>(entity);
+                        auto collisionCpn = _ecs.getComponent<ecs::Collision>(entity);
 
-                        shoot->setTimeSinceLastShot(0);
+                        shoot.setTimeSinceLastShot(0);
 
-                        float const posX = positionCpn->getX() + collisionCpn->getHeight();
-                        float const posY = entity->getComponent<ecs::Position>()->getY();
-                        auto shootCpn = entity->getComponent<ecs::Shoot>();
+                        float const posX = positionCpn.getX() + collisionCpn.getHeight();
+                        float const posY = _ecs.getComponent<ecs::Position>(entity).getY();
+                        auto shootCpn = _ecs.getComponent<ecs::Shoot>(entity);
 
-                        projectile->addComponent<ecs::Position>(posX, posY);
-                        projectile->addComponent<ecs::Velocity>(
+                        _ecs.addComponentToEntity(projectile, ecs::Position(posX, posY));
+                        _ecs.addComponentToEntity(projectile, ecs::Velocity(
                             cmn::playerProjectileSpeed,
                             cmn::playerProjectileDirection
-                        );
-                        projectile->addComponent<ecs::Shoot>(shootCpn->getDamage(), shootCpn->getCooldown());
-                        projectile->addComponent<ecs::Collision>(
-                            ecs::TypeCollision::PLAYER_PROJECTILE,
-                            cmn::playerProjectileCollisionWidth,
-                            cmn::playerProjectileCollisionHeight
-                        );
+                        ));
+                        _ecs.addComponentToEntity(projectile, ecs::Shoot(shootCpn.getDamage(), shootCpn.getCooldown()));
+                        _ecs.addComponentToEntity(projectile, ecs::Collision(
+                        ecs::TypeCollision::PLAYER_PROJECTILE,
+                        cmn::playerProjectileCollisionWidth,
+                        cmn::playerProjectileCollisionHeight
+                        ));
 
                         std::pair<float, float> const position = {posX, posY};
 
@@ -144,7 +141,7 @@ namespace server {
                             cmn::PacketFactory::createNewEntityPacket(
                                 cmn::EntityType::PlayerProjectile,
                                 position,
-                                projectile->getId()
+                                projectile
                             )
                         );
                     }
@@ -160,20 +157,20 @@ namespace server {
             auto randNum = generator() % (cmn::monsterMaxSpawnPositionHeight);
             auto newEnemy = _ecs.createEntity();
 
-            newEnemy->addComponent<ecs::Position>(cmn::monsterSpawnPositionWidth, randNum);
-            newEnemy->addComponent<ecs::Enemy>();
-            newEnemy->addComponent<ecs::Health>(cmn::monsterHealth);
-            newEnemy->addComponent<ecs::Collision>(
+            _ecs.addComponentToEntity(newEnemy, ecs::Position(cmn::monsterSpawnPositionWidth, randNum));
+            _ecs.addComponentToEntity(newEnemy, ecs::Enemy());
+            _ecs.addComponentToEntity(newEnemy, ecs::Health(cmn::monsterHealth));
+            _ecs.addComponentToEntity(newEnemy, ecs::Collision(
                 ecs::TypeCollision::ENEMY,
                 cmn::monsterCollisionWidth,
-                cmn::monsterCollisionHeight
-            );
+                cmn::monsterCollisionHeight));
+
             std::pair<float, float> const position = {cmn::monsterSpawnPositionWidth, randNum};
             _sharedData->addUdpPacketToSend(
                 cmn::PacketFactory::createNewEntityPacket(
                     cmn::EntityType::Monster,
                     position,
-                    newEnemy->getId()
+                    newEnemy
                 )
             );
         }
@@ -181,15 +178,15 @@ namespace server {
 
     void Game::_sendPlayerEntities()
     {
-        for (auto &entity : _ecs.getEntities()) {
-            auto component = entity->getComponent<ecs::Position>();
-            std::pair<float, float> const pos = {component->getX(), component->getY()};
+        for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
+            auto component = _ecs.getComponent<ecs::Position>(entity);
+            std::pair<float, float> const pos = {component.getX(), component.getY()};
 
             _sharedData->addUdpPacketToSend(
                 cmn::PacketFactory::createNewEntityPacket(
                     cmn::EntityType::Player,
                     pos,
-                    entity->getId()
+                    entity
                 )
             );
         }
@@ -222,9 +219,9 @@ namespace server {
             auto entities = _ecs.getEntitiesWithComponent<ecs::InputPlayer>();
 
             for (auto &entity : entities) {
-                if (entity->getComponent<ecs::InputPlayer>()->getReady()
-                    && !_isIdAlreadyPresent(_entityIdPlayerMap[entity->getId()])) {
-                    _readyPlayersId.push_back(_entityIdPlayerMap[entity->getId()]);
+                if (_ecs.getComponent<ecs::InputPlayer>(entity).getReady()
+                    && !_isIdAlreadyPresent(_entityIdPlayerMap[entity])) {
+                    _readyPlayersId.push_back(_entityIdPlayerMap[entity]);
                 }
             }
         }
@@ -254,13 +251,14 @@ namespace server {
                 continue;
             }
             auto player = _ecs.createEntity();
-            player->addComponent<ecs::Health>(cmn::playerHealth);
-            player->addComponent<ecs::Position>(playerPosX, playerPosY);
-            player->addComponent<ecs::InputPlayer>();
-            player->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
-            player->addComponent<ecs::Shoot>(cmn::playerDamage, cmn::playerCoolDown);
-            _playerIdEntityMap[id] = player->getId();
-            _entityIdPlayerMap[player->getId()] = id;
+            _ecs.addComponentToEntity(player, ecs::Health(cmn::playerHealth));
+            _ecs.addComponentToEntity(player, ecs::Position(playerPosX, playerPosY));
+            _ecs.addComponentToEntity(player, ecs::InputPlayer());
+            _ecs.addComponentToEntity(player, ecs::Collision(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight));
+            _ecs.addComponentToEntity(player, ecs::Shoot(cmn::playerDamage, cmn::playerCoolDown));
+
+            _playerIdEntityMap[id] = player;
+            _entityIdPlayerMap[player] = id;
             currentNbPlayerEntities++;
         }
 

@@ -21,8 +21,10 @@ namespace ecs {
     class EcsManager {
     public:
         Entity createEntity();
+        Entity createEntity(std::size_t id);
         void deleteEntity(Entity entity);
         void destroyEntities(std::vector<ecs::Entity> &entitiesToDestroy);
+        void updateSystems();
 
         template <typename T>
         void registerComponent()
@@ -69,21 +71,37 @@ namespace ecs {
         template <typename T>
         std::vector<Entity> getEntitiesWithComponent()
         {
-            auto entities =  _entityManager.getAvailableEntities();
             std::vector<Entity> result;
+            auto bit = _componentManager.getComponentBitId<T>();
 
-            for (int i = 0; i <entities.size(); i++) {
-                if (_componentManager.getComponent<T>(entities.emplace(i))) {
-                    entities.emplace(i);
+            for (Entity entity = 0; entity < cmn::MAX_ENTITIES; ++entity) {
+                Signature sig = _entityManager.getSignature(entity);
+                if (sig.test(bit)) {
+                    result.push_back(entity);
                 }
             }
             return result;
         }
 
         template <typename T>
-        std::shared_ptr<T> addSystem()
+        void addSystem()
         {
             return _systemManager.addSystem<T>(*this);
+        }
+
+        template <typename T, typename... Args>
+        void addSystem(Args&&... args) {
+            return _systemManager.addSystem<T>(*this, std::forward<Args>(args)...);
+        }
+
+        template <typename... Args>
+        bool entityHasComponent(Entity entity)
+        {
+            Signature entitySignature = _entityManager.getSignature(entity);
+            Signature targetSignature;
+            (targetSignature.set(_componentManager.getComponentBitId<Args>()), ...);
+            return (entitySignature & targetSignature) == targetSignature;
+
         }
 
         ResourceManager& getResourceManager();

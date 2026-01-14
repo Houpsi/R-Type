@@ -21,7 +21,7 @@ namespace ecs {
         void play();
 
     private:
-        std::unique_ptr<sf::Sound> _sound;
+        std::shared_ptr<sf::Sound> _sound;
         sf::SoundBuffer _buffer;
     };
 }
