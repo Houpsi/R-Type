@@ -8,7 +8,7 @@
 #ifndef BOOTSTRAP_SYSTEM_HPP
     #define BOOTSTRAP_SYSTEM_HPP
 #include <bitset>
-#include "src/Constants.hpp"
+#include "src/constants/GameConstants.hpp"
 #include "managers/EntityManager.hpp"
 
 namespace ecs {

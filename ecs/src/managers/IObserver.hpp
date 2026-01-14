@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_CLIENT_IOBSERVER_HPP
 	#define R_TYPE_CLIENT_IOBSERVER_HPP
-#include "../../common/src/Constants.hpp"
+#include "src/constants/GameConstants.hpp"
 
 namespace ecs
 {

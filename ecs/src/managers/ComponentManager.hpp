@@ -7,7 +7,7 @@
 
 #ifndef R_TYPE_COMPONENTMANAGER_HPP
 #define R_TYPE_COMPONENTMANAGER_HPP
-#include "src/Constants.hpp"
+#include "src/constants/GameConstants.hpp"
 #include "components/IComponentArray.hpp"
 #include "components/ComponentArray.hpp"
 #include <type_traits>
