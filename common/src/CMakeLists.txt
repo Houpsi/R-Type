@@ -30,6 +30,8 @@ add_library(r-type_common_lib
         packet_data/connection_packet/ConnectionPacket.hpp
         packet_data/start_game_packet/StartGamePacket.cpp
         packet_data/start_game_packet/StartGamePacket.hpp
+        packet_data/sound_packet/SoundPacket.cpp
+        packet_data/sound_packet/SoundPacket.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC
