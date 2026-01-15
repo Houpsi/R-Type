@@ -5,8 +5,8 @@
 ** Constants
 */
 
-#ifndef R_TYPE_CONSTANTS_HPP
-#define R_TYPE_CONSTANTS_HPP
+#ifndef R_TYPE_GAMECONSTANTS_HPP
+#define R_TYPE_GAMECONSTANTS_HPP
 
 #include "SFML/System/Vector2.hpp"
 
@@ -15,15 +15,6 @@
 #include <string>
 
 namespace cmn {
-
-    constexpr uint16_t connectionProtocolId = 0;
-    constexpr uint16_t inputProtocolId = 1;
-    constexpr uint16_t positionProtocolId = 2;
-    constexpr uint16_t newEntityProtocolId = 3;
-    constexpr uint16_t deleteEntityProtocolId = 4;
-    constexpr uint16_t startGameProtocolId = 5;
-    constexpr uint16_t soundProtocolId = 6;
-
 
     constexpr float playerHealth = 100;
     constexpr sf::Vector2f playerSpriteScale = {2.0F, 2.0F};
@@ -71,4 +62,4 @@ namespace cmn {
     constexpr std::array<std::string_view, 2> idToSound = {"shoot", "theme"};
 }
 
-#endif// R_TYPE_CONSTANTS_HPP
+#endif// R_TYPE_GAMECONSTANTS_HPP

@@ -19,26 +19,26 @@ namespace cmn {
      * @brief Adds a packet to the received queue using a lock_guard for synchronization.
      * @param data The packet to add.
      */
-    void SharedData::addUdpReceivedPacket(const packetData &data)
+    void SharedData::addUdpReceivedPacket(const CustomPacket &packet)
     {
         std::lock_guard const lock(_mutex);
 //        std::cout << _udpReceivedQueue.size() << "\n";
-        _udpReceivedQueue.push(data);
+        _udpReceivedQueue.push(packet);
     }
 
     /**
      * @brief Retrieves the next packet from the received queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<packetData> SharedData::getUdpReceivedPacket()
+    std::optional<CustomPacket> SharedData::getUdpReceivedPacket()
     {
         std::lock_guard const lock(_mutex);
         if (_udpReceivedQueue.empty()) {
             return std::nullopt;
         }
-        packetData packetData = _udpReceivedQueue.front();
+        CustomPacket packet = _udpReceivedQueue.front();
         _udpReceivedQueue.pop();
-        return packetData;
+        return packet;
     }
 
     /**
@@ -70,25 +70,25 @@ namespace cmn {
      * @brief Adds a packet to the received queue using a lock_guard for synchronization.
      * @param data The packet to add.
      */
-    void SharedData::addTcpReceivedPacket(const packetData &data)
+    void SharedData::addTcpReceivedPacket(const CustomPacket &packet)
     {
         std::lock_guard const lock(_mutex);
-        _tcpReceivedQueue.push(data);
+        _tcpReceivedQueue.push(packet);
     }
 
     /**
      * @brief Retrieves the next packet from the received queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<packetData> SharedData::getTcpReceivedPacket()
+    std::optional<CustomPacket> SharedData::getTcpReceivedPacket()
     {
         std::lock_guard const lock(_mutex);
         if (_tcpReceivedQueue.empty()) {
             return std::nullopt;
         }
-        packetData packetData = _tcpReceivedQueue.front();
+        CustomPacket packet = _tcpReceivedQueue.front();
         _tcpReceivedQueue.pop();
-        return packetData;
+        return packet;
     }
 
     /**

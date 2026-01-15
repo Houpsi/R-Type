@@ -5,6 +5,7 @@
 ** TestDataTranslator
 */
 
+#include "constants/ProtocolConstants.hpp"
 #include "EcsManager.hpp"
 #include "components/Destroy.hpp"
 #include "components/InputPlayer.hpp"
@@ -15,9 +16,8 @@
 #include "enums/Key.hpp"
 #include "enums/KeyState.hpp"
 #include "packet_data/PacketData.hpp"
-#include "packet_data/input_packet/InputPacket.hpp"
+#include "packet_data/input_data/InputData.hpp"
 #include <gtest/gtest.h>
-#include "Constants.hpp"
 
 namespace cmn {
 
@@ -32,13 +32,13 @@ namespace cmn {
 
         playerIdEntityMap[6] = 1;
 
-        inputPacket packet = {
+        inputData inputData = {
             6,
             static_cast<uint8_t>(Keys::Down),
             static_cast<uint8_t>(KeyState::Pressed)
         };
-        packetContent const content = packet;
-        packetData data = {inputProtocolId, content};
+
+        packetData data = inputData;
 
         translator.translate(ecs, data, playerIdEntityMap);
 
@@ -58,9 +58,8 @@ namespace cmn {
         auto entity = ecs.createEntity(42);
         entity->addComponent<ecs::Position>(0.F, 0.F);
 
-        positionPacket packet = {42, 100, 200};
-        packetContent const content = packet;
-        packetData data = {positionProtocolId, content};
+        positionData positionData = {42, 100, 200};
+        packetData data = positionData;
 
         translator.translate(ecs, data, playerIdEntityMap);
 
@@ -75,15 +74,14 @@ namespace cmn {
         DataTranslator translator {};
         std::unordered_map<int, uint64_t> playerIdEntityMap;
 
-        newEntityPacket packet = {
+        newEntityData newEntityData = {
             .entityId=42,
             .type=static_cast<uint8_t>(EntityType::Player),
             .posX=10.F,
             .posY=20.F
         };
 
-        packetContent const content = packet;
-        packetData data = {newEntityProtocolId, content};
+        packetData data = newEntityData;
 
         translator.translate(ecs, data, playerIdEntityMap);
 
@@ -105,9 +103,8 @@ namespace cmn {
         auto entity = ecs.createEntity(42);
         entity->addComponent<ecs::Position>(0.F, 0.F);
 
-        deleteEntityPacket packet = {42};
-        packetContent const content = packet;
-        packetData data = {deleteEntityProtocolId, content};
+        deleteEntityData deleteEntityData = {42};
+        packetData data = deleteEntityData;
 
         translator.translate(ecs, data, playerIdEntityMap);
 

@@ -8,7 +8,7 @@
 #ifndef R_TYPE_LEVEL_HPP
 #define R_TYPE_LEVEL_HPP
 
-#include "Constants.hpp"
+#include "constants/GameConstants.hpp"
 #include <cstdint>
 #include <list>
 #include <string>
