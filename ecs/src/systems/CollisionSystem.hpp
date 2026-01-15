@@ -14,9 +14,12 @@
 #include "src/constants/GameConstants.hpp"
 
 namespace ecs {
-    struct AABB {
-        float x, y;
-        float width, height;
+    class AABB {
+    public:
+        AABB(): x(0.f), y(0.f), width(0.f), height(0.f) {}
+
+        AABB(float x, float y, float w, float h)
+            : x(x), y(y), width(w), height(h) {}
 
         bool intersects(const AABB& other) const {
             return !(x + width < other.x || other.x + other.width < x ||
@@ -26,6 +29,9 @@ namespace ecs {
             return other.x >= x && other.x + other.width <= x + width &&
                 other.y >= y && other.y + other.height <= y + height;
         }
+
+        float x, y;
+        float width, height;
     };
     using EntityRef = std::shared_ptr<Entity>;
 
