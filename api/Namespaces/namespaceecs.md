@@ -16,6 +16,8 @@ title: ecs
 | class | **[ecs::System](Classes/classecs_1_1System.md)**  |
 | class | **[ecs::SpriteAnimationSystem](Classes/classecs_1_1SpriteAnimationSystem.md)**  |
 | class | **[ecs::Sprite](Classes/classecs_1_1Sprite.md)**  |
+| class | **[ecs::SoundSystem](Classes/classecs_1_1SoundSystem.md)**  |
+| class | **[ecs::SoundManager](Classes/classecs_1_1SoundManager.md)**  |
 | class | **[ecs::Sound](Classes/classecs_1_1Sound.md)**  |
 | class | **[ecs::ShootSystem](Classes/classecs_1_1ShootSystem.md)**  |
 | class | **[ecs::Shoot](Classes/classecs_1_1Shoot.md)**  |
@@ -64,6 +66,14 @@ title: ecs
 | | **[TEST](Namespaces/namespaceecs.md#function-test)**(EcsManagerTest , GetPosition ) |
 | | **[TEST](Namespaces/namespaceecs.md#function-test)**(EcsManagerTest , SetPosition ) |
 | | **[TEST](Namespaces/namespaceecs.md#function-test)**(SpriteTest , GetSpriteReturnsReference ) |
+
+## Attributes
+
+|                | Name           |
+| -------------- | -------------- |
+| constexpr int | **[volumeMusic](Namespaces/namespaceecs.md#variable-volumemusic)**  |
+| constexpr std::array< std::string_view, 2 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
+| constexpr std::string_view | **[folderSound](Namespaces/namespaceecs.md#variable-foldersound)**  |
 
 ## Types Documentation
 
@@ -194,9 +204,32 @@ TEST(
 
 
 
+## Attributes Documentation
+
+### variable volumeMusic
+
+```cpp
+constexpr int volumeMusic = 100;
+```
+
+
+### variable idToSound
+
+```cpp
+constexpr std::array< std::string_view, 2 > idToSound = {"shoot", "theme"};
+```
+
+
+### variable folderSound
+
+```cpp
+constexpr std::string_view folderSound = "./assets/sound/";
+```
+
+
 
 
 
 -------------------------------
 
-Updated on 2026-01-14 at 08:22:53 +0000
+Updated on 2026-01-15 at 18:57:40 +0000

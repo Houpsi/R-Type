@@ -35,6 +35,8 @@ title: Classes
     * **class [Shoot](Classes/classecs_1_1Shoot.md)** 
     * **class [ShootSystem](Classes/classecs_1_1ShootSystem.md)** 
     * **class [Sound](Classes/classecs_1_1Sound.md)** 
+    * **class [SoundManager](Classes/classecs_1_1SoundManager.md)** 
+    * **class [SoundSystem](Classes/classecs_1_1SoundSystem.md)** 
     * **class [Sprite](Classes/classecs_1_1Sprite.md)** 
     * **class [SpriteAnimationSystem](Classes/classecs_1_1SpriteAnimationSystem.md)** 
     * **class [System](Classes/classecs_1_1System.md)** 
@@ -56,4 +58,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2026-01-14 at 08:22:53 +0000
+Updated on 2026-01-15 at 18:57:40 +0000

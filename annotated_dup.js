@@ -27,6 +27,8 @@ var annotated_dup =
       [ "Shoot", "classecs_1_1Shoot.html", "classecs_1_1Shoot" ],
       [ "ShootSystem", "classecs_1_1ShootSystem.html", "classecs_1_1ShootSystem" ],
       [ "Sound", "classecs_1_1Sound.html", "classecs_1_1Sound" ],
+      [ "SoundManager", "classecs_1_1SoundManager.html", "classecs_1_1SoundManager" ],
+      [ "SoundSystem", "classecs_1_1SoundSystem.html", "classecs_1_1SoundSystem" ],
       [ "Sprite", "classecs_1_1Sprite.html", "classecs_1_1Sprite" ],
       [ "SpriteAnimationSystem", "classecs_1_1SpriteAnimationSystem.html", "classecs_1_1SpriteAnimationSystem" ],
       [ "System", "classecs_1_1System.html", "classecs_1_1System" ],

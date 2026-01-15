@@ -17,6 +17,7 @@ title: ecs::Entity
 |                | Name           |
 | -------------- | -------------- |
 | | **[~Entity](Classes/classecs_1_1Entity.md#function-~entity)**() =default |
+| template <typename T \> <br>void | **[removeComponent](Classes/classecs_1_1Entity.md#function-removecomponent)**() |
 | uint64_t | **[getId](Classes/classecs_1_1Entity.md#function-getid)**() const |
 | template <typename T \> <br>std::shared_ptr< T > | **[getComponent](Classes/classecs_1_1Entity.md#function-getcomponent)**() |
 | template <typename T ,typename... Args\> <br>std::shared_ptr< T > | **[addComponent](Classes/classecs_1_1Entity.md#function-addcomponent)**(Args &&... args) |
@@ -29,6 +30,14 @@ title: ecs::Entity
 
 ```cpp
 ~Entity() =default
+```
+
+
+### function removeComponent
+
+```cpp
+template <typename T >
+inline void removeComponent()
 ```
 
 
@@ -77,4 +86,4 @@ inline explicit Entity(
 
 -------------------------------
 
-Updated on 2026-01-14 at 08:22:53 +0000
+Updated on 2026-01-15 at 18:57:40 +0000

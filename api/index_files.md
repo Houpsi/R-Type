@@ -10,12 +10,15 @@ title: Files
 
 * **dir [ecs](Files/dir_eafb92770fbc727220bdaa0b1292f771.md#dir-ecs)** 
     * **dir [ecs/src](Files/dir_cd62a81a5498271e83c00ee7432ae4e6.md#dir-ecs/src)** 
+        * **file [ecs/src/EcsConstant.hpp](Files/EcsConstant_8hpp.md#file-ecsconstant.hpp)** 
         * **file [ecs/src/EcsManager.cpp](Files/EcsManager_8cpp.md#file-ecsmanager.cpp)** 
         * **file [ecs/src/EcsManager.hpp](Files/EcsManager_8hpp.md#file-ecsmanager.hpp)** 
         * **file [ecs/src/Entity.cpp](Files/Entity_8cpp.md#file-entity.cpp)** 
         * **file [ecs/src/Entity.hpp](Files/Entity_8hpp.md#file-entity.hpp)** 
         * **file [ecs/src/ResourceManager.cpp](Files/ResourceManager_8cpp.md#file-resourcemanager.cpp)** 
         * **file [ecs/src/ResourceManager.hpp](Files/ResourceManager_8hpp.md#file-resourcemanager.hpp)** 
+        * **file [ecs/src/SoundManager.cpp](Files/SoundManager_8cpp.md#file-soundmanager.cpp)** 
+        * **file [ecs/src/SoundManager.hpp](Files/SoundManager_8hpp.md#file-soundmanager.hpp)** 
         * **dir [ecs/src/components](Files/dir_79c5a346a0c3740c5441f87bb4d2087a.md#dir-ecs/src/components)** 
             * **file [ecs/src/components/Animation.cpp](Files/Animation_8cpp.md#file-animation.cpp)** 
             * **file [ecs/src/components/Animation.hpp](Files/Animation_8hpp.md#file-animation.hpp)** 
@@ -64,6 +67,8 @@ title: Files
             * **file [ecs/src/systems/RenderSystem.hpp](Files/RenderSystem_8hpp.md#file-rendersystem.hpp)** 
             * **file [ecs/src/systems/ShootSystem.cpp](Files/ShootSystem_8cpp.md#file-shootsystem.cpp)** 
             * **file [ecs/src/systems/ShootSystem.hpp](Files/ShootSystem_8hpp.md#file-shootsystem.hpp)** 
+            * **file [ecs/src/systems/SoundSystem.cpp](Files/SoundSystem_8cpp.md#file-soundsystem.cpp)** 
+            * **file [ecs/src/systems/SoundSystem.hpp](Files/SoundSystem_8hpp.md#file-soundsystem.hpp)** 
             * **file [ecs/src/systems/SpriteAnimationSystem.cpp](Files/SpriteAnimationSystem_8cpp.md#file-spriteanimationsystem.cpp)** 
             * **file [ecs/src/systems/SpriteAnimationSystem.hpp](Files/SpriteAnimationSystem_8hpp.md#file-spriteanimationsystem.hpp)** 
             * **file [ecs/src/systems/System.cpp](Files/System_8cpp.md#file-system.cpp)** 
@@ -107,4 +112,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2026-01-14 at 08:22:53 +0000
+Updated on 2026-01-15 at 18:57:40 +0000

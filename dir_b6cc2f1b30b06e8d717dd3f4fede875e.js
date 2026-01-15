@@ -18,6 +18,8 @@ var dir_b6cc2f1b30b06e8d717dd3f4fede875e =
     [ "RenderSystem.hpp", "RenderSystem_8hpp.html", "RenderSystem_8hpp" ],
     [ "ShootSystem.cpp", "ShootSystem_8cpp.html", null ],
     [ "ShootSystem.hpp", "ShootSystem_8hpp.html", "ShootSystem_8hpp" ],
+    [ "SoundSystem.cpp", "SoundSystem_8cpp.html", null ],
+    [ "SoundSystem.hpp", "SoundSystem_8hpp.html", "SoundSystem_8hpp" ],
     [ "SpriteAnimationSystem.cpp", "SpriteAnimationSystem_8cpp.html", null ],
     [ "SpriteAnimationSystem.hpp", "SpriteAnimationSystem_8hpp.html", "SpriteAnimationSystem_8hpp" ],
     [ "System.cpp", "System_8cpp.html", null ],

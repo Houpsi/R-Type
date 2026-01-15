@@ -30,6 +30,7 @@ var hierarchy =
     [ "server::LevelParser", "classserver_1_1LevelParser.html", null ],
     [ "ecs::ResourceManager", "classecs_1_1ResourceManager.html", null ],
     [ "server::Server", "classserver_1_1Server.html", null ],
+    [ "ecs::SoundManager", "classecs_1_1SoundManager.html", null ],
     [ "ecs::System", "classecs_1_1System.html", [
       [ "ecs::BackgroundSystem", "classecs_1_1BackgroundSystem.html", null ],
       [ "ecs::CollisionSystem", "classecs_1_1CollisionSystem.html", null ],
@@ -41,6 +42,7 @@ var hierarchy =
       [ "ecs::PlayerAnimationSystem", "classecs_1_1PlayerAnimationSystem.html", null ],
       [ "ecs::RenderSystem", "classecs_1_1RenderSystem.html", null ],
       [ "ecs::ShootSystem", "classecs_1_1ShootSystem.html", null ],
+      [ "ecs::SoundSystem", "classecs_1_1SoundSystem.html", null ],
       [ "ecs::SpriteAnimationSystem", "classecs_1_1SpriteAnimationSystem.html", null ],
       [ "ecs::VelocitySystem", "classecs_1_1VelocitySystem.html", null ]
     ] ],

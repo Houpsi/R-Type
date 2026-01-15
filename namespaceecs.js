@@ -26,6 +26,8 @@ var namespaceecs =
     [ "Shoot", "classecs_1_1Shoot.html", "classecs_1_1Shoot" ],
     [ "ShootSystem", "classecs_1_1ShootSystem.html", "classecs_1_1ShootSystem" ],
     [ "Sound", "classecs_1_1Sound.html", "classecs_1_1Sound" ],
+    [ "SoundManager", "classecs_1_1SoundManager.html", "classecs_1_1SoundManager" ],
+    [ "SoundSystem", "classecs_1_1SoundSystem.html", "classecs_1_1SoundSystem" ],
     [ "Sprite", "classecs_1_1Sprite.html", "classecs_1_1Sprite" ],
     [ "SpriteAnimationSystem", "classecs_1_1SpriteAnimationSystem.html", "classecs_1_1SpriteAnimationSystem" ],
     [ "System", "classecs_1_1System.html", "classecs_1_1System" ],
@@ -48,5 +50,8 @@ var namespaceecs =
     [ "TEST", "namespaceecs.html#aa6ecccc90c123ae2623fe70fa3555b9a", null ],
     [ "TEST", "namespaceecs.html#a631cd7ddaed82be770d98ad03a1a5bca", null ],
     [ "TEST", "namespaceecs.html#a0a16bfcb7ac2ecb53fd6979b4282950c", null ],
-    [ "TEST", "namespaceecs.html#ad4997ede705c6001fc3e35fd035980a0", null ]
+    [ "TEST", "namespaceecs.html#ad4997ede705c6001fc3e35fd035980a0", null ],
+    [ "folderSound", "namespaceecs.html#a1b57c2380fa3729ef2b1840b37b213e3", null ],
+    [ "idToSound", "namespaceecs.html#ae7c0e9dc0417a14b858146d8e6d7df22", null ],
+    [ "volumeMusic", "namespaceecs.html#a5d022ba3aaad087186a14614dea11848", null ]
 ];

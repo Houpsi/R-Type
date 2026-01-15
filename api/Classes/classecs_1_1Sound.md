@@ -19,9 +19,12 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 |                | Name           |
 | -------------- | -------------- |
 | | **[~Sound](Classes/classecs_1_1Sound.md#function-~sound)**() override =default |
-| void | **[play](Classes/classecs_1_1Sound.md#function-play)**()<br>PLay the sound of the component.  |
-| const sf::Sound & | **[getSound](Classes/classecs_1_1Sound.md#function-getsound)**() const<br>Gets [Sound](Classes/classecs_1_1Sound.md) of the component.  |
-| | **[Sound](Classes/classecs_1_1Sound.md#function-sound)**(const std::string & filepath) |
+| void | **[setIsPlayed](Classes/classecs_1_1Sound.md#function-setisplayed)**(bool played) |
+| void | **[setIsLoopping](Classes/classecs_1_1Sound.md#function-setisloopping)**(bool loop) |
+| bool | **[getIsPlayed](Classes/classecs_1_1Sound.md#function-getisplayed)**() const |
+| int | **[getIsLoopping](Classes/classecs_1_1Sound.md#function-getisloopping)**() |
+| int | **[getIdMusic](Classes/classecs_1_1Sound.md#function-getidmusic)**() const |
+| | **[Sound](Classes/classecs_1_1Sound.md#function-sound)**(int id, bool loop) |
 
 ## Additional inherited members
 
@@ -42,41 +45,55 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 ```
 
 
-### function play
+### function setIsPlayed
 
 ```cpp
-void play()
-```
-
-PLay the sound of the component. 
-
-### function getSound
-
-```cpp
-const sf::Sound & getSound() const
-```
-
-Gets [Sound](Classes/classecs_1_1Sound.md) of the component. 
-
-**Return**: the sound of the component 
-
-### function Sound
-
-```cpp
-Sound(
-    const std::string & filepath
+void setIsPlayed(
+    bool played
 )
 ```
 
 
-**Parameters**: 
+### function setIsLoopping
 
-  * **filepath** The path to the sound file 
+```cpp
+void setIsLoopping(
+    bool loop
+)
+```
 
 
-@bried Load the sound from a file 
+### function getIsPlayed
+
+```cpp
+bool getIsPlayed() const
+```
+
+
+### function getIsLoopping
+
+```cpp
+int getIsLoopping()
+```
+
+
+### function getIdMusic
+
+```cpp
+int getIdMusic() const
+```
+
+
+### function Sound
+
+```cpp
+inline explicit Sound(
+    int id,
+    bool loop
+)
+```
 
 
 -------------------------------
 
-Updated on 2026-01-14 at 08:22:53 +0000
+Updated on 2026-01-15 at 18:57:40 +0000

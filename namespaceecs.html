@@ -98,7 +98,8 @@ $(document).ready(function(){initNavTree('namespaceecs.html',''); initResizable(
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">ecs Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -159,6 +160,10 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Sound.html">Sound</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1SoundManager.html">SoundManager</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1SoundSystem.html">SoundSystem</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Sprite.html">Sprite</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1SpriteAnimationSystem.html">SpriteAnimationSystem</a></td></tr>
@@ -207,6 +212,15 @@ Functions</h2></td></tr>
 <tr class="separator:a631cd7ddaed82be770d98ad03a1a5bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4997ede705c6001fc3e35fd035980a0" id="r_ad4997ede705c6001fc3e35fd035980a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#ad4997ede705c6001fc3e35fd035980a0">TEST</a> (SpriteTest, GetSpriteReturnsReference)</td></tr>
 <tr class="separator:ad4997ede705c6001fc3e35fd035980a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a5d022ba3aaad087186a14614dea11848" id="r_a5d022ba3aaad087186a14614dea11848"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a5d022ba3aaad087186a14614dea11848">volumeMusic</a> = 100</td></tr>
+<tr class="separator:a5d022ba3aaad087186a14614dea11848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b57c2380fa3729ef2b1840b37b213e3" id="r_a1b57c2380fa3729ef2b1840b37b213e3"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a1b57c2380fa3729ef2b1840b37b213e3">folderSound</a> = &quot;./assets/sound/&quot;</td></tr>
+<tr class="separator:a1b57c2380fa3729ef2b1840b37b213e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7c0e9dc0417a14b858146d8e6d7df22" id="r_ae7c0e9dc0417a14b858146d8e6d7df22"><td class="memItemLeft" align="right" valign="top">constexpr std::array&lt; std::string_view, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#ae7c0e9dc0417a14b858146d8e6d7df22">idToSound</a> = {&quot;shoot&quot;, &quot;theme&quot;}</td></tr>
+<tr class="separator:ae7c0e9dc0417a14b858146d8e6d7df22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a6614fb4da96ff1729ad9ec05a67c3d1c" name="a6614fb4da96ff1729ad9ec05a67c3d1c"></a>
@@ -586,6 +600,73 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespaceecs_ad4997ede705c6001fc3e35fd035980a0_cgraph.png" border="0" usemap="#anamespaceecs_ad4997ede705c6001fc3e35fd035980a0_cgraph" alt=""/></div>
 </div>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a1b57c2380fa3729ef2b1840b37b213e3" name="a1b57c2380fa3729ef2b1840b37b213e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b57c2380fa3729ef2b1840b37b213e3">&#9670;&#160;</a></span>folderSound</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::string_view ecs::folderSound = &quot;./assets/sound/&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae7c0e9dc0417a14b858146d8e6d7df22" name="ae7c0e9dc0417a14b858146d8e6d7df22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c0e9dc0417a14b858146d8e6d7df22">&#9670;&#160;</a></span>idToSound</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::array&lt;std::string_view, 2&gt; ecs::idToSound = {&quot;shoot&quot;, &quot;theme&quot;}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d022ba3aaad087186a14614dea11848" name="a5d022ba3aaad087186a14614dea11848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d022ba3aaad087186a14614dea11848">&#9670;&#160;</a></span>volumeMusic</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int ecs::volumeMusic = 100</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

@@ -17,6 +17,8 @@ title: ecs/src/systems
 | **[ecs/src/systems/System.cpp](Files/System_8cpp.md#file-system.cpp)**  |
 | **[ecs/src/systems/SpriteAnimationSystem.hpp](Files/SpriteAnimationSystem_8hpp.md#file-spriteanimationsystem.hpp)**  |
 | **[ecs/src/systems/SpriteAnimationSystem.cpp](Files/SpriteAnimationSystem_8cpp.md#file-spriteanimationsystem.cpp)**  |
+| **[ecs/src/systems/SoundSystem.hpp](Files/SoundSystem_8hpp.md#file-soundsystem.hpp)**  |
+| **[ecs/src/systems/SoundSystem.cpp](Files/SoundSystem_8cpp.md#file-soundsystem.cpp)**  |
 | **[ecs/src/systems/ShootSystem.hpp](Files/ShootSystem_8hpp.md#file-shootsystem.hpp)**  |
 | **[ecs/src/systems/ShootSystem.cpp](Files/ShootSystem_8cpp.md#file-shootsystem.cpp)**  |
 | **[ecs/src/systems/RenderSystem.hpp](Files/RenderSystem_8hpp.md#file-rendersystem.hpp)**  |
@@ -43,4 +45,4 @@ title: ecs/src/systems
 
 -------------------------------
 
-Updated on 2026-01-14 at 08:22:53 +0000
+Updated on 2026-01-15 at 18:57:40 +0000
