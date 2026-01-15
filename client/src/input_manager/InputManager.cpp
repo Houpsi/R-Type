@@ -78,6 +78,14 @@ namespace client {
             bindKey("shoot", cmn::Keys::Space);
             bindKey("ready", cmn::Keys::R);
 
+            if (root.exists("shader")) {
+                const libconfig::Setting& shader = root["shader"];
+                if (shader.lookupValue("name", _shader)) {
+                    std::cout << "[SHADER] : " << _shader << " load" <<  std::endl;
+                } else {
+                    std::cout << "[SHADER] No shader load" << std::endl;
+                }
+            }
         } catch (const libconfig::SettingNotFoundException& nfex) {
             std::cerr << "[InputManager] Setting not found in config file." << std::endl;
         }
@@ -117,4 +125,9 @@ namespace client {
             return sf::Joystick::isButtonPressed(0, bind.joystickButton);
         }
     }
-}
+
+    std::string InputManager::getShaderName() const
+    {
+        return _shader;
+    }
+}// namespace client

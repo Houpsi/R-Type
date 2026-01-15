@@ -30,18 +30,16 @@ namespace client {
     public:
         InputManager();
         ~InputManager() = default;
+
         void loadConfig(const std::string& filePath);
-
-        bool isActionTriggered(cmn::Keys action) const;
-
+        [[nodiscard]] bool isActionTriggered(cmn::Keys action) const;
+        [[nodiscard]] std::string getShaderName() const;
     private:
         std::map<cmn::Keys, InputBinding> _bindings;
-
         void _initDefaultBindings();
-        bool _checkGamepad(const InputBinding& bind) const;
-
-        // Helpers pour convertir String <-> SFML Key
-        sf::Keyboard::Key _stringToKey(const std::string& keyName) const;
+        [[nodiscard]] bool _checkGamepad(const InputBinding& bind) const;
+        [[nodiscard]] sf::Keyboard::Key _stringToKey(const std::string& keyName) const;
+        std::string _shader;
     };
 }
 #endif// R_TYPE_INPUTMANAGER_HPP
