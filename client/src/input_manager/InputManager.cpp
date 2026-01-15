@@ -1,5 +1,11 @@
-#include "InputManager.hpp"
+/*
+** EPITECH PROJECT, 2026
+** R_Type
+** File description:
+** InputManager
+*/
 
+#include "InputManager.hpp"
 #include "constants/GameConstants.hpp"
 
 namespace client {
