@@ -14,7 +14,6 @@
 #include "components/Shoot.hpp"
 #include "components/Enemy.hpp"
 #include "data_translator/DataTranslator.hpp"
-#include "packet_factory/PacketFactory.hpp"
 #include "systems/CollisionSystem.hpp"
 #include "systems/DestroySystem.hpp"
 #include "systems/HealthSystem.hpp"
@@ -24,7 +23,6 @@
 #include "systems/VelocitySystem.hpp"
 #include <algorithm>
 #include <random>
-#include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_data/PacketData.hpp"
 
 namespace server {
@@ -44,7 +42,8 @@ namespace server {
     {
         _initLevels();
         _waitForPlayers();
-        _sharedData->addTcpPacketToSend(cmn::PacketFactory::createStartGamePacket());
+        cmn::startGameData data = {};
+        _sharedData->addTcpPacketToSend(data);
         _sendPlayerEntities();
         _initEcsManager();
         _startGame();
@@ -63,14 +62,12 @@ namespace server {
 
         while (true) {
             float const deltaTime = clock.restart().asSeconds();
-            std::optional<cmn::CustomPacket> packet = _sharedData->getUdpReceivedPacket();
+            auto data = _sharedData->getUdpReceivedPacket();
 
-            if (packet.has_value()) {
-                std::optional<cmn::packetData> data = cmn::PacketDisassembler::disassemble(packet.value());
-                if (data.has_value()) {
-                    cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
-                }
+            if (data.has_value()) {
+                cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
             }
+
             _createEnemy(currentLevel, enemyClock, generator);
             _checkSpaceBar();
             if (elapsedTime > frameTimer) {
@@ -87,7 +84,8 @@ namespace server {
     void Game::_sendDestroy()
     {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Destroy>()) {
-            _sharedData->addUdpPacketToSend(cmn::PacketFactory::createDeleteEntityPacket(entity->getId()));
+            cmn::deleteEntityData data = {entity->getId()};
+            _sharedData->addUdpPacketToSend(data);
         }
     }
 
@@ -96,8 +94,8 @@ namespace server {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
             auto component = entity->getComponent<ecs::Position>();
             std::pair<float, float> const position = { component->getX(), component->getY() };
-            _sharedData->addUdpPacketToSend(
-                cmn::PacketFactory::createPositionPacket(position, entity->getId()));
+            cmn::positionData data = {entity->getId(), position.first, position.second};
+            _sharedData->addUdpPacketToSend(data);
         }
     }
 
@@ -138,15 +136,8 @@ namespace server {
                             cmn::playerProjectileCollisionHeight
                         );
 
-                        std::pair<float, float> const position = {posX, posY};
-
-                        _sharedData->addUdpPacketToSend(
-                            cmn::PacketFactory::createNewEntityPacket(
-                                cmn::EntityType::PlayerProjectile,
-                                position,
-                                projectile->getId()
-                            )
-                        );
+                        cmn::newEntityData data = {projectile->getId(), cmn::EntityType::PlayerProjectile, posX, posY};
+                        _sharedData->addUdpPacketToSend(data);
                     }
                 }
             }
@@ -169,13 +160,8 @@ namespace server {
                 cmn::monsterCollisionHeight
             );
             std::pair<float, float> const position = {cmn::monsterSpawnPositionWidth, randNum};
-            _sharedData->addUdpPacketToSend(
-                cmn::PacketFactory::createNewEntityPacket(
-                    cmn::EntityType::Monster,
-                    position,
-                    newEnemy->getId()
-                )
-            );
+            cmn::newEntityData data = {newEnemy->getId(), cmn::EntityType::Monster, position.first, position.second};
+            _sharedData->addUdpPacketToSend(data);
         }
     }
 
@@ -184,14 +170,8 @@ namespace server {
         for (auto &entity : _ecs.getEntities()) {
             auto component = entity->getComponent<ecs::Position>();
             std::pair<float, float> const pos = {component->getX(), component->getY()};
-
-            _sharedData->addUdpPacketToSend(
-                cmn::PacketFactory::createNewEntityPacket(
-                    cmn::EntityType::Player,
-                    pos,
-                    entity->getId()
-                )
-            );
+            cmn::newEntityData data = {entity->getId(), cmn::EntityType::Player, pos.first, pos.second};
+            _sharedData->addUdpPacketToSend(data);
         }
     }
 
@@ -206,17 +186,12 @@ namespace server {
                 _createNewPlayers(_sharedData->getAllPlayerIds(), currentNbPlayerEntities);
             }
 
-            std::optional<cmn::CustomPacket> packet = _sharedData->getUdpReceivedPacket();
-
-            if (!packet.has_value()) {
-                continue;
-            }
-
-            std::optional<cmn::packetData> data = cmn::PacketDisassembler::disassemble(packet.value());
+            auto data = _sharedData->getUdpReceivedPacket();
 
             if (!data.has_value()) {
                 continue;
             }
+
             cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
 
             auto entities = _ecs.getEntitiesWithComponent<ecs::InputPlayer>();

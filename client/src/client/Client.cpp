@@ -9,10 +9,13 @@
 
 #include "custom_packet/CustomPacket.hpp"
 
+#include "constants/ProtocolConstants.hpp"
+#include "packet_disassembler/PacketDisassembler.hpp"
+#include "packet_factory/PacketFactory.hpp"
+#include <SFML/Network/IpAddress.hpp>
+#include <SFML/Network/TcpSocket.hpp>
 #include <cstdint>
 #include <iostream>
-#include <SFML/Network/TcpSocket.hpp>
-#include <SFML/Network/IpAddress.hpp>
 
 namespace client {
 
@@ -47,7 +50,7 @@ namespace client {
         return 0;
     }
 
-    int Client::sendTcp(cmn::CustomPacket &packet)
+    int Client::sendTcp(cmn::CustomPacket packet)
     {
         if (_tcpSocket.send(packet) != sf::Socket::Status::Done) {
             std::cerr << "[ERROR]: Failed to send TCP packet.\n";
@@ -57,7 +60,7 @@ namespace client {
         return 0;
     }
 
-    int Client::sendUdp(cmn::CustomPacket &packet)
+    int Client::sendUdp(cmn::CustomPacket packet)
     {
         if (_udpSocket.send(packet, _serverIp, _serverUdpPort) != sf::Socket::Status::Done) {
             std::cerr << "[ERROR]: Failed to send UDP packet.\n";
@@ -88,9 +91,31 @@ namespace client {
                     std::cerr << "[TCP]: Failed to receive TCP packet.\n";
                     continue;
                 }
-                _sharedData->addTcpReceivedPacket(packet);
-                //std::cout << "[RECEIVED]: TCP Packet received\n";
+
+                auto data = cmn::PacketDisassembler::disassemble(packet);
+
+                _sharedData->addTcpReceivedPacket(data.second);
             }
+        }
+    }
+
+    void Client::_handleUdpReception(cmn::packetHeader header, cmn::packetData data, uint32_t &loopIdx)
+    {
+        if (header.protocolId == cmn::acknowledgeProtocolId) {
+            cmn::acknowledgeData acknowledgeData = std::get<cmn::acknowledgeData>(data);
+            uint32_t sequenceNbr = acknowledgeData.sequenceNbr;
+            _sequencePacketMap.erase(sequenceNbr);
+            return;
+        }
+        if (loopIdx > 5000) {
+            for (auto &it : _sequencePacketMap) {
+                sendUdp(it.second);
+            }
+            loopIdx = 0;
+        }
+        _sharedData->addUdpReceivedPacket(data);
+        if (!_sequencePacketMap.empty()) {
+            loopIdx++;
         }
     }
 
@@ -102,18 +127,19 @@ namespace client {
         std::optional sender = sf::IpAddress::LocalHost;
         unsigned short port = 0;
         cmn::CustomPacket packet {};
+        uint32_t loopIdx = 0;
 
         while (true) {
             auto receivedData = _sharedData->getUdpPacketToSend();
             if (receivedData.has_value()) {
-                sendUdp(receivedData.value());
+                sendUdp(cmn::PacketFactory::createPacket(receivedData.value(), _sequencePacketMap));
             }
             if (_udpSocket.receive(packet, sender, port) != sf::Socket::Status::Done) {
 //                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
-            _sharedData->addUdpReceivedPacket(packet);
-            //std::cout << "[RECEIVED]: UDP Packet received" << "\n";
+            auto data = cmn::PacketDisassembler::disassemble(packet);
+            _handleUdpReception(data.first, data.second, loopIdx);
         }
     }
 }

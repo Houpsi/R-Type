@@ -7,10 +7,11 @@
 
 #ifndef R_TYPE_CLIENT_HPP
 #define R_TYPE_CLIENT_HPP
-#include "packet_data/PacketData.hpp"
 #include "SFML/Network/SocketSelector.hpp"
 #include "SFML/Network/TcpSocket.hpp"
 #include "SFML/Network/UdpSocket.hpp"
+#include "packet_data/PacketData.hpp"
+#include "packet_header/PacketHeader.hpp"
 #include "shared_data/SharedData.hpp"
 
 #include <thread>
@@ -25,8 +26,8 @@ namespace client {
             [[nodiscard]] int connectToHost(const std::string &address, uint16_t port);
             [[noreturn]] int run();
 
-            int sendUdp(cmn::CustomPacket &packet);
-            int sendTcp(cmn::CustomPacket &packet);
+            int sendUdp(cmn::CustomPacket packet);
+            int sendTcp(cmn::CustomPacket packet);
 
         private:
             sf::TcpSocket _tcpSocket;
@@ -39,6 +40,8 @@ namespace client {
             std::jthread _tcpThread;
 
             std::shared_ptr<cmn::SharedData> _sharedData;
+            std::unordered_map<uint32_t, cmn::CustomPacket> _sequencePacketMap;
+            void _handleUdpReception(cmn::packetHeader header, cmn::packetData data, uint32_t &loopIdx);
     };
 }
 

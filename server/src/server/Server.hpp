@@ -11,6 +11,7 @@
 #include "SFML/Network/UdpSocket.hpp"
 #include "custom_packet/CustomPacket.hpp"
 #include "packet_data/PacketData.hpp"
+#include "packet_header/PacketHeader.hpp"
 #include "shared_data/SharedData.hpp"
 #include <SFML/Network/TcpListener.hpp>
 #include <SFML/Network/TcpSocket.hpp>
@@ -42,6 +43,8 @@ namespace server {
         void _checkSocket();
         void _handleNewTcpPacket();
         std::shared_ptr<cmn::SharedData> _sharedData;
+        std::unordered_map<uint32_t, cmn::CustomPacket> _sequencePacketMap;
+        void _handleUdpReception(cmn::packetHeader header, cmn::packetData data, uint32_t &loopIdx);
     };
 
 }// namespace server

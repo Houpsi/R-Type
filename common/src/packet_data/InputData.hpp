@@ -9,14 +9,16 @@
 
 #include "SFML/Network/Packet.hpp"
 #include <cstdint>
+#include "enums/Key.hpp"
+#include "enums/KeyState.hpp"
 
 namespace cmn {
 
     using inputData = struct inputData
     {
         uint32_t playerId;
-        uint8_t key;
-        uint8_t keyState;
+        Keys key;
+        KeyState keyState;
     };
 
 }

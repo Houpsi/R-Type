@@ -13,21 +13,29 @@
 #include "enums/Key.hpp"
 #include "enums/KeyState.hpp"
 #include "bit_packer/BitPacker.hpp"
+#include "packet_data/PacketData.hpp"
+#include <optional>
+#include <unordered_map>
 
 namespace cmn {
 
     class PacketFactory
     {
       public:
-        static CustomPacket createConnectionPacket(uint32_t playerId);
-        static CustomPacket createInputPacket(uint32_t playerId, Keys key, KeyState state);
-        static CustomPacket createPositionPacket(std::pair<float, float> positions, uint64_t entityId);
-        static CustomPacket createNewEntityPacket(EntityType type, std::pair<float, float> positions, uint64_t entityId);
-        static CustomPacket createDeleteEntityPacket(uint64_t entityId);
-        static CustomPacket createStartGamePacket();
+        static CustomPacket createPacket(packetData data, std::unordered_map<uint32_t, cmn::CustomPacket> &sequencePacketMap);
 
       private:
+        static CustomPacket _createConnectionPacket(connectionData data);
+        static CustomPacket _createInputPacket(inputData data);
+        static CustomPacket _createPositionPacket(positionData data);
+        static CustomPacket _createNewEntityPacket(newEntityData data,
+            std::unordered_map<uint32_t, cmn::CustomPacket> &sequencePacketMap);
+        static CustomPacket _createDeleteEntityPacket(deleteEntityData data,
+            std::unordered_map<uint32_t, cmn::CustomPacket> &sequencePacketMap);
+        static CustomPacket _createStartGamePacket();
+        static CustomPacket _createAcknowledgePacket(acknowledgeData data);
         static CustomPacket _putInPacket(BitPacker &packer);
+        static uint32_t _sequenceNbr;
     };
 
 }// namespace cmn
