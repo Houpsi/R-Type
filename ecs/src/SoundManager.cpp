@@ -7,8 +7,7 @@
 
 
 #include "SoundManager.hpp"
-
-#include "../../common/src/Constants.hpp"
+#include "EcsConstant.hpp"
 #include "SFML/Audio/Sound.hpp"
 
 #include <iostream>
@@ -25,10 +24,10 @@ namespace ecs {
 
     void SoundManager::play(int id, bool looping)
     {
-        if (id < 0 || id > static_cast<int>(cmn::idToSound.size()))
+        if (id < 0 || id > static_cast<int>(idToSound.size()))
             return;
 
-        std::string_view soundName = cmn::idToSound[id - 1];
+        std::string_view soundName = idToSound[id - 1];
 
         auto it = _buffers.find(std::string(soundName));
         if (it == _buffers.end())
@@ -36,7 +35,7 @@ namespace ecs {
 
         auto sound = std::make_shared<sf::Sound>(it->second);
         sound->setBuffer(it->second);
-        sound->setVolume(cmn::volumeMusic);
+        sound->setVolume(volumeMusic);
         sound->setLooping(looping);
         sound->play();
 
@@ -58,7 +57,7 @@ namespace ecs {
 
     SoundManager::SoundManager()
     {
-        loadFolder(static_cast<std::string>(cmn::folderSound));
+        loadFolder(static_cast<std::string>(folderSound));
     }
 
     void SoundManager::loadFolder(const std::string& folderPath)

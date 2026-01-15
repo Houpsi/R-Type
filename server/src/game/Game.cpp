@@ -97,7 +97,7 @@ namespace server {
      {
          for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Sound>()) {
              uint8_t soundId = static_cast<uint8_t>(entity->getComponent<ecs::Sound>()->getIdMusic());
-             _sharedData->addUdpPacketToSend(cmn::PacketFactory::createSoundPacket(entity->getId(), soundId));
+             _sharedData->addUdpPacketToSend(cmn::PacketFactory::createSoundPacket(soundId));
              entity->removeComponent<ecs::Sound>();
          }
      }

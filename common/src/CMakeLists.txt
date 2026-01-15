@@ -31,7 +31,6 @@ add_library(r-type_common_lib
         bit_unpacker/BitUnpacker.hpp
         packet_disassembler/PacketDisassembler.cpp
         packet_disassembler/PacketDisassembler.hpp
-        packet_data/sound_packet/SoundPacket.cpp
         packet_data/sound_packet/SoundPacket.hpp
 )
 

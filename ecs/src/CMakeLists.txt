@@ -62,6 +62,7 @@ add_library(r-type_ecs_lib
         systems/BackgroundSystem.cpp
         systems/SoundSystem.cpp
         systems/SoundSystem.hpp
+        EcsConstant.hpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC
