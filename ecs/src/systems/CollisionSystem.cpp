@@ -7,6 +7,8 @@
 
 #include "CollisionSystem.hpp"
 
+#include "components/Sound.hpp"
+
 namespace ecs
 {
     /**
@@ -67,13 +69,13 @@ namespace ecs
 
                     if (health && shoot)
                         health->setHealth(health->getHealth() - shoot->getDamage());
-
+                    entity->addComponent<Sound>(1, false);
                     entity->addComponent<Destroy>();
                 }
 
                 if (typeA == TypeCollision::PLAYER &&
                     typeB == TypeCollision::ENEMY) {
-
+                    entity->addComponent<Sound>(1, false);
                     entity->addComponent<Destroy>();
                 }
             }

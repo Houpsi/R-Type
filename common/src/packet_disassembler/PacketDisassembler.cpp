@@ -61,6 +61,14 @@ namespace cmn {
         return data;
     }
 
+    packetData PacketDisassembler::_disassembleIntoSoundData(BitUnpacker &unpacker)
+    {
+        uint8_t const soundId = unpacker.readUInt8();
+        soundData data = {soundId};
+
+        return data;
+    }
+
     packetData PacketDisassembler::_disassembleIntoStartGameData(BitUnpacker &unpacker)
     {
         startGameData data = {};
@@ -94,6 +102,8 @@ namespace cmn {
                 return _disassembleIntoDeleteEntityData(unpacker);
             case (startGameProtocolId):
                 return _disassembleIntoStartGameData(unpacker);
+            case (soundProtocolId):
+                return _disassembleIntoSoundData(unpacker);
             default:
                 return std::nullopt;
         }

@@ -10,6 +10,7 @@
 #include "components/Component.hpp"
 #include <memory>
 #include <vector>
+#include <algorithm>
 
 namespace ecs {
 class Entity {
@@ -38,6 +39,18 @@ class Entity {
         }
         return nullptr;
     }
+
+    template <typename T>
+    void removeComponent() {
+        _components.erase(
+            std::remove_if(_components.begin(), _components.end(),
+                [](const std::shared_ptr<Component>& c) {
+                    return std::dynamic_pointer_cast<T>(c) != nullptr;
+                }),
+            _components.end()
+        );
+    }
+
 
   private:
     std::vector<std::shared_ptr<Component>> _components;

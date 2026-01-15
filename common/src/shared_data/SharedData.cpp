@@ -175,4 +175,16 @@ namespace cmn {
         }
         return ids;
     }
-}
+
+    bool SharedData::getRunThread()
+    {
+        const std::lock_guard lock(_mutex);
+        return _isRunning;
+    }
+
+    void SharedData::setRunThread(bool run)
+    {
+        std::lock_guard const lock(_mutex);
+        _isRunning = run;
+    }
+}// namespace cmn

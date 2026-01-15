@@ -80,6 +80,16 @@ namespace cmn {
         return _putInPacket(packer);
     }
 
+
+    CustomPacket PacketFactory::createSoundPacket(uint8_t soundId)
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(soundProtocolId);
+        packer.writeUInt8(soundId);
+        return _putInPacket(packer);
+    }
+
     CustomPacket PacketFactory::createStartGamePacket()
     {
         BitPacker packer;

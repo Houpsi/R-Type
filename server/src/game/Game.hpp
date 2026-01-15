@@ -32,6 +32,7 @@ namespace server {
         void _createNewPlayers(const std::vector<int>& ids, size_t &currentNbPlayerEntities);
         bool _isIdAlreadyPresent(int playerId);
         void _waitForPlayers();
+        void _sendSound();
         void _sendPlayerEntities();
         [[noreturn]] void _startGame();
         void _createEnemy(const Level &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator);

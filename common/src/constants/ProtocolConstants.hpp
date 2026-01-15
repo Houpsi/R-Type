@@ -18,6 +18,8 @@ namespace cmn {
     constexpr uint16_t newEntityProtocolId = 3;
     constexpr uint16_t deleteEntityProtocolId = 4;
     constexpr uint16_t startGameProtocolId = 5;
+    constexpr uint16_t soundProtocolId = 6;
+
 
 }
 

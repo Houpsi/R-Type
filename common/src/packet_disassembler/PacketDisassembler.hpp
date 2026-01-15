@@ -27,6 +27,8 @@ namespace cmn {
         static packetData _disassembleIntoNewEntityData(BitUnpacker &unpacker);
         static packetData _disassembleIntoDeleteEntityData(BitUnpacker &unpacker);
         static packetData _disassembleIntoStartGameData(BitUnpacker &unpacker);
+        static packetData _disassembleIntoSoundData(BitUnpacker &unpacker);
+
     };
 
 }// namespace cmn
