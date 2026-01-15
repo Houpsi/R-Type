@@ -61,4 +61,22 @@ namespace ecs {
     {
         _timeSinceLastShot = t;
     }
+
+    /**
+     * @brief Gets the shooter time
+     * @return The shoot timer
+     */
+    float Shoot::getShootTimer() const
+    {
+        return _shootTimer;
+    }
+
+    /**
+     * @brief Sets the shooter
+     * @param t New shot of the shoot
+     */
+    void Shoot::setShootTimer(float t)
+    {
+        _shootTimer = t;
+    }
 }
