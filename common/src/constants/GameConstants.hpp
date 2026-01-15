@@ -9,10 +9,13 @@
 #define R_TYPE_GAMECONSTANTS_HPP
 
 #include "SFML/System/Vector2.hpp"
+#include "enums/EntityType.hpp"
 
 #include <array>
 #include <cstdint>
+#include <map>
 #include <string>
+#include <unordered_map>
 
 namespace cmn {
 
@@ -36,6 +39,17 @@ namespace cmn {
     constexpr uint16_t monsterSpawnPositionWidth = 2020;
     constexpr uint16_t monsterMaxSpawnPositionHeight = 1081;
 
+    constexpr uint8_t monster2Health = 100;
+    constexpr sf::Vector2f monster2SpriteScale = {1.0F, 1.0F};
+    constexpr std::string_view monster2SpriteSheet = "./assets/r-typesheet211.gif";
+    constexpr std::pair<uint8_t, uint8_t> monster2AnimationSize = {64, 50};
+    constexpr uint8_t monster2AnimationOffset = 0;
+    constexpr uint8_t monster2AnimationNumberFrame = 4;
+    constexpr uint8_t monster2CollisionHeight = 64;
+    constexpr uint8_t monster2CollisionWidth = 50;
+    constexpr uint16_t monster2SpawnPositionWidth = 2020;
+    constexpr uint16_t monster2MaxSpawnPositionHeight = 1081;
+
     constexpr uint16_t playerProjectileSpeed = 400;
     constexpr uint16_t playerSpeed = 100;
     constexpr int8_t playerProjectileDirection = 1;
@@ -51,8 +65,9 @@ namespace cmn {
     constexpr uint16_t windowHeight = 1080;
 
     constexpr std::string_view folderLevels = "Levels";
-    constexpr std::array<std::string_view, 2> nameTypeEnemies = {"basic_enemy", "fast_enemy"};
+    constexpr std::array<std::string_view, 2> nameTypeEnemies = {"plane_enemy", "crochet_enemy"};
     constexpr std::array<std::string_view, 2> nameTypeBoss = {"boss_type_1", "boss_type_2"};
+
 }
 
 #endif// R_TYPE_GAMECONSTANTS_HPP

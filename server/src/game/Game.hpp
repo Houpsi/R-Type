@@ -34,7 +34,7 @@ namespace server {
         void _waitForPlayers();
         void _sendPlayerEntities();
         [[noreturn]] void _startGame();
-        void _createEnemy(const Level &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator);
+        void _createEnemy(Level &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator);
         void _checkSpaceBar();
         void _sendPositions();
         void _sendDestroy();

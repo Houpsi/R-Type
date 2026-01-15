@@ -83,9 +83,13 @@ namespace cmn {
             entity->addComponent<ecs::Sound>(std::string(playerShootSound));
             entity->addComponent<ecs::InputPlayer>();
         }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::Monster) {
+        if (static_cast<EntityType>(newEntity.type) == EntityType::Plane) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
             entity->addComponent<ecs::Animation>(monsterAnimationSize, monsterAnimationOffset, monsterAnimationNumberFrame);
+        }
+        if (static_cast<EntityType>(newEntity.type) == EntityType::Crochet) {
+            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monster2SpriteSheet)), monster2SpriteScale);
+            entity->addComponent<ecs::Animation>(monster2AnimationSize, monster2AnimationOffset, monster2AnimationNumberFrame);
         }
         if (static_cast<EntityType>(newEntity.type) == EntityType::PlayerProjectile) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
