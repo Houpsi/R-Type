@@ -13,17 +13,32 @@
 #include "components/Position.hpp"
 #include "components/Sprite.hpp"
 #include "SFML/Graphics.hpp"
+#include <map>
 
 namespace ecs {
-class RenderSystem : public System
-{
-  public:
-    explicit RenderSystem(sf::RenderWindow &window) : _window(window) {};
-    ~RenderSystem() override = default;
-    void update(EcsManager &ecs) override;
-  private:
-    sf::RenderWindow &_window;
-};
+    enum class AccessibilityFilter : uint8_t {
+        None = 0,
+        HighContrast,
+        Invert,
+        Protanopia,
+    };
+
+    class RenderSystem : public System{
+    public:
+        explicit RenderSystem(sf::RenderWindow& window, const std::string& nameShader);
+        void update(EcsManager &ecs);
+
+    private:
+        sf::RenderWindow& _window;
+        sf::Shader _shader;
+        bool _useFilter = true;
+        AccessibilityFilter _currentFilter = AccessibilityFilter::None;
+        std::map<AccessibilityFilter, sf::Shader> _shaders;
+
+
+        void _loadShader(AccessibilityFilter type, const std::string& fragmentCode);
+        AccessibilityFilter _getFilterByName(const std::string& name);
+    };
 }
 
 #endif //BOOTSTRAP_RENDERSYSTEM_HPP

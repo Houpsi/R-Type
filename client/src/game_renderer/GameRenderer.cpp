@@ -35,7 +35,7 @@ namespace client {
         _ecs.addSystem<ecs::InputSystem>();
         _ecs.addSystem<ecs::PlayerAnimationSystem>();
         _ecs.addSystem<ecs::SpriteAnimationSystem>();
-        _ecs.addSystem<ecs::RenderSystem>(_window);
+        _ecs.addSystem<ecs::RenderSystem>(_window, _inputManager.getShaderName());
         _ecs.addSystem<ecs::DestroySystem>();
         _ecs.addSystem<ecs::VelocitySystem>();
         _ecs.addSystem<ecs::BackgroundSystem>();
