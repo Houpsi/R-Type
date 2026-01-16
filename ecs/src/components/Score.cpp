@@ -8,18 +8,18 @@
 
 namespace ecs
 {
-	// int Score::getScore() const
-	// {
-	// 	return _score;
-	// }
-	//
-	// void Score::setScore(int score)
-	// {
-	// 	_score = score;
-	// }
-	//
-	// sf::Text Score::getText() const
-	// {
-	// 	return _text;
-	// }
+	void Score::addToScore(int v)
+	{
+		_score += v;
+	}
+
+	void Score::setScore(int v)
+	{
+		_score = v;
+	}
+
+	int Score::getScore() const
+	{
+		return _score;
+	}
 } // ecs
