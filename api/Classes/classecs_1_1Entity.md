@@ -18,11 +18,11 @@ title: ecs::Entity
 | -------------- | -------------- |
 | | **[~Entity](Classes/classecs_1_1Entity.md#function-~entity)**() =default |
 | template <typename T \> <br>void | **[removeComponent](Classes/classecs_1_1Entity.md#function-removecomponent)**() |
-| uint64_t | **[getId](Classes/classecs_1_1Entity.md#function-getid)**() const |
+| uint32_t | **[getId](Classes/classecs_1_1Entity.md#function-getid)**() const |
 | template <typename T \> <br>std::shared_ptr< T > | **[getComponent](Classes/classecs_1_1Entity.md#function-getcomponent)**() |
 | template <typename T ,typename... Args\> <br>std::shared_ptr< T > | **[addComponent](Classes/classecs_1_1Entity.md#function-addcomponent)**(Args &&... args) |
 | template <typename T \> <br>std::shared_ptr< T > | **[addComponent](Classes/classecs_1_1Entity.md#function-addcomponent)**() |
-| | **[Entity](Classes/classecs_1_1Entity.md#function-entity)**(uint64_t id) |
+| | **[Entity](Classes/classecs_1_1Entity.md#function-entity)**(uint32_t id) |
 
 ## Public Functions Documentation
 
@@ -44,7 +44,7 @@ inline void removeComponent()
 ### function getId
 
 ```cpp
-uint64_t getId() const
+uint32_t getId() const
 ```
 
 
@@ -79,11 +79,11 @@ inline std::shared_ptr< T > addComponent()
 
 ```cpp
 inline explicit Entity(
-    uint64_t id
+    uint32_t id
 )
 ```
 
 
 -------------------------------
 
-Updated on 2026-01-16 at 16:51:27 +0000
+Updated on 2026-01-16 at 18:45:29 +0000

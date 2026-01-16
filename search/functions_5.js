@@ -19,7 +19,7 @@ var searchData=
   ['getentitybyid_16',['getEntityById',['../classecs_1_1EcsManager.html#a1cac8a7475c5b4164692bb4ad8b3874a',1,'ecs::EcsManager']]],
   ['gethealth_17',['getHealth',['../classecs_1_1Health.html#a9eaf49d60b6b1ca3f4f444d8efb268dd',1,'ecs::Health']]],
   ['getheight_18',['getHeight',['../classecs_1_1Collision.html#a8f99f5fc705aa4ddfdbae20f60243c9d',1,'ecs::Collision']]],
-  ['getid_19',['getid',['../classecs_1_1PlayerAnimation.html#a67e1337faa248057608e52f176799d57',1,'ecs::PlayerAnimation::getId()'],['../classecs_1_1Entity.html#ae580832fdebad7511cc0eb5b6f66a2f0',1,'ecs::Entity::getId()']]],
+  ['getid_19',['getid',['../classecs_1_1PlayerAnimation.html#a67e1337faa248057608e52f176799d57',1,'ecs::PlayerAnimation::getId()'],['../classecs_1_1Entity.html#a2d7084fe49c2ee94621e0f1e53a1fb17',1,'ecs::Entity::getId()']]],
   ['getidmusic_20',['getIdMusic',['../classecs_1_1Sound.html#a19757c7f991608c59fe3bd9986779e5b',1,'ecs::Sound']]],
   ['getisbosspresent_21',['getIsBossPresent',['../classserver_1_1Level.html#adf4fb033ccba40a52e39a611541fa24a',1,'server::Level']]],
   ['getislooping_22',['getIsLooping',['../classecs_1_1Background.html#abdf1a4b445e251be968342f487994bb3',1,'ecs::Background']]],

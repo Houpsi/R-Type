@@ -35,5 +35,4 @@ digraph "ecs/src/components/Health.hpp"
   Node12 -> Node6 [id="edge16_Node000012_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node1 -> Node14 [id="edge17_Node000001_Node000014",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node14 [id="Node000014",label="ecs/tests/TestsHealth.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$TestsHealth_8cpp.html",tooltip=" "];
-  Node1 -> Node6 [id="edge18_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
 }

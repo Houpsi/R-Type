@@ -116,9 +116,9 @@ $(document).ready(function(){initNavTree('Entity_8hpp_source.html',''); initResi
 <div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classecs_1_1Entity.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="classecs_1_1Entity.html">Entity</a> {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classecs_1_1Entity.html#a86d89ad043e28dfb1046c56d8c1f3aeb">   18</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classecs_1_1Entity.html#a86d89ad043e28dfb1046c56d8c1f3aeb">Entity</a>(uint64_t <span class="keywordtype">id</span>) : _id(id) {};</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classecs_1_1Entity.html#a8592da6a41f2401ed0dab4f39c44edf7">   18</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classecs_1_1Entity.html#a8592da6a41f2401ed0dab4f39c44edf7">Entity</a>(uint32_t <span class="keywordtype">id</span>) : _id(id) {};</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classecs_1_1Entity.html#acf9322786b327ff9257a17e68024b886">   19</a></span>    <a class="code hl_function" href="classecs_1_1Entity.html#acf9322786b327ff9257a17e68024b886">~Entity</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    [[nodiscard]] uint64_t <a class="code hl_function" href="classecs_1_1Entity.html#ae580832fdebad7511cc0eb5b6f66a2f0">getId</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    [[nodiscard]] uint32_t <a class="code hl_function" href="classecs_1_1Entity.html#a2d7084fe49c2ee94621e0f1e53a1fb17">getId</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classecs_1_1Entity.html#a32e700b04637a1686ccca12156f7f608">   22</a></span>    std::shared_ptr&lt;T&gt; <a class="code hl_function" href="classecs_1_1Entity.html#a32e700b04637a1686ccca12156f7f608">addComponent</a>(Args&amp;&amp;... args) {</div>
@@ -163,7 +163,7 @@ $(document).ready(function(){initNavTree('Entity_8hpp_source.html',''); initResi
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    std::vector&lt;std::shared_ptr&lt;Component&gt;&gt; _components;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    uint64_t _id;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    uint32_t _id;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>};</div>
 </div>
@@ -173,12 +173,12 @@ $(document).ready(function(){initNavTree('Entity_8hpp_source.html',''); initResi
 <div class="ttc" id="aComponent_8hpp_html"><div class="ttname"><a href="Component_8hpp.html">Component.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1Entity_html"><div class="ttname"><a href="classecs_1_1Entity.html">ecs::Entity</a></div><div class="ttdef"><b>Definition</b> Entity.hpp:16</div></div>
 <div class="ttc" id="aclassecs_1_1Entity_html_a2550e213257657651c5fd19d639ddcdd"><div class="ttname"><a href="classecs_1_1Entity.html#a2550e213257657651c5fd19d639ddcdd">ecs::Entity::getComponent</a></div><div class="ttdeci">std::shared_ptr&lt; T &gt; getComponent()</div><div class="ttdef"><b>Definition</b> Entity.hpp:34</div></div>
+<div class="ttc" id="aclassecs_1_1Entity_html_a2d7084fe49c2ee94621e0f1e53a1fb17"><div class="ttname"><a href="classecs_1_1Entity.html#a2d7084fe49c2ee94621e0f1e53a1fb17">ecs::Entity::getId</a></div><div class="ttdeci">uint32_t getId() const</div><div class="ttdef"><b>Definition</b> Entity.cpp:11</div></div>
 <div class="ttc" id="aclassecs_1_1Entity_html_a30056c776dc8e57264e3fc83658e3198"><div class="ttname"><a href="classecs_1_1Entity.html#a30056c776dc8e57264e3fc83658e3198">ecs::Entity::removeComponent</a></div><div class="ttdeci">void removeComponent()</div><div class="ttdef"><b>Definition</b> Entity.hpp:44</div></div>
 <div class="ttc" id="aclassecs_1_1Entity_html_a32e700b04637a1686ccca12156f7f608"><div class="ttname"><a href="classecs_1_1Entity.html#a32e700b04637a1686ccca12156f7f608">ecs::Entity::addComponent</a></div><div class="ttdeci">std::shared_ptr&lt; T &gt; addComponent(Args &amp;&amp;... args)</div><div class="ttdef"><b>Definition</b> Entity.hpp:22</div></div>
-<div class="ttc" id="aclassecs_1_1Entity_html_a86d89ad043e28dfb1046c56d8c1f3aeb"><div class="ttname"><a href="classecs_1_1Entity.html#a86d89ad043e28dfb1046c56d8c1f3aeb">ecs::Entity::Entity</a></div><div class="ttdeci">Entity(uint64_t id)</div><div class="ttdef"><b>Definition</b> Entity.hpp:18</div></div>
+<div class="ttc" id="aclassecs_1_1Entity_html_a8592da6a41f2401ed0dab4f39c44edf7"><div class="ttname"><a href="classecs_1_1Entity.html#a8592da6a41f2401ed0dab4f39c44edf7">ecs::Entity::Entity</a></div><div class="ttdeci">Entity(uint32_t id)</div><div class="ttdef"><b>Definition</b> Entity.hpp:18</div></div>
 <div class="ttc" id="aclassecs_1_1Entity_html_acf9322786b327ff9257a17e68024b886"><div class="ttname"><a href="classecs_1_1Entity.html#acf9322786b327ff9257a17e68024b886">ecs::Entity::~Entity</a></div><div class="ttdeci">~Entity()=default</div></div>
 <div class="ttc" id="aclassecs_1_1Entity_html_adabd62c169a7c0c657fe0f8e7b993bd8"><div class="ttname"><a href="classecs_1_1Entity.html#adabd62c169a7c0c657fe0f8e7b993bd8">ecs::Entity::addComponent</a></div><div class="ttdeci">std::shared_ptr&lt; T &gt; addComponent()</div><div class="ttdef"><b>Definition</b> Entity.hpp:28</div></div>
-<div class="ttc" id="aclassecs_1_1Entity_html_ae580832fdebad7511cc0eb5b6f66a2f0"><div class="ttname"><a href="classecs_1_1Entity.html#ae580832fdebad7511cc0eb5b6f66a2f0">ecs::Entity::getId</a></div><div class="ttdeci">uint64_t getId() const</div><div class="ttdef"><b>Definition</b> Entity.cpp:11</div></div>
 <div class="ttc" id="anamespaceecs_html"><div class="ttname"><a href="namespaceecs.html">ecs</a></div><div class="ttdef"><b>Definition</b> Animation.cpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
