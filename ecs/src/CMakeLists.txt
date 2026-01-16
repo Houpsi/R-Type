@@ -21,6 +21,8 @@ add_library(r-type_ecs_lib
         components/Position.hpp
         components/Component.cpp
         components/Component.hpp
+        components/Score.cpp
+        components/Score.hpp
         Entity.cpp
         Entity.hpp
         EcsManager.cpp
@@ -36,6 +38,8 @@ add_library(r-type_ecs_lib
         components/Enemy.hpp
         systems/ShootSystem.cpp
         systems/ShootSystem.hpp
+        systems/ScoreTextSystem.cpp
+        systems/ScoreTextSystem.hpp
         components/Destroy.cpp
         components/Destroy.hpp
         components/Shoot.cpp
