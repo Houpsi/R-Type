@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "ecs::AABB", "classecs_1_1AABB.html", null ],
     [ "AParser", null, [
       [ "server::Parser", "classserver_1_1Parser.html", null ]
     ] ],
@@ -28,6 +29,7 @@ var hierarchy =
     [ "server::Level", "classserver_1_1Level.html", null ],
     [ "server::LevelManager", "classserver_1_1LevelManager.html", null ],
     [ "server::LevelParser", "classserver_1_1LevelParser.html", null ],
+    [ "ecs::QuadTree", "classecs_1_1QuadTree.html", null ],
     [ "ecs::ResourceManager", "classecs_1_1ResourceManager.html", null ],
     [ "server::Server", "classserver_1_1Server.html", null ],
     [ "ecs::SoundManager", "classecs_1_1SoundManager.html", null ],

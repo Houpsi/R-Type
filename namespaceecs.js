@@ -1,5 +1,6 @@
 var namespaceecs =
 [
+    [ "AABB", "classecs_1_1AABB.html", "classecs_1_1AABB" ],
     [ "Animation", "classecs_1_1Animation.html", "classecs_1_1Animation" ],
     [ "Background", "classecs_1_1Background.html", "classecs_1_1Background" ],
     [ "BackgroundSystem", "classecs_1_1BackgroundSystem.html", "classecs_1_1BackgroundSystem" ],
@@ -21,6 +22,7 @@ var namespaceecs =
     [ "PlayerAnimation", "classecs_1_1PlayerAnimation.html", "classecs_1_1PlayerAnimation" ],
     [ "PlayerAnimationSystem", "classecs_1_1PlayerAnimationSystem.html", "classecs_1_1PlayerAnimationSystem" ],
     [ "Position", "classecs_1_1Position.html", "classecs_1_1Position" ],
+    [ "QuadTree", "classecs_1_1QuadTree.html", "classecs_1_1QuadTree" ],
     [ "RenderSystem", "classecs_1_1RenderSystem.html", "classecs_1_1RenderSystem" ],
     [ "ResourceManager", "classecs_1_1ResourceManager.html", "classecs_1_1ResourceManager" ],
     [ "Shoot", "classecs_1_1Shoot.html", "classecs_1_1Shoot" ],
@@ -33,6 +35,7 @@ var namespaceecs =
     [ "System", "classecs_1_1System.html", "classecs_1_1System" ],
     [ "Velocity", "classecs_1_1Velocity.html", "classecs_1_1Velocity" ],
     [ "VelocitySystem", "classecs_1_1VelocitySystem.html", "classecs_1_1VelocitySystem" ],
+    [ "EntityRef", "namespaceecs.html#aba6b31839917e69e9f5f823b29c49a3a", null ],
     [ "TypeCollision", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1c", [
       [ "PLAYER", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1cabf279887788e305b92e229afa00d3a3e", null ],
       [ "ENEMY", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1cae9d74ed3fbdbf5b0952dce8e37f2f72f", null ],
@@ -53,5 +56,9 @@ var namespaceecs =
     [ "TEST", "namespaceecs.html#ad4997ede705c6001fc3e35fd035980a0", null ],
     [ "folderSound", "namespaceecs.html#a1b57c2380fa3729ef2b1840b37b213e3", null ],
     [ "idToSound", "namespaceecs.html#ae7c0e9dc0417a14b858146d8e6d7df22", null ],
-    [ "volumeMusic", "namespaceecs.html#a5d022ba3aaad087186a14614dea11848", null ]
+    [ "MAX_DEPTH", "namespaceecs.html#a0505af24dab235fc3b06a36f76518682", null ],
+    [ "MAX_ENTITIES", "namespaceecs.html#a0b10355f6a3934015d874d3207ee0669", null ],
+    [ "volumeMusic", "namespaceecs.html#a5d022ba3aaad087186a14614dea11848", null ],
+    [ "windowHeight", "namespaceecs.html#a27edd8b07d9449a82115ae47ffac1eb5", null ],
+    [ "windowWidth", "namespaceecs.html#a20d28d4913b2bdf576f2abef59d02376", null ]
 ];

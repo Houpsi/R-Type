@@ -23,6 +23,7 @@ title: ecs
 | class | **[ecs::Shoot](Classes/classecs_1_1Shoot.md)**  |
 | class | **[ecs::ResourceManager](Classes/classecs_1_1ResourceManager.md)**  |
 | class | **[ecs::RenderSystem](Classes/classecs_1_1RenderSystem.md)**  |
+| class | **[ecs::QuadTree](Classes/classecs_1_1QuadTree.md)**  |
 | class | **[ecs::Position](Classes/classecs_1_1Position.md)**  |
 | class | **[ecs::PlayerAnimationSystem](Classes/classecs_1_1PlayerAnimationSystem.md)**  |
 | class | **[ecs::PlayerAnimation](Classes/classecs_1_1PlayerAnimation.md)**  |
@@ -44,12 +45,14 @@ title: ecs
 | class | **[ecs::BackgroundSystem](Classes/classecs_1_1BackgroundSystem.md)** <br>[System](Classes/classecs_1_1System.md) responsible for the infinite scrolling logic of the background.  |
 | class | **[ecs::Background](Classes/classecs_1_1Background.md)** <br>A component handling background logic, specifically for scrolling/looping effects.  |
 | class | **[ecs::Animation](Classes/classecs_1_1Animation.md)**  |
+| class | **[ecs::AABB](Classes/classecs_1_1AABB.md)**  |
 
 ## Types
 
 |                | Name           |
 | -------------- | -------------- |
 | enum| **[TypeCollision](Namespaces/namespaceecs.md#enum-typecollision)** { PLAYER_PROJECTILE, PLAYER, OBSTACLE, ENEMY_PROJECTILE, ENEMY} |
+| using std::shared_ptr< [Entity](Classes/classecs_1_1Entity.md) > | **[EntityRef](Namespaces/namespaceecs.md#using-entityref)**  |
 
 ## Functions
 
@@ -71,9 +74,13 @@ title: ecs
 
 |                | Name           |
 | -------------- | -------------- |
+| constexpr uint16_t | **[windowWidth](Namespaces/namespaceecs.md#variable-windowwidth)**  |
+| constexpr uint16_t | **[windowHeight](Namespaces/namespaceecs.md#variable-windowheight)**  |
 | constexpr int | **[volumeMusic](Namespaces/namespaceecs.md#variable-volumemusic)**  |
 | constexpr std::array< std::string_view, 2 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
 | constexpr std::string_view | **[folderSound](Namespaces/namespaceecs.md#variable-foldersound)**  |
+| constexpr int | **[MAX_ENTITIES](Namespaces/namespaceecs.md#variable-max-entities)**  |
+| constexpr int | **[MAX_DEPTH](Namespaces/namespaceecs.md#variable-max-depth)**  |
 
 ## Types Documentation
 
@@ -88,6 +95,13 @@ title: ecs
 | ENEMY | |   |
 
 
+
+
+### using EntityRef
+
+```cpp
+using ecs::EntityRef = typedef std::shared_ptr<Entity>;
+```
 
 
 
@@ -206,6 +220,20 @@ TEST(
 
 ## Attributes Documentation
 
+### variable windowWidth
+
+```cpp
+constexpr uint16_t windowWidth = 1920;
+```
+
+
+### variable windowHeight
+
+```cpp
+constexpr uint16_t windowHeight = 1080;
+```
+
+
 ### variable volumeMusic
 
 ```cpp
@@ -227,9 +255,23 @@ constexpr std::string_view folderSound = "./assets/sound/";
 ```
 
 
+### variable MAX_ENTITIES
+
+```cpp
+static constexpr int MAX_ENTITIES = 6;
+```
+
+
+### variable MAX_DEPTH
+
+```cpp
+static constexpr int MAX_DEPTH = 6;
+```
+
+
 
 
 
 -------------------------------
 
-Updated on 2026-01-15 at 18:57:40 +0000
+Updated on 2026-01-16 at 09:38:10 +0000

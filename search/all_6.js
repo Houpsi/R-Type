@@ -15,7 +15,7 @@ var searchData=
   ['getdirection_12',['getDirection',['../classecs_1_1Velocity.html#af46b35bdb0c40fc70204851b6c3a79e2',1,'ecs::Velocity']]],
   ['getdown_13',['getDown',['../classecs_1_1InputPlayer.html#a05c4bbc23088af9bd55754f85802ee37',1,'ecs::InputPlayer']]],
   ['getenemyspawnrate_14',['getEnemySpawnRate',['../classserver_1_1Level.html#aa638ced9d5d35a996557747ac118bfeb',1,'server::Level']]],
-  ['getentities_15',['getEntities',['../classecs_1_1EcsManager.html#a07a7925eaa065a35249b1c6ae2adf4e6',1,'ecs::EcsManager']]],
+  ['getentities_15',['getentities',['../classecs_1_1EcsManager.html#a07a7925eaa065a35249b1c6ae2adf4e6',1,'ecs::EcsManager::getEntities()'],['../classecs_1_1QuadTree.html#add648c9796b8108f8aec3743ae5832ca',1,'ecs::QuadTree::getEntities()']]],
   ['getentitieswithcomponent_16',['getEntitiesWithComponent',['../classecs_1_1EcsManager.html#ab5e639c33a3e584201192a8687c50401',1,'ecs::EcsManager']]],
   ['getentitybyid_17',['getEntityById',['../classecs_1_1EcsManager.html#a1cac8a7475c5b4164692bb4ad8b3874a',1,'ecs::EcsManager']]],
   ['gethealth_18',['getHealth',['../classecs_1_1Health.html#a9eaf49d60b6b1ca3f4f444d8efb268dd',1,'ecs::Health']]],

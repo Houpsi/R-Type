@@ -9,6 +9,7 @@ title: Classes
 
 
 * **namespace [ecs](Namespaces/namespaceecs.md)** 
+    * **class [AABB](Classes/classecs_1_1AABB.md)** 
     * **class [Animation](Classes/classecs_1_1Animation.md)** 
     * **class [Background](Classes/classecs_1_1Background.md)** <br>A component handling background logic, specifically for scrolling/looping effects. 
     * **class [BackgroundSystem](Classes/classecs_1_1BackgroundSystem.md)** <br>[System](Classes/classecs_1_1System.md) responsible for the infinite scrolling logic of the background. 
@@ -30,6 +31,7 @@ title: Classes
     * **class [PlayerAnimation](Classes/classecs_1_1PlayerAnimation.md)** 
     * **class [PlayerAnimationSystem](Classes/classecs_1_1PlayerAnimationSystem.md)** 
     * **class [Position](Classes/classecs_1_1Position.md)** 
+    * **class [QuadTree](Classes/classecs_1_1QuadTree.md)** 
     * **class [RenderSystem](Classes/classecs_1_1RenderSystem.md)** 
     * **class [ResourceManager](Classes/classecs_1_1ResourceManager.md)** 
     * **class [Shoot](Classes/classecs_1_1Shoot.md)** 
@@ -58,4 +60,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2026-01-15 at 18:57:40 +0000
+Updated on 2026-01-16 at 09:38:10 +0000

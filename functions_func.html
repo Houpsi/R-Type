@@ -98,6 +98,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <div class="textblock">Here is a list of all functions with links to the classes they belong to:</div>
 
 <h3><a id="index_a" name="index_a"></a>- a -</h3><ul>
+<li>AABB()&#160;:&#160;<a class="el" href="classecs_1_1AABB.html#aff89f00438686355f80c85e46f52b2c6">ecs::AABB</a></li>
 <li>addComponent()&#160;:&#160;<a class="el" href="classecs_1_1Entity.html#a32e700b04637a1686ccca12156f7f608">ecs::Entity</a></li>
 <li>addLevel()&#160;:&#160;<a class="el" href="classserver_1_1LevelManager.html#aea299d883c3f7c09fc81e4200c32ca59">server::LevelManager</a></li>
 <li>addSystem()&#160;:&#160;<a class="el" href="classecs_1_1EcsManager.html#a5cc872a200e584f840a24b4bcdb4c7bd">ecs::EcsManager</a></li>
@@ -121,6 +122,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>Collision()&#160;:&#160;<a class="el" href="classecs_1_1Collision.html#aca7f446002e8a18932bc1fa69d8d7671">ecs::Collision</a></li>
 <li>CollisionSystem()&#160;:&#160;<a class="el" href="classecs_1_1CollisionSystem.html#acaf14161170c983bb5018d1a58265f32">ecs::CollisionSystem</a></li>
 <li>Component()&#160;:&#160;<a class="el" href="classecs_1_1Component.html#a03794632c30cbe13f476caacfd937b14">ecs::Component</a></li>
+<li>contains()&#160;:&#160;<a class="el" href="classecs_1_1AABB.html#af5216e88bca1d29a509f371621b2c413">ecs::AABB</a></li>
 <li>createEntity()&#160;:&#160;<a class="el" href="classecs_1_1EcsManager.html#a2a2e15d8e7a352cdb6ff1915bf60b7e8">ecs::EcsManager</a></li>
 <li>createLevel()&#160;:&#160;<a class="el" href="classserver_1_1LevelParser.html#aedd75c95fb917debd2408a156da11d54">server::LevelParser</a></li>
 </ul>
@@ -153,7 +155,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>getDirection()&#160;:&#160;<a class="el" href="classecs_1_1Velocity.html#af46b35bdb0c40fc70204851b6c3a79e2">ecs::Velocity</a></li>
 <li>getDown()&#160;:&#160;<a class="el" href="classecs_1_1InputPlayer.html#a05c4bbc23088af9bd55754f85802ee37">ecs::InputPlayer</a></li>
 <li>getEnemySpawnRate()&#160;:&#160;<a class="el" href="classserver_1_1Level.html#aa638ced9d5d35a996557747ac118bfeb">server::Level</a></li>
-<li>getEntities()&#160;:&#160;<a class="el" href="classecs_1_1EcsManager.html#a07a7925eaa065a35249b1c6ae2adf4e6">ecs::EcsManager</a></li>
+<li>getEntities()&#160;:&#160;<a class="el" href="classecs_1_1EcsManager.html#a07a7925eaa065a35249b1c6ae2adf4e6">ecs::EcsManager</a>, <a class="el" href="classecs_1_1QuadTree.html#add648c9796b8108f8aec3743ae5832ca">ecs::QuadTree</a></li>
 <li>getEntitiesWithComponent()&#160;:&#160;<a class="el" href="classecs_1_1EcsManager.html#ab5e639c33a3e584201192a8687c50401">ecs::EcsManager</a></li>
 <li>getEntityById()&#160;:&#160;<a class="el" href="classecs_1_1EcsManager.html#a1cac8a7475c5b4164692bb4ad8b3874a">ecs::EcsManager</a></li>
 <li>getHealth()&#160;:&#160;<a class="el" href="classecs_1_1Health.html#a9eaf49d60b6b1ca3f4f444d8efb268dd">ecs::Health</a></li>
@@ -200,7 +202,8 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
 <li>InputPlayer()&#160;:&#160;<a class="el" href="classecs_1_1InputPlayer.html#a7af1f9d5497dae4c8e6644f4425bd85a">ecs::InputPlayer</a></li>
 <li>InputSystem()&#160;:&#160;<a class="el" href="classecs_1_1InputSystem.html#a894bf87d2f41a8a8b820594b58e9f967">ecs::InputSystem</a></li>
-<li>isColliding()&#160;:&#160;<a class="el" href="classecs_1_1CollisionSystem.html#a5062a8b0307744ed579c13bd3784bfdd">ecs::CollisionSystem</a></li>
+<li>insert()&#160;:&#160;<a class="el" href="classecs_1_1QuadTree.html#a55d17aad29db696a26e0606e396d5f63">ecs::QuadTree</a></li>
+<li>intersects()&#160;:&#160;<a class="el" href="classecs_1_1AABB.html#a0cfaf29cee58d9842e17a96a9a3bc45e">ecs::AABB</a></li>
 <li>isEveryArgValid()&#160;:&#160;<a class="el" href="classserver_1_1Parser.html#adbbff1cf8ed9047cae4d54862992a3ea">server::Parser</a></li>
 </ul>
 
@@ -226,6 +229,11 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>PlayerAnimation()&#160;:&#160;<a class="el" href="classecs_1_1PlayerAnimation.html#a65a28cc9a719cc2fdb56d3ba67a6ff2d">ecs::PlayerAnimation</a></li>
 <li>PlayerAnimationSystem()&#160;:&#160;<a class="el" href="classecs_1_1PlayerAnimationSystem.html#ad445bd37339d603133b3b3b40747a038">ecs::PlayerAnimationSystem</a></li>
 <li>Position()&#160;:&#160;<a class="el" href="classecs_1_1Position.html#a3032218da5dfc46842b42a37e1bfcaf1">ecs::Position</a></li>
+</ul>
+
+
+<h3><a id="index_q" name="index_q"></a>- q -</h3><ul>
+<li>QuadTree()&#160;:&#160;<a class="el" href="classecs_1_1QuadTree.html#adb12ed3efd04bcd6c6b468267f5d2ddd">ecs::QuadTree</a></li>
 </ul>
 
 
@@ -274,7 +282,6 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>setY()&#160;:&#160;<a class="el" href="classecs_1_1Position.html#a6017a41e2dd57bbd109f3bf37cbd7b2e">ecs::Position</a></li>
 <li>Shoot()&#160;:&#160;<a class="el" href="classecs_1_1Shoot.html#a17b2469282a3832437da4cfc76d4a26b">ecs::Shoot</a></li>
 <li>ShootSystem()&#160;:&#160;<a class="el" href="classecs_1_1ShootSystem.html#a7cb9c07b2dbbd7a927998e574f4ffc00">ecs::ShootSystem</a></li>
-<li>shouldIgnoreCollision()&#160;:&#160;<a class="el" href="classecs_1_1CollisionSystem.html#a298ba2ec5c5e05c9ed03f6adbf32c9e2">ecs::CollisionSystem</a></li>
 <li>Sound()&#160;:&#160;<a class="el" href="classecs_1_1Sound.html#addc2a2093f8b911b25215b8efeffcf5a">ecs::Sound</a></li>
 <li>SoundManager()&#160;:&#160;<a class="el" href="classecs_1_1SoundManager.html#add7b6119be009b7e284d6f84bad3ed8d">ecs::SoundManager</a></li>
 <li>SoundSystem()&#160;:&#160;<a class="el" href="classecs_1_1SoundSystem.html#adfc14aa282c0dba6e49f0a74795ad04a">ecs::SoundSystem</a></li>
@@ -285,7 +292,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 
 
 <h3><a id="index_u" name="index_u"></a>- u -</h3><ul>
-<li>update()&#160;:&#160;<a class="el" href="classecs_1_1BackgroundSystem.html#abad35052013fa0f254370d53666bb191">ecs::BackgroundSystem</a>, <a class="el" href="classecs_1_1CollisionSystem.html#adbc18c1dbf424a64d3fef29276c4f4b8">ecs::CollisionSystem</a>, <a class="el" href="classecs_1_1DestroySystem.html#a725a58d560c1161c9c10018b9af20148">ecs::DestroySystem</a>, <a class="el" href="classecs_1_1DummySystem.html#a78d8c14e3e59d1fdc5246d537043a0cb">ecs::DummySystem</a>, <a class="el" href="classecs_1_1HealthSystem.html#a5b5d4f1d40001c83c60d1c3325965717">ecs::HealthSystem</a>, <a class="el" href="classecs_1_1InputSystem.html#aeedba5c48daf0b545847a9869c7f27c3">ecs::InputSystem</a>, <a class="el" href="classecs_1_1MovementSystem.html#a785fd53392e22cc1292735dd5e4ff630">ecs::MovementSystem</a>, <a class="el" href="classecs_1_1PlayerAnimationSystem.html#a87e8568ecfa304b1d947bdac8c60aeaa">ecs::PlayerAnimationSystem</a>, <a class="el" href="classecs_1_1RenderSystem.html#a9b1c22e0bd0bf0858642a117d9e0fa1f">ecs::RenderSystem</a>, <a class="el" href="classecs_1_1ShootSystem.html#a9b93dd339ccafaef4bf2bd4fcb14d87c">ecs::ShootSystem</a>, <a class="el" href="classecs_1_1SoundManager.html#a3a2abab35d14d90bb6638bb686246080">ecs::SoundManager</a>, <a class="el" href="classecs_1_1SoundSystem.html#a5ff98d6e172fd8fe5d250bb1d704394c">ecs::SoundSystem</a>, <a class="el" href="classecs_1_1SpriteAnimationSystem.html#a4855d63578ca8caac5195e5ca1433ad5">ecs::SpriteAnimationSystem</a>, <a class="el" href="classecs_1_1System.html#af7ada0779bed0ab3e7f358430af25cc0">ecs::System</a>, <a class="el" href="classecs_1_1VelocitySystem.html#a2597a352e667c9bb54f55d6852c40a24">ecs::VelocitySystem</a></li>
+<li>update()&#160;:&#160;<a class="el" href="classecs_1_1BackgroundSystem.html#abad35052013fa0f254370d53666bb191">ecs::BackgroundSystem</a>, <a class="el" href="classecs_1_1CollisionSystem.html#a1beb446068d816c3c0fa0db095453111">ecs::CollisionSystem</a>, <a class="el" href="classecs_1_1DestroySystem.html#a725a58d560c1161c9c10018b9af20148">ecs::DestroySystem</a>, <a class="el" href="classecs_1_1DummySystem.html#a78d8c14e3e59d1fdc5246d537043a0cb">ecs::DummySystem</a>, <a class="el" href="classecs_1_1HealthSystem.html#a5b5d4f1d40001c83c60d1c3325965717">ecs::HealthSystem</a>, <a class="el" href="classecs_1_1InputSystem.html#aeedba5c48daf0b545847a9869c7f27c3">ecs::InputSystem</a>, <a class="el" href="classecs_1_1MovementSystem.html#a785fd53392e22cc1292735dd5e4ff630">ecs::MovementSystem</a>, <a class="el" href="classecs_1_1PlayerAnimationSystem.html#a87e8568ecfa304b1d947bdac8c60aeaa">ecs::PlayerAnimationSystem</a>, <a class="el" href="classecs_1_1RenderSystem.html#a9b1c22e0bd0bf0858642a117d9e0fa1f">ecs::RenderSystem</a>, <a class="el" href="classecs_1_1ShootSystem.html#a9b93dd339ccafaef4bf2bd4fcb14d87c">ecs::ShootSystem</a>, <a class="el" href="classecs_1_1SoundManager.html#a3a2abab35d14d90bb6638bb686246080">ecs::SoundManager</a>, <a class="el" href="classecs_1_1SoundSystem.html#a5ff98d6e172fd8fe5d250bb1d704394c">ecs::SoundSystem</a>, <a class="el" href="classecs_1_1SpriteAnimationSystem.html#a4855d63578ca8caac5195e5ca1433ad5">ecs::SpriteAnimationSystem</a>, <a class="el" href="classecs_1_1System.html#af7ada0779bed0ab3e7f358430af25cc0">ecs::System</a>, <a class="el" href="classecs_1_1VelocitySystem.html#a2597a352e667c9bb54f55d6852c40a24">ecs::VelocitySystem</a></li>
 <li>updateAnimation()&#160;:&#160;<a class="el" href="classecs_1_1Animation.html#a0232bf1ee97c4c44b373d39dd5594dea">ecs::Animation</a>, <a class="el" href="classecs_1_1PlayerAnimation.html#acc91554275507926b0990864223d1875">ecs::PlayerAnimation</a></li>
 <li>updateSystems()&#160;:&#160;<a class="el" href="classecs_1_1EcsManager.html#a4334a98ba68617230e1e6006258f237a">ecs::EcsManager</a></li>
 </ul>
@@ -318,6 +325,7 @@ $(document).ready(function(){initNavTree('functions_func.html',''); initResizabl
 <li>~PlayerAnimation()&#160;:&#160;<a class="el" href="classecs_1_1PlayerAnimation.html#a1bffb88841c6942231354b2cfd49e7ad">ecs::PlayerAnimation</a></li>
 <li>~PlayerAnimationSystem()&#160;:&#160;<a class="el" href="classecs_1_1PlayerAnimationSystem.html#a857969370adb49b996e39870db37cc70">ecs::PlayerAnimationSystem</a></li>
 <li>~Position()&#160;:&#160;<a class="el" href="classecs_1_1Position.html#a2254557c2428020c750ed77d557b7f28">ecs::Position</a></li>
+<li>~QuadTree()&#160;:&#160;<a class="el" href="classecs_1_1QuadTree.html#ae1ac4544cceb23f2d8cc51875a1d0d45">ecs::QuadTree</a></li>
 <li>~RenderSystem()&#160;:&#160;<a class="el" href="classecs_1_1RenderSystem.html#a74b02543f41680e0cfaf766d677cc179">ecs::RenderSystem</a></li>
 <li>~Shoot()&#160;:&#160;<a class="el" href="classecs_1_1Shoot.html#a3ceb02d04643a51514f160e39a686425">ecs::Shoot</a></li>
 <li>~Sound()&#160;:&#160;<a class="el" href="classecs_1_1Sound.html#a55e016f647cd5d2c3b7a49412d173187">ecs::Sound</a></li>
