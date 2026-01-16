@@ -25,6 +25,7 @@ namespace cmn {
         static CustomPacket createNewEntityPacket(EntityType type, std::pair<float, float> positions, uint64_t entityId);
         static CustomPacket createDeleteEntityPacket(uint64_t entityId);
         static CustomPacket createSoundPacket(uint8_t playerId);
+        static CustomPacket createTextPacket(uint32_t playerId, int score);
         static CustomPacket createStartGamePacket();
 
       private:

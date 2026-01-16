@@ -90,6 +90,17 @@ namespace cmn {
         return _putInPacket(packer);
     }
 
+    CustomPacket PacketFactory::createTextPacket(uint32_t textId, int score)
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(textProtocolId);
+        packer.writeUInt32(textId);
+        packer.writeUInt32(score);
+
+        return _putInPacket(packer);
+    }
+
     CustomPacket PacketFactory::createStartGamePacket()
     {
         BitPacker packer;
