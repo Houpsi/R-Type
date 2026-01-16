@@ -40,6 +40,8 @@ add_library(r-type_ecs_lib
         systems/ShootSystem.hpp
         systems/ScoreTextSystem.cpp
         systems/ScoreTextSystem.hpp
+        components/Text.cpp
+        components/Text.hpp
         components/Destroy.cpp
         components/Destroy.hpp
         components/Shoot.cpp
