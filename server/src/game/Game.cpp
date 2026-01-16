@@ -172,7 +172,7 @@ namespace server {
                      auto projectile = _ecs.createEntity();
 
                      float posX = posCpn->getX() - collision->getWidth() - 10;
-                     float posY = posCpn->getY();
+                     float posY = posCpn->getY() + 15;
 
                      projectile->addComponent<ecs::Position>(posX, posY);
                      projectile->addComponent<ecs::Velocity>(
