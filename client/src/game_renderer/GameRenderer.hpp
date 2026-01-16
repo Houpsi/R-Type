@@ -29,6 +29,7 @@ namespace client {
         cmn::DataTranslator _translator{};
         std::shared_ptr<ecs::Entity> _keyboard;
         std::shared_ptr<ecs::Entity> _sound;
+        std::shared_ptr<ecs::Entity> _text;
 
         void _handleEvents();
         void _initEcsSystem();
@@ -39,6 +40,7 @@ namespace client {
         void _updateLobby();
         void _updateGame();
         void _initSound();
+        void _initScore();
 
 
         bool _isRunning = false;
