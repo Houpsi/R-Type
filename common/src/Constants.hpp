@@ -56,6 +56,14 @@ namespace cmn {
     constexpr uint8_t monster2CollisionWidth = 50;
     constexpr uint16_t monster2SpawnPositionWidth = 2020;
     constexpr uint16_t monster2MaxSpawnPositionHeight = 1081;
+    constexpr int8_t monsterProjectileDirection = 0;
+    constexpr uint16_t monsterProjectileSpeed = 600;
+    constexpr uint8_t monsterProjectileCollisionHeight = 10;
+    constexpr uint8_t monsterProjectileCollisionWidth = 10;
+    constexpr std::string_view monsterProjectileSpriteSheet = "./assets/r-typesheet30a.gif";
+    constexpr uint8_t monsterProjectileAnimationNumberFrame = 3;
+    constexpr uint8_t monsterProjectileAnimationOffset = 0;
+    constexpr std::pair<uint8_t, uint8_t> monsterProjectileAnimationSize = {32, 36};
 
     constexpr uint16_t playerProjectileSpeed = 400;
     constexpr uint16_t playerSpeed = 100;
@@ -70,6 +78,9 @@ namespace cmn {
 
     constexpr uint16_t windowWidth = 1920;
     constexpr uint16_t windowHeight = 1080;
+
+    static constexpr int MAX_ENTITIES = 6;
+    static constexpr int MAX_DEPTH = 6;
 
     constexpr std::string_view folderLevels = "Levels";
     constexpr std::array<std::string_view, 2> nameTypeEnemies = {"plane_enemy", "crochet_enemy"};
