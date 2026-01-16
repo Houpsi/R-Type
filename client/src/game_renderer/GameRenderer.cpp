@@ -101,17 +101,9 @@ namespace client {
 
     void GameRenderer::_checkPlayerInput()
     {
-        static const std::vector<cmn::Keys> allActions = {
-            cmn::Keys::Up,
-            cmn::Keys::Down,
-            cmn::Keys::Left,
-            cmn::Keys::Right,
-            cmn::Keys::Space,
-            cmn::Keys::R
-        };
-
         bool isPressed = false;
-        for (const auto& action : allActions) {
+            for (uint8_t i = 0; i < static_cast<uint8_t>(cmn::Keys::None); ++i) {
+            auto action = static_cast<cmn::Keys>(i);
             if (_inputManager.isActionTriggered(action)) {
                 _sharedData->addUdpPacketToSend(
                     cmn::PacketFactory::createInputPacket(_playerId, action, cmn::KeyState::Pressed)
