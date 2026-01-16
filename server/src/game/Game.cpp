@@ -25,8 +25,10 @@
 #include "systems/VelocitySystem.hpp"
 #include <algorithm>
 #include <random>
+#include "components/Score.hpp"
 #include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_data/PacketData.hpp"
+#include "systems/ScoreTextSystem.hpp"
 
 namespace server {
 
@@ -79,6 +81,7 @@ namespace server {
                 _sendPositions();
             }
             _sendSound();
+            _sendText();
             _sendDestroy();
             _ecs.setDeltaTime(deltaTime);
             _ecs.updateSystems();
@@ -99,6 +102,21 @@ namespace server {
              uint8_t soundId = static_cast<uint8_t>(entity->getComponent<ecs::Sound>()->getIdMusic());
              _sharedData->addUdpPacketToSend(cmn::PacketFactory::createSoundPacket(soundId));
              entity->removeComponent<ecs::Sound>();
+         }
+     }
+
+    void Game::_sendText()
+     {
+         for (auto& entity : _ecs.getEntitiesWithComponent<ecs::Score>()) {
+             auto score = entity->getComponent<ecs::Score>();
+
+             if (!score) continue;
+             _sharedData->addUdpPacketToSend(
+                 cmn::PacketFactory::createTextPacket(
+                     entity->getId(),
+                     score->getScore()
+                 )
+             );
          }
      }
 
@@ -285,6 +303,17 @@ namespace server {
         _ecs.addSystem<ecs::ShootSystem>();
         _ecs.addSystem<ecs::VelocitySystem>();
         _ecs.addSystem<ecs::HealthSystem>();
+        _ecs.addSystem<ecs::ScoreTextSystem>();
+
+        auto scoreEntity = _ecs.createEntity(7);
+        scoreEntity->addComponent<ecs::Position>(20.f, 20.f);
+        scoreEntity->addComponent<ecs::Score>();
+        scoreEntity->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
+        scoreEntity->addComponent<ecs::Text>(
+            _ecs.getResourceManager().getFont("./assets/font/font.ttf"),
+            32
+        );
+        scoreEntity->addComponent<ecs::Score>();
     }
 
 }

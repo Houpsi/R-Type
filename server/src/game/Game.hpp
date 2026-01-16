@@ -39,6 +39,7 @@ namespace server {
         void _checkSpaceBar();
         void _sendPositions();
         void _sendDestroy();
+        void _sendText();
     };
 }
 
