@@ -74,6 +74,22 @@ namespace cmn {
     constexpr uint8_t playerProjectileCollisionHeight = 10;
     constexpr uint8_t playerProjectileCollisionWidth = 10;
 
+
+    constexpr sf::Vector2f backgroundSpriteScale = {1.0F, 1.0F};
+    constexpr std::string_view pathBackgroundStars = "./assets/bg-stars.png";
+    constexpr std::string_view pathBackgroundPlanets = "./assets/planets_background.png";
+    constexpr sf::Vector2f posZero(0.0F, 0.0F);
+    constexpr sf::Vector2f posOne(1920.0F, 0.0F);
+    constexpr sf::Vector2f posTwo(3840.0F, 0.0F);
+    constexpr int idBg1 = 0;
+    constexpr int idBg2 = 1;
+    constexpr int idStart1 = 2;
+    constexpr int idStart2 = 3;
+    constexpr sf::Vector2f veloStars(10.0F, 0.5F);
+    constexpr sf::Vector2f veloPlanets(20.0F, 0.5F);
+    constexpr int sizeStars = 1920;
+    constexpr int sizePlanets = 3840;
+
     constexpr uint16_t windowWidth = 1920;
     constexpr uint16_t windowHeight = 1080;
 

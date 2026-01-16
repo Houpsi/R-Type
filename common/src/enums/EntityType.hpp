@@ -19,6 +19,8 @@ namespace cmn {
         Boss1,
         PlayerProjectile,
         MonsterProjectile,
+        BackgroundStars,
+        BackgroundPlanets
     };
 
 

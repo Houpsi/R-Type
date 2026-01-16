@@ -9,6 +9,7 @@
 #include "EntityFactory.hpp"
 
 #include "components/Animation.hpp"
+#include "components/Background.hpp"
 #include "components/Collision.hpp"
 #include "components/Enemy.hpp"
 #include "components/InputPlayer.hpp"
@@ -47,6 +48,10 @@ namespace cmn {
             case cmn::EntityType::Boss1:
                 _initBoss(ecs, entity, context, hp);
                 break;
+            case cmn::EntityType::BackgroundPlanets:
+            case cmn::EntityType::BackgroundStars:
+                _initBackground(ecs, entity, context, type);
+            break;
             default:
                 break;
         }
@@ -114,6 +119,35 @@ namespace cmn {
                 ecs::TypeCollision::ENEMY,
                 cmn::boss1CollisionWidth,
                 cmn::boss1CollisionHeight
+            );
+        }
+    }
+
+    void EntityFactory::_initBackground(ecs::EcsManager &ecs, std::shared_ptr<ecs::Entity> entity, Context context, EntityType type) {
+
+        float velX = 0;
+        float velY = 0;
+        std::string texturePath;
+        int bgSize = 0;
+
+        if (type == EntityType::BackgroundStars) {
+            velX = veloStars.x;
+            velY = veloStars.y;
+            texturePath = static_cast<std::string>(pathBackgroundStars);
+            bgSize = sizeStars;
+        } else {
+            velX = veloPlanets.x;
+            velY = veloPlanets.y;
+            texturePath = static_cast<std::string>(pathBackgroundPlanets);
+            bgSize = sizePlanets;
+        }
+        entity->addComponent<ecs::Velocity>(velX, velY);
+        entity->addComponent<ecs::Background>(bgSize);
+
+        if (context == Context::CLIENT) {
+            entity->addComponent<ecs::Sprite>(
+                ecs.getResourceManager().getTexture(std::string(texturePath)),
+                backgroundSpriteScale
             );
         }
     }
