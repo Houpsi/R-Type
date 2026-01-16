@@ -45,7 +45,7 @@ namespace server {
         void setBossSpawned(bool spawned) { _bossHasSpawned = spawned; }
       private:
         uint8_t _levelId = 0;
-        uint8_t _enemySpawnRate = 1; //temporary;
+        uint8_t _enemySpawnRate = 1;
         bool _isBossPresent = false;
         std::string _nameLevel;
         uint32_t _playerSpeed = cmn::playerSpeed;
