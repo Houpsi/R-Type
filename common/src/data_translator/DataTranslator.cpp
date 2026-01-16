@@ -6,14 +6,18 @@
 */
 
 #include "DataTranslator.hpp"
-#include "Constants.hpp"
+#include "constants/GameConstants.hpp"
 #include "components/Animation.hpp"
+#include "components/Collision.hpp"
 #include "components/Destroy.hpp"
+#include "components/Enemy.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/PlayerAnimation.hpp"
 #include "components/Position.hpp"
 #include "components/Sound.hpp"
 #include "components/Sprite.hpp"
+#include "constants/GameConstants.hpp"
+#include "entity_factory/EntityFactory.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
 #include <list>
@@ -43,7 +47,7 @@ namespace cmn {
         }
     }};
 
-    void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputPacket &input, std::unordered_map<int, uint64_t> playerIdEntityMap)
+    void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputData &input, std::unordered_map<int, uint64_t> playerIdEntityMap)
     {
         uint32_t playerId = input.playerId;
         uint64_t const entityId = playerIdEntityMap[static_cast<int>(playerId)];
@@ -60,7 +64,7 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionPacket &position)
+    void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionData &position)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
             if (entity->getId() == position.entityId) {
@@ -72,40 +76,30 @@ namespace cmn {
         }
     }
 
-    void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityPacket &newEntity)
+    void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityData &newEntity)
     {
-        auto entity = ecs.createEntity(newEntity.entityId);
+        auto entity =  cmn::EntityFactory::createEntity(ecs,
+                        static_cast<EntityType>(newEntity.type),
+                        newEntity.posX, newEntity.posY,
+                        cmn::EntityFactory::Context::CLIENT, 0, newEntity.entityId);
 
-        entity->addComponent<ecs::Position>(newEntity.posX, newEntity.posY);
-        if (static_cast<EntityType>(newEntity.type) == EntityType::Player) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
-            entity->addComponent<ecs::PlayerAnimation>();
-            entity->addComponent<ecs::Sound>(std::string(playerShootSound));
-            entity->addComponent<ecs::InputPlayer>();
-        }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::Plane) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
-            entity->addComponent<ecs::Animation>(monsterAnimationSize, monsterAnimationOffset, monsterAnimationNumberFrame);
-        }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::Crochet) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monster2SpriteSheet)), monster2SpriteScale);
-            entity->addComponent<ecs::Animation>(monster2AnimationSize, monster2AnimationOffset, monster2AnimationNumberFrame);
-        }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::PlayerProjectile) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
-            entity->addComponent<ecs::Animation>(playerProjectileAnimationSize, playerProjectileAnimationOffset, playerProjectileAnimationNumberFrame);
-        }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::MonsterProjectile) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterProjectileSpriteSheet)), playerProjectileScale);
-            entity->addComponent<ecs::Animation>(monsterProjectileAnimationSize, monsterProjectileAnimationOffset, monsterProjectileAnimationNumberFrame);
-        }
     }
 
-    void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity)
+    void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityData &deleteEntity)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
             if (entity->getId() == deleteEntity.entityId) {
                 entity->addComponent<ecs::Destroy>();
+                break;
+            }
+        }
+    }
+
+    void DataTranslator::_soundEntity(ecs::EcsManager &ecs, soundData &sound)
+    {
+        for (auto &entity : ecs.getEntities()) {
+            if (entity->getId() == idEntityForMusic) {
+                entity->addComponent<ecs::Sound>(static_cast<int>(sound.soundId), false);
                 break;
             }
         }
@@ -116,20 +110,23 @@ namespace cmn {
         std::visit([&ecs, playerIdEntityMap](auto &&arg)
             {
                 using T = std::decay_t<decltype(arg)>;
-                if constexpr (std::is_same_v<T, inputPacket>) {
-                    inputPacket &input = arg;
+                if constexpr (std::is_same_v<T, inputData>) {
+                    inputData &input = arg;
                     _injectInput(ecs, input, playerIdEntityMap);
-                } else if constexpr (std::is_same_v<T, positionPacket>) {
-                    positionPacket &position = arg;
+                } else if constexpr (std::is_same_v<T, positionData>) {
+                    positionData &position = arg;
                     _injectPosition(ecs, position);
-                } else if constexpr (std::is_same_v<T, newEntityPacket>) {
-                    newEntityPacket &newEntity = arg;
+                } else if constexpr (std::is_same_v<T, newEntityData>) {
+                    newEntityData &newEntity = arg;
                     _injectNewEntity(ecs, newEntity);
-                } else if constexpr (std::is_same_v<T, deleteEntityPacket>) {
-                    deleteEntityPacket &deleteEntity = arg;
+                } else if constexpr (std::is_same_v<T, deleteEntityData>) {
+                    deleteEntityData &deleteEntity = arg;
                     _deleteEntity(ecs, deleteEntity);
+                }  else if constexpr (std::is_same_v<T, soundData>) {
+                    soundData &sound = arg;
+                    _soundEntity(ecs, sound);
                 }
-            }, data.content);
+            }, data);
     }
 
 }// namespace cmn

@@ -8,12 +8,12 @@
 #ifndef R_TYPE_LEVEL_HPP
 #define R_TYPE_LEVEL_HPP
 
-#include "Constants.hpp"
-#include "TmpEnemy.hpp"
+#include "constants/GameConstants.hpp"
 #include <cstdint>
 #include <list>
 #include <string>
 #include <vector>
+#include "TmpEnemy.hpp"
 namespace server {
 
     class Level
@@ -41,9 +41,11 @@ namespace server {
         bool isFinished() const;
         void nextWave();
         void calculateNumberTotalWave();
+        bool hasBossSpawned() const;
+        void setBossSpawned(bool spawned);
       private:
         uint8_t _levelId = 0;
-        uint8_t _enemySpawnRate;
+        uint8_t _enemySpawnRate = 1;
         bool _isBossPresent = false;
         std::string _nameLevel;
         uint32_t _playerSpeed = cmn::playerSpeed;
@@ -53,6 +55,7 @@ namespace server {
         int _currentWave = 0;
         int _currentRepeat = 0;
         int _totalRepeatWaves = 0;
+        bool _bossHasSpawned = false;
     };
 
 }// namespace server

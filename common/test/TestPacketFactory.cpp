@@ -11,36 +11,31 @@
 #include "custom_packet/CustomPacket.hpp"
 
 #include "packet_data/PacketData.hpp"
-#include "packet_data/input_packet/InputPacket.hpp"
-#include "packet_data/position_packet/PositionPacket.hpp"
-#include "packet_data/new_entity_packet/NewEntityPacket.hpp"
-#include "packet_data/delete_entity_packet/DeleteEntityPacket.hpp"
+#include "packet_data/input_data/InputData.hpp"
+#include "packet_data/position_data/PositionData.hpp"
+#include "packet_data/new_entity_data/NewEntityData.hpp"
+#include "packet_data/delete_entity_data/DeleteEntityData.hpp"
 
+#include "constants/ProtocolConstants.hpp"
+#include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
 #include "enums/KeyState.hpp"
-#include "enums/EntityType.hpp"
-#include "Constants.hpp"
+#include "packet_disassembler/PacketDisassembler.hpp"
 
 namespace cmn {
 
     TEST(PacketFactoryTest, CreateInputPacket)
     {
-        CustomPacket packet =
-            PacketFactory::createInputPacket(8, Keys::Up, KeyState::Pressed);
+        CustomPacket packet = PacketFactory::createInputPacket(8, Keys::Up, KeyState::Pressed);
+        auto data = PacketDisassembler::disassemble(packet);
+        inputData input{};
 
-        packetData data;
-        packet >> data;
-
-        EXPECT_EQ(data.packetId, inputProtocolId);
-
-        inputPacket input{};
         std::visit([&input](auto &&arg) {
             using T = std::decay_t<decltype(arg)>;
-            if constexpr (std::is_same_v<T, inputPacket>) {
+            if constexpr (std::is_same_v<T, inputData>) {
                 input = arg;
             }
-        }, data.content);
-
+        }, data.value());
         EXPECT_EQ(input.playerId, 8);
         EXPECT_EQ(input.key, static_cast<uint8_t>(Keys::Up));
         EXPECT_EQ(input.keyState, static_cast<uint8_t>(KeyState::Pressed));
@@ -48,22 +43,16 @@ namespace cmn {
 
     TEST(PacketFactoryTest, CreatePositionPacket)
     {
-        CustomPacket packet =
-            PacketFactory::createPositionPacket({10.F, 20.F}, 42);
+        CustomPacket packet = PacketFactory::createPositionPacket({10.F, 20.F}, 42);
+        auto data = PacketDisassembler::disassemble(packet);
+        positionData pos{};
 
-        packetData data;
-        packet >> data;
-
-        EXPECT_EQ(data.packetId, positionProtocolId);
-
-        positionPacket pos{};
         std::visit([&pos](auto &&arg) {
             using T = std::decay_t<decltype(arg)>;
-            if constexpr (std::is_same_v<T, positionPacket>) {
+            if constexpr (std::is_same_v<T, positionData>) {
                 pos = arg;
             }
-        }, data.content);
-
+        }, data.value());
         EXPECT_FLOAT_EQ(pos.posX, 10.F);
         EXPECT_FLOAT_EQ(pos.posY, 20.F);
         EXPECT_EQ(pos.entityId, 42);
@@ -71,22 +60,16 @@ namespace cmn {
 
     TEST(PacketFactoryTest, CreateNewEntityPacket)
     {
-        CustomPacket packet =
-            PacketFactory::createNewEntityPacket(EntityType::Plane, {5.F, 8.F}, 99);
+        CustomPacket packet = PacketFactory::createNewEntityPacket(EntityType::Plane, {5.F, 8.F}, 99);
+        auto data = PacketDisassembler::disassemble(packet);
+        newEntityData entity{};
 
-        packetData data;
-        packet >> data;
-
-        EXPECT_EQ(data.packetId, newEntityProtocolId);
-
-        newEntityPacket entity{};
         std::visit([&entity](auto &&arg) {
             using T = std::decay_t<decltype(arg)>;
-            if constexpr (std::is_same_v<T, newEntityPacket>) {
+            if constexpr (std::is_same_v<T, newEntityData>) {
                 entity = arg;
             }
-        }, data.content);
-
+        }, data.value());
         EXPECT_EQ(entity.type, static_cast<uint8_t>(EntityType::Plane));
         EXPECT_FLOAT_EQ(entity.posX, 5.F);
         EXPECT_FLOAT_EQ(entity.posY, 8.F);
@@ -95,22 +78,16 @@ namespace cmn {
 
     TEST(PacketFactoryTest, CreateDeleteEntityPacket)
     {
-        CustomPacket packet =
-            PacketFactory::createDeleteEntityPacket(42);
+        CustomPacket packet = PacketFactory::createDeleteEntityPacket(42);
+        auto data = PacketDisassembler::disassemble(packet);
+        deleteEntityData del{};
 
-        packetData data;
-        packet >> data;
-
-        EXPECT_EQ(data.packetId, deleteEntityProtocolId);
-
-        deleteEntityPacket del{};
         std::visit([&del](auto &&arg) {
             using T = std::decay_t<decltype(arg)>;
-            if constexpr (std::is_same_v<T, deleteEntityPacket>) {
+            if constexpr (std::is_same_v<T, deleteEntityData>) {
                 del = arg;
             }
-        }, data.content);
-
+        }, data.value());
         EXPECT_EQ(del.entityId, 42);
     }
 

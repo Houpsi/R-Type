@@ -11,11 +11,9 @@
 #include "EcsManager.hpp"
 #include "components/Collision.hpp"
 #include "components/Position.hpp"
-#include "src/Constants.hpp"
+#include "EcsConstant.hpp"
 
 namespace ecs {
-
-
     class AABB {
     public:
         AABB(): x(0.f), y(0.f), width(0.f), height(0.f) {}

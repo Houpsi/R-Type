@@ -10,9 +10,9 @@
 
 #include "EcsManager.hpp"
 #include "SFML/Graphics/Font.hpp"
-#include "SFML/Graphics/Text.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "data_translator/DataTranslator.hpp"
+#include "input_manager/InputManager.hpp"
 #include "shared_data/SharedData.hpp"
 
 namespace client {
@@ -28,6 +28,8 @@ namespace client {
         sf::Clock enemyClock;
         cmn::DataTranslator _translator{};
         std::shared_ptr<ecs::Entity> _keyboard;
+        std::shared_ptr<ecs::Entity> _sound;
+        InputManager _inputManager;
 
         void _handleEvents();
         void _initEcsSystem();
@@ -37,10 +39,11 @@ namespace client {
         void _updateNetwork();
         void _updateLobby();
         void _updateGame();
+        void _initSound();
+
 
         bool _isRunning = false;
         uint32_t _playerId = 0;
-
     };
 }
 

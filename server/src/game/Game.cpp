@@ -6,15 +6,18 @@
 */
 
 #include "Game.hpp"
-#include "Constants.hpp"
 #include "components/Collision.hpp"
 #include "components/Enemy.hpp"
 #include "components/Health.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
 #include "components/Shoot.hpp"
+#include "components/Sound.hpp"
+#include "constants/GameConstants.hpp"
 #include "data_translator/DataTranslator.hpp"
-#include "factory/EnemyProduct.hpp"
+#include "entity_factory/EntityFactory.hpp"
+#include "packet_data/PacketData.hpp"
+#include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_factory/PacketFactory.hpp"
 #include "systems/CollisionSystem.hpp"
 #include "systems/DestroySystem.hpp"
@@ -60,21 +63,22 @@ namespace server {
 
         while (true) {
             float const deltaTime = clock.restart().asSeconds();
-            std::optional<cmn::packetData> data = _sharedData->getUdpReceivedPacket();
+            std::optional<cmn::CustomPacket> packet = _sharedData->getUdpReceivedPacket();
 
-            if (data.has_value()) {
-                cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
+            if (packet.has_value()) {
+                std::optional<cmn::packetData> data = cmn::PacketDisassembler::disassemble(packet.value());
+                if (data.has_value()) {
+                    cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
+                }
             }
-
             _createEnemy(currentLevel, enemyClock, generator);
-
             _checkSpaceBar();
             _enemyShoot();
-
             if (elapsedTime > frameTimer) {
                 fpsClock.restart();
                 _sendPositions();
             }
+            _sendSound();
             _sendDestroy();
             _ecs.setDeltaTime(deltaTime);
             _ecs.updateSystems();
@@ -88,6 +92,15 @@ namespace server {
             _sharedData->addUdpPacketToSend(cmn::PacketFactory::createDeleteEntityPacket(entity->getId()));
         }
     }
+
+    void Game::_sendSound()
+     {
+         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Sound>()) {
+             uint8_t soundId = static_cast<uint8_t>(entity->getComponent<ecs::Sound>()->getIdMusic());
+             _sharedData->addUdpPacketToSend(cmn::PacketFactory::createSoundPacket(soundId));
+             entity->removeComponent<ecs::Sound>();
+         }
+     }
 
     void Game::_sendPositions()
     {
@@ -114,7 +127,6 @@ namespace server {
 
                 if (input->getSpacebar()) {
                     if (shoot->getTimeSinceLastShot() >= shoot->getCooldown()) {
-                        auto projectile = _ecs.createEntity();
                         auto positionCpn = entity->getComponent<ecs::Position>();
                         auto collisionCpn = entity->getComponent<ecs::Collision>();
 
@@ -124,17 +136,11 @@ namespace server {
                         float const posY = entity->getComponent<ecs::Position>()->getY();
                         auto shootCpn = entity->getComponent<ecs::Shoot>();
 
-                        projectile->addComponent<ecs::Position>(posX, posY);
-                        projectile->addComponent<ecs::Velocity>(
-                            cmn::playerProjectileSpeed,
-                            cmn::playerProjectileDirection
-                        );
-                        projectile->addComponent<ecs::Shoot>(shootCpn->getDamage(), shootCpn->getCooldown());
-                        projectile->addComponent<ecs::Collision>(
-                            ecs::TypeCollision::PLAYER_PROJECTILE,
-                            cmn::playerProjectileCollisionWidth,
-                            cmn::playerProjectileCollisionHeight
-                        );
+                        auto projectile = cmn::EntityFactory::createEntity(_ecs,
+                            cmn::EntityType::PlayerProjectile,
+                            posX,
+                            posY,
+                            cmn::EntityFactory::Context::SERVER);
 
                         std::pair<float, float> const position = {posX, posY};
 
@@ -200,58 +206,71 @@ namespace server {
      }
 
     void Game::_createEnemy(Level &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator)
-     {
-         auto &waves = currentLevel.getWaves();
-         int waveId = currentLevel.getCurrentWaveId();
+{
+    if (currentLevel.isFinished()) {
+        if (currentLevel.hasBossSpawned()) {
+            return;
+        }
 
-         if (waveId >= waves.size())
-             return;
+        auto boss = currentLevel.getBoss();
+        auto newEnemy = cmn::EntityFactory::createEntity(_ecs,
+                            cmn::EntityType::Boss1,
+                            cmn::boss1SpawnPositionWidth, cmn::boss1SpawnPositionHeight,
+                            cmn::EntityFactory::Context::SERVER, boss.second);
 
-         auto &[waveDuration, enemies] = waves[waveId];
 
-         float elapsed = enemyClock.getElapsedTime().asSeconds();
+        std::pair<float, float> const position = { cmn::boss1SpawnPositionWidth, cmn::boss1SpawnPositionHeight };
 
-         if (currentLevel.isFinished()) {
-                return;
-         }
+        _sharedData->addUdpPacketToSend(
+            cmn::PacketFactory::createNewEntityPacket(
+                cmn::EntityType::Boss1,
+                position,
+                newEnemy->getId()
+            )
+        );
+        currentLevel.setBossSpawned(true);
+        return;
+    }
 
-         for (auto &enemy : enemies) {
-             if (elapsed - enemy.lastSpawnTime >= enemy.spawnRate) {
-                 auto randNum = generator() % cmn::monsterMaxSpawnPositionHeight;
-                 auto newEnemy = _ecs.createEntity();
+    auto &waves = currentLevel.getWaves();
+    int waveId = currentLevel.getCurrentWaveId();
 
-                 newEnemy->addComponent<ecs::Position>(cmn::monsterSpawnPositionWidth, randNum);
-                 newEnemy->addComponent<ecs::Enemy>();
-                 newEnemy->addComponent<ecs::Health>(cmn::monsterHealth);
-                 newEnemy->addComponent<ecs::Collision>(
-                     ecs::TypeCollision::ENEMY,
-                     cmn::monsterCollisionWidth,
-                     cmn::monsterCollisionHeight
-                 );
-                 newEnemy->addComponent<ecs::Shoot>(cmn::playerDamage, 3, 0.0f);
-                 newEnemy->addComponent<ecs::Velocity>(250, 0);
+    if (waveId >= waves.size())
+        return;
 
-                 std::pair<float, float> const position = {
-                     cmn::monsterSpawnPositionWidth,
-                     randNum
-                 };
+    auto &[waveDuration, enemies] = waves[waveId];
+    float elapsed = enemyClock.getElapsedTime().asSeconds();
 
-                 _sharedData->addUdpPacketToSend(
-                     cmn::PacketFactory::createNewEntityPacket(
-                         enemy.type,
-                         position,
-                         newEnemy->getId()
-                     )
-                     );
-                 enemy.lastSpawnTime = elapsed;
-             }
-         }
+    for (auto &enemy : enemies) {
+        if (elapsed - enemy.lastSpawnTime >= enemy.spawnRate) {
+            auto randNum = generator() % cmn::monsterMaxSpawnPositionHeight;
+            auto newEnemy =  cmn::EntityFactory::createEntity(_ecs,
+                            cmn::EntityType::Plane,
+                            cmn::monsterSpawnPositionWidth, randNum,
+                            cmn::EntityFactory::Context::SERVER);
 
-         if (elapsed >= waveDuration) {
-             currentLevel.nextWave();
-             enemyClock.restart();
-         }
-     }
+
+            std::pair<float, float> const position = {
+                cmn::monsterSpawnPositionWidth,
+                (float)randNum
+            };
+
+            _sharedData->addUdpPacketToSend(
+                cmn::PacketFactory::createNewEntityPacket(
+                    enemy.type,
+                    position,
+                    newEnemy->getId()
+                )
+            );
+            enemy.lastSpawnTime = elapsed;
+        }
+    }
+
+    if (elapsed >= waveDuration) {
+        currentLevel.nextWave();
+        enemyClock.restart();
+    }
+}
 
     void Game::_sendPlayerEntities()
     {
@@ -280,7 +299,13 @@ namespace server {
                 _createNewPlayers(_sharedData->getAllPlayerIds(), currentNbPlayerEntities);
             }
 
-            std::optional<cmn::packetData> data = _sharedData->getUdpReceivedPacket();
+            std::optional<cmn::CustomPacket> packet = _sharedData->getUdpReceivedPacket();
+
+            if (!packet.has_value()) {
+                continue;
+            }
+
+            std::optional<cmn::packetData> data = cmn::PacketDisassembler::disassemble(packet.value());
 
             if (!data.has_value()) {
                 continue;
@@ -321,12 +346,11 @@ namespace server {
             if (_playerIdEntityMap.contains(id)) {
                 continue;
             }
-            auto player = _ecs.createEntity();
-            player->addComponent<ecs::Health>(cmn::playerHealth);
-            player->addComponent<ecs::Position>(playerPosX, playerPosY);
-            player->addComponent<ecs::InputPlayer>();
-            player->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
-            player->addComponent<ecs::Shoot>(cmn::playerDamage, cmn::playerCoolDown);
+            auto player =  cmn::EntityFactory::createEntity(_ecs,
+                            cmn::EntityType::Player,
+                            playerPosX, playerPosY,
+                            cmn::EntityFactory::Context::SERVER);
+
             _playerIdEntityMap[id] = player->getId();
             _entityIdPlayerMap[player->getId()] = id;
             currentNbPlayerEntities++;

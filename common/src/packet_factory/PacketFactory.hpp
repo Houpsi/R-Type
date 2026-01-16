@@ -12,6 +12,7 @@
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
 #include "enums/KeyState.hpp"
+#include "bit_packer/BitPacker.hpp"
 
 namespace cmn {
 
@@ -23,10 +24,11 @@ namespace cmn {
         static CustomPacket createPositionPacket(std::pair<float, float> positions, uint64_t entityId);
         static CustomPacket createNewEntityPacket(EntityType type, std::pair<float, float> positions, uint64_t entityId);
         static CustomPacket createDeleteEntityPacket(uint64_t entityId);
+        static CustomPacket createSoundPacket(uint8_t playerId);
         static CustomPacket createStartGamePacket();
 
       private:
-
+        static CustomPacket _putInPacket(BitPacker &packer);
     };
 
 }// namespace cmn

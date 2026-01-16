@@ -26,7 +26,7 @@ namespace client {
             [[noreturn]] int run();
 
             int sendUdp(cmn::CustomPacket &packet);
-            int sendTcp(const cmn::packetData& dataPacket);
+            int sendTcp(cmn::CustomPacket &packet);
 
         private:
             sf::TcpSocket _tcpSocket;

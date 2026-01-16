@@ -12,7 +12,7 @@ namespace ecs
 {
     void CollisionSystem::_buildQuadTree(const std::vector<std::shared_ptr<Entity>> &entities)
     {
-        _quadTree = std::make_unique<QuadTree>(AABB{0, 0, cmn::windowWidth, cmn::windowHeight});
+        _quadTree = std::make_unique<QuadTree>(AABB{0, 0, ecs::windowWidth, ecs::windowHeight});
         for (const auto &entity : entities) {
             auto collision = entity->getComponent<Collision>();
             auto position = entity->getComponent<Position>();
@@ -31,8 +31,7 @@ namespace ecs
         const auto &entities = ecs.getEntities();
         _buildQuadTree(entities);
 
-        for (const auto &entity : entities)
-        {
+        for (const auto &entity : entities) {
             auto collision = entity->getComponent<Collision>();
             auto position = entity->getComponent<Position>();
 
@@ -67,17 +66,17 @@ namespace ecs
 
                         if (!health && !shoot) continue;
                         health->setHealth(health->getHealth() - shoot->getDamage());
-                        // entity->addComponent<Sound>(1, false);
+                        entity->addComponent<Sound>(3, false);
                         entity->addComponent<Destroy>();
                     }
                     else if (typeA == PLAYER &&
                         typeB == ENEMY) {
-                        // entity->addComponent<Sound>(1, false);
+                        entity->addComponent<Sound>(3, false);
                         entity->addComponent<Destroy>();
                     }
                     else if (typeA == ENEMY_PROJECTILE &&
                         typeB == PLAYER) {
-                        // entity->addComponent<Sound>(1, false);
+                        entity->addComponent<Sound>(3, false);
                         entity->addComponent<Destroy>();
                         other->addComponent<Destroy>();
                     }

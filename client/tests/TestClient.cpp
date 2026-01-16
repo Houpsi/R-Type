@@ -86,10 +86,9 @@ TEST(ClientTest, SendTcpSuccess)
     client::Client client(sharedData);
     ASSERT_EQ(client.connectToHost("127.0.0.1", port), 0);
 
-    cmn::packetData data {};
-    data.packetId = 1;
+    cmn::CustomPacket packet;
 
-    int result = client.sendTcp(data);
+    int result = client.sendTcp(packet);
     EXPECT_EQ(result, 0);
 
     serverThread.join();
@@ -125,10 +124,7 @@ TEST(ClientTest, SendUdpSuccess)
         sf::Socket::Status b = udpSocket.receive(packet, sender, senderPort);
     });
 
-    cmn::packetData data {};
-    data.packetId = 2;
     cmn::CustomPacket packet;
-    packet << data;
 
     EXPECT_EQ(client.sendUdp(packet), 0);
 

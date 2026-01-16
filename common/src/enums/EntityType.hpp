@@ -16,9 +16,14 @@ namespace cmn {
         Player,
         Plane,
         Crochet,
+        Boss1,
         PlayerProjectile,
         MonsterProjectile,
+        BackgroundStars,
+        BackgroundPlanets
     };
+
+
 
 }
 

@@ -122,4 +122,13 @@ namespace server {
         _totalRepeatWaves = static_cast<int>(_waves.size()) * _repeatWaves;
     }
 
+    bool Level::hasBossSpawned() const
+    {
+        return _bossHasSpawned;
+    }
+    void Level::setBossSpawned(bool spawned)
+    {
+        _bossHasSpawned = spawned;
+    }
+
 }// namespace server
