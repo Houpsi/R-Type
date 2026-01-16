@@ -10,6 +10,9 @@
 #include "client/Client.hpp"
 #include "constants/GameConstants.hpp"
 #include "entity_factory/EntityFactory.hpp"
+#include "components/Background.hpp"
+#include "components/Sound.hpp"
+#include "constants/GameConstants.hpp"
 #include "enums/Key.hpp"
 #include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_factory/PacketFactory.hpp"
@@ -18,6 +21,7 @@
 #include "systems/InputSystem.hpp"
 #include "systems/PlayerAnimationSystem.hpp"
 #include "systems/RenderSystem.hpp"
+#include "systems/SoundSystem.hpp"
 #include "systems/SpriteAnimationSystem.hpp"
 #include "systems/VelocitySystem.hpp"
 
@@ -34,6 +38,7 @@ namespace client {
     void GameRenderer::_initEcsSystem()
     {
         _ecs.addSystem<ecs::InputSystem>();
+        _ecs.addSystem<ecs::SoundSystem>();
         _ecs.addSystem<ecs::PlayerAnimationSystem>();
         _ecs.addSystem<ecs::SpriteAnimationSystem>();
         _ecs.addSystem<ecs::RenderSystem>(_window);
@@ -49,6 +54,12 @@ namespace client {
         _keyboard = keyboard;
     }
 
+    void GameRenderer::_initSound()
+    {
+        const auto sound = _ecs.createEntity(cmn::idEntityForMusic);
+        _sound = sound;
+        sound->addComponent<ecs::Sound>(cmn::idThemeMusic, true);
+    }
 
     void GameRenderer::_initBackground()
     {
@@ -174,6 +185,7 @@ namespace client {
         _initEcsSystem();
         _initBackground();
         _initKeyboard();
+        _initSound();
         while (_window.isOpen()) {
             const float deltaTime = _clock.restart().asSeconds();
             _updateNetwork();

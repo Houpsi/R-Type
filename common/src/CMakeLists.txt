@@ -33,6 +33,7 @@ add_library(r-type_common_lib
         packet_disassembler/PacketDisassembler.hpp
         entity_factory/EntityFactory.cpp
         entity_factory/EntityFactory.hpp
+        packet_data/sound_packet/SoundPacket.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC

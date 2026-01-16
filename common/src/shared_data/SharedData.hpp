@@ -93,12 +93,16 @@ namespace cmn {
             [[nodiscard]] size_t getPlayerListSize();
             [[nodiscard]] std::vector<int> getAllPlayerIds();
 
+            void setRunThread(bool run);
+            bool getRunThread();
+
         private:
             std::queue<CustomPacket> _udpReceivedQueue; ///< Queue for received packets (to be processed).
             std::queue<CustomPacket> _udpSendQueue;     ///< Queue for packets to be sent.
             std::queue<CustomPacket> _tcpReceivedQueue;  ///< Queue for packets to be sent.
             std::queue<CustomPacket> _tcpSendQueue;     ///< Queue for packets to be sent.
             std::mutex _mutex;                     ///< Mutex for synchronizing data access.
+            bool _isRunning = true;
             /**
              * @brief List of connected players.
              * The key is the player ID (int), the value is a pair (port, IP address).

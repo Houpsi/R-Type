@@ -7,9 +7,12 @@
 
 #include "Game.hpp"
 #include "components/Collision.hpp"
+#include "components/Enemy.hpp"
+#include "components/Health.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
 #include "components/Shoot.hpp"
+#include "components/Sound.hpp"
 #include "constants/GameConstants.hpp"
 #include "data_translator/DataTranslator.hpp"
 #include "entity_factory/EntityFactory.hpp"
@@ -75,6 +78,7 @@ namespace server {
                 fpsClock.restart();
                 _sendPositions();
             }
+            _sendSound();
             _sendDestroy();
             _ecs.setDeltaTime(deltaTime);
             _ecs.updateSystems();
@@ -88,6 +92,15 @@ namespace server {
             _sharedData->addUdpPacketToSend(cmn::PacketFactory::createDeleteEntityPacket(entity->getId()));
         }
     }
+
+    void Game::_sendSound()
+     {
+         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Sound>()) {
+             uint8_t soundId = static_cast<uint8_t>(entity->getComponent<ecs::Sound>()->getIdMusic());
+             _sharedData->addUdpPacketToSend(cmn::PacketFactory::createSoundPacket(soundId));
+             entity->removeComponent<ecs::Sound>();
+         }
+     }
 
     void Game::_sendPositions()
     {

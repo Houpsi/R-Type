@@ -97,6 +97,16 @@ namespace cmn {
     constexpr std::array<std::string_view, 2> nameTypeEnemies = {"plane_enemy", "crochet_enemy"};
     constexpr std::array<std::string_view, 2> nameTypeBoss = {"boss_type_1", "boss_type_2"};
 
+    constexpr int volumeMusic = 100;
+    constexpr int idEntityForMusic = 5;
+
+    constexpr std::string_view folderSound = "./assets/sound/";
+
+    constexpr std::array<std::string_view, 2> idToSound = {"shoot", "theme"};
+
+    constexpr int idThemeMusic = 2;
+
+
 }
 
 #endif// R_TYPE_GAMECONSTANTS_HPP
