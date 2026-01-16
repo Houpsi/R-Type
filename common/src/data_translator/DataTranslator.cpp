@@ -95,6 +95,10 @@ namespace cmn {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
             entity->addComponent<ecs::Animation>(playerProjectileAnimationSize, playerProjectileAnimationOffset, playerProjectileAnimationNumberFrame);
         }
+        if (static_cast<EntityType>(newEntity.type) == EntityType::MonsterProjectile) {
+            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterProjectileSpriteSheet)), playerProjectileScale);
+            entity->addComponent<ecs::Animation>(monsterProjectileAnimationSize, monsterProjectileAnimationOffset, monsterProjectileAnimationNumberFrame);
+        }
     }
 
     void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityPacket &deleteEntity)
