@@ -6,7 +6,6 @@
 */
 
 #include "RenderSystem.hpp"
-#include "components/Score.hpp"
 #define SIZE_X_PLAYER 33
 #define SIZE_Y_PLAYER 17
 

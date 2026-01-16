@@ -12,6 +12,8 @@
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
 #include "components/Sprite.hpp"
+#include "components/Score.hpp"
+#include "components/Text.hpp"
 #include "SFML/Graphics.hpp"
 
 namespace ecs {

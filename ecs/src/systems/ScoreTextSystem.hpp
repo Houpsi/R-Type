@@ -11,6 +11,7 @@
 
 #include "EcsManager.hpp"
 #include "components/Score.hpp"
+#include "components/Text.hpp"
 
 namespace ecs
 {

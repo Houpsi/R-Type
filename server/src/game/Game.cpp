@@ -26,6 +26,7 @@
 #include <algorithm>
 #include <random>
 #include "components/Score.hpp"
+#include "components/Text.hpp"
 #include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_data/PacketData.hpp"
 #include "systems/ScoreTextSystem.hpp"
