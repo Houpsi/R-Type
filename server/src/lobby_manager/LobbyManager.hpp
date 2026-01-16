@@ -40,7 +40,7 @@ namespace server {
         private:
         std::queue<int> _matchmakingQueue;
         std::shared_ptr<ServerSharedData> _sharedData;
-        std::unordered_map<int, Lobby> _lobbyMap; // TODO: change this to shared pointer or send a packet if end
+        std::unordered_map<int, Lobby> _lobbyMap;
         std::unordered_map<int, std::jthread> _activeGames;
         std::unordered_set<int> _playersInMatchmaking;
         size_t _lastPlayerCount;
