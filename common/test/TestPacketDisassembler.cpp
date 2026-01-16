@@ -8,7 +8,7 @@
 #include <gtest/gtest.h>
 #include <unordered_map>
 
-#include "constants/ProtocolConstants.hpp"
+#include "constants/NetworkConstants.hpp"
 #include "custom_packet/CustomPacket.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
@@ -324,7 +324,7 @@ namespace cmn {
 
     TEST_F(PacketDisassemblerTest, DisassembleWithMaxEntityId)
     {
-        uint64_t maxEntityId = 18446744073709551615ULL;
+        uint32_t maxEntityId = UINT32_MAX;
 
         deleteEntityData delData{maxEntityId};
         CustomPacket packet = PacketFactory::createPacket(delData, sequencePacketMap);

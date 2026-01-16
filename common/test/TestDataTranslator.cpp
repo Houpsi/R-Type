@@ -10,7 +10,7 @@
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
 #include "components/Sprite.hpp"
-#include "constants/ProtocolConstants.hpp"
+#include "constants/NetworkConstants.hpp"
 #include "data_translator/DataTranslator.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"

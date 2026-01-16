@@ -16,7 +16,7 @@ namespace cmn {
 
     using newEntityData = struct newEntityData
     {
-        uint64_t entityId;
+        uint32_t entityId;
         EntityType type;
         float posX;
         float posY;

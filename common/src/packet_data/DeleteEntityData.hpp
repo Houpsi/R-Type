@@ -13,7 +13,7 @@
 namespace cmn {
 
     using deleteEntityData = struct deleteEntityData {
-        uint64_t entityId;
+        uint32_t entityId;
     };
 
 }// namespace cmn

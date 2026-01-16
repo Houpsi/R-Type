@@ -6,15 +6,13 @@
 */
 #include "Server.hpp"
 
-#include "custom_packet/CustomPacket.hpp"
 #include "SFML/Network/TcpSocket.hpp"
-#include <iostream>
-#include <thread>
-#include "packet_factory/PacketFactory.hpp"
+#include "constants/NetworkConstants.hpp"
+#include "custom_packet/CustomPacket.hpp"
 #include "packet_disassembler/PacketDisassembler.hpp"
+#include "packet_factory/PacketFactory.hpp"
 #include "packet_header/PacketHeader.hpp"
-#include "constants/ProtocolConstants.hpp"
-#include "constants/ServerConstants.hpp"
+#include <thread>
 
 namespace server {
 
@@ -67,9 +65,7 @@ namespace server {
                 cmn::CustomPacket packet;
                 sf::Socket::Status const status = sock.receive(packet);
                 if (status != sf::Socket::Status::Done) {
-//                    std::cerr << "[ERROR]: failed to receive TCP packet" << "\n";
                     if (status == sf::Socket::Status::Disconnected || status == sf::Socket::Status::Error) {
-//                        std::cout << "[DISCONNECTION]: Client " << sock.getRemoteAddress().value() << ":" << sock.getRemotePort() << " disconnected." << "\n";
                         _socketSelector.remove(sock);
                         _sharedData->deletePlayer(sock.getRemotePort(), sock.getRemoteAddress().value());
                         it = _socketVector.erase(it);
@@ -87,8 +83,6 @@ namespace server {
     {
         sf::Socket::Status const status = _udpSocket.send(packet, clientIp, port);
         if (status != sf::Socket::Status::Done) {
-//            std::cerr << "[ERROR]: failed to send UDP packet to:"
-//            << clientIp << ":" << port << "\n";
             return 1;
         }
         return 0;
@@ -98,7 +92,6 @@ namespace server {
     {
         sf::Socket::Status const status = clientSocket.send(packet);
         if (status != sf::Socket::Status::Done) {
-//            std::cerr << "[ERROR]: failed to send TCP packet to server" << "\n";
             return 1;
         }
         return 0;
@@ -108,7 +101,6 @@ namespace server {
     {
         for (const auto &client : _socketVector) {
             if (sendTcp(packet, *client) == 1) {
-//                std::cerr << "[ERROR]: failed to send tcp message to a player" << "\n";
             }
         }
     }
@@ -122,7 +114,6 @@ namespace server {
                 continue;
             }
             if (sendUdp(packet, ip.value(), clientPort) == 1) {
-//                std::cerr << "[ERROR]: failed to send udp message to a player" << "\n";
             }
         }
     }
@@ -135,24 +126,22 @@ namespace server {
         client->setBlocking(false);
 
         if (_listener.accept(*client) != sf::Socket::Status::Done) {
-//            std::cerr << "[ERROR]: failed to accept new TCP connection" << "\n";
             return;
         }
         _socketSelector.add(*client);
-        _sharedData->addPlayer(idPlayer, client->getRemotePort(), client->getRemoteAddress().value());
+        _sharedData->addPlayer(static_cast<int>(idPlayer), client->getRemotePort(), client->getRemoteAddress().value());
         cmn::connectionData data = {idPlayer};
-        cmn::CustomPacket packet = cmn::PacketFactory::createPacket(data, _sequencePacketMap);
+        cmn::CustomPacket const packet = cmn::PacketFactory::createPacket(data, _sequencePacketMap);
         sendTcp(packet, *client);
         _socketVector.push_back(std::move(client));
-        //        std::cout << "[CONNECTION]: TCP connection accepted" << "\n";
         idPlayer++;
     }
 
     void Server::_handleUdpReception(cmn::packetHeader header, cmn::packetData data, uint32_t &loopIdx)
     {
         if (header.protocolId == cmn::acknowledgeProtocolId) {
-            cmn::acknowledgeData acknowledgeData = std::get<cmn::acknowledgeData>(data);
-            uint32_t sequenceNbr = acknowledgeData.sequenceNbr;
+            cmn::acknowledgeData const acknowledgeData = std::get<cmn::acknowledgeData>(data);
+            uint32_t const sequenceNbr = acknowledgeData.sequenceNbr;
             _sequencePacketMap.erase(sequenceNbr);
             return;
         }

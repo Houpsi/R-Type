@@ -94,8 +94,9 @@ namespace server {
     void Game::_sendSound()
      {
          for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Sound>()) {
-             uint8_t soundId = static_cast<uint8_t>(entity->getComponent<ecs::Sound>()->getIdMusic());
-             _sharedData->addUdpPacketToSend(cmn::PacketFactory::createSoundPacket(soundId));
+             uint8_t const soundId = static_cast<uint8_t>(entity->getComponent<ecs::Sound>()->getIdMusic());
+             cmn::soundData data = {soundId};
+             _sharedData->addUdpPacketToSend(data);
              entity->removeComponent<ecs::Sound>();
          }
      }

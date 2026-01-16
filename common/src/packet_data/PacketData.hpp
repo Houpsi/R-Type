@@ -26,8 +26,8 @@ namespace cmn {
         newEntityData,
         deleteEntityData,
         startGameData,
-        acknowledgeData,
-        soundData
+        soundData,
+        acknowledgeData
     >;
 
 }

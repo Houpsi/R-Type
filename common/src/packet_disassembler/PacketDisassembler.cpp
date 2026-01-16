@@ -9,7 +9,8 @@
 #include "bit_unpacker/BitUnpacker.hpp"
 #include "constants/BitPackingConstants.hpp"
 #include "constants/GameConstants.hpp"
-#include "constants/ProtocolConstants.hpp"
+#include "constants/NetworkConstants.hpp"
+#include <iostream>
 #include <optional>
 
 namespace cmn {
@@ -76,6 +77,15 @@ namespace cmn {
         return data;
     }
 
+    packetData PacketDisassembler::_disassembleIntoAcknowledgeData(BitUnpacker &unpacker)
+    {
+        uint32_t const sequenceNbr = unpacker.readUInt32();
+        acknowledgeData data = {sequenceNbr};
+
+        return data;
+    }
+
+
     std::pair<packetHeader, packetData> PacketDisassembler::disassemble(CustomPacket &packet)
     {
         std::vector<uint8_t> buffer;
@@ -108,6 +118,8 @@ namespace cmn {
                 return {header, _disassembleIntoStartGameData()};
             case (soundProtocolId):
                 return {header, _disassembleIntoSoundData(unpacker)};
+            case (acknowledgeProtocolId):
+                return {header, _disassembleIntoAcknowledgeData(unpacker)};
             default:
                 throw std::exception();
         }

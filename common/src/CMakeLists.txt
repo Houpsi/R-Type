@@ -25,7 +25,7 @@ add_library(r-type_common_lib
         packet_data/StartGameData.hpp
         bit_packer/BitPacker.cpp
         bit_packer/BitPacker.hpp
-        constants/ProtocolConstants.hpp
+        constants/NetworkConstants.hpp
         constants/BitPackingConstants.hpp
         bit_unpacker/BitUnpacker.cpp
         bit_unpacker/BitUnpacker.hpp
@@ -33,7 +33,6 @@ add_library(r-type_common_lib
         packet_disassembler/PacketDisassembler.hpp
         packet_header/PacketHeader.hpp
         packet_data/AcknowledgeData.hpp
-        constants/ServerConstants.hpp
         packet_data/SoundData.hpp
 )
 

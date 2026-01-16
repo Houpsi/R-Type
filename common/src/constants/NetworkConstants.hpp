@@ -5,12 +5,14 @@
 ** ProtocolConstants
 */
 
-#ifndef R_TYPE_PROTOCOLCONSTANTS_HPP
-#define R_TYPE_PROTOCOLCONSTANTS_HPP
+#ifndef R_TYPE_NETWORKCONSTANTS_HPP
+#define R_TYPE_NETWORKCONSTANTS_HPP
 
 #include <cstdint>
 
 namespace cmn {
+
+    constexpr uint32_t ticksBeforeResending = 5000;
 
     constexpr uint16_t connectionProtocolId = 0;
     constexpr uint16_t inputProtocolId = 1;
@@ -23,4 +25,4 @@ namespace cmn {
 
 }
 
-#endif// R_TYPE_PROTOCOLCONSTANTS_HPP
+#endif// R_TYPE_NETWORKCONSTANTS_HPP

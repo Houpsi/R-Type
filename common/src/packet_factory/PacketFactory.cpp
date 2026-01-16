@@ -6,9 +6,9 @@
 */
 
 #include "PacketFactory.hpp"
-#include "constants/ProtocolConstants.hpp"
-#include "constants/GameConstants.hpp"
 #include "constants/BitPackingConstants.hpp"
+#include "constants/GameConstants.hpp"
+#include "constants/NetworkConstants.hpp"
 
 namespace cmn {
 
@@ -30,6 +30,8 @@ namespace cmn {
         BitPacker packer;
 
         packer.writeUInt16(connectionProtocolId);
+        packer.writeUInt32(_sequenceNbr);
+        packer.writeBool(false);
         packer.writeUInt32(data.playerId);
 
         _sequenceNbr++;
@@ -121,6 +123,8 @@ namespace cmn {
         BitPacker packer;
 
         packer.writeUInt16(soundProtocolId);
+        packer.writeUInt32(_sequenceNbr);
+        packer.writeBool(false);
         packer.writeUInt8(data.soundId);
         return _putInPacket(packer);
     }

@@ -51,7 +51,7 @@ namespace cmn {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
             if (entity->getId() == entityId) {
                 auto component = entity->getComponent<ecs::InputPlayer>();
-                Keys const key = static_cast<Keys>(input.key);
+                Keys const key = input.key;
                 for (const auto &function : functionArray) {
                     function(key, component);
                 }

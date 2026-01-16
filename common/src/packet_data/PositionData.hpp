@@ -15,7 +15,7 @@ namespace cmn {
 
     using positionData = struct positionData
     {
-        uint64_t entityId;
+        uint32_t entityId;
         float posX;
         float posY;
     };

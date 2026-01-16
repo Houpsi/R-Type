@@ -6,10 +6,8 @@
 */
 
 #include "Client.hpp"
-
 #include "custom_packet/CustomPacket.hpp"
-
-#include "constants/ProtocolConstants.hpp"
+#include "constants/NetworkConstants.hpp"
 #include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_factory/PacketFactory.hpp"
 #include <SFML/Network/IpAddress.hpp>
@@ -56,7 +54,6 @@ namespace client {
             std::cerr << "[ERROR]: Failed to send TCP packet.\n";
             return 1;
         }
-        //std::cout << "[SEND]: TCP Packet send" << "\n";
         return 0;
     }
 
@@ -66,7 +63,6 @@ namespace client {
             std::cerr << "[ERROR]: Failed to send UDP packet.\n";
             return 1;
         }
-        //std::cout << "[SEND]: UDP Packet send" << "\n";
         return 0;
     }
 
@@ -102,12 +98,12 @@ namespace client {
     void Client::_handleUdpReception(cmn::packetHeader header, cmn::packetData data, uint32_t &loopIdx)
     {
         if (header.protocolId == cmn::acknowledgeProtocolId) {
-            cmn::acknowledgeData acknowledgeData = std::get<cmn::acknowledgeData>(data);
-            uint32_t sequenceNbr = acknowledgeData.sequenceNbr;
+            cmn::acknowledgeData const acknowledgeData = std::get<cmn::acknowledgeData>(data);
+            uint32_t const sequenceNbr = acknowledgeData.sequenceNbr;
             _sequencePacketMap.erase(sequenceNbr);
             return;
         }
-        if (loopIdx > 5000) {
+        if (loopIdx > cmn::ticksBeforeResending) {
             for (auto &it : _sequencePacketMap) {
                 sendUdp(it.second);
             }
@@ -135,7 +131,6 @@ namespace client {
                 sendUdp(cmn::PacketFactory::createPacket(receivedData.value(), _sequencePacketMap));
             }
             if (_udpSocket.receive(packet, sender, port) != sf::Socket::Status::Done) {
-//                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
             auto data = cmn::PacketDisassembler::disassemble(packet);
