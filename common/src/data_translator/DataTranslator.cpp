@@ -14,6 +14,7 @@
 #include "components/InputPlayer.hpp"
 #include "components/PlayerAnimation.hpp"
 #include "components/Position.hpp"
+#include "components/Score.hpp"
 #include "components/Sound.hpp"
 #include "components/Sprite.hpp"
 #include "enums/EntityType.hpp"
@@ -113,6 +114,20 @@ namespace cmn {
         }
     }
 
+    void DataTranslator::_injectScore(ecs::EcsManager& ecs, textData& data)
+    {
+        auto entities = ecs.getEntitiesWithComponent<ecs::Score>();
+        for (auto& entity : entities) {
+            if (entity->getId() == data.entityId) {
+                auto score = entity->getComponent<ecs::Score>();
+                if (!score) continue;
+                score->setScore(data.score);
+                break;
+            }
+        }
+    }
+
+
     void DataTranslator::translate(ecs::EcsManager &ecs, packetData &data, const std::unordered_map<int, uint64_t>& playerIdEntityMap)
     {
         std::visit([&ecs, playerIdEntityMap](auto &&arg)
@@ -133,6 +148,9 @@ namespace cmn {
                 }  else if constexpr (std::is_same_v<T, soundData>) {
                     soundData &sound = arg;
                     _soundEntity(ecs, sound);
+                } else if constexpr (std::is_same_v<T, textData>) {
+                    textData &text = arg;
+                    _injectScore(ecs, text);
                 }
             }, data);
     }
