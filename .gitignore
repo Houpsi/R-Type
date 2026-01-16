@@ -44,3 +44,5 @@ r-type_server
 # perf files
 perf.data
 perf.data.old
+
+log.txt

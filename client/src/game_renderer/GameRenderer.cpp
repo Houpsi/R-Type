@@ -51,7 +51,7 @@ namespace client {
         _gameEcs.addSystem<ecs::BackgroundSystem>();
 
         _menuEcs.addSystem<ecs::InputSystem>();
-        _menuEcs.addSystem<ecs::RenderSystem>(_window);
+        _menuEcs.addSystem<ecs::RenderSystem>(_window, _inputManager.getShaderName());
         _menuEcs.addSystem<ecs::DestroySystem>();
         _menuEcs.addSystem<ecs::BackgroundSystem>();
     }

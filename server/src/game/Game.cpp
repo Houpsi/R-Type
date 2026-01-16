@@ -100,22 +100,139 @@ namespace server {
      {
          for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Sound>()) {
              uint8_t soundId = static_cast<uint8_t>(entity->getComponent<ecs::Sound>()->getIdMusic());
-             _sharedData->addLobbyUdpPacketToSend(_lobbyId,
+             _sharedData->addLobbyUdpPacketToSend(
+                 _lobbyId,
+                 cmn::PacketFactory::createSoundPacket(soundId));
+             entity->removeComponent<ecs::Sound>();
+         }
+     }
+
+    void Game::_sendPositions()
+     {
+         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
+             auto component = entity->getComponent<ecs::Position>();
+             std::pair<float, float> const position = { component->getX(), component->getY() };
+             _sharedData->addLobbyUdpPacketToSend(
+                 _lobbyId,
+                 cmn::PacketFactory::createPositionPacket(position, entity->getId()));
+         }
+     }
+
+    void Game::_checkSpaceBar()
+     {
+         for (auto const &entity : _ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
+             auto input = entity->getComponent<ecs::InputPlayer>();
+
+             if (!entity->getComponent<ecs::Shoot>()) {
+                 continue;
+             }
+             if (input) {
+                 const auto shoot = entity->getComponent<ecs::Shoot>();
+
+                 shoot->setTimeSinceLastShot(shoot->getTimeSinceLastShot() + _ecs.getDeltaTime());
+
+                 if (input->getSpacebar()) {
+                     if (shoot->getTimeSinceLastShot() >= shoot->getCooldown()) {
+                         auto positionCpn = entity->getComponent<ecs::Position>();
+                         auto collisionCpn = entity->getComponent<ecs::Collision>();
+
+                         shoot->setTimeSinceLastShot(0);
+
+                         float const posX = positionCpn->getX() + collisionCpn->getHeight();
+                         float const posY = entity->getComponent<ecs::Position>()->getY();
+                         auto shootCpn = entity->getComponent<ecs::Shoot>();
+
+                         auto projectile = cmn::EntityFactory::createEntity(_ecs,
+                             cmn::EntityType::PlayerProjectile,
+                             posX,
+                             posY,
+                             cmn::EntityFactory::Context::SERVER);
+
+                         std::pair<float, float> const position = {posX, posY};
+
+                         _sharedData->addLobbyUdpPacketToSend(
+                             _lobbyId,
+                             cmn::PacketFactory::createNewEntityPacket(
+                                 cmn::EntityType::PlayerProjectile,
+                                 position,
+                                 projectile->getId()
+                             )
+                         );
+                     }
+                 }
+             }
+         }
+     }
+
+
+    void Game::_createEnemy(Level &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator)
+    {
+        if (currentLevel.isFinished()) {
+            if (currentLevel.hasBossSpawned()) {
+                return;
+            }
+
+            auto boss = currentLevel.getBoss();
+            auto newEnemy = cmn::EntityFactory::createEntity(_ecs,
+                                cmn::EntityType::Boss1,
+                                cmn::boss1SpawnPositionWidth, cmn::boss1SpawnPositionHeight,
+                                cmn::EntityFactory::Context::SERVER, boss.second);
+
+
+            std::pair<float, float> const position = { cmn::boss1SpawnPositionWidth, cmn::boss1SpawnPositionHeight };
+
+            _sharedData->addLobbyUdpPacketToSend(
+                _lobbyId,
                 cmn::PacketFactory::createNewEntityPacket(
-                    enemy.type,
+                    cmn::EntityType::Boss1,
                     position,
                     newEnemy->getId()
                 )
             );
-            enemy.lastSpawnTime = elapsed;
+            currentLevel.setBossSpawned(true);
+            return;
+        }
+
+        auto &waves = currentLevel.getWaves();
+        int waveId = currentLevel.getCurrentWaveId();
+
+        if (waveId >= waves.size())
+            return;
+
+        auto &[waveDuration, enemies] = waves[waveId];
+        float elapsed = enemyClock.getElapsedTime().asSeconds();
+
+        for (auto &enemy : enemies) {
+            if (elapsed - enemy.lastSpawnTime >= enemy.spawnRate) {
+                auto randNum = generator() % cmn::monsterMaxSpawnPositionHeight;
+                auto newEnemy =  cmn::EntityFactory::createEntity(_ecs,
+                                cmn::EntityType::Plane,
+                                cmn::monsterSpawnPositionWidth, randNum,
+                                cmn::EntityFactory::Context::SERVER);
+
+
+                std::pair<float, float> const position = {
+                    cmn::monsterSpawnPositionWidth,
+                    static_cast<float>(randNum)
+                };
+
+                _sharedData->addLobbyUdpPacketToSend(
+                    _lobbyId,
+                    cmn::PacketFactory::createNewEntityPacket(
+                        enemy.type,
+                        position,
+                        newEnemy->getId()
+                    )
+                );
+                enemy.lastSpawnTime = elapsed;
+            }
+        }
+
+        if (elapsed >= waveDuration) {
+            currentLevel.nextWave();
+            enemyClock.restart();
         }
     }
-
-    if (elapsed >= waveDuration) {
-        currentLevel.nextWave();
-        enemyClock.restart();
-    }
-}
 
     void Game::_sendPlayerEntities()
     {
@@ -123,7 +240,8 @@ namespace server {
             auto component = entity->getComponent<ecs::Position>();
             std::pair<float, float> const pos = {component->getX(), component->getY()};
 
-            _sharedData->addUdpPacketToSend(
+            _sharedData->addLobbyUdpPacketToSend(
+                _lobbyId,
                 cmn::PacketFactory::createNewEntityPacket(
                     cmn::EntityType::Player,
                     pos,
