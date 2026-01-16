@@ -14,12 +14,13 @@
 #include "packet_data/position_data/PositionData.hpp"
 #include "packet_data/start_game_data/StartGameData.hpp"
 #include "sound_packet/SoundPacket.hpp"
+#include "text_data/textPacket.hpp"
 
 #include <variant>
 
 namespace cmn {
 
-    using packetData = std::variant<connectionData, inputData, positionData, newEntityData, deleteEntityData, startGameData, soundData>;
+    using packetData = std::variant<connectionData, inputData, positionData, newEntityData, deleteEntityData, startGameData, soundData, textData>;
 }
 
 #endif// R_TYPE_PACKETDATA_HPP
