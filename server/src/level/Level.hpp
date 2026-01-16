@@ -41,6 +41,8 @@ namespace server {
         bool isFinished() const;
         void nextWave();
         void calculateNumberTotalWave();
+        bool hasBossSpawned() const { return _bossHasSpawned; }
+        void setBossSpawned(bool spawned) { _bossHasSpawned = spawned; }
       private:
         uint8_t _levelId = 0;
         uint8_t _enemySpawnRate = 1; //temporary;
@@ -53,6 +55,7 @@ namespace server {
         int _currentWave = 0;
         int _currentRepeat = 0;
         int _totalRepeatWaves = 0;
+        bool _bossHasSpawned = false;
     };
 
 }// namespace server

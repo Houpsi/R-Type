@@ -31,6 +31,8 @@ add_library(r-type_common_lib
         bit_unpacker/BitUnpacker.hpp
         packet_disassembler/PacketDisassembler.cpp
         packet_disassembler/PacketDisassembler.hpp
+        entity_factory/EntityFactory.cpp
+        entity_factory/EntityFactory.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC
