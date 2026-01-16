@@ -35,7 +35,7 @@ namespace ecs
             auto collision = entity->getComponent<Collision>();
             auto position = entity->getComponent<Position>();
 
-            if (!collision && !position) continue;
+            if (!collision || !position) continue;
 
             AABB bound{
                 position->getX(),
@@ -127,7 +127,7 @@ namespace ecs
         const auto& posB = b.getComponent<Position>();
         const auto& colB = b.getComponent<Collision>();
 
-        if (!posA && !colA && !posB && !colB) return false;
+        if (!posA || !colA || !posB || !colB) return false;
 
         return _isColliding(
             posA->getX(), posA->getY(), colA->getWidth(), colA->getHeight(),
