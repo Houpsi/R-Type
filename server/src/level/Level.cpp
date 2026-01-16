@@ -46,9 +46,9 @@ namespace server {
         return _nameLevel;
     }
 
-    uint8_t Level::getNumberWaves() const
+    uint8_t Level::getRepeatWaves() const
     {
-        return _numberWaves;
+        return _repeatWaves;
     }
 
     uint16_t Level::getPlayerSpeed() const
@@ -66,9 +66,9 @@ namespace server {
         _nameLevel = nameLevel;
     }
 
-    void Level::setNumberWaves(uint8_t numberWaves)
+    void Level::setRepeatWaves(uint8_t repeatWaves)
     {
-        _numberWaves = numberWaves;
+        _repeatWaves = repeatWaves;
     }
 
     void Level::setPlayerSpeed(uint16_t playerSpeed)
@@ -81,10 +81,54 @@ namespace server {
         _waves.emplace_back(time, enemies);
     }
 
-    std::list<std::pair<uint16_t, std::list<tmpEnemy>>> Level::getWaves() const
+    const std::vector<std::pair<uint16_t, std::list<tmpEnemy>>>& Level::getWaves() const
     {
         return _waves;
     }
 
+    std::vector<std::pair<uint16_t, std::list<tmpEnemy>>> &Level::getWaves()
+    {
+        return _waves;
+    }
+
+
+    int Level::getCurrentWaveId() const
+    {
+        return  _currentWave;
+    }
+
+    void Level::setCurrentWave(int id)
+    {
+        _currentWave = id;
+    }
+
+    void Level::nextWave()
+    {
+        _currentWave++;
+
+        if (_currentWave >= _waves.size()) {
+            _currentWave = 0;
+            _currentRepeat++;
+        }
+    }
+
+    bool Level::isFinished() const
+    {
+        return _currentRepeat >= static_cast<int>(_totalRepeatWaves);
+    }
+
+    void Level::calculateNumberTotalWave()
+    {
+        _totalRepeatWaves = static_cast<int>(_waves.size()) * _repeatWaves;
+    }
+
+    bool Level::hasBossSpawned() const
+    {
+        return _bossHasSpawned;
+    }
+    void Level::setBossSpawned(bool spawned)
+    {
+        _bossHasSpawned = spawned;
+    }
 
 }// namespace server

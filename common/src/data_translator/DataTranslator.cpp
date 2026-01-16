@@ -16,8 +16,11 @@
 #include "components/Position.hpp"
 #include "components/Sound.hpp"
 #include "components/Sprite.hpp"
+#include "constants/GameConstants.hpp"
+#include "entity_factory/EntityFactory.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
+#include <list>
 
 namespace cmn {
 
@@ -75,22 +78,11 @@ namespace cmn {
 
     void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityData &newEntity)
     {
-        auto entity = ecs.createEntity(newEntity.entityId);
+        auto entity =  cmn::EntityFactory::createEntity(ecs,
+                        static_cast<EntityType>(newEntity.type),
+                        newEntity.posX, newEntity.posY,
+                        cmn::EntityFactory::Context::CLIENT, 0, newEntity.entityId);
 
-        entity->addComponent<ecs::Position>(newEntity.posX, newEntity.posY);
-        if (static_cast<EntityType>(newEntity.type) == EntityType::Player) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
-            entity->addComponent<ecs::PlayerAnimation>();
-            entity->addComponent<ecs::InputPlayer>();
-        }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::Monster) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
-            entity->addComponent<ecs::Animation>(monsterAnimationSize, monsterAnimationOffset, monsterAnimationNumberFrame);
-        }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::PlayerProjectile) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
-            entity->addComponent<ecs::Animation>(playerProjectileAnimationSize, playerProjectileAnimationOffset, playerProjectileAnimationNumberFrame);
-        }
     }
 
     void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityData &deleteEntity)

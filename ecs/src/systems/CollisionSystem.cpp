@@ -63,12 +63,12 @@ namespace ecs
                         auto shoot = entity->getComponent<Shoot>();
 
                         health->setHealth(health->getHealth() - shoot->getDamage());
-                        entity->addComponent<Sound>(1, false);
+                        entity->addComponent<Sound>(3, false);
                         entity->addComponent<Destroy>();
                     }
                     else if (typeA == PLAYER &&
                         typeB == ENEMY) {
-                        entity->addComponent<Sound>(1, false);
+                        entity->addComponent<Sound>(3, false);
                         entity->addComponent<Destroy>();
                     }
                 }

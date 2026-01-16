@@ -8,13 +8,12 @@
 
 #ifndef R_TYPE_TMPENEMY_HPP
 #define R_TYPE_TMPENEMY_HPP
-#include <cstdint>
-#include <string>
 
 struct tmpEnemy
 {
-    std::string type;
-    uint8_t count;
+    cmn::EntityType type;
+    float spawnRate;
+    float lastSpawnTime = 0;
 };
 
 
