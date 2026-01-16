@@ -14,6 +14,12 @@ namespace ecs {
     constexpr int volumeMusic = 100;
     constexpr std::string_view folderSound = "./assets/sound/";
     constexpr std::array<std::string_view, 2> idToSound = {"shoot", "theme"};
+
+    static constexpr int MAX_ENTITIES = 6;
+    static constexpr int MAX_DEPTH = 6;
+
+    constexpr uint16_t windowWidth = 1920;
+    constexpr uint16_t windowHeight = 1080;
 }
 
 
