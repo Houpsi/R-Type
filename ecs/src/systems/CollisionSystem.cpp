@@ -140,7 +140,7 @@ namespace ecs
         if (!_bound.intersects(bound)) {
             return;
         }
-        if (_entities.size() < cmn::MAX_ENTITIES || _depth >= cmn::MAX_DEPTH) {
+        if (_entities.size() < ecs::MAX_ENTITIES || _depth >= ecs::MAX_DEPTH) {
             _entities.push_back({entity, bound});
             return;
         }
