@@ -16,25 +16,33 @@ title: tmpEnemy
 
 |                | Name           |
 | -------------- | -------------- |
-| std::string | **[type](Classes/structtmpEnemy.md#variable-type)**  |
-| uint8_t | **[count](Classes/structtmpEnemy.md#variable-count)**  |
+| cmn::EntityType | **[type](Classes/structtmpEnemy.md#variable-type)**  |
+| float | **[spawnRate](Classes/structtmpEnemy.md#variable-spawnrate)**  |
+| float | **[lastSpawnTime](Classes/structtmpEnemy.md#variable-lastspawntime)**  |
 
 ## Public Attributes Documentation
 
 ### variable type
 
 ```cpp
-std::string type;
+cmn::EntityType type;
 ```
 
 
-### variable count
+### variable spawnRate
 
 ```cpp
-uint8_t count;
+float spawnRate;
+```
+
+
+### variable lastSpawnTime
+
+```cpp
+float lastSpawnTime = 0;
 ```
 
 
 -------------------------------
 
-Updated on 2026-01-16 at 09:38:10 +0000
+Updated on 2026-01-16 at 16:50:30 +0000

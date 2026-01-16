@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quadtree_0',['quadtree',['../classecs_1_1QuadTree.html',1,'ecs::QuadTree'],['../classecs_1_1QuadTree.html#adb12ed3efd04bcd6c6b468267f5d2ddd',1,'ecs::QuadTree::QuadTree()']]]
+  ['obstacle_0',['OBSTACLE',['../namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca8ca56dc91e28869f29d69bc6d75ceb9d',1,'ecs']]]
 ];

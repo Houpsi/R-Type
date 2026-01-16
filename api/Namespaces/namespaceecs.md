@@ -77,7 +77,7 @@ title: ecs
 | constexpr uint16_t | **[windowWidth](Namespaces/namespaceecs.md#variable-windowwidth)**  |
 | constexpr uint16_t | **[windowHeight](Namespaces/namespaceecs.md#variable-windowheight)**  |
 | constexpr int | **[volumeMusic](Namespaces/namespaceecs.md#variable-volumemusic)**  |
-| constexpr std::array< std::string_view, 2 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
+| constexpr std::array< std::string_view, 3 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
 | constexpr std::string_view | **[folderSound](Namespaces/namespaceecs.md#variable-foldersound)**  |
 | constexpr int | **[MAX_ENTITIES](Namespaces/namespaceecs.md#variable-max-entities)**  |
 | constexpr int | **[MAX_DEPTH](Namespaces/namespaceecs.md#variable-max-depth)**  |
@@ -244,7 +244,7 @@ constexpr int volumeMusic = 100;
 ### variable idToSound
 
 ```cpp
-constexpr std::array< std::string_view, 2 > idToSound = {"shoot", "theme"};
+constexpr std::array< std::string_view, 3 > idToSound = {"shoot", "theme", "explosion"};
 ```
 
 
@@ -274,4 +274,4 @@ static constexpr int MAX_DEPTH = 6;
 
 -------------------------------
 
-Updated on 2026-01-16 at 09:38:10 +0000
+Updated on 2026-01-16 at 16:50:30 +0000

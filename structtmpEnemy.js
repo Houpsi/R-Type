@@ -1,5 +1,6 @@
 var structtmpEnemy =
 [
-    [ "count", "structtmpEnemy.html#a462f15b021376755ab5e15c8406a5966", null ],
-    [ "type", "structtmpEnemy.html#a32968a4037bef679400453fc19b95bc6", null ]
+    [ "lastSpawnTime", "structtmpEnemy.html#aba419a89bd7a92a1e914d7e037efefa9", null ],
+    [ "spawnRate", "structtmpEnemy.html#a35ad10baa09fb33c1a0dae7930b34f9a", null ],
+    [ "type", "structtmpEnemy.html#a9279925c45b6d1ae1be779b2fabe04a9", null ]
 ];

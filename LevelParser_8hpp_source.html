@@ -143,21 +143,22 @@ $(document).ready(function(){initNavTree('LevelParser_8hpp_source.html',''); ini
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordtype">void</span> _checkIdExists(<span class="keyword">const</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keywordtype">void</span> _isValidEnemyType(<span class="keyword">const</span> std::string&amp; type);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordtype">void</span> _isValidBossType(<span class="keyword">const</span> std::string&amp; type);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            std::unordered_set&lt;int&gt; _idAlreadyExists;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    };</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            cmn::EntityType _entityTypeFromString(<span class="keyword">const</span> std::string&amp; type);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            std::unordered_set&lt;int&gt; _idAlreadyExists;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    };</div>
 </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span><span class="comment">// R_TYPE_LEVELPARSER_HPP</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#endif</span><span class="comment">// R_TYPE_LEVELPARSER_HPP</span></div>
 <div class="ttc" id="aLevel_8hpp_html"><div class="ttname"><a href="Level_8hpp.html">Level.hpp</a></div></div>
 <div class="ttc" id="aclassserver_1_1LevelParser_1_1LevelParserException_html"><div class="ttname"><a href="classserver_1_1LevelParser_1_1LevelParserException.html">server::LevelParser::LevelParserException</a></div><div class="ttdef"><b>Definition</b> LevelParser.hpp:24</div></div>
 <div class="ttc" id="aclassserver_1_1LevelParser_1_1LevelParserException_html_a4447225d5d40c874ec32aa9be59292ac"><div class="ttname"><a href="classserver_1_1LevelParser_1_1LevelParserException.html#a4447225d5d40c874ec32aa9be59292ac">server::LevelParser::LevelParserException::LevelParserException</a></div><div class="ttdeci">LevelParserException(const char *msg)</div><div class="ttdef"><b>Definition</b> LevelParser.hpp:28</div></div>
 <div class="ttc" id="aclassserver_1_1LevelParser_1_1LevelParserException_html_a7fe3442ff06b825006485a53688551c9"><div class="ttname"><a href="classserver_1_1LevelParser_1_1LevelParserException.html#a7fe3442ff06b825006485a53688551c9">server::LevelParser::LevelParserException::what</a></div><div class="ttdeci">const char * what() const noexcept</div><div class="ttdef"><b>Definition</b> LevelParser.hpp:30</div></div>
 <div class="ttc" id="aclassserver_1_1LevelParser_html"><div class="ttname"><a href="classserver_1_1LevelParser.html">server::LevelParser</a></div><div class="ttdef"><b>Definition</b> LevelParser.hpp:18</div></div>
 <div class="ttc" id="aclassserver_1_1LevelParser_html_a28d56b3223fcd4b94910f4998046b508"><div class="ttname"><a href="classserver_1_1LevelParser.html#a28d56b3223fcd4b94910f4998046b508">server::LevelParser::LevelParser</a></div><div class="ttdeci">LevelParser()=default</div></div>
-<div class="ttc" id="aclassserver_1_1LevelParser_html_aedd75c95fb917debd2408a156da11d54"><div class="ttname"><a href="classserver_1_1LevelParser.html#aedd75c95fb917debd2408a156da11d54">server::LevelParser::createLevel</a></div><div class="ttdeci">bool createLevel(const std::string &amp;fileConfigLevel, Level &amp;baseLevel)</div><div class="ttdef"><b>Definition</b> LevelParser.cpp:14</div></div>
+<div class="ttc" id="aclassserver_1_1LevelParser_html_aedd75c95fb917debd2408a156da11d54"><div class="ttname"><a href="classserver_1_1LevelParser.html#aedd75c95fb917debd2408a156da11d54">server::LevelParser::createLevel</a></div><div class="ttdeci">bool createLevel(const std::string &amp;fileConfigLevel, Level &amp;baseLevel)</div><div class="ttdef"><b>Definition</b> LevelParser.cpp:20</div></div>
 <div class="ttc" id="aclassserver_1_1Level_html"><div class="ttname"><a href="classserver_1_1Level.html">server::Level</a></div><div class="ttdef"><b>Definition</b> Level.hpp:20</div></div>
 <div class="ttc" id="anamespaceserver_html"><div class="ttname"><a href="namespaceserver.html">server</a></div><div class="ttdef"><b>Definition</b> Game.cpp:31</div></div>
 </div><!-- fragment --></div><!-- contents -->

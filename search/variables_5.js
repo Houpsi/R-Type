@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['size_5fx_5fplayer_0',['SIZE_X_PLAYER',['../PlayerAnimationSystem_8cpp.html#a51bfb0c4a1a9b9e2b8f89e52f182ae6a',1,'PlayerAnimationSystem.cpp']]],
-  ['size_5fy_5fplayer_1',['SIZE_Y_PLAYER',['../PlayerAnimationSystem_8cpp.html#a74110b443678b755222c85d4e9e73b7b',1,'PlayerAnimationSystem.cpp']]]
+  ['max_5fdepth_0',['MAX_DEPTH',['../namespaceecs.html#a0505af24dab235fc3b06a36f76518682',1,'ecs']]],
+  ['max_5fentities_1',['MAX_ENTITIES',['../namespaceecs.html#a0b10355f6a3934015d874d3207ee0669',1,'ecs']]]
 ];

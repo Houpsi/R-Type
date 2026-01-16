@@ -16,39 +16,47 @@ title: server::Level
 
 |                | Name           |
 | -------------- | -------------- |
+| void | **[setRepeatWaves](Classes/classserver_1_1Level.md#function-setrepeatwaves)**(uint8_t numberWaves) |
 | void | **[setPlayerSpeed](Classes/classserver_1_1Level.md#function-setplayerspeed)**(uint16_t playerSpeed) |
-| void | **[setNumberWaves](Classes/classserver_1_1Level.md#function-setnumberwaves)**(uint8_t numberWaves) |
 | void | **[setNameLevel](Classes/classserver_1_1Level.md#function-setnamelevel)**(const std::string & _nameLevel) |
 | void | **[setLevelId](Classes/classserver_1_1Level.md#function-setlevelid)**(uint8_t levelId) |
 | void | **[setIsBossPresent](Classes/classserver_1_1Level.md#function-setisbosspresent)**(bool isPresent) |
+| void | **[setCurrentWave](Classes/classserver_1_1Level.md#function-setcurrentwave)**(int id) |
+| void | **[setBossSpawned](Classes/classserver_1_1Level.md#function-setbossspawned)**(bool spawned) |
 | void | **[setBoss](Classes/classserver_1_1Level.md#function-setboss)**(std::string boss, uint32_t healthBoss) |
-| std::list< std::pair< uint16_t, std::list< [tmpEnemy](Classes/structtmpEnemy.md) > > > | **[getWaves](Classes/classserver_1_1Level.md#function-getwaves)**() const |
+| void | **[nextWave](Classes/classserver_1_1Level.md#function-nextwave)**() |
+| bool | **[isFinished](Classes/classserver_1_1Level.md#function-isfinished)**() const |
+| bool | **[hasBossSpawned](Classes/classserver_1_1Level.md#function-hasbossspawned)**() const |
+| const std::vector< std::pair< uint16_t, std::list< [tmpEnemy](Classes/structtmpEnemy.md) > > > & | **[getWaves](Classes/classserver_1_1Level.md#function-getwaves)**() const |
+| std::vector< std::pair< uint16_t, std::list< [tmpEnemy](Classes/structtmpEnemy.md) > > > & | **[getWaves](Classes/classserver_1_1Level.md#function-getwaves)**() |
+| uint8_t | **[getRepeatWaves](Classes/classserver_1_1Level.md#function-getrepeatwaves)**() const |
 | uint16_t | **[getPlayerSpeed](Classes/classserver_1_1Level.md#function-getplayerspeed)**() const |
-| uint8_t | **[getNumberWaves](Classes/classserver_1_1Level.md#function-getnumberwaves)**() const |
 | std::string | **[getNameLevel](Classes/classserver_1_1Level.md#function-getnamelevel)**() const |
 | uint8_t | **[getLevelId](Classes/classserver_1_1Level.md#function-getlevelid)**() const |
 | bool | **[getIsBossPresent](Classes/classserver_1_1Level.md#function-getisbosspresent)**() const |
 | uint8_t | **[getEnemySpawnRate](Classes/classserver_1_1Level.md#function-getenemyspawnrate)**() const |
+| int | **[getCurrentWaveId](Classes/classserver_1_1Level.md#function-getcurrentwaveid)**() const |
 | std::pair< std::string, uint32_t > | **[getBoss](Classes/classserver_1_1Level.md#function-getboss)**() const |
+| void | **[calculateNumberTotalWave](Classes/classserver_1_1Level.md#function-calculatenumbertotalwave)**() |
 | void | **[addWave](Classes/classserver_1_1Level.md#function-addwave)**(uint16_t time, std::list< [tmpEnemy](Classes/structtmpEnemy.md) > enemies) |
 | | **[Level](Classes/classserver_1_1Level.md#function-level)**() =default |
 
 ## Public Functions Documentation
+
+### function setRepeatWaves
+
+```cpp
+void setRepeatWaves(
+    uint8_t numberWaves
+)
+```
+
 
 ### function setPlayerSpeed
 
 ```cpp
 void setPlayerSpeed(
     uint16_t playerSpeed
-)
-```
-
-
-### function setNumberWaves
-
-```cpp
-void setNumberWaves(
-    uint8_t numberWaves
 )
 ```
 
@@ -80,6 +88,24 @@ void setIsBossPresent(
 ```
 
 
+### function setCurrentWave
+
+```cpp
+void setCurrentWave(
+    int id
+)
+```
+
+
+### function setBossSpawned
+
+```cpp
+void setBossSpawned(
+    bool spawned
+)
+```
+
+
 ### function setBoss
 
 ```cpp
@@ -90,10 +116,45 @@ void setBoss(
 ```
 
 
+### function nextWave
+
+```cpp
+void nextWave()
+```
+
+
+### function isFinished
+
+```cpp
+bool isFinished() const
+```
+
+
+### function hasBossSpawned
+
+```cpp
+bool hasBossSpawned() const
+```
+
+
 ### function getWaves
 
 ```cpp
-std::list< std::pair< uint16_t, std::list< tmpEnemy > > > getWaves() const
+const std::vector< std::pair< uint16_t, std::list< tmpEnemy > > > & getWaves() const
+```
+
+
+### function getWaves
+
+```cpp
+std::vector< std::pair< uint16_t, std::list< tmpEnemy > > > & getWaves()
+```
+
+
+### function getRepeatWaves
+
+```cpp
+uint8_t getRepeatWaves() const
 ```
 
 
@@ -101,13 +162,6 @@ std::list< std::pair< uint16_t, std::list< tmpEnemy > > > getWaves() const
 
 ```cpp
 uint16_t getPlayerSpeed() const
-```
-
-
-### function getNumberWaves
-
-```cpp
-uint8_t getNumberWaves() const
 ```
 
 
@@ -139,10 +193,24 @@ uint8_t getEnemySpawnRate() const
 ```
 
 
+### function getCurrentWaveId
+
+```cpp
+int getCurrentWaveId() const
+```
+
+
 ### function getBoss
 
 ```cpp
 std::pair< std::string, uint32_t > getBoss() const
+```
+
+
+### function calculateNumberTotalWave
+
+```cpp
+void calculateNumberTotalWave()
 ```
 
 
@@ -165,4 +233,4 @@ Level() =default
 
 -------------------------------
 
-Updated on 2026-01-16 at 09:38:10 +0000
+Updated on 2026-01-16 at 16:50:30 +0000
