@@ -69,6 +69,15 @@ namespace cmn {
         return data;
     }
 
+    packetData PacketDisassembler::_disassembleIntoTextData(BitUnpacker &unpacker)
+    {
+        uint32_t const textId = unpacker.readUInt32();
+        uint32_t const score = unpacker.readUInt32();
+        textData data = {textId, score};
+
+        return data;
+    }
+
     packetData PacketDisassembler::_disassembleIntoStartGameData(BitUnpacker &unpacker)
     {
         startGameData data = {};
@@ -104,6 +113,8 @@ namespace cmn {
                 return _disassembleIntoStartGameData(unpacker);
             case (soundProtocolId):
                 return _disassembleIntoSoundData(unpacker);
+            case (textProtocolId):
+                return _disassembleIntoTextData(unpacker);
             default:
                 return std::nullopt;
         }
