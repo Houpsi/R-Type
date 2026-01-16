@@ -197,6 +197,12 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a6614fb4da96ff1729ad9ec05a67c3d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174a2e96286873cbaf666e019a4f83f5" id="r_a174a2e96286873cbaf666e019a4f83f5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5">AccessibilityFilter</a> : uint8_t { <a class="el" href="namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a6adf97f83acf6453d4a6a4b1070f3754">None</a> = 0
+, <a class="el" href="namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a9cacbc671b3007953971a4cdf63368e1">HighContrast</a>
+, <a class="el" href="namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a9b8958acb7be504bb5f55f17c0eea366">Invert</a>
+, <a class="el" href="namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a8022a7ceb04a413d242483f01407dfba">Protanopia</a>
+ }</td></tr>
+<tr class="separator:a174a2e96286873cbaf666e019a4f83f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -239,6 +245,12 @@ Variables</h2></td></tr>
 <tr class="separator:a20d28d4913b2bdf576f2abef59d02376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27edd8b07d9449a82115ae47ffac1eb5" id="r_a27edd8b07d9449a82115ae47ffac1eb5"><td class="memItemLeft" align="right" valign="top">constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a27edd8b07d9449a82115ae47ffac1eb5">windowHeight</a> = 1080</td></tr>
 <tr class="separator:a27edd8b07d9449a82115ae47ffac1eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae439b378537d9e351f383e3f70c6cd58" id="r_ae439b378537d9e351f383e3f70c6cd58"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#ae439b378537d9e351f383e3f70c6cd58">highContrastShader</a></td></tr>
+<tr class="separator:ae439b378537d9e351f383e3f70c6cd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4284d107c2d84bcbc84b9fad729482" id="r_a1e4284d107c2d84bcbc84b9fad729482"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a1e4284d107c2d84bcbc84b9fad729482">invertShader</a></td></tr>
+<tr class="separator:a1e4284d107c2d84bcbc84b9fad729482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9154e6a2f62e403336b1d820718bf519" id="r_a9154e6a2f62e403336b1d820718bf519"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a9154e6a2f62e403336b1d820718bf519">protanopiaShader</a></td></tr>
+<tr class="separator:a9154e6a2f62e403336b1d820718bf519"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="aba6b31839917e69e9f5f823b29c49a3a" name="aba6b31839917e69e9f5f823b29c49a3a"></a>
@@ -256,6 +268,34 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a174a2e96286873cbaf666e019a4f83f5" name="a174a2e96286873cbaf666e019a4f83f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a174a2e96286873cbaf666e019a4f83f5">&#9670;&#160;</a></span>AccessibilityFilter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5">ecs::AccessibilityFilter</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a174a2e96286873cbaf666e019a4f83f5a6adf97f83acf6453d4a6a4b1070f3754" name="a174a2e96286873cbaf666e019a4f83f5a6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a174a2e96286873cbaf666e019a4f83f5a9cacbc671b3007953971a4cdf63368e1" name="a174a2e96286873cbaf666e019a4f83f5a9cacbc671b3007953971a4cdf63368e1"></a>HighContrast&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a174a2e96286873cbaf666e019a4f83f5a9b8958acb7be504bb5f55f17c0eea366" name="a174a2e96286873cbaf666e019a4f83f5a9b8958acb7be504bb5f55f17c0eea366"></a>Invert&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a174a2e96286873cbaf666e019a4f83f5a8022a7ceb04a413d242483f01407dfba" name="a174a2e96286873cbaf666e019a4f83f5a8022a7ceb04a413d242483f01407dfba"></a>Protanopia&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="a6614fb4da96ff1729ad9ec05a67c3d1c" name="a6614fb4da96ff1729ad9ec05a67c3d1c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6614fb4da96ff1729ad9ec05a67c3d1c">&#9670;&#160;</a></span>TypeCollision</h2>
 
@@ -659,6 +699,29 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="ae439b378537d9e351f383e3f70c6cd58" name="ae439b378537d9e351f383e3f70c6cd58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae439b378537d9e351f383e3f70c6cd58">&#9670;&#160;</a></span>highContrastShader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string ecs::highContrastShader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= R<span class="stringliteral">&quot;(</span></div>
+<div class="line"><span class="stringliteral">    uniform sampler2D texture;</span></div>
+<div class="line"><span class="stringliteral">    void main() {</span></div>
+<div class="line"><span class="stringliteral">        vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);</span></div>
+<div class="line"><span class="stringliteral">        float gray = dot(pixel.rgb, vec3(0.299, 0.587, 0.114));</span></div>
+<div class="line"><span class="stringliteral">        float contrast = step(0.4, gray);</span></div>
+<div class="line"><span class="stringliteral">        gl_FragColor = vec4(contrast, contrast, contrast, pixel.a);</span></div>
+<div class="line"><span class="stringliteral">    }</span></div>
+<div class="line"><span class="stringliteral">    )&quot;</span></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="aa8796a8ab89583326fca41efab10136b" name="aa8796a8ab89583326fca41efab10136b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8796a8ab89583326fca41efab10136b">&#9670;&#160;</a></span>idToSound</h2>
 
@@ -679,6 +742,27 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<a id="a1e4284d107c2d84bcbc84b9fad729482" name="a1e4284d107c2d84bcbc84b9fad729482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e4284d107c2d84bcbc84b9fad729482">&#9670;&#160;</a></span>invertShader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string ecs::invertShader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= R<span class="stringliteral">&quot;(</span></div>
+<div class="line"><span class="stringliteral">    uniform sampler2D texture;</span></div>
+<div class="line"><span class="stringliteral">    void main() {</span></div>
+<div class="line"><span class="stringliteral">        vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);</span></div>
+<div class="line"><span class="stringliteral">        gl_FragColor = vec4(1.0 - pixel.r, 1.0 - pixel.g, 1.0 - pixel.b, pixel.a);</span></div>
+<div class="line"><span class="stringliteral">    }</span></div>
+<div class="line"><span class="stringliteral">    )&quot;</span></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a0505af24dab235fc3b06a36f76518682" name="a0505af24dab235fc3b06a36f76518682"></a>
@@ -723,6 +807,33 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<a id="a9154e6a2f62e403336b1d820718bf519" name="a9154e6a2f62e403336b1d820718bf519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9154e6a2f62e403336b1d820718bf519">&#9670;&#160;</a></span>protanopiaShader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string ecs::protanopiaShader</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= R<span class="stringliteral">&quot;(</span></div>
+<div class="line"><span class="stringliteral">    uniform sampler2D texture;</span></div>
+<div class="line"><span class="stringliteral">    void main() {</span></div>
+<div class="line"><span class="stringliteral">        vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);</span></div>
+<div class="line"><span class="stringliteral">        mat3 matrix = mat3(</span></div>
+<div class="line"><span class="stringliteral">            0.567, 0.433, 0.0,</span></div>
+<div class="line"><span class="stringliteral">            0.558, 0.442, 0.0,</span></div>
+<div class="line"><span class="stringliteral">            0.0,   0.242, 0.758</span></div>
+<div class="line"><span class="stringliteral">        );</span></div>
+<div class="line"><span class="stringliteral">        vec3 color = pixel.rgb * matrix;</span></div>
+<div class="line"><span class="stringliteral">        gl_FragColor = vec4(color, pixel.a);</span></div>
+<div class="line"><span class="stringliteral">    }</span></div>
+<div class="line"><span class="stringliteral">)&quot;</span></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="a5d022ba3aaad087186a14614dea11848" name="a5d022ba3aaad087186a14614dea11848"></a>

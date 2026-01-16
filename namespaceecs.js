@@ -36,6 +36,12 @@ var namespaceecs =
     [ "Velocity", "classecs_1_1Velocity.html", "classecs_1_1Velocity" ],
     [ "VelocitySystem", "classecs_1_1VelocitySystem.html", "classecs_1_1VelocitySystem" ],
     [ "EntityRef", "namespaceecs.html#aba6b31839917e69e9f5f823b29c49a3a", null ],
+    [ "AccessibilityFilter", "namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5", [
+      [ "None", "namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a6adf97f83acf6453d4a6a4b1070f3754", null ],
+      [ "HighContrast", "namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a9cacbc671b3007953971a4cdf63368e1", null ],
+      [ "Invert", "namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a9b8958acb7be504bb5f55f17c0eea366", null ],
+      [ "Protanopia", "namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a8022a7ceb04a413d242483f01407dfba", null ]
+    ] ],
     [ "TypeCollision", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1c", [
       [ "PLAYER", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1cabf279887788e305b92e229afa00d3a3e", null ],
       [ "ENEMY", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1cae9d74ed3fbdbf5b0952dce8e37f2f72f", null ],
@@ -55,9 +61,12 @@ var namespaceecs =
     [ "TEST", "namespaceecs.html#a0a16bfcb7ac2ecb53fd6979b4282950c", null ],
     [ "TEST", "namespaceecs.html#ad4997ede705c6001fc3e35fd035980a0", null ],
     [ "folderSound", "namespaceecs.html#a1b57c2380fa3729ef2b1840b37b213e3", null ],
+    [ "highContrastShader", "namespaceecs.html#ae439b378537d9e351f383e3f70c6cd58", null ],
     [ "idToSound", "namespaceecs.html#aa8796a8ab89583326fca41efab10136b", null ],
+    [ "invertShader", "namespaceecs.html#a1e4284d107c2d84bcbc84b9fad729482", null ],
     [ "MAX_DEPTH", "namespaceecs.html#a0505af24dab235fc3b06a36f76518682", null ],
     [ "MAX_ENTITIES", "namespaceecs.html#a0b10355f6a3934015d874d3207ee0669", null ],
+    [ "protanopiaShader", "namespaceecs.html#a9154e6a2f62e403336b1d820718bf519", null ],
     [ "volumeMusic", "namespaceecs.html#a5d022ba3aaad087186a14614dea11848", null ],
     [ "windowHeight", "namespaceecs.html#a27edd8b07d9449a82115ae47ffac1eb5", null ],
     [ "windowWidth", "namespaceecs.html#a20d28d4913b2bdf576f2abef59d02376", null ]

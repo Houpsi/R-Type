@@ -53,6 +53,7 @@ title: ecs
 | -------------- | -------------- |
 | enum| **[TypeCollision](Namespaces/namespaceecs.md#enum-typecollision)** { PLAYER_PROJECTILE, PLAYER, OBSTACLE, ENEMY_PROJECTILE, ENEMY} |
 | using std::shared_ptr< [Entity](Classes/classecs_1_1Entity.md) > | **[EntityRef](Namespaces/namespaceecs.md#using-entityref)**  |
+| enum class uint8_t | **[AccessibilityFilter](Namespaces/namespaceecs.md#enum-accessibilityfilter)** { Protanopia, None = 0, Invert, HighContrast} |
 
 ## Functions
 
@@ -77,7 +78,10 @@ title: ecs
 | constexpr uint16_t | **[windowWidth](Namespaces/namespaceecs.md#variable-windowwidth)**  |
 | constexpr uint16_t | **[windowHeight](Namespaces/namespaceecs.md#variable-windowheight)**  |
 | constexpr int | **[volumeMusic](Namespaces/namespaceecs.md#variable-volumemusic)**  |
+| const std::string | **[protanopiaShader](Namespaces/namespaceecs.md#variable-protanopiashader)**  |
+| const std::string | **[invertShader](Namespaces/namespaceecs.md#variable-invertshader)**  |
 | constexpr std::array< std::string_view, 3 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
+| const std::string | **[highContrastShader](Namespaces/namespaceecs.md#variable-highcontrastshader)**  |
 | constexpr std::string_view | **[folderSound](Namespaces/namespaceecs.md#variable-foldersound)**  |
 | constexpr int | **[MAX_ENTITIES](Namespaces/namespaceecs.md#variable-max-entities)**  |
 | constexpr int | **[MAX_DEPTH](Namespaces/namespaceecs.md#variable-max-depth)**  |
@@ -102,6 +106,18 @@ title: ecs
 ```cpp
 using ecs::EntityRef = typedef std::shared_ptr<Entity>;
 ```
+
+
+### enum AccessibilityFilter
+
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| Protanopia | |   |
+| None | 0|   |
+| Invert | |   |
+| HighContrast | |   |
+
+
 
 
 
@@ -241,10 +257,57 @@ constexpr int volumeMusic = 100;
 ```
 
 
+### variable protanopiaShader
+
+```cpp
+const std::string protanopiaShader = R"(
+    uniform sampler2D texture;
+    void main() {
+        vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);
+        mat3 matrix = mat3(
+            0.567, 0.433, 0.0,
+            0.558, 0.442, 0.0,
+            0.0,   0.242, 0.758
+        );
+        vec3 color = pixel.rgb * matrix;
+        gl_FragColor = vec4(color, pixel.a);
+    }
+)";
+```
+
+
+### variable invertShader
+
+```cpp
+const std::string invertShader = R"(
+    uniform sampler2D texture;
+    void main() {
+        vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);
+        gl_FragColor = vec4(1.0 - pixel.r, 1.0 - pixel.g, 1.0 - pixel.b, pixel.a);
+    }
+    )";
+```
+
+
 ### variable idToSound
 
 ```cpp
 constexpr std::array< std::string_view, 3 > idToSound = {"shoot", "theme", "explosion"};
+```
+
+
+### variable highContrastShader
+
+```cpp
+const std::string highContrastShader = R"(
+    uniform sampler2D texture;
+    void main() {
+        vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);
+        float gray = dot(pixel.rgb, vec3(0.299, 0.587, 0.114));
+        float contrast = step(0.4, gray);
+        gl_FragColor = vec4(contrast, contrast, contrast, pixel.a);
+    }
+    )";
 ```
 
 
@@ -274,4 +337,4 @@ static constexpr int MAX_DEPTH = 6;
 
 -------------------------------
 
-Updated on 2026-01-16 at 16:50:30 +0000
+Updated on 2026-01-16 at 16:51:26 +0000

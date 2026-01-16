@@ -1,6 +1,5 @@
 var classecs_1_1RenderSystem =
 [
-    [ "RenderSystem", "classecs_1_1RenderSystem.html#a2a1fb6f3b6dc47736710cb3458f3d8d5", null ],
-    [ "~RenderSystem", "classecs_1_1RenderSystem.html#a74b02543f41680e0cfaf766d677cc179", null ],
-    [ "update", "classecs_1_1RenderSystem.html#a9b1c22e0bd0bf0858642a117d9e0fa1f", null ]
+    [ "RenderSystem", "classecs_1_1RenderSystem.html#ae4dc08f4428e0bcfeac5b4d12e846fbb", null ],
+    [ "update", "classecs_1_1RenderSystem.html#a6c9862fe5ee4f42426b4e909eceb53c3", null ]
 ];

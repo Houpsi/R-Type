@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['value_0',['value',['../classecs_1_1DummyComponent.html#a69ed88a0e479b1a1508e7349e024f5ff',1,'ecs::DummyComponent']]],
-  ['volumemusic_1',['volumeMusic',['../namespaceecs.html#a5d022ba3aaad087186a14614dea11848',1,'ecs']]]
+  ['updated_0',['updated',['../classecs_1_1DummySystem.html#a65592d6be0e12e4eae86a8b6c1298eed',1,'ecs::DummySystem']]]
 ];

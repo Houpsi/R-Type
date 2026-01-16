@@ -18,9 +18,8 @@ Inherits from [ecs::System](Classes/classecs_1_1System.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[~RenderSystem](Classes/classecs_1_1RenderSystem.md#function-~rendersystem)**() override =default |
-| virtual void | **[update](Classes/classecs_1_1RenderSystem.md#function-update)**([EcsManager](Classes/classecs_1_1EcsManager.md) & ecs) override |
-| | **[RenderSystem](Classes/classecs_1_1RenderSystem.md#function-rendersystem)**(sf::RenderWindow & window) |
+| virtual void | **[update](Classes/classecs_1_1RenderSystem.md#function-update)**([EcsManager](Classes/classecs_1_1EcsManager.md) & ecs) |
+| | **[RenderSystem](Classes/classecs_1_1RenderSystem.md#function-rendersystem)**(sf::RenderWindow & window, const std::string & nameShader) |
 
 ## Additional inherited members
 
@@ -34,19 +33,12 @@ Inherits from [ecs::System](Classes/classecs_1_1System.md)
 
 ## Public Functions Documentation
 
-### function ~RenderSystem
-
-```cpp
-~RenderSystem() override =default
-```
-
-
 ### function update
 
 ```cpp
 virtual void update(
     EcsManager & ecs
-) override
+)
 ```
 
 
@@ -56,12 +48,13 @@ virtual void update(
 ### function RenderSystem
 
 ```cpp
-inline explicit RenderSystem(
-    sf::RenderWindow & window
+explicit RenderSystem(
+    sf::RenderWindow & window,
+    const std::string & nameShader
 )
 ```
 
 
 -------------------------------
 
-Updated on 2026-01-16 at 16:50:30 +0000
+Updated on 2026-01-16 at 16:51:27 +0000

@@ -50,4 +50,6 @@ digraph "ecs/src/systems/RenderSystem.hpp"
   Node17 -> Node19 [id="edge26_Node000017_Node000019",color="steelblue1",style="solid",tooltip=" "];
   Node19 [id="Node000019",label="iostream",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node18 [id="edge27_Node000001_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node20 [id="edge28_Node000001_Node000020",color="steelblue1",style="solid",tooltip=" "];
+  Node20 [id="Node000020",label="map",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
 }

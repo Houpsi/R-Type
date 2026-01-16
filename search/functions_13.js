@@ -16,13 +16,12 @@ var searchData=
   ['_7eplayeranimationsystem_13',['~PlayerAnimationSystem',['../classecs_1_1PlayerAnimationSystem.html#a857969370adb49b996e39870db37cc70',1,'ecs::PlayerAnimationSystem']]],
   ['_7eposition_14',['~Position',['../classecs_1_1Position.html#a2254557c2428020c750ed77d557b7f28',1,'ecs::Position']]],
   ['_7equadtree_15',['~QuadTree',['../classecs_1_1QuadTree.html#ae1ac4544cceb23f2d8cc51875a1d0d45',1,'ecs::QuadTree']]],
-  ['_7erendersystem_16',['~RenderSystem',['../classecs_1_1RenderSystem.html#a74b02543f41680e0cfaf766d677cc179',1,'ecs::RenderSystem']]],
-  ['_7eshoot_17',['~Shoot',['../classecs_1_1Shoot.html#a3ceb02d04643a51514f160e39a686425',1,'ecs::Shoot']]],
-  ['_7esound_18',['~Sound',['../classecs_1_1Sound.html#a55e016f647cd5d2c3b7a49412d173187',1,'ecs::Sound']]],
-  ['_7esoundsystem_19',['~SoundSystem',['../classecs_1_1SoundSystem.html#afe41000e736779728f456859289f3610',1,'ecs::SoundSystem']]],
-  ['_7esprite_20',['~Sprite',['../classecs_1_1Sprite.html#a8a17a11edf14ed4278c0feb94644f058',1,'ecs::Sprite']]],
-  ['_7espriteanimationsystem_21',['~SpriteAnimationSystem',['../classecs_1_1SpriteAnimationSystem.html#a19b0c010df6fa01e4530f1c6e2da3207',1,'ecs::SpriteAnimationSystem']]],
-  ['_7esystem_22',['~System',['../classecs_1_1System.html#ab0ae8f1804130e3b8cfa2bbe2b0c5e6b',1,'ecs::System']]],
-  ['_7evelocity_23',['~Velocity',['../classecs_1_1Velocity.html#aabd20659ad36013ad643058a16526716',1,'ecs::Velocity']]],
-  ['_7evelocitysystem_24',['~VelocitySystem',['../classecs_1_1VelocitySystem.html#a4fcd41775603965b5dfdb5faf5781ae1',1,'ecs::VelocitySystem']]]
+  ['_7eshoot_16',['~Shoot',['../classecs_1_1Shoot.html#a3ceb02d04643a51514f160e39a686425',1,'ecs::Shoot']]],
+  ['_7esound_17',['~Sound',['../classecs_1_1Sound.html#a55e016f647cd5d2c3b7a49412d173187',1,'ecs::Sound']]],
+  ['_7esoundsystem_18',['~SoundSystem',['../classecs_1_1SoundSystem.html#afe41000e736779728f456859289f3610',1,'ecs::SoundSystem']]],
+  ['_7esprite_19',['~Sprite',['../classecs_1_1Sprite.html#a8a17a11edf14ed4278c0feb94644f058',1,'ecs::Sprite']]],
+  ['_7espriteanimationsystem_20',['~SpriteAnimationSystem',['../classecs_1_1SpriteAnimationSystem.html#a19b0c010df6fa01e4530f1c6e2da3207',1,'ecs::SpriteAnimationSystem']]],
+  ['_7esystem_21',['~System',['../classecs_1_1System.html#ab0ae8f1804130e3b8cfa2bbe2b0c5e6b',1,'ecs::System']]],
+  ['_7evelocity_22',['~Velocity',['../classecs_1_1Velocity.html#aabd20659ad36013ad643058a16526716',1,'ecs::Velocity']]],
+  ['_7evelocitysystem_23',['~VelocitySystem',['../classecs_1_1VelocitySystem.html#a4fcd41775603965b5dfdb5faf5781ae1',1,'ecs::VelocitySystem']]]
 ];
