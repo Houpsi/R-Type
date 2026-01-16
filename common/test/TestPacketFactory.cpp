@@ -60,7 +60,7 @@ namespace cmn {
 
     TEST(PacketFactoryTest, CreateNewEntityPacket)
     {
-        CustomPacket packet = PacketFactory::createNewEntityPacket(EntityType::Monster, {5.F, 8.F}, 99);
+        CustomPacket packet = PacketFactory::createNewEntityPacket(EntityType::Plane, {5.F, 8.F}, 99);
         auto data = PacketDisassembler::disassemble(packet);
         newEntityData entity{};
 
@@ -70,7 +70,7 @@ namespace cmn {
                 entity = arg;
             }
         }, data.value());
-        EXPECT_EQ(entity.type, static_cast<uint8_t>(EntityType::Monster));
+        EXPECT_EQ(entity.type, static_cast<uint8_t>(EntityType::Plane));
         EXPECT_FLOAT_EQ(entity.posX, 5.F);
         EXPECT_FLOAT_EQ(entity.posY, 8.F);
         EXPECT_EQ(entity.entityId, 99);
