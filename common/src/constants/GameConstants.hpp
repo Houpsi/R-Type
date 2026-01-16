@@ -16,7 +16,7 @@
 
 namespace cmn {
 
-    constexpr int maxPlayers = 4;
+    constexpr int maxPlayers = 2;
 
     constexpr float playerHealth = 100;
     constexpr sf::Vector2f playerSpriteScale = {2.0F, 2.0F};

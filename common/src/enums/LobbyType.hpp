@@ -10,7 +10,7 @@
 #include <cstdint>
 
 namespace cmn {
-    enum class LobbyType: uint8_t {
+    enum LobbyType: uint8_t {
         Solo,
         Lobby,
         Matchmaking

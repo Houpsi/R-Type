@@ -25,6 +25,11 @@ namespace cmn {
         static CustomPacket createNewEntityPacket(EntityType type, std::pair<float, float> positions, uint64_t entityId);
         static CustomPacket createDeleteEntityPacket(uint64_t entityId);
         static CustomPacket createStartGamePacket();
+        static CustomPacket createLeaveLobbyPacket(uint32_t playerId);
+        static CustomPacket createErrorTcpPacket(uint8_t errorId);
+        static CustomPacket createJoinLobbyPacket(uint32_t lobbyId, uint8_t lobbyType, uint32_t lobbyCode);
+        static CustomPacket createSelectModePacket(uint8_t lobbyType, uint32_t playerId);
+        static CustomPacket createRequestJoinLobbyPacket(uint32_t playerId, uint32_t lobbyCode);
 
       private:
         static CustomPacket _putInPacket(BitPacker &packer);

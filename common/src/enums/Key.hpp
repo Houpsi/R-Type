@@ -13,6 +13,10 @@ namespace cmn {
         Left,
         Right,
         Escape,
+        One,
+        Two,
+        Three,
+        Four,
         None,
     };
 

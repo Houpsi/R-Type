@@ -10,7 +10,10 @@
 #include "constants/BitPackingConstants.hpp"
 #include "constants/GameConstants.hpp"
 #include "constants/ProtocolConstants.hpp"
+
+#include <iostream>
 #include <optional>
+#include <ostream>
 
 namespace cmn {
 
@@ -68,6 +71,52 @@ namespace cmn {
         return data;
     }
 
+    packetData PacketDisassembler::_disassembleIntoLeaveLobbyData(BitUnpacker &unpacker)
+    {
+        uint32_t const playerId = unpacker.readUInt32();
+        leaveLobbyData data = {playerId};
+
+        return data;
+    }
+
+    packetData PacketDisassembler::_disassembleIntoErrorTcpData(BitUnpacker &unpacker)
+    {
+        uint8_t const errorId = unpacker.readUInt8();
+        errorTcpData data = {errorId};
+
+        return data;
+    }
+
+    packetData PacketDisassembler::_disassembleIntoJoinLobbyData(BitUnpacker &unpacker)
+    {
+        uint32_t const lobbyId = unpacker.readUInt32();
+        uint8_t const lobbyType = unpacker.readUInt8();
+        uint8_t const lobbyCode = unpacker.readUInt32();
+
+        joinLobbyData data = {lobbyId, lobbyType, lobbyCode};
+
+        return data;
+    }
+
+    packetData PacketDisassembler::_disassembleIntoSelectModeData(BitUnpacker &unpacker)
+    {
+        uint8_t const lobbyType = unpacker.readUInt8();
+        uint32_t const playerId = unpacker.readUInt32();
+        selectModeData data = {lobbyType, playerId};
+
+        return data;
+    }
+
+    packetData PacketDisassembler::_disassembleIntoRequestJoinLobbyData(BitUnpacker &unpacker)
+    {
+        uint32_t const playerId = unpacker.readUInt32();
+        uint32_t const lobbyCode = unpacker.readUInt32();
+        requestJoinLobbyData data = {playerId, lobbyCode};
+
+        return data;
+    }
+
+
     std::optional<packetData> PacketDisassembler::disassemble(CustomPacket &packet)
     {
         std::vector<uint8_t> buffer;
@@ -94,6 +143,16 @@ namespace cmn {
                 return _disassembleIntoDeleteEntityData(unpacker);
             case (startGameProtocolId):
                 return _disassembleIntoStartGameData(unpacker);
+            case (leaveLobbyProtocolId):
+                return _disassembleIntoLeaveLobbyData(unpacker);
+            case (errorTcpProtocolId):
+                return _disassembleIntoErrorTcpData(unpacker);
+            case (joinLobbyProtocolId):
+                return _disassembleIntoJoinLobbyData(unpacker);
+            case (selectModeProtocolId):
+                return _disassembleIntoSelectModeData(unpacker);
+            case (requestJoinLobbyProtocolId):
+                return _disassembleIntoRequestJoinLobbyData(unpacker);
             default:
                 return std::nullopt;
         }

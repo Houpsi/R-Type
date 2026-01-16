@@ -10,6 +10,8 @@
 #include "constants/GameConstants.hpp"
 #include "constants/BitPackingConstants.hpp"
 
+#include <bits/codecvt.h>
+
 namespace cmn {
 
     CustomPacket PacketFactory::_putInPacket(BitPacker &packer)
@@ -88,5 +90,61 @@ namespace cmn {
 
         return _putInPacket(packer);
     }
+
+    CustomPacket PacketFactory::createLeaveLobbyPacket(uint32_t playerId)
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(leaveLobbyProtocolId);
+        packer.writeUInt32(playerId);
+
+        return _putInPacket(packer);
+    }
+
+    CustomPacket PacketFactory::createErrorTcpPacket(uint8_t errorId)
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(errorTcpProtocolId);
+        packer.writeUInt8(errorId);
+
+        return _putInPacket(packer);
+    }
+
+    CustomPacket PacketFactory::createJoinLobbyPacket(uint32_t lobbyId, uint8_t lobbyType, uint32_t lobbyCode)
+
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(joinLobbyProtocolId);
+        packer.writeUInt32(lobbyId);
+        packer.writeUInt8(lobbyType);
+        packer.writeUInt32(lobbyCode);
+
+        return _putInPacket(packer);
+    }
+
+    CustomPacket PacketFactory::createSelectModePacket(uint8_t lobbyType, uint32_t playerId)
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(selectModeProtocolId);
+        packer.writeUInt8(lobbyType);
+        packer.writeUInt32(playerId);
+
+        return _putInPacket(packer);
+    }
+
+    CustomPacket PacketFactory::createRequestJoinLobbyPacket(uint32_t playerId, uint32_t lobbyCode)
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(requestJoinLobbyProtocolId);
+        packer.writeUInt32(playerId);
+        packer.writeUInt32(lobbyCode);
+
+        return _putInPacket(packer);
+    }
+
 
 }// namespace cmn

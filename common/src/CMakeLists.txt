@@ -33,6 +33,11 @@ add_library(r-type_common_lib
         packet_disassembler/PacketDisassembler.hpp
         enums/LobbyType.hpp
         enums/LobbyState.hpp
+        packet_data/join_lobby_data/JoinLobbyData.hpp
+        packet_data/select_mode_data/SelectModeData.hpp
+        packet_data/leave_lobby_data/LeaveLobbyData.hpp
+        packet_data/error_tcp_data/ErrorTcpData.hpp
+        packet_data/request_join_lobby_data/RequestJoinLobbyData.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC
