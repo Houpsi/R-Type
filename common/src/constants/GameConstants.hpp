@@ -20,6 +20,7 @@
 namespace cmn {
 
     constexpr float playerHealth = 100;
+    constexpr uint16_t playerSpeed = 250;
     constexpr sf::Vector2f playerSpriteScale = {2.0F, 2.0F};
     constexpr std::string_view playerSpriteSheet = "./assets/r-typesheet42.gif";
     constexpr uint8_t playerHeight= 34;
@@ -32,6 +33,7 @@ namespace cmn {
 
     constexpr uint8_t monsterHealth = 100;
     constexpr uint8_t monsterDamage = 100;
+    constexpr uint16_t monsterSpeed = 250;
     constexpr sf::Vector2f monsterSpriteScale = {2.0F, 2.0F};
     constexpr std::string_view monsterSpriteSheet = "./assets/r-typesheet5.gif";
     constexpr std::pair<uint8_t, uint8_t> monsterAnimationSize = {33, 24};
@@ -44,6 +46,7 @@ namespace cmn {
 
     constexpr uint8_t monster2Health = 100;
     constexpr sf::Vector2f monster2SpriteScale = {1.0F, 1.0F};
+    constexpr uint16_t monster2Speed = 400;
     constexpr std::string_view monster2SpriteSheet = "./assets/r-typesheet211.gif";
     constexpr std::pair<uint8_t, uint8_t> monster2AnimationSize = {64, 50};
     constexpr uint8_t monster2AnimationOffset = 0;
@@ -75,7 +78,6 @@ namespace cmn {
     constexpr uint16_t boss1SpawnPositionHeight = 250;
 
     constexpr uint16_t playerProjectileSpeed = 400;
-    constexpr uint16_t playerSpeed = 100;
     constexpr int8_t playerProjectileDirection = 1;
     constexpr sf::Vector2f playerProjectileScale = {1.0F, 1.0F};
     constexpr std::string_view playerProjectileSpriteSheet = "./assets/r-typesheet30a.gif";

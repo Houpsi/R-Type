@@ -109,7 +109,7 @@ namespace client {
     void GameRenderer::_checkPlayerInput()
     {
         bool isPressed = false;
-            for (uint8_t i = 0; i < static_cast<uint8_t>(cmn::Keys::None); ++i) {
+        for (uint8_t i = 0; i < static_cast<uint8_t>(cmn::Keys::None); ++i) {
             auto action = static_cast<cmn::Keys>(i);
             if (_inputManager.isActionTriggered(action)) {
                 _sharedData->addUdpPacketToSend(

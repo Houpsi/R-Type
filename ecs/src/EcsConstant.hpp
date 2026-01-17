@@ -11,6 +11,12 @@
 #include <string_view>
 
 namespace ecs {
+
+    constexpr int left = 0;
+    constexpr int right = 1;
+    constexpr int up = 2;
+    constexpr int down = 3;
+
     constexpr int volumeMusic = 100;
     constexpr std::string_view folderSound = "./assets/sound/";
     constexpr std::array<std::string_view, 3> idToSound = {"shoot", "theme", "explosion"};

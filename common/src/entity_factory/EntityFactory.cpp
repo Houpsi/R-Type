@@ -94,14 +94,15 @@ namespace cmn {
                         monsterCollisionWidth * monsterSpriteScale.x,
                         monsterCollisionHeight * monsterSpriteScale.y
                 );
+                entity->addComponent<ecs::Velocity>(monsterSpeed, 0);
             } else if (type == EntityType::Crochet) {
                 entity->addComponent<ecs::Collision>(
                         ecs::TypeCollision::ENEMY,
                         monster2CollisionWidth * monster2SpriteScale.x,
                         monster2CollisionHeight * monster2SpriteScale.y
                 );
+                entity->addComponent<ecs::Velocity>(monster2Speed, 0);
             }
-            entity->addComponent<ecs::Velocity>(250, 0);
             entity->addComponent<ecs::Shoot>(cmn::playerDamage, 3, 0.0f);
         }
     }
