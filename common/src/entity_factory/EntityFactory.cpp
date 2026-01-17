@@ -150,6 +150,7 @@ namespace cmn {
         if (context == Context::CLIENT) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::boss1SpriteSheet)), cmn::boss1SpriteScale);
             entity->addComponent<ecs::Animation>(cmn::boss1AnimationSize, cmn::boss1AnimationOffset, cmn::boss1AnimationNumberFrame);
+            entity->addComponent<ecs::Sound>(4, false);
         } else {
             entity->addComponent<ecs::Health>(hp);
             entity->addComponent<ecs::Collision>(

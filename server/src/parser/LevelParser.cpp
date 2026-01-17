@@ -52,6 +52,7 @@ namespace server {
         const int id = root.lookup("id");
         const std::string name = root.lookup("name");
         const int scrollSpeed = root.lookup("scroll_speed");
+        const float bonusSpawnRate = root.lookup("bonus_spawn_rate");
 
         if (id < 0 || id > maxId) {
             throw LevelParserException("Level ID out of range");
@@ -59,6 +60,7 @@ namespace server {
         _checkIdExists(id);
         newLevel.setLevelId(static_cast<uint8_t>(id));
         newLevel.setNameLevel(name);
+        newLevel.setBonusSpawnRate(bonusSpawnRate);
         if (scrollSpeed <= 0) {
             throw LevelParserException("Scroll Speed out of range");
         }

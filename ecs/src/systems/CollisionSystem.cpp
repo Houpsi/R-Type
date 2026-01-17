@@ -6,7 +6,6 @@
 */
 
 #include "CollisionSystem.hpp"
-#include "components/PowerUp.hpp"
 #include "components/Sound.hpp"
 
 namespace ecs
@@ -83,7 +82,7 @@ namespace ecs
                     } else if (typeA == PLAYER &&
                         typeB == POWER_UP) {
                         entity->addComponent<Sound>(3, false);
-                        entity->addComponent<PowerUp>();
+                        //entity->addComponent<PowerUp>();
                         other->addComponent<Destroy>();
                     }
                 }

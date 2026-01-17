@@ -82,7 +82,7 @@ namespace server {
             if (data.has_value()) {
                 cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
             }
-            _createBonus(powerUpClock, generator);
+            _createBonus(currentLevel, powerUpClock, generator);
             _checkBossDeath(currentLevel, enemyClock);
             _createEnemy(currentLevel, enemyClock, generator);
             _checkSpaceBar();
@@ -369,12 +369,11 @@ namespace server {
     }
 
 
-    void Game::_createBonus(sf::Clock &bonusClock, std::minstd_rand0 &generator)
+    void Game::_createBonus(Level &currentLevel, sf::Clock &bonusClock, std::minstd_rand0 &generator)
      {
          if (bonusClock.getElapsedTime().asSeconds() < _nextBonusSpawnDelay) {
              return;
          }
-         std::cout << "lalala" << std::endl;
          auto randY = generator() % cmn::monsterMaxSpawnPositionHeight;
          auto newBonus = cmn::EntityFactory::createEntity(_ecs,
                              cmn::EntityType::PowerUp,
@@ -392,7 +391,7 @@ namespace server {
          _sharedData->addUdpPacketToSend(bonusData);
 
          bonusClock.restart();
-         _nextBonusSpawnDelay = 10.0f + (generator() % 11);
+         _nextBonusSpawnDelay = currentLevel.getBonusSpawnRate() + (generator() % (static_cast<int>(currentLevel.getBonusSpawnRate()) + 1));
      }
 
 }
