@@ -6,6 +6,7 @@
 */
 
 #include "HealthSystem.hpp"
+#include "EcsConstant.hpp"
 #include "components/Collision.hpp"
 #include "components/Score.hpp"
 
@@ -24,7 +25,7 @@ namespace ecs
 					for (auto& scoreEntity : scoreEntities) {
 						auto score = scoreEntity->getComponent<ecs::Score>();
 						if (!score) continue;
-						score->addToScore(100);
+						score->addToScore(ecs::scoreKillMonster);
 					}
 				}
 				entity->addComponent<ecs::Destroy>();

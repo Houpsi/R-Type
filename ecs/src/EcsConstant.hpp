@@ -18,6 +18,8 @@ namespace ecs {
     static constexpr int MAX_ENTITIES = 6;
     static constexpr int MAX_DEPTH = 6;
 
+    static constexpr int scoreKillMonster = 100;
+
     constexpr uint16_t windowWidth = 1920;
     constexpr uint16_t windowHeight = 1080;
 }
