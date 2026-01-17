@@ -38,6 +38,7 @@ add_library(r-type_common_lib
         entity_factory/EntityFactory.cpp
         entity_factory/EntityFactory.hpp
         entity_factory/EntityFactory.cpp
+        client_network_state/ClientNetworkState.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC
