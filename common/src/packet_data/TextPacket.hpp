@@ -10,7 +10,7 @@
 
 namespace cmn
 {
-	using textData = struct textPacket {
+	using textData = struct TextPacket {
 		uint32_t entityId;
 		uint32_t score;
 	};

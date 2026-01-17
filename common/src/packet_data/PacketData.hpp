@@ -15,7 +15,7 @@
 #include "PositionData.hpp"
 #include "SoundData.hpp"
 #include "StartGameData.hpp"
-#include "textPacket.hpp"
+#include "TextPacket.hpp"
 #include <variant>
 
 namespace cmn {

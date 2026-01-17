@@ -151,13 +151,13 @@ namespace cmn {
         return _putInPacket(packer);
     }
 
-    CustomPacket PacketFactory::_createTextPacket(uint32_t textId, int score)
+    CustomPacket PacketFactory::_createTextPacket(textData data)
     {
         BitPacker packer;
 
         packer.writeUInt16(textProtocolId);
-        packer.writeUInt32(textId);
-        packer.writeUInt32(score);
+        packer.writeUInt32(data.entityId);
+        packer.writeUInt32(data.score);
 
         return _putInPacket(packer);
     }
@@ -192,8 +192,8 @@ namespace cmn {
                     soundData const &soundData = arg;
                     return _createSoundPacket(soundData);
                 } else if constexpr (std::is_same_v<T, textData>) {
-                    textData const &data = arg;
-                    return _createTextPacket(data.entityId, data.score);
+                    textData const &textData = arg;
+                    return _createTextPacket(textData);
                 }
             }, data);
     }

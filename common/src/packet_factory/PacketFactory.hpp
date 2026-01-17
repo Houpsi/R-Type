@@ -35,7 +35,7 @@ namespace cmn {
             std::unordered_map<uint32_t, cmn::reliablePacket> &reliablePackets);
         static CustomPacket _createStartGamePacket();
         static CustomPacket _createAcknowledgePacket(acknowledgeData data);
-        static CustomPacket _createTextPacket(uint32_t playerId, int score);
+        static CustomPacket _createTextPacket(textData data);
         static CustomPacket _putInPacket(BitPacker &packer);
         static uint32_t _udpSequenceNbr;
         static uint32_t _tcpSequenceNbr;

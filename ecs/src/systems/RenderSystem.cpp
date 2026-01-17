@@ -76,7 +76,7 @@ namespace ecs {
     void RenderSystem::update(EcsManager &ecs)
     {
         _window.clear(sf::Color::Black);
-        const auto entities = ecs.getEntitiesWithComponent<Sprite>();
+        const auto entities = ecs.getEntities();
 
         sf::RenderStates states;
         if (_currentFilter != AccessibilityFilter::None) {

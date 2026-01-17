@@ -110,7 +110,6 @@ namespace server {
              auto score = entity->getComponent<ecs::Score>();
 
              if (!score) continue;
-             // std::cout << "lentity id: " << std::to_string(entity->getId()) << std::end;
              uint32_t const castScore = static_cast<uint32_t>(score->getScore());
              cmn::textData data = {cmn::idEntityForScore, castScore};
              _sharedData->addUdpPacketToSend(data);
@@ -317,5 +316,4 @@ namespace server {
         );
         scoreEntity->addComponent<ecs::Score>();
     }
-
 }

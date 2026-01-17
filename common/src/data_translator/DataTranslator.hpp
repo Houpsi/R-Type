@@ -8,7 +8,7 @@
 #ifndef R_TYPE_DATATRANSLATOR_HPP
 #define R_TYPE_DATATRANSLATOR_HPP
 
-#include "../packet_data/textPacket.hpp"
+#include "../packet_data/TextPacket.hpp"
 #include "EcsManager.hpp"
 #include "packet_data/PacketData.hpp"
 #include "packet_data/SoundData.hpp"
