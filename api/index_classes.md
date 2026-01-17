@@ -46,6 +46,7 @@ title: Classes
     * **class [Text](Classes/classecs_1_1Text.md)** 
     * **class [Velocity](Classes/classecs_1_1Velocity.md)** 
     * **class [VelocitySystem](Classes/classecs_1_1VelocitySystem.md)** 
+    * **namespace [dir](Namespaces/namespaceecs_1_1dir.md)** 
 * **namespace [server](Namespaces/namespaceserver.md)** 
     * **class [Game](Classes/classserver_1_1Game.md)** 
     * **class [Level](Classes/classserver_1_1Level.md)** 
@@ -62,4 +63,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2026-01-17 at 21:25:42 +0000
+Updated on 2026-01-17 at 23:36:19 +0000

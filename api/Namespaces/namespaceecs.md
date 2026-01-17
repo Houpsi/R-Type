@@ -7,6 +7,12 @@ title: ecs
 
 
 
+## Namespaces
+
+| Name           |
+| -------------- |
+| **[ecs::dir](Namespaces/namespaceecs_1_1dir.md)**  |
+
 ## Classes
 
 |                | Name           |
@@ -80,16 +86,12 @@ title: ecs
 | constexpr uint16_t | **[windowWidth](Namespaces/namespaceecs.md#variable-windowwidth)**  |
 | constexpr uint16_t | **[windowHeight](Namespaces/namespaceecs.md#variable-windowheight)**  |
 | constexpr int | **[volumeMusic](Namespaces/namespaceecs.md#variable-volumemusic)**  |
-| constexpr int | **[up](Namespaces/namespaceecs.md#variable-up)**  |
 | constexpr int | **[scoreKillMonster](Namespaces/namespaceecs.md#variable-scorekillmonster)**  |
-| constexpr int | **[right](Namespaces/namespaceecs.md#variable-right)**  |
 | const std::string | **[protanopiaShader](Namespaces/namespaceecs.md#variable-protanopiashader)**  |
-| constexpr int | **[left](Namespaces/namespaceecs.md#variable-left)**  |
 | const std::string | **[invertShader](Namespaces/namespaceecs.md#variable-invertshader)**  |
 | constexpr std::array< std::string_view, 3 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
 | const std::string | **[highContrastShader](Namespaces/namespaceecs.md#variable-highcontrastshader)**  |
 | constexpr std::string_view | **[folderSound](Namespaces/namespaceecs.md#variable-foldersound)**  |
-| constexpr int | **[down](Namespaces/namespaceecs.md#variable-down)**  |
 | constexpr int | **[MAX_ENTITIES](Namespaces/namespaceecs.md#variable-max-entities)**  |
 | constexpr int | **[MAX_DEPTH](Namespaces/namespaceecs.md#variable-max-depth)**  |
 
@@ -264,24 +266,10 @@ constexpr int volumeMusic = 100;
 ```
 
 
-### variable up
-
-```cpp
-constexpr int up = 2;
-```
-
-
 ### variable scoreKillMonster
 
 ```cpp
 static constexpr int scoreKillMonster = 100;
-```
-
-
-### variable right
-
-```cpp
-constexpr int right = 1;
 ```
 
 
@@ -301,13 +289,6 @@ const std::string protanopiaShader = R"(
         gl_FragColor = vec4(color, pixel.a);
     }
 )";
-```
-
-
-### variable left
-
-```cpp
-constexpr int left = 0;
 ```
 
 
@@ -353,13 +334,6 @@ constexpr std::string_view folderSound = "./assets/sound/";
 ```
 
 
-### variable down
-
-```cpp
-constexpr int down = 3;
-```
-
-
 ### variable MAX_ENTITIES
 
 ```cpp
@@ -379,4 +353,4 @@ static constexpr int MAX_DEPTH = 6;
 
 -------------------------------
 
-Updated on 2026-01-17 at 21:25:42 +0000
+Updated on 2026-01-17 at 23:36:19 +0000

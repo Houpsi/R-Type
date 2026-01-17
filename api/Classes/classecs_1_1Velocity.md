@@ -20,10 +20,10 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 | -------------- | -------------- |
 | | **[~Velocity](Classes/classecs_1_1Velocity.md#function-~velocity)**() override =default |
 | void | **[setVelocity](Classes/classecs_1_1Velocity.md#function-setvelocity)**(float velocity) |
-| void | **[setDirection](Classes/classecs_1_1Velocity.md#function-setdirection)**(int direction) |
+| void | **[setDirection](Classes/classecs_1_1Velocity.md#function-setdirection)**(std::pair< float, float > direction) |
 | float | **[getVelocity](Classes/classecs_1_1Velocity.md#function-getvelocity)**() const |
-| int | **[getDirection](Classes/classecs_1_1Velocity.md#function-getdirection)**() const |
-| | **[Velocity](Classes/classecs_1_1Velocity.md#function-velocity)**(float velocity, int direction) |
+| std::pair< float, float > | **[getDirection](Classes/classecs_1_1Velocity.md#function-getdirection)**() const |
+| | **[Velocity](Classes/classecs_1_1Velocity.md#function-velocity)**(float velocity, std::pair< float, float > direction) |
 
 ## Additional inherited members
 
@@ -66,7 +66,7 @@ void setVelocity(
 
 ```cpp
 void setDirection(
-    int direction
+    std::pair< float, float > direction
 )
 ```
 
@@ -81,7 +81,7 @@ float getVelocity() const
 ### function getDirection
 
 ```cpp
-int getDirection() const
+std::pair< float, float > getDirection() const
 ```
 
 
@@ -90,11 +90,11 @@ int getDirection() const
 ```cpp
 inline explicit Velocity(
     float velocity,
-    int direction
+    std::pair< float, float > direction
 )
 ```
 
 
 -------------------------------
 
-Updated on 2026-01-17 at 21:25:42 +0000
+Updated on 2026-01-17 at 23:36:19 +0000

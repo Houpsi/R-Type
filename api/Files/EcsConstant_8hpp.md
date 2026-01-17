@@ -11,6 +11,7 @@ title: ecs/src/EcsConstant.hpp
 
 | Name           |
 | -------------- |
+| **[ecs::dir](Namespaces/namespaceecs_1_1dir.md)**  |
 | **[ecs](Namespaces/namespaceecs.md)**  |
 
 
@@ -20,4 +21,4 @@ title: ecs/src/EcsConstant.hpp
 
 -------------------------------
 
-Updated on 2026-01-17 at 21:25:42 +0000
+Updated on 2026-01-17 at 23:36:19 +0000

@@ -13,7 +13,7 @@ var searchData=
   ['setcurrentwave_10',['setCurrentWave',['../classserver_1_1Level.html#ae220051cc4c181cdaa4e78da502668f1',1,'server::Level']]],
   ['setdamage_11',['setDamage',['../classecs_1_1Shoot.html#a3f29ac3157cbbb34fadcbd6c0d051aa0',1,'ecs::Shoot']]],
   ['setdeltatime_12',['setDeltaTime',['../classecs_1_1EcsManager.html#ad3c55f9e3eb750529c9d57a5d40cfa58',1,'ecs::EcsManager']]],
-  ['setdirection_13',['setDirection',['../classecs_1_1Velocity.html#ad00b7bf58222c6734639d0b1cf282958',1,'ecs::Velocity']]],
+  ['setdirection_13',['setDirection',['../classecs_1_1Velocity.html#add7a7ebc32dc3c36eaf23223726b8823',1,'ecs::Velocity']]],
   ['setdown_14',['setDown',['../classecs_1_1InputPlayer.html#a11e419c4fe114ddfd37419a539dc217c',1,'ecs::InputPlayer']]],
   ['setescape_15',['setEscape',['../classecs_1_1InputPlayer.html#a0b8feb6de2bc195771d06ce4887fb467',1,'ecs::InputPlayer']]],
   ['sethealth_16',['setHealth',['../classecs_1_1Health.html#ab8c22eb64bbce80adb8338bfbbc4c893',1,'ecs::Health']]],

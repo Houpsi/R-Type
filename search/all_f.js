@@ -7,6 +7,6 @@ var searchData=
   ['resourcemanager_4',['resourcemanager',['../classecs_1_1ResourceManager.html',1,'ecs::ResourceManager'],['../classecs_1_1ResourceManager.html#aa79f696d33849ba5562955cdd07dac47',1,'ecs::ResourceManager::ResourceManager()']]],
   ['resourcemanager_2ecpp_5',['ResourceManager.cpp',['../ResourceManager_8cpp.html',1,'']]],
   ['resourcemanager_2ehpp_6',['ResourceManager.hpp',['../ResourceManager_8hpp.html',1,'']]],
-  ['right_7',['right',['../namespaceecs.html#a777e2a13d77aeaf776a5888a32d29140',1,'ecs']]],
+  ['right_7',['right',['../namespaceecs_1_1dir.html#acef4afc3ebda52617da903d5ac444e63',1,'ecs::dir']]],
   ['run_8',['run',['../classserver_1_1Game.html#ab56d9f3e42b375e1e0cf9bcb55e86522',1,'server::Game::run()'],['../classserver_1_1Server.html#a82b4db92e8bc6e7287b2fd7b1427e21f',1,'server::Server::run()']]]
 ];

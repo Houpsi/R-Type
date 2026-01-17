@@ -13,7 +13,7 @@ var searchData=
   ['getcurrentwaveid_10',['getCurrentWaveId',['../classserver_1_1Level.html#acc89192bdac3d07591677da1d09bd246',1,'server::Level']]],
   ['getdamage_11',['getDamage',['../classecs_1_1Shoot.html#a21a7a4db0a29d95c08afe604d2d3ce4b',1,'ecs::Shoot']]],
   ['getdeltatime_12',['getDeltaTime',['../classecs_1_1EcsManager.html#acc9a7d12b587598a1e099c2700d61636',1,'ecs::EcsManager']]],
-  ['getdirection_13',['getDirection',['../classecs_1_1Velocity.html#af46b35bdb0c40fc70204851b6c3a79e2',1,'ecs::Velocity']]],
+  ['getdirection_13',['getDirection',['../classecs_1_1Velocity.html#ac06808debd56289b22513df73d5f7e9b',1,'ecs::Velocity']]],
   ['getdown_14',['getDown',['../classecs_1_1InputPlayer.html#a05c4bbc23088af9bd55754f85802ee37',1,'ecs::InputPlayer']]],
   ['getenemyspawnrate_15',['getEnemySpawnRate',['../classserver_1_1Level.html#aa638ced9d5d35a996557747ac118bfeb',1,'server::Level']]],
   ['getentities_16',['getentities',['../classecs_1_1EcsManager.html#a07a7925eaa065a35249b1c6ae2adf4e6',1,'ecs::EcsManager::getEntities()'],['../classecs_1_1QuadTree.html#add648c9796b8108f8aec3743ae5832ca',1,'ecs::QuadTree::getEntities()']]],

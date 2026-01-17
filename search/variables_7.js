@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['right_0',['right',['../namespaceecs.html#a777e2a13d77aeaf776a5888a32d29140',1,'ecs']]]
+  ['protanopiashader_0',['protanopiaShader',['../namespaceecs.html#a9154e6a2f62e403336b1d820718bf519',1,'ecs']]]
 ];

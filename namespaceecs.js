@@ -1,5 +1,12 @@
 var namespaceecs =
 [
+    [ "dir", "namespaceecs_1_1dir.html", [
+      [ "down", "namespaceecs_1_1dir.html#a30713575381f37cc60fde9b5cf540d2c", null ],
+      [ "left", "namespaceecs_1_1dir.html#a607f05b657c18976d16a7cd2310bced2", null ],
+      [ "neutral", "namespaceecs_1_1dir.html#a3ec81dd8023e9460bd55e1a7b8156283", null ],
+      [ "right", "namespaceecs_1_1dir.html#acef4afc3ebda52617da903d5ac444e63", null ],
+      [ "up", "namespaceecs_1_1dir.html#a072fbfe9a2e32cdc094239839fdfe818", null ]
+    ] ],
     [ "AABB", "classecs_1_1AABB.html", "classecs_1_1AABB" ],
     [ "Animation", "classecs_1_1Animation.html", "classecs_1_1Animation" ],
     [ "Background", "classecs_1_1Background.html", "classecs_1_1Background" ],
@@ -62,18 +69,14 @@ var namespaceecs =
     [ "TEST", "namespaceecs.html#a631cd7ddaed82be770d98ad03a1a5bca", null ],
     [ "TEST", "namespaceecs.html#a0a16bfcb7ac2ecb53fd6979b4282950c", null ],
     [ "TEST", "namespaceecs.html#ad4997ede705c6001fc3e35fd035980a0", null ],
-    [ "down", "namespaceecs.html#ae293f4db7b08edee6aed393d36ce386d", null ],
     [ "folderSound", "namespaceecs.html#a1b57c2380fa3729ef2b1840b37b213e3", null ],
     [ "highContrastShader", "namespaceecs.html#ae439b378537d9e351f383e3f70c6cd58", null ],
     [ "idToSound", "namespaceecs.html#aa8796a8ab89583326fca41efab10136b", null ],
     [ "invertShader", "namespaceecs.html#a1e4284d107c2d84bcbc84b9fad729482", null ],
-    [ "left", "namespaceecs.html#ad9255d52a9845f561f4a9d4c5a7e8e24", null ],
     [ "MAX_DEPTH", "namespaceecs.html#a0505af24dab235fc3b06a36f76518682", null ],
     [ "MAX_ENTITIES", "namespaceecs.html#a0b10355f6a3934015d874d3207ee0669", null ],
     [ "protanopiaShader", "namespaceecs.html#a9154e6a2f62e403336b1d820718bf519", null ],
-    [ "right", "namespaceecs.html#a777e2a13d77aeaf776a5888a32d29140", null ],
     [ "scoreKillMonster", "namespaceecs.html#a9eae524de5e1b5241a65e7d8cec9d116", null ],
-    [ "up", "namespaceecs.html#ad3a047669d93e87c8fa0327f83d91bde", null ],
     [ "volumeMusic", "namespaceecs.html#a5d022ba3aaad087186a14614dea11848", null ],
     [ "windowHeight", "namespaceecs.html#a27edd8b07d9449a82115ae47ffac1eb5", null ],
     [ "windowWidth", "namespaceecs.html#a20d28d4913b2bdf576f2abef59d02376", null ]
