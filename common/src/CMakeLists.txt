@@ -3,7 +3,6 @@ add_library(r-type_common_lib
         shared_data/SharedData.hpp
         packet_data/InputData.hpp
         enums/Key.hpp
-        enums/KeyState.hpp
         custom_packet/CustomPacket.cpp
         custom_packet/CustomPacket.hpp
         parser/AParser.cpp
@@ -38,6 +37,7 @@ add_library(r-type_common_lib
         entity_factory/EntityFactory.cpp
         entity_factory/EntityFactory.hpp
         entity_factory/EntityFactory.cpp
+        client_network_state/ClientNetworkState.hpp
 )
 
 target_include_directories(r-type_common_lib PUBLIC

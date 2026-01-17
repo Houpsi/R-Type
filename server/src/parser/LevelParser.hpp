@@ -25,20 +25,20 @@ namespace server {
                 private:
                     std::string message;
                 public:
-                LevelParserException(const char* msg) : message(msg) {}
+                explicit LevelParserException(const char* msg) : message(msg) {}
 
-                [[nodiscard]] const char* what() const noexcept {
+                [[nodiscard]] const char* what() const noexcept override {
                     return message.c_str();
                 }
             };
         private:
             void _parsePrerequisites(const libconfig::Setting& root, Level &newLevel);
-            void _parseWaves(const libconfig::Setting& root, Level &newLevel);
-            void _parseBoss(const libconfig::Setting& root, Level &newLevel);
+            static void _parseWaves(const libconfig::Setting& root, Level &newLevel);
+            static void _parseBoss(const libconfig::Setting& root, Level &newLevel);
             void _checkIdExists(const int id);
-            void _isValidEnemyType(const std::string& type);
-            void _isValidBossType(const std::string& type);
-            cmn::EntityType _entityTypeFromString(const std::string& type);
+            static void _isValidEnemyType(const std::string& type);
+            static void _isValidBossType(const std::string& type);
+            static cmn::EntityType _entityTypeFromString(const std::string& type);
             std::unordered_set<int> _idAlreadyExists;
     };
 }

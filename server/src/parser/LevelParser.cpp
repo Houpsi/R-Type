@@ -12,11 +12,6 @@
 
 namespace server {
 
-    std::map<std::string, cmn::EntityType> keyEnemyToEnum = {
-        { "plane_enemy" , cmn::EntityType::Plane },
-        { "crochet_enemy", cmn::EntityType::Crochet}
-    };
-
     bool LevelParser::createLevel(const std::string &fileConfigLevel, Level &baseLevel)
     {
         Level newLevel;
@@ -31,16 +26,15 @@ namespace server {
             baseLevel = newLevel;
             return true;
         } catch(const libconfig::ParseException &pex) {
-            std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine() << " - " << pex.getError() << std::endl;
+            std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine() << " - " << pex.getError() << '\n';
             return false;
         } catch(const libconfig::FileIOException &fioex) {
-            std::cerr << "I/O error while reading file." << std::endl;
+            std::cerr << "I/O error while reading file." << '\n';
             return false;
         } catch(const LevelParserException &e) {
-            std::cerr << e.what() << std::endl;
+            std::cerr << e.what() << '\n';
             return false;
         }
-        return false;
     }
 
     void LevelParser::_checkIdExists(const int id)
@@ -53,11 +47,13 @@ namespace server {
 
     void LevelParser::_parsePrerequisites(const libconfig::Setting &root, Level &newLevel)
     {
+        constexpr int maxId = 255;
+
         const int id = root.lookup("id");
         const std::string name = root.lookup("name");
         const int scrollSpeed = root.lookup("scroll_speed");
 
-        if (id < 0 || id > 255) {
+        if (id < 0 || id > maxId) {
             throw LevelParserException("Level ID out of range");
         }
         _checkIdExists(id);
@@ -93,11 +89,11 @@ namespace server {
                 tmpEnemy newEnemy;
                 const libconfig::Setting& enemySetting = enemiesSetting[j];
                 const std::string type = enemySetting.lookup("type");
-                const int countEnemy = enemySetting.lookup("count");
-                if (countEnemy <= 0) {
+                const float countEnemy = enemySetting.lookup("count");
+                if (countEnemy <= 0.0) {
                     throw LevelParserException("Number of Enemy out of range");
                 }
-                newEnemy.spawnRate = static_cast<uint8_t>(countEnemy);
+                newEnemy.spawnRate = countEnemy;
                 _isValidEnemyType(type);
                 newEnemy.type = _entityTypeFromString(type);
                 enemies.push_back(newEnemy);
@@ -112,6 +108,11 @@ namespace server {
 
     cmn::EntityType LevelParser::_entityTypeFromString(const std::string &type)
     {
+        std::map<std::string, cmn::EntityType> keyEnemyToEnum = {
+            { "plane_enemy" , cmn::EntityType::Plane },
+            { "crochet_enemy", cmn::EntityType::Crochet}
+        };
+
         auto it = keyEnemyToEnum.find(type);
         if (it != keyEnemyToEnum.end()) {
             return it->second;
@@ -151,8 +152,9 @@ namespace server {
         _isValidBossType(type);
         newLevel.setIsBossPresent(true);
 
-        if (hp <= 0)
+        if (hp <= 0) {
             throw LevelParserException("Health of boss out of range");
+        }
         newLevel.setBoss(type, static_cast<uint32_t>(hp));
     }
 }// namespace server

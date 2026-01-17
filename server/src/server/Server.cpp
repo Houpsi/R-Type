@@ -12,8 +12,8 @@
 #include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_factory/PacketFactory.hpp"
 #include "packet_header/PacketHeader.hpp"
-#include <iostream>
 #include <thread>
+#include <utility>
 
 namespace server {
 
@@ -131,6 +131,10 @@ namespace server {
         }
         _socketSelector.add(*client);
         _sharedData->addPlayer(static_cast<int>(idPlayer), client->getRemotePort(), client->getRemoteAddress().value());
+        auto pair = std::make_pair(client->getRemotePort(), client->getRemoteAddress().value());
+        _playerList.emplace(pair, idPlayer);
+        cmn::clientNetworkState const clientNetworkState;
+        _clientStates[idPlayer] = clientNetworkState;
         cmn::connectionData data = {idPlayer};
         cmn::CustomPacket const packet = cmn::PacketFactory::createPacket(data, _reliablePackets);
         sendTcp(packet, *client);
@@ -164,15 +168,50 @@ namespace server {
         }
     }
 
+    bool Server::_shouldProcessPacket(const cmn::packetHeader& header, cmn::clientNetworkState state) {
+        uint32_t const incomingSeq = header.sequenceNbr;
 
-    void Server::_handleUdpReception(cmn::packetHeader header, cmn::packetData data)
+        if (state.processedSequences.contains(incomingSeq)) {
+            return false;
+        }
+
+        if ((int32_t)(incomingSeq - state.lastProcessedSequence) <= 0) {
+            return false;
+        }
+
+        state.lastProcessedSequence = incomingSeq;
+        state.processedSequences.insert(incomingSeq);
+
+        if (state.processedSequences.size() > cmn::maxSequences) {
+            for (auto it = state.processedSequences.begin(); it != state.processedSequences.end();) {
+                if (std::cmp_less((*it - state.lastProcessedSequence), cmn::maxSequenceDiff)) {
+                    it = state.processedSequences.erase(it);
+                } else {
+                    ++it;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    void Server::_handleUdpReception(cmn::packetHeader header, cmn::packetData data, sf::IpAddress ip, uint16_t port)
     {
+        auto pair = std::make_pair(port, ip);
+        uint32_t const clientId = _playerList[pair];
+
+        if (!_shouldProcessPacket(header, _clientStates[clientId])) {
+            return;
+        }
+
         if (header.protocolId == cmn::acknowledgeProtocolId) {
             cmn::acknowledgeData const acknowledgeData = std::get<cmn::acknowledgeData>(data);
             uint32_t const sequenceNbr = acknowledgeData.sequenceNbr;
             _reliablePackets.erase(sequenceNbr);
             return;
         }
+
         _sharedData->addUdpReceivedPacket(data);
         _resendTimedOutPackets();
     }
@@ -181,7 +220,7 @@ namespace server {
     {
         _socketSelector.add(_listener);
 
-        _tcpThread = std::jthread{[this]{ _handleTcp(); }};
+        std::jthread const tcpThread = std::jthread{[this]{ _handleTcp(); }};
 
         std::optional<sf::IpAddress> sender;
         unsigned short port = 0;
@@ -205,7 +244,7 @@ namespace server {
             }
 
             auto data = cmn::PacketDisassembler::disassemble(packet);
-            _handleUdpReception(data.first, data.second);
+            _handleUdpReception(data.first, data.second, sender.value(), port);
         }
     }
 
