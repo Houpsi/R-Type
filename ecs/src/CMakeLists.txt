@@ -36,8 +36,6 @@ add_library(r-type_ecs_lib
         components/Sprite.hpp
         components/Enemy.cpp
         components/Enemy.hpp
-        systems/ShootSystem.cpp
-        systems/ShootSystem.hpp
         systems/ScoreTextSystem.cpp
         systems/ScoreTextSystem.hpp
         components/Text.cpp

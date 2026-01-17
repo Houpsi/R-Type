@@ -23,7 +23,6 @@
 #include "systems/HealthSystem.hpp"
 #include "systems/MovementSystem.hpp"
 #include "systems/ScoreTextSystem.hpp"
-#include "systems/ShootSystem.hpp"
 #include "systems/VelocitySystem.hpp"
 #include <algorithm>
 #include <random>
