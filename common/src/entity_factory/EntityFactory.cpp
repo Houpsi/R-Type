@@ -74,6 +74,7 @@ namespace cmn {
             entity->addComponent<ecs::InputPlayer>();
             entity->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
             entity->addComponent<ecs::Shoot>(cmn::playerDamage, cmn::playerCoolDown);
+            entity->addComponent<ecs::Velocity>(playerSpeed, std::make_pair(ecs::dir::neutral, ecs::dir::neutral));
         }
     }
 
@@ -95,7 +96,7 @@ namespace cmn {
                         monsterCollisionWidth * monsterSpriteScale.x,
                         monsterCollisionHeight * monsterSpriteScale.y
                 );
-                entity->addComponent<ecs::Velocity>(monsterSpeed, ecs::left);
+                entity->addComponent<ecs::Velocity>(monsterSpeed, std::make_pair(ecs::dir::left, ecs::dir::neutral));
                 entity->addComponent<ecs::Shoot>(cmn::monsterDamage, monsterShootCooldown, 0.0f);
             } else if (type == EntityType::Crochet) {
                 entity->addComponent<ecs::Collision>(
@@ -103,14 +104,14 @@ namespace cmn {
                         monster2CollisionWidth * monster2SpriteScale.x,
                         monster2CollisionHeight * monster2SpriteScale.y
                 );
-                entity->addComponent<ecs::Velocity>(monster2Speed, ecs::left);
+                entity->addComponent<ecs::Velocity>(monster2Speed, std::make_pair(ecs::dir::left, ecs::dir::neutral));
                 entity->addComponent<ecs::Shoot>(cmn::monsterDamage, monster2ShootCooldown, 0.0f);
             }
         }
     }
 
     void EntityFactory::_initProjectile(ecs::EcsManager &ecs,std::shared_ptr<ecs::Entity> entity, Context context) {
-        entity->addComponent<ecs::Velocity>(cmn::playerProjectileSpeed, cmn::playerProjectileDirection);
+        entity->addComponent<ecs::Velocity>(cmn::playerProjectileSpeed, std::make_pair(ecs::dir::right, ecs::dir::neutral));
 
         if (context == Context::CLIENT) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::playerProjectileSpriteSheet)), cmn::playerProjectileScale);
@@ -127,7 +128,7 @@ namespace cmn {
     }
 
     void EntityFactory::_initMonsterProjectile(ecs::EcsManager &ecs,std::shared_ptr<ecs::Entity> entity, Context context) {
-        entity->addComponent<ecs::Velocity>(cmn::monsterProjectileSpeed, cmn::monsterProjectileDirection);
+        entity->addComponent<ecs::Velocity>(cmn::monsterProjectileSpeed, std::make_pair(ecs::dir::left, ecs::dir::neutral));
 
         if (context == Context::CLIENT) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::monsterProjectileSpriteSheet)), cmn::monsterProjectileScale);
@@ -175,7 +176,7 @@ namespace cmn {
             texturePath = static_cast<std::string>(pathBackgroundPlanets);
             bgSize = sizePlanets;
         }
-        entity->addComponent<ecs::Velocity>(velX, velY);
+        entity->addComponent<ecs::Velocity>(velX, std::make_pair(ecs::dir::left, ecs::dir::neutral));
         entity->addComponent<ecs::Background>(bgSize);
 
         if (context == Context::CLIENT) {
