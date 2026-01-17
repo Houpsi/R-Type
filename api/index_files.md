@@ -65,8 +65,6 @@ title: Files
             * **file [ecs/src/systems/PlayerAnimationSystem.hpp](Files/PlayerAnimationSystem_8hpp.md#file-playeranimationsystem.hpp)** 
             * **file [ecs/src/systems/RenderSystem.cpp](Files/RenderSystem_8cpp.md#file-rendersystem.cpp)** 
             * **file [ecs/src/systems/RenderSystem.hpp](Files/RenderSystem_8hpp.md#file-rendersystem.hpp)** 
-            * **file [ecs/src/systems/ShootSystem.cpp](Files/ShootSystem_8cpp.md#file-shootsystem.cpp)** 
-            * **file [ecs/src/systems/ShootSystem.hpp](Files/ShootSystem_8hpp.md#file-shootsystem.hpp)** 
             * **file [ecs/src/systems/SoundSystem.cpp](Files/SoundSystem_8cpp.md#file-soundsystem.cpp)** 
             * **file [ecs/src/systems/SoundSystem.hpp](Files/SoundSystem_8hpp.md#file-soundsystem.hpp)** 
             * **file [ecs/src/systems/SpriteAnimationSystem.cpp](Files/SpriteAnimationSystem_8cpp.md#file-spriteanimationsystem.cpp)** 
@@ -112,4 +110,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2026-01-17 at 16:36:40 +0000
+Updated on 2026-01-17 at 17:45:57 +0000

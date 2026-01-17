@@ -19,7 +19,6 @@ title: ecs
 | class | **[ecs::SoundSystem](Classes/classecs_1_1SoundSystem.md)**  |
 | class | **[ecs::SoundManager](Classes/classecs_1_1SoundManager.md)**  |
 | class | **[ecs::Sound](Classes/classecs_1_1Sound.md)**  |
-| class | **[ecs::ShootSystem](Classes/classecs_1_1ShootSystem.md)**  |
 | class | **[ecs::Shoot](Classes/classecs_1_1Shoot.md)**  |
 | class | **[ecs::ResourceManager](Classes/classecs_1_1ResourceManager.md)**  |
 | class | **[ecs::RenderSystem](Classes/classecs_1_1RenderSystem.md)**  |
@@ -78,11 +77,15 @@ title: ecs
 | constexpr uint16_t | **[windowWidth](Namespaces/namespaceecs.md#variable-windowwidth)**  |
 | constexpr uint16_t | **[windowHeight](Namespaces/namespaceecs.md#variable-windowheight)**  |
 | constexpr int | **[volumeMusic](Namespaces/namespaceecs.md#variable-volumemusic)**  |
+| constexpr int | **[up](Namespaces/namespaceecs.md#variable-up)**  |
+| constexpr int | **[right](Namespaces/namespaceecs.md#variable-right)**  |
 | const std::string | **[protanopiaShader](Namespaces/namespaceecs.md#variable-protanopiashader)**  |
+| constexpr int | **[left](Namespaces/namespaceecs.md#variable-left)**  |
 | const std::string | **[invertShader](Namespaces/namespaceecs.md#variable-invertshader)**  |
 | constexpr std::array< std::string_view, 3 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
 | const std::string | **[highContrastShader](Namespaces/namespaceecs.md#variable-highcontrastshader)**  |
 | constexpr std::string_view | **[folderSound](Namespaces/namespaceecs.md#variable-foldersound)**  |
+| constexpr int | **[down](Namespaces/namespaceecs.md#variable-down)**  |
 | constexpr int | **[MAX_ENTITIES](Namespaces/namespaceecs.md#variable-max-entities)**  |
 | constexpr int | **[MAX_DEPTH](Namespaces/namespaceecs.md#variable-max-depth)**  |
 
@@ -257,6 +260,20 @@ constexpr int volumeMusic = 100;
 ```
 
 
+### variable up
+
+```cpp
+constexpr int up = 2;
+```
+
+
+### variable right
+
+```cpp
+constexpr int right = 1;
+```
+
+
 ### variable protanopiaShader
 
 ```cpp
@@ -273,6 +290,13 @@ const std::string protanopiaShader = R"(
         gl_FragColor = vec4(color, pixel.a);
     }
 )";
+```
+
+
+### variable left
+
+```cpp
+constexpr int left = 0;
 ```
 
 
@@ -318,6 +342,13 @@ constexpr std::string_view folderSound = "./assets/sound/";
 ```
 
 
+### variable down
+
+```cpp
+constexpr int down = 3;
+```
+
+
 ### variable MAX_ENTITIES
 
 ```cpp
@@ -337,4 +368,4 @@ static constexpr int MAX_DEPTH = 6;
 
 -------------------------------
 
-Updated on 2026-01-17 at 16:36:40 +0000
+Updated on 2026-01-17 at 17:45:57 +0000

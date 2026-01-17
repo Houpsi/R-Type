@@ -43,7 +43,6 @@ var hierarchy =
       [ "ecs::MovementSystem", "classecs_1_1MovementSystem.html", null ],
       [ "ecs::PlayerAnimationSystem", "classecs_1_1PlayerAnimationSystem.html", null ],
       [ "ecs::RenderSystem", "classecs_1_1RenderSystem.html", null ],
-      [ "ecs::ShootSystem", "classecs_1_1ShootSystem.html", null ],
       [ "ecs::SoundSystem", "classecs_1_1SoundSystem.html", null ],
       [ "ecs::SpriteAnimationSystem", "classecs_1_1SpriteAnimationSystem.html", null ],
       [ "ecs::VelocitySystem", "classecs_1_1VelocitySystem.html", null ]

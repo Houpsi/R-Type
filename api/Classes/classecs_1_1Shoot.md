@@ -20,12 +20,14 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 | -------------- | -------------- |
 | | **[~Shoot](Classes/classecs_1_1Shoot.md#function-~shoot)**() override =default |
 | void | **[setTimeSinceLastShot](Classes/classecs_1_1Shoot.md#function-settimesincelastshot)**(float t)<br>Sets the last shot.  |
+| void | **[setShootTimer](Classes/classecs_1_1Shoot.md#function-setshoottimer)**(float cooldown)<br>Sets the shooter.  |
 | void | **[setDamage](Classes/classecs_1_1Shoot.md#function-setdamage)**(int damage)<br>Sets the shoot damage.  |
 | void | **[setCooldown](Classes/classecs_1_1Shoot.md#function-setcooldown)**(float cooldown)<br>Sets the shoot cooldown.  |
 | float | **[getTimeSinceLastShot](Classes/classecs_1_1Shoot.md#function-gettimesincelastshot)**() const<br>Gets the last shot.  |
+| float | **[getShootTimer](Classes/classecs_1_1Shoot.md#function-getshoottimer)**() const<br>Gets the shooter time.  |
 | int | **[getDamage](Classes/classecs_1_1Shoot.md#function-getdamage)**() const<br>Gets the shoot damage.  |
 | float | **[getCooldown](Classes/classecs_1_1Shoot.md#function-getcooldown)**() const<br>Gets the shoot cooldown.  |
-| | **[Shoot](Classes/classecs_1_1Shoot.md#function-shoot)**(int damage, float cooldown) |
+| | **[Shoot](Classes/classecs_1_1Shoot.md#function-shoot)**(int damage, float cooldown, float shootTimer =0.0f) |
 
 ## Additional inherited members
 
@@ -64,6 +66,21 @@ void setTimeSinceLastShot(
 ```
 
 Sets the last shot. 
+
+**Parameters**: 
+
+  * **t** New shot of the shoot 
+
+
+### function setShootTimer
+
+```cpp
+void setShootTimer(
+    float cooldown
+)
+```
+
+Sets the shooter. 
 
 **Parameters**: 
 
@@ -110,6 +127,16 @@ Gets the last shot.
 
 **Return**: The last shot 
 
+### function getShootTimer
+
+```cpp
+float getShootTimer() const
+```
+
+Gets the shooter time. 
+
+**Return**: The shoot timer 
+
 ### function getDamage
 
 ```cpp
@@ -135,11 +162,12 @@ Gets the shoot cooldown.
 ```cpp
 inline explicit Shoot(
     int damage,
-    float cooldown
+    float cooldown,
+    float shootTimer =0.0f
 )
 ```
 
 
 -------------------------------
 
-Updated on 2026-01-17 at 16:36:40 +0000
+Updated on 2026-01-17 at 17:45:57 +0000

@@ -1,6 +1,6 @@
 var classecs_1_1Collision =
 [
-    [ "Collision", "classecs_1_1Collision.html#aca7f446002e8a18932bc1fa69d8d7671", null ],
+    [ "Collision", "classecs_1_1Collision.html#a2796f99d81bc73b7e32b22eb17b1b841", null ],
     [ "~Collision", "classecs_1_1Collision.html#aea06084ff54e573d5009de06ead0977a", null ],
     [ "getHeight", "classecs_1_1Collision.html#a8f99f5fc705aa4ddfdbae20f60243c9d", null ],
     [ "getIsTrigger", "classecs_1_1Collision.html#ace03603254727b39f8f31b6419bc6cea", null ],

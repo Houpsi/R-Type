@@ -116,8 +116,8 @@ Collaboration diagram for ecs::Shoot:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a17b2469282a3832437da4cfc76d4a26b" id="r_a17b2469282a3832437da4cfc76d4a26b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Shoot.html#a17b2469282a3832437da4cfc76d4a26b">Shoot</a> (int damage, float cooldown)</td></tr>
-<tr class="separator:a17b2469282a3832437da4cfc76d4a26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa774c8a8e3af4c81bbc2e0a518a8bcf6" id="r_aa774c8a8e3af4c81bbc2e0a518a8bcf6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Shoot.html#aa774c8a8e3af4c81bbc2e0a518a8bcf6">Shoot</a> (int damage, float cooldown, float shootTimer=0.0f)</td></tr>
+<tr class="separator:aa774c8a8e3af4c81bbc2e0a518a8bcf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ceb02d04643a51514f160e39a686425" id="r_a3ceb02d04643a51514f160e39a686425"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Shoot.html#a3ceb02d04643a51514f160e39a686425">~Shoot</a> () override=default</td></tr>
 <tr class="separator:a3ceb02d04643a51514f160e39a686425"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21a7a4db0a29d95c08afe604d2d3ce4b" id="r_a21a7a4db0a29d95c08afe604d2d3ce4b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Shoot.html#a21a7a4db0a29d95c08afe604d2d3ce4b">getDamage</a> () const</td></tr>
@@ -132,6 +132,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af7b154a6f8a74b81d7629cfe43063bf2" id="r_af7b154a6f8a74b81d7629cfe43063bf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Shoot.html#af7b154a6f8a74b81d7629cfe43063bf2">setCooldown</a> (float cooldown)</td></tr>
 <tr class="memdesc:af7b154a6f8a74b81d7629cfe43063bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the shoot cooldown.  <br /></td></tr>
 <tr class="separator:af7b154a6f8a74b81d7629cfe43063bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3d07574c2a6936bbee324666e2a5f58" id="r_ab3d07574c2a6936bbee324666e2a5f58"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Shoot.html#ab3d07574c2a6936bbee324666e2a5f58">getShootTimer</a> () const</td></tr>
+<tr class="memdesc:ab3d07574c2a6936bbee324666e2a5f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the shooter time.  <br /></td></tr>
+<tr class="separator:ab3d07574c2a6936bbee324666e2a5f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af627ce469f3e6a5957af7e03c72bd5da" id="r_af627ce469f3e6a5957af7e03c72bd5da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Shoot.html#af627ce469f3e6a5957af7e03c72bd5da">setShootTimer</a> (float cooldown)</td></tr>
+<tr class="memdesc:af627ce469f3e6a5957af7e03c72bd5da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the shooter.  <br /></td></tr>
+<tr class="separator:af627ce469f3e6a5957af7e03c72bd5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad580d17cca14c4cbd0a819cd735bddf0" id="r_ad580d17cca14c4cbd0a819cd735bddf0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classecs_1_1Shoot.html#ad580d17cca14c4cbd0a819cd735bddf0">getTimeSinceLastShot</a> () const</td></tr>
 <tr class="memdesc:ad580d17cca14c4cbd0a819cd735bddf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the last shot.  <br /></td></tr>
 <tr class="separator:ad580d17cca14c4cbd0a819cd735bddf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,8 +153,8 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>damage and cooldown </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a17b2469282a3832437da4cfc76d4a26b" name="a17b2469282a3832437da4cfc76d4a26b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17b2469282a3832437da4cfc76d4a26b">&#9670;&#160;</a></span>Shoot()</h2>
+<a id="aa774c8a8e3af4c81bbc2e0a518a8bcf6" name="aa774c8a8e3af4c81bbc2e0a518a8bcf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa774c8a8e3af4c81bbc2e0a518a8bcf6">&#9670;&#160;</a></span>Shoot()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +172,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>cooldown</em>&#160;</td>
+          <td class="paramname"><em>cooldown</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>shootTimer</em> = <code>0.0f</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -249,6 +261,26 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ab3d07574c2a6936bbee324666e2a5f58" name="ab3d07574c2a6936bbee324666e2a5f58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3d07574c2a6936bbee324666e2a5f58">&#9670;&#160;</a></span>getShootTimer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ecs::Shoot::getShootTimer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the shooter time. </p>
+<dl class="section return"><dt>Returns</dt><dd>The shoot timer </dd></dl>
+
+</div>
+</div>
 <a id="ad580d17cca14c4cbd0a819cd735bddf0" name="ad580d17cca14c4cbd0a819cd735bddf0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad580d17cca14c4cbd0a819cd735bddf0">&#9670;&#160;</a></span>getTimeSinceLastShot()</h2>
 
@@ -321,6 +353,32 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="af627ce469f3e6a5957af7e03c72bd5da" name="af627ce469f3e6a5957af7e03c72bd5da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af627ce469f3e6a5957af7e03c72bd5da">&#9670;&#160;</a></span>setShootTimer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ecs::Shoot::setShootTimer </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the shooter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>New shot of the shoot </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aaac88eaf44670dc6920410f9435880a5" name="aaac88eaf44670dc6920410f9435880a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaac88eaf44670dc6920410f9435880a5">&#9670;&#160;</a></span>setTimeSinceLastShot()</h2>
 
@@ -344,11 +402,6 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classecs_1_1Shoot_aaac88eaf44670dc6920410f9435880a5_icgraph.png" border="0" usemap="#aclassecs_1_1Shoot_aaac88eaf44670dc6920410f9435880a5_icgraph" alt=""/></div>
-</div>
 
 </div>
 </div>

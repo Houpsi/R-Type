@@ -7,6 +7,7 @@ var searchData=
   ['destroysystem_4',['destroysystem',['../classecs_1_1DestroySystem.html',1,'ecs::DestroySystem'],['../classecs_1_1DestroySystem.html#a13281960fa34532e8da6699e2e6b0616',1,'ecs::DestroySystem::DestroySystem()']]],
   ['destroysystem_2ecpp_5',['DestroySystem.cpp',['../DestroySystem_8cpp.html',1,'']]],
   ['destroysystem_2ehpp_6',['DestroySystem.hpp',['../DestroySystem_8hpp.html',1,'']]],
-  ['dummycomponent_7',['DummyComponent',['../classecs_1_1DummyComponent.html',1,'ecs']]],
-  ['dummysystem_8',['DummySystem',['../classecs_1_1DummySystem.html',1,'ecs']]]
+  ['down_7',['down',['../namespaceecs.html#ae293f4db7b08edee6aed393d36ce386d',1,'ecs']]],
+  ['dummycomponent_8',['DummyComponent',['../classecs_1_1DummyComponent.html',1,'ecs']]],
+  ['dummysystem_9',['DummySystem',['../classecs_1_1DummySystem.html',1,'ecs']]]
 ];

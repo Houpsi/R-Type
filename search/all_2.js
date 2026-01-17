@@ -3,7 +3,7 @@ var searchData=
   ['calculatenumbertotalwave_0',['calculateNumberTotalWave',['../classserver_1_1Level.html#a6b805b1f0260b7b0af95cbaf7e002bea',1,'server::Level']]],
   ['changetonextlevel_1',['changeToNextLevel',['../classserver_1_1LevelManager.html#aa1b8d2bbf368ef47482835c97340d27d',1,'server::LevelManager']]],
   ['close_2',['close',['../classserver_1_1Server.html#a70766f3a38f83e13897c45fa3f8ef996',1,'server::Server']]],
-  ['collision_3',['collision',['../classecs_1_1Collision.html',1,'ecs::Collision'],['../classecs_1_1Collision.html#aca7f446002e8a18932bc1fa69d8d7671',1,'ecs::Collision::Collision()']]],
+  ['collision_3',['collision',['../classecs_1_1Collision.html',1,'ecs::Collision'],['../classecs_1_1Collision.html#a2796f99d81bc73b7e32b22eb17b1b841',1,'ecs::Collision::Collision()']]],
   ['collision_2ecpp_4',['Collision.cpp',['../Collision_8cpp.html',1,'']]],
   ['collision_2ehpp_5',['Collision.hpp',['../Collision_8hpp.html',1,'']]],
   ['collisionsystem_6',['collisionsystem',['../classecs_1_1CollisionSystem.html',1,'ecs::CollisionSystem'],['../classecs_1_1CollisionSystem.html#acaf14161170c983bb5018d1a58265f32',1,'ecs::CollisionSystem::CollisionSystem()']]],
