@@ -34,6 +34,7 @@ namespace cmn {
     constexpr uint8_t monsterHealth = 100;
     constexpr uint8_t monsterDamage = 100;
     constexpr uint16_t monsterSpeed = 250;
+    constexpr uint8_t monsterShootCooldown = 3;
     constexpr sf::Vector2f monsterSpriteScale = {2.0F, 2.0F};
     constexpr std::string_view monsterSpriteSheet = "./assets/r-typesheet5.gif";
     constexpr std::pair<uint8_t, uint8_t> monsterAnimationSize = {33, 24};
@@ -47,6 +48,7 @@ namespace cmn {
     constexpr uint8_t monster2Health = 100;
     constexpr sf::Vector2f monster2SpriteScale = {1.0F, 1.0F};
     constexpr uint16_t monster2Speed = 400;
+    constexpr uint8_t monster2ShootCooldown = 2;
     constexpr std::string_view monster2SpriteSheet = "./assets/r-typesheet211.gif";
     constexpr std::pair<uint8_t, uint8_t> monster2AnimationSize = {64, 50};
     constexpr uint8_t monster2AnimationOffset = 0;
@@ -65,6 +67,8 @@ namespace cmn {
     constexpr uint8_t monsterProjectileAnimationNumberFrame = 3;
     constexpr uint8_t monsterProjectileCollisionWidth = 32;
     constexpr uint8_t monsterProjectileCollisionHeight = 36;
+    constexpr uint8_t monsterProjectileSoundId = 1;
+    constexpr bool monsterProjectileLoop = false;
 
     constexpr uint8_t boss1Health = 100;
     constexpr sf::Vector2f boss1SpriteScale = {2.0F, 2.0F};
@@ -86,6 +90,8 @@ namespace cmn {
     constexpr uint8_t playerProjectileAnimationNumberFrame = 3;
     constexpr uint8_t playerProjectileCollisionWidth = 32;
     constexpr uint8_t playerProjectileCollisionHeight = 36;
+    constexpr uint8_t playerProjectileSoundId = 1;
+    constexpr bool playerProjectileLoop = false;
 
     constexpr sf::Vector2f backgroundSpriteScale = {1.0F, 1.0F};
     constexpr std::string_view pathBackgroundStars = "./assets/bg-stars.png";

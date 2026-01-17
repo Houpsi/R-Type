@@ -189,13 +189,13 @@ namespace server {
                           posY,
                           cmn::EntityFactory::Context::SERVER);
 
-                     _sharedData->addUdpPacketToSend(
-                         cmn::PacketFactory::createNewEntityPacket(
-                             cmn::EntityType::MonsterProjectile,
-                             {posX, posY},
-                             projectile->getId()
-                         )
-                     );
+                     cmn::newEntityData data {
+                         projectile->getId(),
+                         cmn::EntityType::MonsterProjectile,
+                         posX,
+                         posY
+                     };
+                     _sharedData->addUdpPacketToSend(data);
                      shoot->setTimeSinceLastShot(0);
                      shoot->setShootTimer(0.f);
                  }

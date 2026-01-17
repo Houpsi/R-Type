@@ -19,6 +19,7 @@
 #include "components/Sprite.hpp"
 #include "components/Velocity.hpp"
 #include "constants/GameConstants.hpp"
+#include "EcsConstant.hpp"
 
 namespace cmn {
 
@@ -94,16 +95,17 @@ namespace cmn {
                         monsterCollisionWidth * monsterSpriteScale.x,
                         monsterCollisionHeight * monsterSpriteScale.y
                 );
-                entity->addComponent<ecs::Velocity>(monsterSpeed, 0);
+                entity->addComponent<ecs::Velocity>(monsterSpeed, ecs::left);
+                entity->addComponent<ecs::Shoot>(cmn::monsterDamage, monsterShootCooldown, 0.0f);
             } else if (type == EntityType::Crochet) {
                 entity->addComponent<ecs::Collision>(
                         ecs::TypeCollision::ENEMY,
                         monster2CollisionWidth * monster2SpriteScale.x,
                         monster2CollisionHeight * monster2SpriteScale.y
                 );
-                entity->addComponent<ecs::Velocity>(monster2Speed, 0);
+                entity->addComponent<ecs::Velocity>(monster2Speed, ecs::left);
+                entity->addComponent<ecs::Shoot>(cmn::monsterDamage, monster2ShootCooldown, 0.0f);
             }
-            entity->addComponent<ecs::Shoot>(cmn::playerDamage, 3, 0.0f);
         }
     }
 
@@ -113,7 +115,7 @@ namespace cmn {
         if (context == Context::CLIENT) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::playerProjectileSpriteSheet)), cmn::playerProjectileScale);
             entity->addComponent<ecs::Animation>(cmn::playerProjectileAnimationSize, cmn::playerProjectileAnimationOffset, cmn::playerProjectileAnimationNumberFrame);
-            entity->addComponent<ecs::Sound>(1, false);
+            entity->addComponent<ecs::Sound>(playerProjectileSoundId, playerProjectileLoop);
         } else {
             entity->addComponent<ecs::Shoot>(cmn::playerDamage, 0);
             entity->addComponent<ecs::Collision>(
@@ -130,7 +132,7 @@ namespace cmn {
         if (context == Context::CLIENT) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::monsterProjectileSpriteSheet)), cmn::monsterProjectileScale);
             entity->addComponent<ecs::Animation>(cmn::monsterProjectileAnimationSize, cmn::monsterProjectileAnimationOffset, cmn::monsterProjectileAnimationNumberFrame);
-            entity->addComponent<ecs::Sound>(1, false);
+            entity->addComponent<ecs::Sound>(monsterProjectileSoundId, monsterProjectileLoop);
         } else {
             entity->addComponent<ecs::Shoot>(cmn::monsterDamage, 0);
             entity->addComponent<ecs::Collision>(
