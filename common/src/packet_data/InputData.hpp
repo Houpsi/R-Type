@@ -10,7 +10,6 @@
 #include "SFML/Network/Packet.hpp"
 #include <cstdint>
 #include "enums/Key.hpp"
-#include "enums/KeyState.hpp"
 
 namespace cmn {
 
@@ -18,7 +17,7 @@ namespace cmn {
     {
         uint32_t playerId;
         Keys key;
-        KeyState keyState;
+        bool pressed;
     };
 
 }

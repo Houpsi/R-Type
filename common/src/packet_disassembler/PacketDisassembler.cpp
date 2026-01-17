@@ -27,8 +27,8 @@ namespace cmn {
     {
         uint32_t const playerId = unpacker.readUInt32();
         uint8_t const key = unpacker.readUInt8();
-        uint8_t const keyState = unpacker.readUInt8();
-        inputData data = {playerId, static_cast<cmn::Keys>(key), static_cast<cmn::KeyState>(keyState)};
+        bool const pressed = unpacker.readBool();
+        inputData data = {playerId, static_cast<cmn::Keys>(key), pressed};
 
         return data;
     }

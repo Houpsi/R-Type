@@ -14,7 +14,6 @@
 #include "data_translator/DataTranslator.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
-#include "enums/KeyState.hpp"
 #include "packet_data/InputData.hpp"
 #include "packet_data/PacketData.hpp"
 #include <gtest/gtest.h>
@@ -35,7 +34,7 @@ namespace cmn {
         inputData inputData = {
             6,
             Keys::Down,
-            KeyState::Pressed
+            true
         };
 
         packetData data = inputData;
