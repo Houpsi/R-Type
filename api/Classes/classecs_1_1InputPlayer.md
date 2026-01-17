@@ -24,6 +24,7 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 | void | **[setRight](Classes/classecs_1_1InputPlayer.md#function-setright)**(bool right) |
 | void | **[setR](Classes/classecs_1_1InputPlayer.md#function-setr)**(bool r) |
 | void | **[setLeft](Classes/classecs_1_1InputPlayer.md#function-setleft)**(bool left) |
+| void | **[setEscape](Classes/classecs_1_1InputPlayer.md#function-setescape)**(bool escape) |
 | void | **[setDown](Classes/classecs_1_1InputPlayer.md#function-setdown)**(bool down) |
 | bool | **[getUp](Classes/classecs_1_1InputPlayer.md#function-getup)**() const |
 | bool | **[getSpacebar](Classes/classecs_1_1InputPlayer.md#function-getspacebar)**() const |
@@ -97,6 +98,15 @@ void setLeft(
 ```
 
 
+### function setEscape
+
+```cpp
+void setEscape(
+    bool escape
+)
+```
+
+
 ### function setDown
 
 ```cpp
@@ -157,4 +167,4 @@ InputPlayer() =default
 
 -------------------------------
 
-Updated on 2026-01-16 at 18:45:29 +0000
+Updated on 2026-01-17 at 13:40:42 +0000

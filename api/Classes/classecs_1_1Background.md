@@ -74,4 +74,4 @@ Construct a new [Background](Classes/classecs_1_1Background.md) object.
 
 -------------------------------
 
-Updated on 2026-01-16 at 18:45:29 +0000
+Updated on 2026-01-17 at 13:40:42 +0000

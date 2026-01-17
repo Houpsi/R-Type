@@ -9,6 +9,7 @@ var classecs_1_1InputPlayer =
     [ "getSpacebar", "classecs_1_1InputPlayer.html#af008aec35361d37ba6176d39cb048494", null ],
     [ "getUp", "classecs_1_1InputPlayer.html#acd0b646ad5ccbc3c347c9d2b02b06cf7", null ],
     [ "setDown", "classecs_1_1InputPlayer.html#a11e419c4fe114ddfd37419a539dc217c", null ],
+    [ "setEscape", "classecs_1_1InputPlayer.html#a0b8feb6de2bc195771d06ce4887fb467", null ],
     [ "setLeft", "classecs_1_1InputPlayer.html#ad31ba3aee128f5437a09bcc976c832c5", null ],
     [ "setR", "classecs_1_1InputPlayer.html#a020ea3f1ce17da9a548d1bc173efc9b6", null ],
     [ "setRight", "classecs_1_1InputPlayer.html#a68652975912b80ef420d0ca71425d577", null ],
