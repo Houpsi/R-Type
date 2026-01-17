@@ -42,6 +42,7 @@ namespace server {
         void _sendPositions();
         void _sendDestroy();
         void _enemyShoot();
+        void _sendText();
         std::unordered_map<uint32_t, std::pair<float, float>> _entityPos;
     };
 }
