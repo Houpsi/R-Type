@@ -12,6 +12,7 @@
 #include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_factory/PacketFactory.hpp"
 #include "packet_header/PacketHeader.hpp"
+
 #include <iostream>
 #include <thread>
 #include <utility>
@@ -78,6 +79,7 @@ namespace server {
                     if (playerId != -1) {
                         _sharedData->deletePlayer(playerId);
                         _playerSocketMap.erase(playerId);
+                        _clientStates.erase(playerId);
                     }
                     it = _socketVector.erase(it);
                     std::cout << "Player " << playerId << " removed" << std::endl;
@@ -200,17 +202,71 @@ namespace server {
         }
     }
 
-    void Server::broadcastUdpToLobby(const int lobbyId, const cmn::CustomPacket& packet)
-    {
-        auto const playerIds = _sharedData->getLobbyPlayers(lobbyId);
+    void Server::broadcastUdpToLobby(const int lobbyId, cmn::CustomPacket& packet)
+{
+    auto const playerIds = _sharedData->getLobbyPlayers(lobbyId);
 
-        for (int const playerId : playerIds) {
-            auto playerInfo = _sharedData->getPlayer(playerId);
-            if (playerInfo.has_value()) {
-                sendUdp(packet, playerInfo->second, playerInfo->first);
+    // Extraire le type de packet pour les logs
+    auto disassembled = cmn::PacketDisassembler::disassemble(packet);
+    std::string packetType = "Unknown";
+
+    std::visit([&packetType](auto &&arg) {
+        using T = std::decay_t<decltype(arg)>;
+        if constexpr (std::is_same_v<T, cmn::positionData>) {
+            packetType = "positionData";
+        } else if constexpr (std::is_same_v<T, cmn::deleteEntityData>) {
+            packetType = "deleteEntityData";
+        } else if constexpr (std::is_same_v<T, cmn::newEntityData>) {
+            packetType = "newEntityData";
+        } else if constexpr (std::is_same_v<T, cmn::inputData>) {
+            packetType = "inputData";
+        } else if constexpr (std::is_same_v<T, cmn::soundData>) {
+            packetType = "soundData";
+        } else if constexpr (std::is_same_v<T, cmn::gameResultData>) {
+            packetType = "gameResultData";
+        } else if constexpr (std::is_same_v<T, cmn::playerDeathData>) {
+            packetType = "playerDeathData";
+        } else if constexpr (std::is_same_v<T, cmn::acknowledgeData>) {
+            packetType = "acknowledgeData";
+        }
+    }, disassembled.second);
+
+    std::cout << "[UDP Broadcast] Lobby " << lobbyId
+              << " sending " << packetType
+              << " to " << playerIds.size() << " player(s)" << std::endl;
+
+        if (packetType =="deleteEntityData") {
+            std::visit([&](auto &&arg) {
+        using T = std::decay_t<decltype(arg)>;
+        if constexpr (std::is_same_v<T, cmn::deleteEntityData>) {
+            std::cout << "╔══════════════════════════════════════╗" << std::endl;
+            std::cout << "║ DELETE ENTITY BROADCAST              ║" << std::endl;
+            std::cout << "╠══════════════════════════════════════╣" << std::endl;
+            std::cout << "║ Lobby ID:   " << std::setw(24) << lobbyId << " ║" << std::endl;
+            std::cout << "║ Entity ID:  " << std::setw(24) << arg.entityId << " ║" << std::endl;
+            std::cout << "║ Players:    ";
+            for (int const playerId : playerIds) {
+                std::cout << playerId << " ";
             }
+            std::cout << std::endl;
+            std::cout << "╚══════════════════════════════════════╝" << std::endl;
+        }
+    }, disassembled.second);
+        }
+
+    for (int const playerId : playerIds) {
+        std::cout << "  -> Player " << playerId;
+        auto playerInfo = _sharedData->getPlayer(playerId);
+        if (playerInfo.has_value()) {
+            std::cout << " (" << playerInfo->second.toString()
+                      << ":" << playerInfo->first << ")";
+            sendUdp(packet, playerInfo->second, playerInfo->first);
+            std::cout << " ✓ sent" << std::endl;
+        } else {
+            std::cout << " ✗ player info not found" << std::endl;
         }
     }
+}
 
 
     void Server::_acceptConnection()
@@ -227,6 +283,10 @@ namespace server {
 
         _playerSocketMap[idPlayer] = client;
         _sharedData->addPlayer(idPlayer, client->getRemotePort(), client->getRemoteAddress().value(), client);
+        auto pair = std::make_pair(client->getRemotePort(), client->getRemoteAddress().value());
+        _playerList.emplace(pair, idPlayer);
+        cmn::clientNetworkState const clientNetworkState;
+        _clientStates[idPlayer] = clientNetworkState;
         cmn::connectionData data = {idPlayer};
         cmn::CustomPacket const packet = cmn::PacketFactory::createPacket(data, _reliablePackets);
         sendTcp(packet, *client);
@@ -248,7 +308,7 @@ namespace server {
 
             auto udpData = _sharedData->getLobbyUdpPacketToSend(lobbyId);
             if (udpData.has_value()) {
-                cmn::CustomPacket const packet = cmn::PacketFactory::createPacket(udpData.value(), _reliablePackets);
+                cmn::CustomPacket packet = cmn::PacketFactory::createPacket(udpData.value(), _reliablePackets);
                 broadcastUdpToLobby(lobbyId, packet);
             }
         }
@@ -260,7 +320,7 @@ namespace server {
         }
     }
 
-    void Server::_resendTimedOutPackets()
+    void Server::_resendTimedOutPackets(int lobbyId)
     {
         const auto now = std::chrono::steady_clock::now();
 
@@ -273,7 +333,7 @@ namespace server {
 
             if (timeSinceLastSend > cmn::ticksBeforeResending) {
                 if (reliablePkt.retryCount < cmn::reliabilityRetries) {
-                    broadcastUdp(reliablePkt.packet);
+                    broadcastUdpToLobby(lobbyId, reliablePkt.packet);
                     reliablePkt.lastSentTime = now;
                     reliablePkt.retryCount++;
                     ++it;
@@ -286,22 +346,64 @@ namespace server {
         }
     }
 
-    void Server::_handleUdpReception(const cmn::packetHeader header, cmn::packetData data, const int lobbyId)
+    bool Server::_shouldProcessPacket(const cmn::packetHeader& header, cmn::clientNetworkState state) {
+        uint32_t const incomingSeq = header.sequenceNbr;
+
+        if (state.processedSequences.contains(incomingSeq)) {
+            return false;
+        }
+
+        if ((int32_t)(incomingSeq - state.lastProcessedSequence) <= 0) {
+            return false;
+        }
+
+        state.lastProcessedSequence = incomingSeq;
+        state.processedSequences.insert(incomingSeq);
+
+        if (state.processedSequences.size() > cmn::maxSequences) {
+            for (auto it = state.processedSequences.begin(); it != state.processedSequences.end();) {
+                if (std::cmp_less((*it - state.lastProcessedSequence), cmn::maxSequenceDiff)) {
+                    it = state.processedSequences.erase(it);
+                } else {
+                    ++it;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    void Server::_handleUdpReception(
+        cmn::packetHeader header,
+        cmn::packetData data,
+        sf::IpAddress ip,
+        uint16_t port,
+        int lobbyId)
     {
+        auto pair = std::make_pair(port, ip);
+        uint32_t const clientId = _playerList[pair];
+
+        if (!_shouldProcessPacket(header, _clientStates[clientId])) {
+            return;
+        }
+
         if (header.protocolId == cmn::acknowledgeProtocolId) {
             cmn::acknowledgeData const acknowledgeData = std::get<cmn::acknowledgeData>(data);
             uint32_t const sequenceNbr = acknowledgeData.sequenceNbr;
             _reliablePackets.erase(sequenceNbr);
             return;
         }
+
         _sharedData->addLobbyUdpReceivedPacket(lobbyId, data);
-        _resendTimedOutPackets();
+        _resendTimedOutPackets(lobbyId);
     }
 
     void Server::run()
     {
         _socketSelector.add(_listener);
-        _tcpThread = std::jthread{[this]{ _handleTcp(); }};
+
+        std::jthread const tcpThread = std::jthread{[this]{ _handleTcp(); }};
 
         std::optional<sf::IpAddress> sender;
         unsigned short port = 0;
@@ -318,7 +420,7 @@ namespace server {
                 if (playerId != -1) {
                     int lobbyId = _sharedData->getPlayerLobby(playerId);
                     if (lobbyId != -1) {
-                        _handleUdpReception(data.first, data.second, lobbyId);
+                        _handleUdpReception(data.first, data.second, sender.value(), port, lobbyId);
                     }
                 }
             }

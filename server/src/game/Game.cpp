@@ -115,7 +115,8 @@ namespace server {
                 for (const auto& entity : entities) {
                     if (entity->getId() == entityId) {
                         entity->addComponent<ecs::Destroy>();
-                        cmn::deleteEntityData deleteData = {static_cast<uint32_t>(entityId)};
+                        cmn::deleteEntityData deleteData = {static_cast<uint32_t>(entityId), static_cast<uint32_t>(_lobbyId)};
+                        std::cout << "lobby " << _lobbyId << " remove player " << playerId << "from game " << "\n";
                         _sharedData->addLobbyUdpPacketToSend(_lobbyId, deleteData);
                         break;
                     }
@@ -165,7 +166,7 @@ namespace server {
     void Game::_sendDestroy()
     {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Destroy>()) {
-            cmn::deleteEntityData data = {entity->getId()};
+            cmn::deleteEntityData data = {entity->getId(), static_cast<uint32_t>(_lobbyId)};
             _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
             if (entity->getComponent<ecs::InputPlayer>()) {
                 _checkPlayerDeaths(entity);

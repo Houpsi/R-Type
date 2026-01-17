@@ -1,7 +1,6 @@
 add_library(r-type_common_lib
         packet_data/InputData.hpp
         enums/Key.hpp
-        enums/KeyState.hpp
         custom_packet/CustomPacket.cpp
         custom_packet/CustomPacket.hpp
         parser/AParser.cpp
@@ -41,6 +40,7 @@ add_library(r-type_common_lib
         packet_data/ErrorTcpData.hpp
         packet_data/RequestJoinLobbyData.hpp
         entity_factory/EntityFactory.cpp
+        client_network_state/ClientNetworkState.hpp
         packet_data/PlayerDeathData.hpp
         packet_data/GameResultData.hpp
         enums/GameResultType.hpp

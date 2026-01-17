@@ -35,6 +35,8 @@ class InputPlayer : public Component {
     void setThree(bool three);
     void setFour(bool four);
     void setR(bool r);
+    void setEscape(bool escape);
+
   private:
     bool _up = false;
     bool _down = false;
@@ -42,6 +44,7 @@ class InputPlayer : public Component {
     bool _right = false;
     bool _spacebar = false;
     bool _r = false;
+    bool _escape = false;
     bool _one = false;
     bool _two = false;
     bool _three = false;

@@ -235,7 +235,11 @@ namespace server {
         _activeGames[lobbyId] = std::jthread([this, lobbyId]() {
             try {
                 Game game(_sharedData, lobbyId, _lobbyMap[lobbyId].type);
+                std::cout << "===============================================" << std::endl;
                 std::cout << "Game launched in lobby: " << lobbyId << std::endl;
+                for (auto id: _sharedData->getLobbyPlayers(lobbyId))
+                    std::cout << id << std::endl;
+                std::cout << "===============================================" << std::endl;
                 game.run();
             } catch (const std::exception &e) {
                 std::cerr << "Game error in lobby " << lobbyId << ": " << e.what() << "\n";

@@ -88,6 +88,11 @@ namespace ecs {
         _r = r;
     }
 
+    void InputPlayer::setEscape(bool escape)
+    {
+        _escape = escape;
+    }
+
     void InputPlayer::setOne(bool one)
     {
         _one = one;

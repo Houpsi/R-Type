@@ -40,12 +40,15 @@ namespace client {
         InputManager _inputManager;
         std::shared_ptr<ecs::Entity> _gameKeyboard;
         std::shared_ptr<ecs::Entity> _menuKeyboard;
+        ClientState _currentState = ClientState::Menu;
+        uint32_t _playerId = 0;
+        std::map<cmn::Keys, bool> _previousInputs;
 
         void _handleEvents();
         void _initEcsSystem();
         void _initBackground();
         void _initKeyboard();
-        void _checkGamePlayerInput() const;
+        void _checkGamePlayerInput();
         void _checkMenuPlayerInput() const;
         void _updateNetwork();
         void _initSound();
@@ -53,9 +56,6 @@ namespace client {
         void _updateGame(sf::Clock &inputClock, float elapsedTime, float deltaTime);
         void _resetGame();
         void _clearGameEntities();
-
-        ClientState _currentState = ClientState::Menu;
-        uint32_t _playerId = 0;
     };
 }
 
