@@ -12,7 +12,6 @@
 #include "custom_packet/CustomPacket.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
-#include "enums/KeyState.hpp"
 #include "packet_data/PacketData.hpp"
 #include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_factory/PacketFactory.hpp"
@@ -49,7 +48,7 @@ namespace cmn {
 
     TEST_F(PacketDisassemblerTest, DisassembleInputPacket)
     {
-        inputData inputDataPacket{10, Keys::Up, KeyState::Pressed};
+        inputData inputDataPacket{10, Keys::Up, true};
         CustomPacket packet = PacketFactory::createPacket(inputDataPacket, sequencePacketMap);
         auto [header, result] = PacketDisassembler::disassemble(packet);
 
@@ -63,7 +62,7 @@ namespace cmn {
         }, result);
         EXPECT_EQ(data.playerId, 10);
         EXPECT_EQ(data.key, Keys::Up);
-        EXPECT_EQ(data.keyState, KeyState::Pressed);
+        EXPECT_EQ(data.pressed, true);
         EXPECT_EQ(header.protocolId, inputProtocolId);
         EXPECT_FALSE(header.isReliable);
     }
@@ -76,7 +75,7 @@ namespace cmn {
         };
 
         for (auto key : keys) {
-            inputData inputDataPacket{5, key, KeyState::Pressed};
+            inputData inputDataPacket{5, key, true};
             CustomPacket packet = PacketFactory::createPacket(inputDataPacket, sequencePacketMap);
             auto [header, result] = PacketDisassembler::disassemble(packet);
 
@@ -269,7 +268,7 @@ namespace cmn {
         }
 
         {
-            inputData inputDataPacket{5, Keys::Space, KeyState::Pressed};
+            inputData inputDataPacket{5, Keys::Space, true};
             auto packet = PacketFactory::createPacket(inputDataPacket, sequencePacketMap);
             auto [header, result] = PacketDisassembler::disassemble(packet);
         }
@@ -303,7 +302,7 @@ namespace cmn {
 
     TEST_F(PacketDisassemblerTest, DisassembleMultipleInputStates)
     {
-        std::vector<KeyState> states = {KeyState::Pressed, KeyState::Released};
+        std::vector<bool> states = {true, false};
 
         for (auto state : states) {
             inputData inputDataPacket{7, Keys::Left, state};
@@ -318,7 +317,7 @@ namespace cmn {
                     data = arg;
                 }
             }, result);
-            EXPECT_EQ(data.keyState, state);
+            EXPECT_EQ(data.pressed, state);
         }
     }
 
@@ -344,7 +343,7 @@ namespace cmn {
     TEST_F(PacketDisassemblerTest, DisassembleSequentialPackets)
     {
         connectionData connData{1};
-        inputData inputDataPacket{2, Keys::Up, KeyState::Pressed};
+        inputData inputDataPacket{2, Keys::Up, true};
         positionData posData{3, 10.0f, 20.0f};
         newEntityData newEntData{4, EntityType::Player, 30.0f, 40.0f};
         deleteEntityData delData{5};

@@ -10,42 +10,14 @@
 #include "components/Animation.hpp"
 #include "components/Collision.hpp"
 #include "components/Destroy.hpp"
-#include "components/Enemy.hpp"
 #include "components/InputPlayer.hpp"
-#include "components/PlayerAnimation.hpp"
 #include "components/Position.hpp"
 #include "components/Sound.hpp"
-#include "components/Sprite.hpp"
-#include "constants/GameConstants.hpp"
 #include "entity_factory/EntityFactory.hpp"
-#include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
 #include <list>
 
 namespace cmn {
-
-    using InputFn = void (*)(Keys, const std::shared_ptr<ecs::InputPlayer>&);
-
-    constexpr std::array<InputFn, 6> functionArray = {{
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>&component) {
-            component->setDown(key == Keys::Down);
-        },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>&component) {
-            component->setUp(key == Keys::Up);
-        },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
-            component->setLeft(key == Keys::Left);
-        },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
-            component->setRight(key == Keys::Right);
-        },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
-            component->setSpacebar(key == Keys::Space);
-        },
-        [](Keys key, const std::shared_ptr<ecs::InputPlayer>& component) {
-            component->setR(key == Keys::R);
-        }
-    }};
 
     void DataTranslator::_injectInput(ecs::EcsManager &ecs, inputData &input, std::unordered_map<int, uint64_t> playerIdEntityMap)
     {
@@ -55,11 +27,31 @@ namespace cmn {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
             if (entity->getId() == entityId) {
                 auto component = entity->getComponent<ecs::InputPlayer>();
-                Keys const key = input.key;
-                for (const auto &function : functionArray) {
-                    function(key, component);
+                switch (input.key) {
+                    case (Keys::Up):
+                        component->setUp(input.pressed);
+                        break;
+                    case (Keys::Down):
+                        component->setDown(input.pressed);
+                        break;
+                    case (Keys::Left):
+                        component->setLeft(input.pressed);
+                        break;
+                    case (Keys::Right):
+                        component->setRight(input.pressed);
+                        break;
+                    case (Keys::Space):
+                        component->setSpacebar(input.pressed);
+                        break;
+                    case (Keys::Escape):
+                        component->setEscape(input.pressed);
+                        break;
+                    case (Keys::R):
+                        component->setR(input.pressed);
+                        break;
+                    case (Keys::None):
+                        break;
                 }
-                break;
             }
         }
     }
@@ -79,7 +71,7 @@ namespace cmn {
     void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityData &newEntity)
     {
         auto entity =  cmn::EntityFactory::createEntity(ecs,
-                        static_cast<EntityType>(newEntity.type),
+                        newEntity.type,
                         newEntity.posX, newEntity.posY,
                         cmn::EntityFactory::Context::CLIENT, 0, newEntity.entityId);
 

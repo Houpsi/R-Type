@@ -100,23 +100,30 @@ namespace client {
             if (event->is<sf::Event::Closed>()) {
                 _window.close();
             }
+            else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+            {
+                if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {
+                    _window.close();
+                }
+            }
         }
     }
 
     void GameRenderer::_checkPlayerInput()
     {
-        bool isPressed = false;
         for (uint8_t i = 0; i < static_cast<uint8_t>(cmn::Keys::None); ++i) {
-            auto action = static_cast<cmn::Keys>(i);
-            if (_inputManager.isActionTriggered(action)) {
-                cmn::inputData data = {_playerId, action, cmn::KeyState::Pressed};
+            auto key = static_cast<cmn::Keys>(i);
+            bool const currentPressed = _inputManager.isActionTriggered(key);
+            bool const alreadyPressed = _previousInputs[key];
+            if (currentPressed && !alreadyPressed) {
+                cmn::inputData data = {_playerId, key, true};
                 _sharedData->addUdpPacketToSend(data);
-                isPressed = true;
             }
-        }
-        if (!isPressed) {
-            cmn::inputData data = {_playerId, cmn::Keys::None, cmn::KeyState::Pressed};
-            _sharedData->addUdpPacketToSend(data);
+            else if (!currentPressed && alreadyPressed) {
+                cmn::inputData data = {_playerId, key, false};
+                _sharedData->addUdpPacketToSend(data);
+            }
+            _previousInputs[key] = currentPressed;
         }
     }
 
@@ -150,11 +157,7 @@ namespace client {
 
     void GameRenderer::_updateGame()
     {
-        // if (_inputClock.getElapsedTime().asSeconds() < _inputCooldown) {
-        //     return;
-        // }
         _checkPlayerInput();
-        //_inputClock.restart();
     }
 
     void GameRenderer::run()

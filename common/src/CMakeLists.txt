@@ -3,7 +3,6 @@ add_library(r-type_common_lib
         shared_data/SharedData.hpp
         packet_data/InputData.hpp
         enums/Key.hpp
-        enums/KeyState.hpp
         custom_packet/CustomPacket.cpp
         custom_packet/CustomPacket.hpp
         parser/AParser.cpp

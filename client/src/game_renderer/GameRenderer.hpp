@@ -44,6 +44,7 @@ namespace client {
 
         bool _isRunning = false;
         uint32_t _playerId = 0;
+        std::map<cmn::Keys, bool> _previousInputs;
     };
 }
 

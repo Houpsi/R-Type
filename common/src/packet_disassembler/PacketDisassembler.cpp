@@ -10,7 +10,6 @@
 #include "constants/BitPackingConstants.hpp"
 #include "constants/GameConstants.hpp"
 #include "constants/NetworkConstants.hpp"
-#include <iostream>
 #include <optional>
 
 namespace cmn {
@@ -27,8 +26,8 @@ namespace cmn {
     {
         uint32_t const playerId = unpacker.readUInt32();
         uint8_t const key = unpacker.readUInt8();
-        uint8_t const keyState = unpacker.readUInt8();
-        inputData data = {playerId, static_cast<cmn::Keys>(key), static_cast<cmn::KeyState>(keyState)};
+        bool const pressed = unpacker.readBool();
+        inputData data = {playerId, static_cast<cmn::Keys>(key), pressed};
 
         return data;
     }
@@ -101,7 +100,7 @@ namespace cmn {
         uint32_t const sequenceNbr = unpacker.readUInt32();
         bool const isReliable = unpacker.readBool();
 
-        packetHeader header = {protocolId, sequenceNbr, isReliable};
+        packetHeader const header = {protocolId, sequenceNbr, isReliable};
 
         switch (protocolId) {
             case (connectionProtocolId):

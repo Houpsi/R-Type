@@ -94,12 +94,12 @@ namespace client {
 
     void InputManager::_initDefaultBindings()
     {
-        _bindings[cmn::Keys::Up]    = {sf::Keyboard::Key::Z,     0, true,  sf::Joystick::Axis::Y, -50.0f};
-        _bindings[cmn::Keys::Down]  = {sf::Keyboard::Key::S,     0, true,  sf::Joystick::Axis::Y,  50.0f};
-        _bindings[cmn::Keys::Left]  = {sf::Keyboard::Key::Q,     0, true,  sf::Joystick::Axis::X, -50.0f};
-        _bindings[cmn::Keys::Right] = {sf::Keyboard::Key::D,     0, true,  sf::Joystick::Axis::X,  50.0f};
-        _bindings[cmn::Keys::Space] = {sf::Keyboard::Key::Space, 0, false, sf::Joystick::Axis::Z,  0.0f};
-        _bindings[cmn::Keys::R]     = {sf::Keyboard::Key::R,     7, false, sf::Joystick::Axis::R,  0.0f};
+        _bindings[cmn::Keys::Up]    = {sf::Keyboard::Key::Z, sf::Keyboard::Key::Up,      0, true,  sf::Joystick::Axis::Y, -50.0f};
+        _bindings[cmn::Keys::Down]  = {sf::Keyboard::Key::S, sf::Keyboard::Key::Down,      0, true,  sf::Joystick::Axis::Y,  50.0f};
+        _bindings[cmn::Keys::Left]  = {sf::Keyboard::Key::Q,  sf::Keyboard::Key::Left,   0, true,  sf::Joystick::Axis::X, -50.0f};
+        _bindings[cmn::Keys::Right] = {sf::Keyboard::Key::D, sf::Keyboard::Key::Right,    0, true,  sf::Joystick::Axis::X,  50.0f};
+        _bindings[cmn::Keys::Space] = {sf::Keyboard::Key::Space, sf::Keyboard::Key::Space, 0, false, sf::Joystick::Axis::Z,  0.0f};
+        _bindings[cmn::Keys::R]     = {sf::Keyboard::Key::R, sf::Keyboard::Key::R,    7, false, sf::Joystick::Axis::R,  0.0f};
     }
 
     bool InputManager::isActionTriggered(cmn::Keys action) const
@@ -108,7 +108,7 @@ namespace client {
             return false;
         }
         const auto& bind = _bindings.at(action);
-        if (bind.key != sf::Keyboard::Key::Unknown && sf::Keyboard::isKeyPressed(bind.key)) {
+        if (bind.key != sf::Keyboard::Key::Unknown && (sf::Keyboard::isKeyPressed(bind.key) || sf::Keyboard::isKeyPressed(bind.other_key))) {
             return true;
         }
         if (sf::Joystick::isConnected(0)) {
