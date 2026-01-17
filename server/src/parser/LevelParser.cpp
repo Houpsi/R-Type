@@ -89,11 +89,11 @@ namespace server {
                 tmpEnemy newEnemy;
                 const libconfig::Setting& enemySetting = enemiesSetting[j];
                 const std::string type = enemySetting.lookup("type");
-                const int countEnemy = enemySetting.lookup("count");
-                if (countEnemy <= 0) {
+                const float countEnemy = enemySetting.lookup("count");
+                if (countEnemy <= 0.0) {
                     throw LevelParserException("Number of Enemy out of range");
                 }
-                newEnemy.spawnRate = static_cast<uint8_t>(countEnemy);
+                newEnemy.spawnRate = countEnemy;
                 _isValidEnemyType(type);
                 newEnemy.type = _entityTypeFromString(type);
                 enemies.push_back(newEnemy);
