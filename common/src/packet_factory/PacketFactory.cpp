@@ -69,10 +69,13 @@ namespace cmn {
         packer.writeUInt16(positionProtocolId);
         packer.writeUInt32(_udpSequenceNbr);
         packer.writeBool(false);
-        packer.writeUInt32(data.entityId);
-        packer.writeFloat(data.posX, 0, windowWidth, xPositionFloatPrecision);
-        packer.writeFloat(data.posY, 0, windowHeight, yPositionFloatPrecision);
-
+        size_t const size = data.entityId.size();
+        packer.writeUInt32(size);
+        for (size_t i = 0; i < size; i++) {
+            packer.writeUInt32(data.entityId[i]);
+            packer.writeFloat(data.posX[i], 0, windowWidth, xPositionFloatPrecision);
+            packer.writeFloat(data.posY[i], 0, windowHeight, yPositionFloatPrecision);
+        }
         _udpSequenceNbr++;
         return _putInPacket(packer);
     }

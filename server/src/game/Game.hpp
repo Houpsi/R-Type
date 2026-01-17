@@ -39,6 +39,7 @@ namespace server {
         void _checkSpaceBar();
         void _sendPositions();
         void _sendDestroy();
+        std::unordered_map<uint32_t, std::pair<float, float>> _entityPos;
     };
 }
 
