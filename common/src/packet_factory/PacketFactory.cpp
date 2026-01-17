@@ -154,11 +154,14 @@ namespace cmn {
     CustomPacket PacketFactory::_createTextPacket(textData data)
     {
         BitPacker packer;
-
         packer.writeUInt16(textProtocolId);
+        packer.writeUInt32(_udpSequenceNbr);
+        packer.writeBool(false);
+
         packer.writeUInt32(data.entityId);
         packer.writeUInt32(data.score);
 
+        _udpSequenceNbr ++;
         return _putInPacket(packer);
     }
 
