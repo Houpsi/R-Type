@@ -49,6 +49,21 @@ namespace server {
         _startGame();
     }
 
+    void Game::_checkBossDeath(Level &currentLevel, sf::Clock &enemyClock)
+     {
+         if (!currentLevel.hasBossSpawned()) {
+             return;
+         }
+         if (_currentIdBoss != -1) {
+             if (!_ecs.getEntityById(_currentIdBoss)) {
+                 _levelManager.changeToNextLevel();
+                 currentLevel = _levelManager.getCurrentLevel();
+                 _currentIdBoss = -1;
+                 enemyClock.restart();
+             }
+         }
+     }
+
     [[noreturn]] void Game::_startGame()
     {
         Level &currentLevel = _levelManager.getCurrentLevel();
@@ -67,7 +82,7 @@ namespace server {
             if (data.has_value()) {
                 cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
             }
-
+            _checkBossDeath(currentLevel, enemyClock);
             _createEnemy(currentLevel, enemyClock, generator);
             _checkSpaceBar();
             if (elapsedTime > frameTimer) {
@@ -164,6 +179,7 @@ namespace server {
             cmn::newEntityData data = {newEnemy->getId(), cmn::EntityType::Boss1, cmn::boss1SpawnPositionWidth,
                 cmn::boss1SpawnPositionHeight};
 
+            _currentIdBoss = newEnemy->getId();
             _sharedData->addUdpPacketToSend(data);
             currentLevel.setBossSpawned(true);
             return;
