@@ -8,6 +8,8 @@
 #ifndef R_TYPE_CLIENT_SHOOT_HPP
     #define R_TYPE_CLIENT_SHOOT_HPP
 #include "Component.hpp"
+#include <unordered_map>
+#include <vector>
 
 namespace ecs {
     /**
@@ -15,6 +17,12 @@ namespace ecs {
      */
     class Shoot : public Component {
     public:
+        enum class ShootingType {
+            Normal,
+            Shotgun,
+            Gatling,
+        };
+
         explicit Shoot(int damage, float cooldown, float shootTimer = 0.0f): _damage(damage), _cooldown(cooldown), _shootTimer(shootTimer) {};
         ~Shoot() override = default;
 
@@ -30,12 +38,15 @@ namespace ecs {
         float getTimeSinceLastShot() const;
         void setTimeSinceLastShot(float t);
 
+        void addActiveShootingType(ShootingType type, float duration);
+        std::vector<ShootingType> getActiveShootingTypes() const;
 
     private:
         float _cooldown;
         int _damage;
         float _timeSinceLastShot = 0;
         float _shootTimer;
+        std::unordered_map<ShootingType, float> _activeShootingTypes;
     };
 }
 

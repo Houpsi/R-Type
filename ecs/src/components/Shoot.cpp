@@ -5,6 +5,7 @@
 ** Shoot
 */
 
+#include <vector>
 #include "Shoot.hpp"
 
 namespace ecs {
@@ -78,5 +79,23 @@ namespace ecs {
     void Shoot::setShootTimer(float t)
     {
         _shootTimer = t;
+    }
+
+    void Shoot::addActiveShootingType(ShootingType type, float duration)
+    {
+        _activeShootingTypes[type] = duration;
+    }
+
+    std::vector<Shoot::ShootingType> Shoot::getActiveShootingTypes() const
+    {
+        std::vector<ShootingType> types;
+
+        if (_activeShootingTypes.empty()) {
+            types.push_back(ShootingType::Normal);
+        }
+        for (const auto &pair : _activeShootingTypes) {
+            types.push_back(pair.first);
+        }
+        return types;
     }
 }

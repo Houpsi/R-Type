@@ -12,6 +12,7 @@
 #include "SFML/System/Clock.hpp"
 #include "level_manager/LevelManager.hpp"
 #include "shared_data/SharedData.hpp"
+#include "shoot_manager/ShootManager.hpp"
 #include <random>
 
 namespace server {
@@ -24,6 +25,7 @@ namespace server {
         ecs::EcsManager _ecs;
         std::shared_ptr<cmn::SharedData> _sharedData;
         LevelManager _levelManager;
+        ShootManager _shootManager;
         void _initLevels();
         void _initEcsManager();
         std::vector<int> _readyPlayersId;

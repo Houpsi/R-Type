@@ -139,24 +139,7 @@ namespace server {
                 shoot->setTimeSinceLastShot(shoot->getTimeSinceLastShot() + _ecs.getDeltaTime());
 
                 if (input->getSpacebar()) {
-                    if (shoot->getTimeSinceLastShot() >= shoot->getCooldown()) {
-                        auto positionCpn = entity->getComponent<ecs::Position>();
-                        auto collisionCpn = entity->getComponent<ecs::Collision>();
-
-                        shoot->setTimeSinceLastShot(0);
-
-                        float const posX = positionCpn->getX() + collisionCpn->getHeight();
-                        float const posY = entity->getComponent<ecs::Position>()->getY();
-
-                        auto projectile = cmn::EntityFactory::createEntity(_ecs,
-                            cmn::EntityType::PlayerProjectile,
-                            posX,
-                            posY,
-                            cmn::EntityFactory::Context::SERVER);
-
-                        cmn::newEntityData data = {projectile->getId(), cmn::EntityType::PlayerProjectile, posX, posY};
-                        _sharedData->addUdpPacketToSend(data);
-                    }
+                    _shootManager.shoot(_ecs, _sharedData, entity);
                 }
             }
         }
