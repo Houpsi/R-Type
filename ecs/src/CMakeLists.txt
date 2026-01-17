@@ -34,8 +34,6 @@ add_library(r-type_ecs_lib
         components/Sprite.hpp
         components/Enemy.cpp
         components/Enemy.hpp
-        systems/ShootSystem.cpp
-        systems/ShootSystem.hpp
         components/Destroy.cpp
         components/Destroy.hpp
         components/Shoot.cpp
@@ -63,6 +61,12 @@ add_library(r-type_ecs_lib
         systems/SoundSystem.cpp
         systems/SoundSystem.hpp
         EcsConstant.hpp
+        components/Score.cpp
+        components/Score.hpp
+        components/Text.cpp
+        components/Text.hpp
+        systems/ScoreTextSystem.hpp
+        systems/ScoreTextSystem.cpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC

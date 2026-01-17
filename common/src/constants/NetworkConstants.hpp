@@ -32,6 +32,7 @@ namespace cmn {
     constexpr uint16_t requestJoinLobbyProtocolId = 12;
     constexpr uint16_t gameResultProtocolId = 13;
     constexpr uint16_t playerDeathProtocolId = 14;
+    constexpr uint16_t textProtocolId = 15;
 
     // id ERROR
     constexpr uint16_t noExistentLobbyError = 0;

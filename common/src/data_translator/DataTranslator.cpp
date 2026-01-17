@@ -12,6 +12,8 @@
 #include "components/Position.hpp"
 #include "components/Sound.hpp"
 #include "constants/GameConstants.hpp"
+#include "components/Text.hpp"
+#include "components/Score.hpp"
 #include "entity_factory/EntityFactory.hpp"
 #include "enums/GameResultType.hpp"
 #include "enums/Key.hpp"
@@ -62,11 +64,14 @@ namespace cmn {
     void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionData &position)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
-            if (entity->getId() == position.entityId) {
-                auto component = entity->getComponent<ecs::Position>();
-                component->setX(position.posX);
-                component->setY(position.posY);
-                break;
+            size_t const size = position.entityId.size();
+            for (size_t i = 0; i < size; i++) {
+                if (entity->getId() == position.entityId[i]) {
+                    auto component = entity->getComponent<ecs::Position>();
+                    component->setX(position.posX[i]);
+                    component->setY(position.posY[i]);
+                    break;
+                }
             }
         }
     }
@@ -100,6 +105,19 @@ namespace cmn {
         }
     }
 
+    void DataTranslator::_injectScore(ecs::EcsManager& ecs, textData& data)
+    {
+        auto entities = ecs.getEntitiesWithComponent<ecs::Score>();
+        for (auto& entity : entities) {
+            if (entity->getId() == data.entityId) {
+                auto score = entity->getComponent<ecs::Score>();
+                if (!score) continue;
+                score->setScore(data.score);
+                break;
+            }
+        }
+    }
+
     void DataTranslator::translate(ecs::EcsManager &ecs, packetData &data, const std::unordered_map<int, uint64_t>& playerIdEntityMap)
     {
         std::visit([&ecs, playerIdEntityMap](auto &&arg)
@@ -124,6 +142,9 @@ namespace cmn {
                     // TODO do something when a player is dead
                     playerDeathData &death = arg;
                     std::cout << "[GAME] player " << death.playerId << " is dead" << std::endl;
+                } else if constexpr (std::is_same_v<T, textData>) {
+                    textData &text = arg;
+                    _injectScore(ecs, text);
                 }
             }, data);
     }

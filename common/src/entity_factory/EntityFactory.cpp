@@ -19,6 +19,7 @@
 #include "components/Sprite.hpp"
 #include "components/Velocity.hpp"
 #include "constants/GameConstants.hpp"
+#include "EcsConstant.hpp"
 
 namespace cmn {
 
@@ -43,8 +44,11 @@ namespace cmn {
             case EntityType::Plane:
                 _initEnemy(ecs, entity, context, type);
                 break;
-            case cmn::EntityType::PlayerProjectile:
+        case cmn::EntityType::PlayerProjectile:
                 _initProjectile(ecs, entity, context);
+                break;
+            case cmn::EntityType::MonsterProjectile:
+                _initMonsterProjectile(ecs, entity, context);
                 break;
             case cmn::EntityType::Boss1:
                 _initBoss(ecs, entity, context, hp);
@@ -76,20 +80,32 @@ namespace cmn {
     void EntityFactory::_initEnemy(ecs::EcsManager& ecs, std::shared_ptr<ecs::Entity> entity, Context context, EntityType type) {
         if (context == Context::CLIENT) {
             if (type == EntityType::Plane) {
-                 entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
-                 entity->addComponent<ecs::Animation>(cmn::monsterAnimationSize, cmn::monsterAnimationOffset, monsterAnimationNumberFrame);
+                entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
+                entity->addComponent<ecs::Animation>(cmn::monsterAnimationSize, cmn::monsterAnimationOffset, monsterAnimationNumberFrame);
             } else if (type == EntityType::Crochet) {
-                 entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monster2SpriteSheet)), monster2SpriteScale);
-                 entity->addComponent<ecs::Animation>(cmn::monster2AnimationSize, monster2AnimationOffset, monster2AnimationNumberFrame);
+                entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monster2SpriteSheet)), monster2SpriteScale);
+                entity->addComponent<ecs::Animation>(cmn::monster2AnimationSize, monster2AnimationOffset, monster2AnimationNumberFrame);
             }
         } else {
             entity->addComponent<ecs::Health>(monsterHealth);
             entity->addComponent<ecs::Enemy>();
-            entity->addComponent<ecs::Collision>(
-                ecs::TypeCollision::ENEMY,
-                monsterCollisionWidth,
-                monsterCollisionHeight
-            );
+            if (type == EntityType::Plane) {
+                entity->addComponent<ecs::Collision>(
+                        ecs::TypeCollision::ENEMY,
+                        monsterCollisionWidth * monsterSpriteScale.x,
+                        monsterCollisionHeight * monsterSpriteScale.y
+                );
+                entity->addComponent<ecs::Velocity>(monsterSpeed, ecs::left);
+                entity->addComponent<ecs::Shoot>(cmn::monsterDamage, monsterShootCooldown, 0.0f);
+            } else if (type == EntityType::Crochet) {
+                entity->addComponent<ecs::Collision>(
+                        ecs::TypeCollision::ENEMY,
+                        monster2CollisionWidth * monster2SpriteScale.x,
+                        monster2CollisionHeight * monster2SpriteScale.y
+                );
+                entity->addComponent<ecs::Velocity>(monster2Speed, ecs::left);
+                entity->addComponent<ecs::Shoot>(cmn::monsterDamage, monster2ShootCooldown, 0.0f);
+            }
         }
     }
 
@@ -99,13 +115,30 @@ namespace cmn {
         if (context == Context::CLIENT) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::playerProjectileSpriteSheet)), cmn::playerProjectileScale);
             entity->addComponent<ecs::Animation>(cmn::playerProjectileAnimationSize, cmn::playerProjectileAnimationOffset, cmn::playerProjectileAnimationNumberFrame);
-            entity->addComponent<ecs::Sound>(1, false);
+            entity->addComponent<ecs::Sound>(playerProjectileSoundId, playerProjectileLoop);
         } else {
             entity->addComponent<ecs::Shoot>(cmn::playerDamage, 0);
             entity->addComponent<ecs::Collision>(
-                ecs::TypeCollision::PLAYER_PROJECTILE,
-                cmn::playerProjectileCollisionWidth,
-                cmn::playerProjectileCollisionHeight
+                ecs::PLAYER_PROJECTILE,
+                cmn::playerProjectileCollisionWidth * playerProjectileScale.x,
+                cmn::playerProjectileCollisionHeight * playerProjectileScale.y
+            );
+        }
+    }
+
+    void EntityFactory::_initMonsterProjectile(ecs::EcsManager &ecs,std::shared_ptr<ecs::Entity> entity, Context context) {
+        entity->addComponent<ecs::Velocity>(cmn::monsterProjectileSpeed, cmn::monsterProjectileDirection);
+
+        if (context == Context::CLIENT) {
+            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::monsterProjectileSpriteSheet)), cmn::monsterProjectileScale);
+            entity->addComponent<ecs::Animation>(cmn::monsterProjectileAnimationSize, cmn::monsterProjectileAnimationOffset, cmn::monsterProjectileAnimationNumberFrame);
+            entity->addComponent<ecs::Sound>(monsterProjectileSoundId, monsterProjectileLoop);
+        } else {
+            entity->addComponent<ecs::Shoot>(cmn::monsterDamage, 0);
+            entity->addComponent<ecs::Collision>(
+                ecs::ENEMY_PROJECTILE,
+                cmn::monsterProjectileCollisionWidth * monsterProjectileScale.x,
+                cmn::monsterProjectileCollisionHeight * monsterProjectileScale.y
             );
         }
     }
@@ -118,8 +151,8 @@ namespace cmn {
             entity->addComponent<ecs::Health>(hp);
             entity->addComponent<ecs::Collision>(
                 ecs::TypeCollision::ENEMY,
-                cmn::boss1CollisionWidth,
-                cmn::boss1CollisionHeight
+                cmn::boss1CollisionWidth * boss1SpriteScale.x,
+                cmn::boss1CollisionHeight * boss1SpriteScale.y
             );
         }
     }

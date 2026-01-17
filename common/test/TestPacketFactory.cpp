@@ -17,6 +17,7 @@
 #include "packet_data/PacketData.hpp"
 #include "packet_data/PositionData.hpp"
 #include "packet_data/ConnectionData.hpp"
+#include "packet_data/StartGameData.hpp"
 
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
@@ -69,9 +70,9 @@ namespace cmn {
         EXPECT_FALSE(header.isReliable);
     }
 
-    TEST_F(PacketFactoryTest, CreatePositionPacket)
+    TEST_F(PacketFactoryTest, CreatePositionPacketSingleEntity)
     {
-        positionData posData{42, 10.F, 20.F};
+        positionData posData{{42}, {10.F}, {20.F}};
         CustomPacket packet = PacketFactory::createPacket(posData, sequencePacketMap);
         auto [header, data] = PacketDisassembler::disassemble(packet);
         positionData pos{};
@@ -82,9 +83,71 @@ namespace cmn {
                 pos = arg;
             }
         }, data);
-        EXPECT_FLOAT_EQ(pos.posX, 10.F);
-        EXPECT_FLOAT_EQ(pos.posY, 20.F);
-        EXPECT_EQ(pos.entityId, 42);
+
+        ASSERT_EQ(pos.entityId.size(), 1);
+        ASSERT_EQ(pos.posX.size(), 1);
+        ASSERT_EQ(pos.posY.size(), 1);
+
+        EXPECT_FLOAT_EQ(pos.posX[0], 10.F);
+        EXPECT_FLOAT_EQ(pos.posY[0], 20.F);
+        EXPECT_EQ(pos.entityId[0], 42);
+        EXPECT_FALSE(header.isReliable);
+    }
+
+    TEST_F(PacketFactoryTest, CreatePositionPacketMultipleEntities)
+    {
+        positionData posData{
+            {10, 20, 30},
+            {100.0f, 200.0f, 300.0f},
+            {150.0f, 250.0f, 350.0f}
+        };
+        CustomPacket packet = PacketFactory::createPacket(posData, sequencePacketMap);
+        auto [header, data] = PacketDisassembler::disassemble(packet);
+        positionData pos{};
+
+        std::visit([&pos](auto &&arg) {
+            using T = std::decay_t<decltype(arg)>;
+            if constexpr (std::is_same_v<T, positionData>) {
+                pos = arg;
+            }
+        }, data);
+
+        ASSERT_EQ(pos.entityId.size(), 3);
+        ASSERT_EQ(pos.posX.size(), 3);
+        ASSERT_EQ(pos.posY.size(), 3);
+
+        EXPECT_EQ(pos.entityId[0], 10);
+        EXPECT_FLOAT_EQ(pos.posX[0], 100.0f);
+        EXPECT_FLOAT_EQ(pos.posY[0], 150.0f);
+
+        EXPECT_EQ(pos.entityId[1], 20);
+        EXPECT_FLOAT_EQ(pos.posX[1], 200.0f);
+        EXPECT_FLOAT_EQ(pos.posY[1], 250.0f);
+
+        EXPECT_EQ(pos.entityId[2], 30);
+        EXPECT_FLOAT_EQ(pos.posX[2], 300.0f);
+        EXPECT_FLOAT_EQ(pos.posY[2], 350.0f);
+
+        EXPECT_FALSE(header.isReliable);
+    }
+
+    TEST_F(PacketFactoryTest, CreatePositionPacketEmpty)
+    {
+        positionData posData{{}, {}, {}};
+        CustomPacket packet = PacketFactory::createPacket(posData, sequencePacketMap);
+        auto [header, data] = PacketDisassembler::disassemble(packet);
+        positionData pos{};
+
+        std::visit([&pos](auto &&arg) {
+            using T = std::decay_t<decltype(arg)>;
+            if constexpr (std::is_same_v<T, positionData>) {
+                pos = arg;
+            }
+        }, data);
+
+        EXPECT_EQ(pos.entityId.size(), 0);
+        EXPECT_EQ(pos.posX.size(), 0);
+        EXPECT_EQ(pos.posY.size(), 0);
         EXPECT_FALSE(header.isReliable);
     }
 
@@ -92,19 +155,21 @@ namespace cmn {
     {
         newEntityData entity = {99, EntityType::Plane, 5.0F, 8.0F};
         CustomPacket packet = PacketFactory::createPacket(entity, sequencePacketMap);
-        auto data = PacketDisassembler::disassemble(packet);
+        auto [header, data] = PacketDisassembler::disassemble(packet);
+        newEntityData receivedEntity{};
 
-        std::visit([&entity](auto &&arg) {
+        std::visit([&receivedEntity](auto &&arg) {
             using T = std::decay_t<decltype(arg)>;
             if constexpr (std::is_same_v<T, newEntityData>) {
-                 entity = arg;
+                receivedEntity = arg;
             }
-        }, data.second);
-        EXPECT_EQ(entity.type, EntityType::Plane);
-        EXPECT_FLOAT_EQ(entity.posX, 5.F);
-        EXPECT_FLOAT_EQ(entity.posY, 8.F);
-        EXPECT_EQ(entity.entityId, 99);
+        }, data);
 
+        EXPECT_EQ(receivedEntity.type, EntityType::Plane);
+        EXPECT_FLOAT_EQ(receivedEntity.posX, 5.F);
+        EXPECT_FLOAT_EQ(receivedEntity.posY, 8.F);
+        EXPECT_EQ(receivedEntity.entityId, 99);
+        EXPECT_TRUE(header.isReliable);
         EXPECT_EQ(sequencePacketMap.size(), 1);
     }
 
@@ -122,6 +187,82 @@ namespace cmn {
             }
         }, data);
         EXPECT_EQ(del.entityId, 42);
+        EXPECT_TRUE(header.isReliable);
+        EXPECT_EQ(sequencePacketMap.size(), 1);
+    }
+
+    TEST_F(PacketFactoryTest, CreateStartGamePacket)
+    {
+        startGameData startData{};
+        CustomPacket packet = PacketFactory::createPacket(startData, sequencePacketMap);
+        auto [header, data] = PacketDisassembler::disassemble(packet);
+
+        bool isStartGameData = false;
+        std::visit([&isStartGameData](auto &&arg) {
+            using T = std::decay_t<decltype(arg)>;
+            if constexpr (std::is_same_v<T, startGameData>) {
+                isStartGameData = true;
+            }
+        }, data);
+
+        EXPECT_TRUE(isStartGameData);
+        EXPECT_FALSE(header.isReliable);
+    }
+
+    TEST_F(PacketFactoryTest, VerifySequenceNumberIncrement)
+    {
+        connectionData connData1{1};
+        auto packet1 = PacketFactory::createPacket(connData1, sequencePacketMap);
+        auto [header1, data1] = PacketDisassembler::disassemble(packet1);
+
+        connectionData connData2{2};
+        auto packet2 = PacketFactory::createPacket(connData2, sequencePacketMap);
+        auto [header2, data2] = PacketDisassembler::disassemble(packet2);
+
+        connectionData connData3{3};
+        auto packet3 = PacketFactory::createPacket(connData3, sequencePacketMap);
+        auto [header3, data3] = PacketDisassembler::disassemble(packet3);
+
+        EXPECT_EQ(header2.sequenceNbr, header1.sequenceNbr + 1);
+        EXPECT_EQ(header3.sequenceNbr, header2.sequenceNbr + 1);
+    }
+
+    TEST_F(PacketFactoryTest, VerifyReliablePacketsStoredInMap)
+    {
+        connectionData connData{1};
+        PacketFactory::createPacket(connData, sequencePacketMap);
+        EXPECT_EQ(sequencePacketMap.size(), 0);
+
+        inputData inputDataPacket{2, Keys::Up, true};
+        PacketFactory::createPacket(inputDataPacket, sequencePacketMap);
+        EXPECT_EQ(sequencePacketMap.size(), 0);
+
+        newEntityData newEntData{100, EntityType::Player, 50.0f, 50.0f};
+        PacketFactory::createPacket(newEntData, sequencePacketMap);
+        EXPECT_EQ(sequencePacketMap.size(), 1);
+
+        deleteEntityData delData{200};
+        PacketFactory::createPacket(delData, sequencePacketMap);
+        EXPECT_EQ(sequencePacketMap.size(), 2);
+    }
+
+    TEST_F(PacketFactoryTest, MultiplePacketsRoundTrip)
+    {
+        std::vector<packetData> originalData = {
+            connectionData{10},
+            inputData{20, Keys::Space, true},
+            positionData{{30}, {100.5f}, {200.7f}},
+            newEntityData{40, EntityType::Plane, 50.0f, 75.0f},
+            deleteEntityData{50},
+            startGameData{}
+        };
+
+        for (const auto& original : originalData) {
+            auto packet = PacketFactory::createPacket(original, sequencePacketMap);
+            auto [header, disassembled] = PacketDisassembler::disassemble(packet);
+
+            EXPECT_EQ(original.index(), disassembled.index());
+        }
     }
 
 } // namespace cmn

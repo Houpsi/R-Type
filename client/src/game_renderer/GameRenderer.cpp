@@ -24,6 +24,10 @@
 #include "systems/SoundSystem.hpp"
 #include "systems/SpriteAnimationSystem.hpp"
 #include "systems/VelocitySystem.hpp"
+#include "packet_factory/PacketFactory.hpp"
+#include "components/Score.hpp"
+#include "systems/ScoreTextSystem.hpp"
+#include <functional>
 
 namespace client {
 
@@ -43,6 +47,7 @@ namespace client {
         _gameEcs.addSystem<ecs::DestroySystem>();
         _gameEcs.addSystem<ecs::VelocitySystem>();
         _gameEcs.addSystem<ecs::BackgroundSystem>();
+        _gameEcs.addSystem<ecs::ScoreTextSystem>();
 
         _menuEcs.addSystem<ecs::InputSystem>();
         _menuEcs.addSystem<ecs::RenderSystem>(_window, _inputManager.getShaderName());
@@ -66,6 +71,18 @@ namespace client {
         const auto sound = _gameEcs.createEntity(cmn::idEntityForMusic);
         _sound = sound;
         sound->addComponent<ecs::Sound>(cmn::idThemeMusic, true);
+    }
+
+    void GameRenderer::_initScore()
+    {
+        const auto scoreEntity = _gameEcs.createEntity(cmn::idEntityForScore);
+
+        scoreEntity->addComponent<ecs::Position>(cmn::positionScoreX, cmn::positionScoreY);
+        scoreEntity->addComponent<ecs::Score>();
+        scoreEntity->addComponent<ecs::Text>(
+            _gameEcs.getResourceManager().getFont(cmn::fontPath.data()),
+            cmn::sizeScore
+        );
     }
 
     void GameRenderer::_initBackground()
@@ -278,6 +295,7 @@ namespace client {
         _initBackground();
         _initKeyboard();
         _initSound();
+        _initScore();
         while (_window.isOpen() && _sharedData->isGameRunning()) {
             const float deltaTime = _clock.restart().asSeconds();
             _updateNetwork();

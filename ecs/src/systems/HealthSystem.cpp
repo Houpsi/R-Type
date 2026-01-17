@@ -6,18 +6,31 @@
 */
 
 #include "HealthSystem.hpp"
+#include "EcsConstant.hpp"
+#include "components/Collision.hpp"
+#include "components/Score.hpp"
 
 namespace ecs
 {
-	void HealthSystem::update(EcsManager& ecs)
-	{
-		for (const auto& entity : ecs.getEntitiesWithComponent<Health>())
-		{
-			auto health = entity->getComponent<Health>()->getHealth();
-			if (health <= 0)
-			{
-				entity->addComponent<Destroy>();
-			}
-		}
-	}
+    void HealthSystem::update(EcsManager& ecs)
+    {
+        for (auto& entity : ecs.getEntitiesWithComponent<ecs::Health>())
+        {
+            auto health = entity->getComponent<ecs::Health>();
+            auto collision = entity->getComponent<ecs::Collision>();
+
+            if (health->getHealth() <= 0) {
+                if (collision && collision->getTypeCollision() == ENEMY) {
+                    auto scoreEntities = ecs.getEntitiesWithComponent<ecs::Score>();
+                    for (auto& scoreEntity : scoreEntities) {
+                        auto score = scoreEntity->getComponent<ecs::Score>();
+                        if (!score) continue;
+                        score->addToScore(ecs::scoreKillMonster);
+                    }
+                }
+                entity->addComponent<ecs::Destroy>();
+            }
+        }
+
+    }
 } // ecs

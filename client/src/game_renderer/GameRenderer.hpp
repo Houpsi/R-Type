@@ -52,6 +52,7 @@ namespace client {
         void _checkMenuPlayerInput() const;
         void _updateNetwork();
         void _initSound();
+        void _initScore();
         void _updateMenu(sf::Clock &inputClock, float elapsedTime, float deltaTime);
         void _updateGame(sf::Clock &inputClock, float elapsedTime, float deltaTime);
         void _resetGame();

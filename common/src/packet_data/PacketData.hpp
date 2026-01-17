@@ -22,6 +22,9 @@
 #include "SelectModeData.hpp"
 #include "SoundData.hpp"
 #include "StartGameData.hpp"
+#include "StartGameData.hpp"
+#include "TextData.hpp"
+
 #include <variant>
 
 namespace cmn {
@@ -34,6 +37,7 @@ namespace cmn {
         deleteEntityData,
         startGameData,
         soundData,
+        textData,
         acknowledgeData,
         leaveLobbyData,
         errorTcpData,

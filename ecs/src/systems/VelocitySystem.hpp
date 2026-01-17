@@ -11,6 +11,10 @@
 #include "System.hpp"
 #include "components/Velocity.hpp"
 #include "components/Position.hpp"
+#include "components/Enemy.hpp"
+#include "components/InputPlayer.hpp"
+#include "components/Collision.hpp"
+#include "components/Destroy.hpp"
 
 namespace ecs {
 class VelocitySystem : public System {

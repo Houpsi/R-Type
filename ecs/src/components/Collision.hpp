@@ -24,7 +24,7 @@ namespace ecs {
 
 class Collision: public Component {
   public:
-    explicit Collision(TypeCollision typeColision, float height, float width): _typeCollision(typeColision), _height(height), _width(width) {};
+    explicit Collision(TypeCollision typeColision, float width, float height): _typeCollision(typeColision), _height(height), _width(width) {};
     ~Collision() = default;
 
     [[nodiscard]] TypeCollision getTypeCollision() const;

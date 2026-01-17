@@ -9,6 +9,8 @@
 #include "components/Collision.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
+#include "components/Score.hpp"
+#include "components/Text.hpp"
 #include "components/Shoot.hpp"
 #include "components/Sound.hpp"
 #include "constants/GameConstants.hpp"
@@ -22,7 +24,6 @@
 #include "systems/DestroySystem.hpp"
 #include "systems/HealthSystem.hpp"
 #include "systems/MovementSystem.hpp"
-#include "systems/ShootSystem.hpp"
 #include "systems/VelocitySystem.hpp"
 #include <algorithm>
 #include <random>
@@ -55,6 +56,21 @@ namespace server {
         _sharedData->setLobbyState(_lobbyId, cmn::LobbyState::EndGame);
     }
 
+    void Game::_checkBossDeath(Level &currentLevel, sf::Clock &enemyClock)
+    {
+        if (!currentLevel.hasBossSpawned()) {
+            return;
+        }
+        if (_currentIdBoss != -1) {
+            if (!_ecs.getEntityById(_currentIdBoss)) {
+                _levelManager.changeToNextLevel();
+                currentLevel = _levelManager.getCurrentLevel();
+                _currentIdBoss = -1;
+                enemyClock.restart();
+            }
+        }
+    }
+
     void Game::_startGame()
     {
         Level &currentLevel = _levelManager.getCurrentLevel();
@@ -70,6 +86,10 @@ namespace server {
         while (_sharedData->getLobbyState(_lobbyId) == cmn::LobbyState::Running) {
             float const deltaTime = clock.restart().asSeconds();
 
+            if (_levelManager.getGameFinished()) {
+                _sendGameEndState(cmn::GameResultType::Win);
+                break;
+            }
             _handleDisconnectedPlayers();
             if (_playerIdEntityMap.empty()) {
                 std::cout << "[Game] No players connected, ending game for lobby " << _lobbyId << "\n";
@@ -79,16 +99,19 @@ namespace server {
             if (data.has_value()) {
                 cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
             }
+            _checkBossDeath(currentLevel, enemyClock);
             _createEnemy(currentLevel, enemyClock, generator);
             _checkSpaceBar();
+            _enemyShoot();
             if (elapsedTime > frameTimer) {
                 fpsClock.restart();
                 _sendPositions();
             }
             _sendSound();
+            _sendText();
             _sendDestroy();
             if (_areAllPlayersDead()) {
-                _sendGameOver();
+                _sendGameEndState(cmn::GameResultType::Lose);
                 std::cout << "[Game] All players are dead, game over for lobby " << _lobbyId << "\n";
                 break;
             }
@@ -115,7 +138,7 @@ namespace server {
                 for (const auto& entity : entities) {
                     if (entity->getId() == entityId) {
                         entity->addComponent<ecs::Destroy>();
-                        cmn::deleteEntityData deleteData = {static_cast<uint32_t>(entityId), static_cast<uint32_t>(_lobbyId)};
+                        cmn::deleteEntityData deleteData = {static_cast<uint32_t>(entityId)};
                         _sharedData->addLobbyUdpPacketToSend(_lobbyId, deleteData);
                         break;
                     }
@@ -153,11 +176,10 @@ namespace server {
         return _deadPlayersId.size() == _playerIdEntityMap.size();
     }
 
-    void Game::_sendGameOver() const
+    void Game::_sendGameEndState(cmn::GameResultType type) const
     {
-        cmn::gameResultData data = {static_cast<uint8_t>(cmn::GameResultType::Lose)};
+        cmn::gameResultData data = {static_cast<uint8_t>(type)};
         _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
-         // TODO: might create a bool so it doesnt delete the lobby before sending result
          std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         _sharedData->setLobbyState(_lobbyId, cmn::LobbyState::EndGame);
     }
@@ -165,11 +187,12 @@ namespace server {
     void Game::_sendDestroy()
     {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Destroy>()) {
-            cmn::deleteEntityData data = {entity->getId(), static_cast<uint32_t>(_lobbyId)};
+            cmn::deleteEntityData data = {entity->getId()};
             _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
             if (entity->getComponent<ecs::InputPlayer>()) {
                 _checkPlayerDeaths(entity);
             }
+            _entityPos.erase(entity->getId());
         }
     }
 
@@ -183,14 +206,46 @@ namespace server {
          }
      }
 
-    void Game::_sendPositions() const
+    void Game::_sendText()
      {
-        for (const auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
-             const auto component = entity->getComponent<ecs::Position>();
-            std::pair const position = { component->getX(), component->getY() };
-            cmn::positionData data = {entity->getId(), position.first, position.second};
-            _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
+         for (auto& entity : _ecs.getEntitiesWithComponent<ecs::Score>()) {
+             auto score = entity->getComponent<ecs::Score>();
+
+             if (!score) continue;
+             uint32_t const castScore = static_cast<uint32_t>(score->getScore());
+             cmn::textData data = {entity->getId(), castScore};
+             _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
+         }
+     }
+
+    void Game::_sendPositions()
+    {
+        std::vector<uint32_t> ids;
+        std::vector<float> posX;
+        std::vector<float> posY;
+
+        for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
+            auto component = entity->getComponent<ecs::Position>();
+            auto realPos = std::make_pair(component->getX(), component->getY());
+            uint32_t const entityId = entity->getId();
+            if (_entityPos.contains(entityId)) {
+                auto oldPos = _entityPos[entityId];
+                if (oldPos == realPos) {
+                    continue;
+                }
+                _entityPos[entityId] = realPos;
+                ids.push_back(entityId);
+                posX.push_back(realPos.first);
+                posY.push_back(realPos.second);
+                continue;
+            }
+            _entityPos[entityId] = std::make_pair(realPos.first, realPos.second);
+            ids.push_back(entityId);
+            posX.push_back(realPos.first);
+            posY.push_back(realPos.second);
         }
+        cmn::positionData data = {ids, posX, posY};
+        _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
     }
 
     void Game::_checkSpaceBar()
@@ -231,6 +286,47 @@ namespace server {
         }
     }
 
+    void Game::_enemyShoot()
+     {
+         for (auto const &entity : _ecs.getEntitiesWithComponent<ecs::Shoot>())
+         {
+             auto input = entity->getComponent<ecs::InputPlayer>();
+             const auto shoot = entity->getComponent<ecs::Shoot>();
+             const auto collision= entity->getComponent<ecs::Collision>();
+
+             if (!shoot && !collision) { continue; }
+
+             if (collision && collision->getTypeCollision() == ecs::ENEMY)
+             {
+                 auto posCpn = entity->getComponent<ecs::Position>();
+                 shoot->setShootTimer(shoot->getShootTimer() + _ecs.getDeltaTime());
+
+                 if (shoot->getShootTimer() >= shoot->getCooldown()) {
+                     shoot->setShootTimer(0);
+
+                     float posX = posCpn->getX() - collision->getWidth() - 10;
+                     float posY = posCpn->getY() + 15;
+
+                     auto projectile = cmn::EntityFactory::createEntity(_ecs,
+                          cmn::EntityType::MonsterProjectile,
+                          posX,
+                          posY,
+                          cmn::EntityFactory::Context::SERVER);
+
+                     cmn::newEntityData data {
+                         projectile->getId(),
+                         cmn::EntityType::MonsterProjectile,
+                         posX,
+                         posY
+                     };
+                     _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
+                     shoot->setTimeSinceLastShot(0);
+                     shoot->setShootTimer(0.f);
+                 }
+             }
+         }
+     }
+
     void Game::_createEnemy(Level &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator)
     {
         if (currentLevel.isFinished()) {
@@ -248,6 +344,7 @@ namespace server {
             cmn::newEntityData data = {newEnemy->getId(), cmn::EntityType::Boss1, cmn::boss1SpawnPositionWidth,
                 cmn::boss1SpawnPositionHeight};
 
+            _currentIdBoss = newEnemy->getId();
             _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
             currentLevel.setBossSpawned(true);
             return;
@@ -371,7 +468,6 @@ namespace server {
             _entityIdPlayerMap[player->getId()] = id;
             currentNbPlayerEntities++;
         }
-
     }
 
     void Game::_initEcsManager()
@@ -379,9 +475,17 @@ namespace server {
         _ecs.addSystem<ecs::DestroySystem>();
         _ecs.addSystem<ecs::MovementSystem>();
         _ecs.addSystem<ecs::CollisionSystem>();
-        _ecs.addSystem<ecs::ShootSystem>();
         _ecs.addSystem<ecs::VelocitySystem>();
         _ecs.addSystem<ecs::HealthSystem>();
+
+         auto scoreEntity = _ecs.createEntity(cmn::idEntityForScore);
+         scoreEntity->addComponent<ecs::Position>(cmn::positionScoreX, cmn::positionScoreY);
+         scoreEntity->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
+         scoreEntity->addComponent<ecs::Text>(
+             _ecs.getResourceManager().getFont(cmn::fontPath.data()),
+             cmn::sizeScore
+         );
+         scoreEntity->addComponent<ecs::Score>();
     }
 
 }
