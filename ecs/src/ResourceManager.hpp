@@ -10,6 +10,7 @@
 
 #include "SFML/Audio/SoundBuffer.hpp"
 #include "SFML/Graphics/Texture.hpp"
+#include "SFML/Graphics/Font.hpp"
 #include <string>
 #include <unordered_map>
 
@@ -20,8 +21,10 @@ namespace ecs {
         ResourceManager();
 
         sf::Texture &getTexture(const std::string &);
+        const sf::Font& getFont(const std::string& path);
       private:
         std::unordered_map<std::string, sf::Texture> _textureMap;
+        std::unordered_map<std::string, sf::Font> _fonts;
     };
 }
 

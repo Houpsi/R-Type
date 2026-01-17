@@ -15,9 +15,9 @@ namespace cmn {
 
     using positionData = struct positionData
     {
-        uint32_t entityId;
-        float posX;
-        float posY;
+        std::vector<uint32_t> entityId;
+        std::vector<float> posX;
+        std::vector<float> posY;
     };
 
 }// namespace cmn

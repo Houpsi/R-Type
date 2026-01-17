@@ -69,10 +69,13 @@ namespace cmn {
         packer.writeUInt16(positionProtocolId);
         packer.writeUInt32(_udpSequenceNbr);
         packer.writeBool(false);
-        packer.writeUInt32(data.entityId);
-        packer.writeFloat(data.posX, 0, windowWidth, xPositionFloatPrecision);
-        packer.writeFloat(data.posY, 0, windowHeight, yPositionFloatPrecision);
-
+        size_t const size = data.entityId.size();
+        packer.writeUInt32(size);
+        for (size_t i = 0; i < size; i++) {
+            packer.writeUInt32(data.entityId[i]);
+            packer.writeFloat(data.posX[i], 0, windowWidth, xPositionFloatPrecision);
+            packer.writeFloat(data.posY[i], 0, windowHeight, yPositionFloatPrecision);
+        }
         _udpSequenceNbr++;
         return _putInPacket(packer);
     }
@@ -151,6 +154,20 @@ namespace cmn {
         return _putInPacket(packer);
     }
 
+    CustomPacket PacketFactory::_createTextPacket(textData data)
+    {
+        BitPacker packer;
+        packer.writeUInt16(textProtocolId);
+        packer.writeUInt32(_udpSequenceNbr);
+        packer.writeBool(false);
+
+        packer.writeUInt32(data.entityId);
+        packer.writeUInt32(data.score);
+
+        _udpSequenceNbr ++;
+        return _putInPacket(packer);
+    }
+
     CustomPacket PacketFactory::createPacket(packetData data,
         std::unordered_map<uint32_t, cmn::reliablePacket> &reliablePackets)
     {
@@ -180,6 +197,9 @@ namespace cmn {
                 } else if constexpr (std::is_same_v<T, soundData>) {
                     soundData const &soundData = arg;
                     return _createSoundPacket(soundData);
+                } else if constexpr (std::is_same_v<T, textData>) {
+                    textData const &textData = arg;
+                    return _createTextPacket(textData);
                 }
             }, data);
     }

@@ -13,8 +13,10 @@
 #include "InputData.hpp"
 #include "NewEntityData.hpp"
 #include "PositionData.hpp"
-#include "StartGameData.hpp"
 #include "SoundData.hpp"
+#include "StartGameData.hpp"
+#include "TextData.hpp"
+
 #include <variant>
 
 namespace cmn {
@@ -27,7 +29,8 @@ namespace cmn {
         deleteEntityData,
         startGameData,
         soundData,
-        acknowledgeData
+        acknowledgeData,
+        textData
     >;
 
 }

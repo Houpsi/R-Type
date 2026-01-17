@@ -9,6 +9,8 @@
 #include "components/Collision.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
+#include "components/Score.hpp"
+#include "components/Text.hpp"
 #include "components/Shoot.hpp"
 #include "components/Sound.hpp"
 #include "constants/GameConstants.hpp"
@@ -90,6 +92,7 @@ namespace server {
                 _sendPositions();
             }
             _sendSound();
+            _sendText();
             _sendDestroy();
             _ecs.setDeltaTime(deltaTime);
             _ecs.updateSystems();
@@ -102,6 +105,7 @@ namespace server {
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Destroy>()) {
             cmn::deleteEntityData data = {entity->getId()};
             _sharedData->addUdpPacketToSend(data);
+            _entityPos.erase(entity->getId());
         }
     }
 
@@ -115,14 +119,46 @@ namespace server {
          }
      }
 
+    void Game::_sendText()
+     {
+         for (auto& entity : _ecs.getEntitiesWithComponent<ecs::Score>()) {
+             auto score = entity->getComponent<ecs::Score>();
+
+             if (!score) continue;
+             uint32_t const castScore = static_cast<uint32_t>(score->getScore());
+             cmn::textData data = {entity->getId(), castScore};
+             _sharedData->addUdpPacketToSend(data);
+         }
+     }
+
     void Game::_sendPositions()
     {
+        std::vector<uint32_t> ids;
+        std::vector<float> posX;
+        std::vector<float> posY;
+
         for (auto &entity : _ecs.getEntitiesWithComponent<ecs::Position>()) {
             auto component = entity->getComponent<ecs::Position>();
-            std::pair<float, float> const position = { component->getX(), component->getY() };
-            cmn::positionData data = {entity->getId(), position.first, position.second};
-            _sharedData->addUdpPacketToSend(data);
+            auto realPos = std::make_pair(component->getX(), component->getY());
+            uint32_t const entityId = entity->getId();
+            if (_entityPos.contains(entityId)) {
+                auto oldPos = _entityPos[entityId];
+                if (oldPos == realPos) {
+                    continue;
+                }
+                _entityPos[entityId] = realPos;
+                ids.push_back(entityId);
+                posX.push_back(realPos.first);
+                posY.push_back(realPos.second);
+                continue;
+            }
+            _entityPos[entityId] = std::make_pair(realPos.first, realPos.second);
+            ids.push_back(entityId);
+            posX.push_back(realPos.first);
+            posY.push_back(realPos.second);
         }
+        cmn::positionData data = {ids, posX, posY};
+        _sharedData->addUdpPacketToSend(data);
     }
 
     void Game::_checkSpaceBar()
@@ -335,7 +371,6 @@ namespace server {
             _entityIdPlayerMap[player->getId()] = id;
             currentNbPlayerEntities++;
         }
-
     }
 
     void Game::_initEcsManager()
@@ -345,6 +380,15 @@ namespace server {
         _ecs.addSystem<ecs::CollisionSystem>();
         _ecs.addSystem<ecs::VelocitySystem>();
         _ecs.addSystem<ecs::HealthSystem>();
+
+         auto scoreEntity = _ecs.createEntity(cmn::idEntityForScore);
+         scoreEntity->addComponent<ecs::Position>(cmn::positionScoreX, cmn::positionScoreY);
+         scoreEntity->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
+         scoreEntity->addComponent<ecs::Text>(
+             _ecs.getResourceManager().getFont(cmn::fontPath.data()),
+             cmn::sizeScore
+         );
+         scoreEntity->addComponent<ecs::Score>();
     }
 
 }

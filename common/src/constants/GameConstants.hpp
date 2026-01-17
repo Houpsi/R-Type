@@ -122,7 +122,12 @@ namespace cmn {
     constexpr int idEntityForMusic = 5;
     constexpr int idThemeMusic = 2;
 
+    constexpr int idEntityForScore = 8;
 
+    constexpr float positionScoreX = 20.f;
+    constexpr float positionScoreY = 20.f;
+    constexpr int sizeScore = 32;
+    constexpr std::string_view fontPath = "./assets/font/font.ttf";
 }
 
 #endif// R_TYPE_GAMECONSTANTS_HPP

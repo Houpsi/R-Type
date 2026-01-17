@@ -40,6 +40,7 @@ namespace client {
         void _updateLobby();
         void _updateGame();
         void _initSound();
+        void _initScore();
 
 
         bool _isRunning = false;
