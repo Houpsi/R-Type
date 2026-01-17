@@ -10,7 +10,6 @@
 #include "SFML/Network/SocketSelector.hpp"
 #include "SFML/Network/TcpSocket.hpp"
 #include "SFML/Network/UdpSocket.hpp"
-#include "client_network_state/ClientNetworkState.hpp"
 #include "packet_data/PacketData.hpp"
 #include "packet_header/PacketHeader.hpp"
 #include "reliable_packet/ReliablePacket.hpp"
@@ -46,9 +45,6 @@ namespace client {
             void _handleUdpReception(cmn::packetHeader header, cmn::packetData data);
             void _resendTimedOutPackets();
             void _sendAckPacket(cmn::packetHeader header);
-            static bool _shouldProcessPacket(const cmn::packetHeader &header,
-                cmn::clientNetworkState state);
-            cmn::clientNetworkState _serverState;
     };
 }
 

@@ -67,9 +67,4 @@ namespace ecs {
     {
         _r = r;
     }
-
-    void InputPlayer::setEscape(bool escape)
-    {
-        _escape = escape;
-    }
 }

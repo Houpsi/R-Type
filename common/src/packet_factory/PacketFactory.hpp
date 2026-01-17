@@ -11,6 +11,7 @@
 #include "custom_packet/CustomPacket.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
+#include "enums/KeyState.hpp"
 #include "bit_packer/BitPacker.hpp"
 #include "packet_data/PacketData.hpp"
 #include <optional>

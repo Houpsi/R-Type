@@ -47,10 +47,6 @@ namespace server {
         _currentLevelId = id;
     }
 
-    bool LevelManager::getGameFinished() const {
-       return _gameFinished;
-    }
-
     void LevelManager::changeToNextLevel()
     {
         bool found = false;
@@ -68,7 +64,6 @@ namespace server {
         }
         if (!found) {
             _currentLevelId = tmpCurrent;
-            _gameFinished = true;
             return;
         }
         _currentLevelId = nextId;

@@ -27,8 +27,6 @@ class InputPlayer : public Component {
     void setRight(bool right);
     void setSpacebar(bool spacebar);
     void setR(bool r);
-    void setEscape(bool escape);
-
   private:
     bool _up = false;
     bool _down = false;
@@ -36,7 +34,6 @@ class InputPlayer : public Component {
     bool _right = false;
     bool _spacebar = false;
     bool _r = false;
-    bool _escape = false;
 };
 }
 

@@ -20,7 +20,6 @@ namespace client {
 
     struct InputBinding {
         sf::Keyboard::Key key;
-        sf::Keyboard::Key other_key;
         unsigned int joystickButton;
         bool isAxis;
         sf::Joystick::Axis axis;

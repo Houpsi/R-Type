@@ -9,16 +9,14 @@
 
 #include "SFML/Network/SocketSelector.hpp"
 #include "SFML/Network/UdpSocket.hpp"
-#include "client_network_state/ClientNetworkState.hpp"
 #include "custom_packet/CustomPacket.hpp"
 #include "packet_data/PacketData.hpp"
 #include "packet_header/PacketHeader.hpp"
-#include "reliable_packet/ReliablePacket.hpp"
 #include "shared_data/SharedData.hpp"
 #include <SFML/Network/TcpListener.hpp>
 #include <SFML/Network/TcpSocket.hpp>
-#include <map>
 #include <thread>
+#include "reliable_packet/ReliablePacket.hpp"
 
 namespace server {
 
@@ -42,15 +40,13 @@ namespace server {
         void _acceptConnection();
         sf::UdpSocket _udpSocket;
         [[noreturn]] void _handleTcp();
+        std::jthread _tcpThread;
         void _checkSocket();
         void _handleNewTcpPacket();
         std::shared_ptr<cmn::SharedData> _sharedData;
         std::unordered_map<uint32_t, cmn::reliablePacket> _reliablePackets;
-        void _handleUdpReception(cmn::packetHeader header, cmn::packetData data, sf::IpAddress ip, uint16_t port);
+        void _handleUdpReception(cmn::packetHeader header, cmn::packetData data);
         void _resendTimedOutPackets();
-        std::map<std::pair<uint16_t, sf::IpAddress>, uint32_t> _playerList;
-        std::unordered_map<uint32_t, cmn::clientNetworkState> _clientStates;
-        static bool _shouldProcessPacket(const cmn::packetHeader &header, cmn::clientNetworkState state);
     };
 
 }// namespace server

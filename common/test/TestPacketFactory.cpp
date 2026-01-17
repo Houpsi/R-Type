@@ -17,9 +17,11 @@
 #include "packet_data/PacketData.hpp"
 #include "packet_data/PositionData.hpp"
 #include "packet_data/ConnectionData.hpp"
+#include "packet_data/StartGameData.hpp"
 
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
+#include "enums/KeyState.hpp"
 #include "packet_disassembler/PacketDisassembler.hpp"
 
 namespace cmn {
@@ -52,7 +54,7 @@ namespace cmn {
 
     TEST_F(PacketFactoryTest, CreateInputPacket)
     {
-        inputData inputDataPacket{8, Keys::Up, true};
+        inputData inputDataPacket{8, Keys::Up, KeyState::Pressed};
         CustomPacket packet = PacketFactory::createPacket(inputDataPacket, sequencePacketMap);
         auto [header, data] = PacketDisassembler::disassemble(packet);
         inputData input{};
@@ -65,7 +67,7 @@ namespace cmn {
         }, data);
         EXPECT_EQ(input.playerId, 8);
         EXPECT_EQ(input.key, Keys::Up);
-        EXPECT_EQ(input.pressed, true);
+        EXPECT_EQ(input.keyState, KeyState::Pressed);
         EXPECT_FALSE(header.isReliable);
     }
 
