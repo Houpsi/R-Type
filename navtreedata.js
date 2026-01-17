@@ -63,7 +63,7 @@ var NAVTREEINDEX =
 "Animation_8cpp.html",
 "classecs_1_1Collision.html#a74f03a1f76c9d71e3fce64b231010ff9",
 "classecs_1_1Sound.html#a55e016f647cd5d2c3b7a49412d173187",
-"main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627"
+"index.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
