@@ -65,11 +65,11 @@ namespace client {
     {
         const auto scoreEntity = _ecs.createEntity(cmn::idEntityForScore);
 
-        scoreEntity->addComponent<ecs::Position>(20.f, 20.f);
+        scoreEntity->addComponent<ecs::Position>(cmn::positionScoreX, cmn::positionScoreY);
         scoreEntity->addComponent<ecs::Score>();
         scoreEntity->addComponent<ecs::Text>(
-            _ecs.getResourceManager().getFont("./assets/font/font.ttf"),
-            32
+            _ecs.getResourceManager().getFont(cmn::fontPath.data()),
+            cmn::sizeScore
         );
     }
 
