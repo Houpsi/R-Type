@@ -111,7 +111,7 @@ namespace server {
 
              if (!score) continue;
              uint32_t const castScore = static_cast<uint32_t>(score->getScore());
-             cmn::textData data = {cmn::idEntityForScore, castScore};
+             cmn::textData data = {entity->getId(), castScore};
              _sharedData->addUdpPacketToSend(data);
          }
      }
@@ -308,11 +308,11 @@ namespace server {
         _ecs.addSystem<ecs::ScoreTextSystem>();
 
         auto scoreEntity = _ecs.createEntity(cmn::idEntityForScore);
-        scoreEntity->addComponent<ecs::Position>(20.f, 20.f);
+        scoreEntity->addComponent<ecs::Position>(cmn::positionScoreX, cmn::positionScoreY);
         scoreEntity->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
         scoreEntity->addComponent<ecs::Text>(
-            _ecs.getResourceManager().getFont("./assets/font/font.ttf"),
-            32
+            _ecs.getResourceManager().getFont(cmn::fontPath.data()),
+            cmn::sizeScore
         );
         scoreEntity->addComponent<ecs::Score>();
     }
