@@ -29,6 +29,8 @@ namespace server {
         std::vector<int> _readyPlayersId;
         std::unordered_map<int, uint64_t> _playerIdEntityMap;
         std::unordered_map<uint64_t , int> _entityIdPlayerMap;
+        int _currentIdBoss = -1;
+        void _checkBossDeath(Level &currentLevel, sf::Clock &enemyClock);
         void _createNewPlayers(const std::vector<int>& ids, size_t &currentNbPlayerEntities);
         bool _isIdAlreadyPresent(int playerId);
         void _waitForPlayers();

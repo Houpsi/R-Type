@@ -12,8 +12,8 @@
 
 namespace cmn {
 
-    uint32_t PacketFactory::_udpSequenceNbr = 0;
-    uint32_t PacketFactory::_tcpSequenceNbr = 0;
+    uint32_t PacketFactory::_udpSequenceNbr = 1;
+    uint32_t PacketFactory::_tcpSequenceNbr = 1;
 
     CustomPacket PacketFactory::_putInPacket(BitPacker &packer)
     {
@@ -56,7 +56,7 @@ namespace cmn {
         packer.writeBool(false);
         packer.writeUInt32(data.playerId);
         packer.writeUInt8(static_cast<uint8_t>(data.key));
-        packer.writeUInt8(static_cast<uint8_t>(data.keyState));
+        packer.writeBool(data.pressed);
 
         _udpSequenceNbr++;
         return _putInPacket(packer);
