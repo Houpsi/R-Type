@@ -41,4 +41,16 @@ namespace ecs {
             }
         }
     }
+
+    const sf::Font& ResourceManager::getFont(const std::string& path)
+    {
+        if (!_fonts.contains(path)) {
+            sf::Font font;
+            if (!font.openFromFile(path)) {
+                throw std::runtime_error("Failed to load font: " + path);
+            }
+            _fonts.emplace(path, std::move(font));
+        }
+        return _fonts.at(path);
+    }
 }

@@ -61,6 +61,12 @@ add_library(r-type_ecs_lib
         systems/SoundSystem.cpp
         systems/SoundSystem.hpp
         EcsConstant.hpp
+        components/Score.cpp
+        components/Score.hpp
+        components/Text.cpp
+        components/Text.hpp
+        systems/ScoreTextSystem.hpp
+        systems/ScoreTextSystem.cpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC

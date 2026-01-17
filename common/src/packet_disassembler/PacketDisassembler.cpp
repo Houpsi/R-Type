@@ -10,6 +10,8 @@
 #include "constants/BitPackingConstants.hpp"
 #include "constants/GameConstants.hpp"
 #include "constants/NetworkConstants.hpp"
+#include "packet_data/TextData.hpp"
+
 #include <optional>
 
 namespace cmn {
@@ -94,6 +96,14 @@ namespace cmn {
         return data;
     }
 
+    packetData PacketDisassembler::_disassembleIntoTextData(BitUnpacker &unpacker)
+    {
+        uint32_t const textId = unpacker.readUInt32();
+        uint32_t const score = unpacker.readUInt32();
+        textData data = {textId, score};
+
+        return data;
+    }
 
     std::pair<packetHeader, packetData> PacketDisassembler::disassemble(CustomPacket &packet)
     {
@@ -129,6 +139,8 @@ namespace cmn {
                 return {header, _disassembleIntoSoundData(unpacker)};
             case (acknowledgeProtocolId):
                 return {header, _disassembleIntoAcknowledgeData(unpacker)};
+            case (textProtocolId):
+                return  {header, _disassembleIntoTextData(unpacker)};
             default:
                 throw std::exception();
         }

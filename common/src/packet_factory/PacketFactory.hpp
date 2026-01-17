@@ -8,14 +8,15 @@
 #ifndef R_TYPE_PACKETFACTORY_HPP
 #define R_TYPE_PACKETFACTORY_HPP
 
+#include "bit_packer/BitPacker.hpp"
 #include "custom_packet/CustomPacket.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
-#include "bit_packer/BitPacker.hpp"
 #include "packet_data/PacketData.hpp"
+#include "packet_data/TextData.hpp"
+#include "reliable_packet/ReliablePacket.hpp"
 #include <optional>
 #include <unordered_map>
-#include "reliable_packet/ReliablePacket.hpp"
 
 namespace cmn {
 
@@ -38,6 +39,7 @@ namespace cmn {
         static uint32_t _udpSequenceNbr;
         static uint32_t _tcpSequenceNbr;
         static CustomPacket _createSoundPacket(soundData data);
+        static CustomPacket _createTextPacket(textData data);
         static void _handleReliability(CustomPacket &packet, std::unordered_map<uint32_t, reliablePacket> &reliablePackets);
     };
 

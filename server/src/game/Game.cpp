@@ -9,6 +9,8 @@
 #include "components/Collision.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
+#include "components/Score.hpp"
+#include "components/Text.hpp"
 #include "components/Shoot.hpp"
 #include "components/Sound.hpp"
 #include "constants/GameConstants.hpp"
@@ -90,6 +92,7 @@ namespace server {
                 _sendPositions();
             }
             _sendSound();
+            _sendText();
             _sendDestroy();
             _ecs.setDeltaTime(deltaTime);
             _ecs.updateSystems();
@@ -113,6 +116,18 @@ namespace server {
              cmn::soundData data = {soundId};
              _sharedData->addUdpPacketToSend(data);
              entity->removeComponent<ecs::Sound>();
+         }
+     }
+
+    void Game::_sendText()
+     {
+         for (auto& entity : _ecs.getEntitiesWithComponent<ecs::Score>()) {
+             auto score = entity->getComponent<ecs::Score>();
+
+             if (!score) continue;
+             uint32_t const castScore = static_cast<uint32_t>(score->getScore());
+             cmn::textData data = {entity->getId(), castScore};
+             _sharedData->addUdpPacketToSend(data);
          }
      }
 
@@ -365,6 +380,15 @@ namespace server {
         _ecs.addSystem<ecs::CollisionSystem>();
         _ecs.addSystem<ecs::VelocitySystem>();
         _ecs.addSystem<ecs::HealthSystem>();
+
+         auto scoreEntity = _ecs.createEntity(cmn::idEntityForScore);
+         scoreEntity->addComponent<ecs::Position>(cmn::positionScoreX, cmn::positionScoreY);
+         scoreEntity->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
+         scoreEntity->addComponent<ecs::Text>(
+             _ecs.getResourceManager().getFont(cmn::fontPath.data()),
+             cmn::sizeScore
+         );
+         scoreEntity->addComponent<ecs::Score>();
     }
 
 }

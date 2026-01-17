@@ -21,6 +21,8 @@ namespace ecs {
     constexpr std::string_view folderSound = "./assets/sound/";
     constexpr std::array<std::string_view, 3> idToSound = {"shoot", "theme", "explosion"};
 
+    static constexpr int scoreKillMonster = 100;
+
     static constexpr int MAX_ENTITIES = 6;
     static constexpr int MAX_DEPTH = 6;
 
