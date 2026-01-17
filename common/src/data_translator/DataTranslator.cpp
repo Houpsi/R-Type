@@ -59,11 +59,14 @@ namespace cmn {
     void DataTranslator::_injectPosition(ecs::EcsManager &ecs, positionData &position)
     {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::Position>()) {
-            if (entity->getId() == position.entityId) {
-                auto component = entity->getComponent<ecs::Position>();
-                component->setX(position.posX);
-                component->setY(position.posY);
-                break;
+            size_t const size = position.entityId.size();
+            for (size_t i = 0; i < size; i++) {
+                if (entity->getId() == position.entityId[i]) {
+                    auto component = entity->getComponent<ecs::Position>();
+                    component->setX(position.posX[i]);
+                    component->setY(position.posY[i]);
+                    break;
+                }
             }
         }
     }
