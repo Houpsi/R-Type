@@ -12,8 +12,8 @@
 
 namespace cmn {
 
-    uint32_t PacketFactory::_udpSequenceNbr = 0;
-    uint32_t PacketFactory::_tcpSequenceNbr = 0;
+    uint32_t PacketFactory::_udpSequenceNbr = 1;
+    uint32_t PacketFactory::_tcpSequenceNbr = 1;
 
     CustomPacket PacketFactory::_putInPacket(BitPacker &packer)
     {
