@@ -38,6 +38,7 @@ namespace server {
             void _checkIdExists(const int id);
             void _isValidEnemyType(const std::string& type);
             void _isValidBossType(const std::string& type);
+            cmn::EntityType _entityTypeFromString(const std::string& type);
             std::unordered_set<int> _idAlreadyExists;
     };
 }

@@ -24,7 +24,8 @@ namespace ecs
 					for (auto& scoreEntity : scoreEntities) {
 						auto score = scoreEntity->getComponent<ecs::Score>();
 						if (!score) continue;
-						score->addToScore(100);}
+						score->addToScore(100);
+					}
 				}
 				entity->addComponent<ecs::Destroy>();
 			}

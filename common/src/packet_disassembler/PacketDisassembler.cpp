@@ -9,7 +9,8 @@
 #include "bit_unpacker/BitUnpacker.hpp"
 #include "constants/BitPackingConstants.hpp"
 #include "constants/GameConstants.hpp"
-#include "constants/ProtocolConstants.hpp"
+#include "constants/NetworkConstants.hpp"
+#include <iostream>
 #include <optional>
 
 namespace cmn {
@@ -27,7 +28,7 @@ namespace cmn {
         uint32_t const playerId = unpacker.readUInt32();
         uint8_t const key = unpacker.readUInt8();
         uint8_t const keyState = unpacker.readUInt8();
-        inputData data = {playerId, key, keyState};
+        inputData data = {playerId, static_cast<cmn::Keys>(key), static_cast<cmn::KeyState>(keyState)};
 
         return data;
     }
@@ -48,7 +49,7 @@ namespace cmn {
         uint8_t const entityType = unpacker.readUInt8();
         float const positionX = unpacker.readFloat(0, windowWidth, xPositionFloatPrecision);
         float const positionY = unpacker.readFloat(0, windowHeight, yPositionFloatPrecision);
-        newEntityData data = {entityId, entityType, positionX, positionY};
+        newEntityData data = {entityId, static_cast<cmn::EntityType>(entityType), positionX, positionY};
 
         return data;
     }
@@ -78,14 +79,23 @@ namespace cmn {
         return data;
     }
 
-    packetData PacketDisassembler::_disassembleIntoStartGameData(BitUnpacker &unpacker)
+    packetData PacketDisassembler::_disassembleIntoStartGameData()
     {
         startGameData data = {};
 
         return data;
     }
 
-    std::optional<packetData> PacketDisassembler::disassemble(CustomPacket &packet)
+    packetData PacketDisassembler::_disassembleIntoAcknowledgeData(BitUnpacker &unpacker)
+    {
+        uint32_t const sequenceNbr = unpacker.readUInt32();
+        acknowledgeData data = {sequenceNbr};
+
+        return data;
+    }
+
+
+    std::pair<packetHeader, packetData> PacketDisassembler::disassemble(CustomPacket &packet)
     {
         std::vector<uint8_t> buffer;
 
@@ -97,26 +107,32 @@ namespace cmn {
 
         BitUnpacker unpacker(buffer, packet.getDataSize());
         uint16_t const protocolId = unpacker.readUInt16();
+        uint32_t const sequenceNbr = unpacker.readUInt32();
+        bool const isReliable = unpacker.readBool();
+
+        packetHeader header = {protocolId, sequenceNbr, isReliable};
 
         switch (protocolId) {
             case (connectionProtocolId):
-                return _disassembleIntoConnectionData(unpacker);
+                return {header, _disassembleIntoConnectionData(unpacker)};
             case (inputProtocolId):
-                return _disassembleIntoInputData(unpacker);
+                return {header, _disassembleIntoInputData(unpacker)};
             case (positionProtocolId):
-                return _disassembleIntoPositionData(unpacker);
+                return {header, _disassembleIntoPositionData(unpacker)};
             case (newEntityProtocolId):
-                return _disassembleIntoNewEntityData(unpacker);
+                return {header, _disassembleIntoNewEntityData(unpacker)};
             case (deleteEntityProtocolId):
-                return _disassembleIntoDeleteEntityData(unpacker);
+                return {header, _disassembleIntoDeleteEntityData(unpacker)};
             case (startGameProtocolId):
-                return _disassembleIntoStartGameData(unpacker);
+                return {header, _disassembleIntoStartGameData()};
             case (soundProtocolId):
-                return _disassembleIntoSoundData(unpacker);
+                return {header, _disassembleIntoSoundData(unpacker)};
+            case (acknowledgeProtocolId):
+                return {header, _disassembleIntoAcknowledgeData(unpacker)};
             case (textProtocolId):
-                return _disassembleIntoTextData(unpacker);
+                return  {header, _disassembleIntoTextData(unpacker)};
             default:
-                return std::nullopt;
+                throw std::exception();
         }
     }
 

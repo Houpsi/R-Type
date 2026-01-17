@@ -6,11 +6,14 @@
 */
 
 #include "PacketFactory.hpp"
-#include "constants/ProtocolConstants.hpp"
-#include "constants/GameConstants.hpp"
 #include "constants/BitPackingConstants.hpp"
+#include "constants/GameConstants.hpp"
+#include "constants/NetworkConstants.hpp"
 
 namespace cmn {
+
+    uint32_t PacketFactory::_udpSequenceNbr = 0;
+    uint32_t PacketFactory::_tcpSequenceNbr = 0;
 
     CustomPacket PacketFactory::_putInPacket(BitPacker &packer)
     {
@@ -23,74 +26,132 @@ namespace cmn {
         return packet;
     }
 
-    CustomPacket PacketFactory::createConnectionPacket(uint32_t playerId)
+    void PacketFactory::_handleReliability(CustomPacket &packet,
+        std::unordered_map<uint32_t, reliablePacket> &reliablePackets)
+    {
+        auto now = std::chrono::steady_clock::now();
+        reliablePacket const reliablePacket = {packet, now, 0};
+        reliablePackets[_udpSequenceNbr] = reliablePacket;
+    }
+
+    CustomPacket PacketFactory::_createConnectionPacket(connectionData data)
     {
         BitPacker packer;
 
         packer.writeUInt16(connectionProtocolId);
-        packer.writeUInt32(playerId);
+        packer.writeUInt32(_tcpSequenceNbr);
+        packer.writeBool(false);
+        packer.writeUInt32(data.playerId);
 
+        _tcpSequenceNbr++;
         return _putInPacket(packer);
     }
 
-    CustomPacket PacketFactory::createInputPacket(uint32_t playerId, Keys key, KeyState state)
+    CustomPacket PacketFactory::_createInputPacket(inputData data)
     {
         BitPacker packer;
 
         packer.writeUInt16(inputProtocolId);
-        packer.writeUInt32(playerId);
-        packer.writeUInt8(static_cast<uint8_t>(key));
-        packer.writeUInt8(static_cast<uint8_t>(state));
+        packer.writeUInt32(_udpSequenceNbr);
+        packer.writeBool(false);
+        packer.writeUInt32(data.playerId);
+        packer.writeUInt8(static_cast<uint8_t>(data.key));
+        packer.writeUInt8(static_cast<uint8_t>(data.keyState));
 
+        _udpSequenceNbr++;
         return _putInPacket(packer);
     }
 
-    CustomPacket PacketFactory::createPositionPacket(std::pair<float, float> positionPair, uint64_t entityId)
+    CustomPacket PacketFactory::_createPositionPacket(positionData data)
     {
         BitPacker packer;
 
         packer.writeUInt16(positionProtocolId);
-        packer.writeUInt32(entityId);
-        packer.writeFloat(positionPair.first, 0, windowWidth, xPositionFloatPrecision);
-        packer.writeFloat(positionPair.second, 0, windowHeight, yPositionFloatPrecision);
+        packer.writeUInt32(_udpSequenceNbr);
+        packer.writeBool(false);
+        packer.writeUInt32(data.entityId);
+        packer.writeFloat(data.posX, 0, windowWidth, xPositionFloatPrecision);
+        packer.writeFloat(data.posY, 0, windowHeight, yPositionFloatPrecision);
 
+        _udpSequenceNbr++;
         return _putInPacket(packer);
     }
 
-    CustomPacket PacketFactory::createNewEntityPacket(EntityType type, std::pair<float, float> positionPair, uint64_t entityId)
+    CustomPacket PacketFactory::_createNewEntityPacket(newEntityData data,
+        std::unordered_map<uint32_t, cmn::reliablePacket> &reliablePackets)
     {
         BitPacker packer;
 
         packer.writeUInt16(newEntityProtocolId);
-        packer.writeUInt32(entityId);
-        packer.writeUInt8(static_cast<uint8_t>(type));
-        packer.writeFloat(positionPair.first, 0, windowWidth, xPositionFloatPrecision);
-        packer.writeFloat(positionPair.second, 0, windowHeight, yPositionFloatPrecision);
+        packer.writeUInt32(_udpSequenceNbr);
+        packer.writeBool(true);
+        packer.writeUInt32(data.entityId);
+        packer.writeUInt8(static_cast<uint8_t>(data.type));
+        packer.writeFloat(data.posX, 0, windowWidth, xPositionFloatPrecision);
+        packer.writeFloat(data.posY, 0, windowHeight, yPositionFloatPrecision);
 
-        return _putInPacket(packer);
+        CustomPacket packet = _putInPacket(packer);
+        _handleReliability(packet, reliablePackets);
+
+        _udpSequenceNbr++;
+        return packet;
     }
 
-    CustomPacket PacketFactory::createDeleteEntityPacket(uint64_t entityId)
+    CustomPacket PacketFactory::_createDeleteEntityPacket(deleteEntityData data,
+        std::unordered_map<uint32_t, cmn::reliablePacket> &reliablePackets)
     {
         BitPacker packer;
 
         packer.writeUInt16(deleteEntityProtocolId);
-        packer.writeUInt32(entityId);
+        packer.writeUInt32(_udpSequenceNbr);
+        packer.writeBool(true);
+        packer.writeUInt32(data.entityId);
 
+        CustomPacket packet = _putInPacket(packer);
+        _handleReliability(packet, reliablePackets);
+
+        _udpSequenceNbr++;
+        return packet;
+    }
+
+    CustomPacket PacketFactory::_createStartGamePacket()
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(startGameProtocolId);
+        packer.writeUInt32(_tcpSequenceNbr);
+        packer.writeBool(false);
+
+        _tcpSequenceNbr++;
         return _putInPacket(packer);
     }
 
 
-    CustomPacket PacketFactory::createSoundPacket(uint8_t soundId)
+    CustomPacket PacketFactory::_createSoundPacket(soundData data)
     {
         BitPacker packer;
 
         packer.writeUInt16(soundProtocolId);
-        packer.writeUInt8(soundId);
+        packer.writeUInt32(_udpSequenceNbr);
+        packer.writeBool(false);
+        packer.writeUInt8(data.soundId);
         return _putInPacket(packer);
     }
 
-    CustomPacket PacketFactory::createTextPacket(uint32_t textId, int score)
+    CustomPacket PacketFactory::_createAcknowledgePacket(acknowledgeData data)
+    {
+        BitPacker packer;
+
+        packer.writeUInt16(acknowledgeProtocolId);
+        packer.writeUInt32(_udpSequenceNbr);
+        packer.writeBool(false);
+        packer.writeUInt32(data.sequenceNbr);
+
+        _udpSequenceNbr++;
+        return _putInPacket(packer);
+    }
+
+    CustomPacket PacketFactory::_createTextPacket(uint32_t textId, int score)
     {
         BitPacker packer;
 
@@ -101,13 +162,40 @@ namespace cmn {
         return _putInPacket(packer);
     }
 
-    CustomPacket PacketFactory::createStartGamePacket()
+    CustomPacket PacketFactory::createPacket(packetData data,
+        std::unordered_map<uint32_t, cmn::reliablePacket> &reliablePackets)
     {
-        BitPacker packer;
-
-        packer.writeUInt16(startGameProtocolId);
-
-        return _putInPacket(packer);
+        return std::visit([&reliablePackets](auto &&arg)
+            {
+                using T = std::decay_t<decltype(arg)>;
+                if constexpr (std::is_same_v<T, connectionData>) {
+                    connectionData const &connectionData = arg;
+                    return _createConnectionPacket(connectionData);
+                } else if constexpr (std::is_same_v<T, inputData>) {
+                    inputData const &inputData = arg;
+                    return _createInputPacket(inputData);
+                } else if constexpr (std::is_same_v<T, positionData>) {
+                    positionData const &positionData = arg;
+                    return _createPositionPacket(positionData);
+                } else if constexpr (std::is_same_v<T, newEntityData>) {
+                    newEntityData const &newEntityData = arg;
+                    return _createNewEntityPacket(newEntityData, reliablePackets);
+                } else if constexpr (std::is_same_v<T, deleteEntityData>) {
+                    deleteEntityData const &deleteEntityData = arg;
+                    return _createDeleteEntityPacket(deleteEntityData, reliablePackets);
+                } else if constexpr (std::is_same_v<T, startGameData>) {
+                    return _createStartGamePacket();
+                } else if constexpr (std::is_same_v<T, acknowledgeData>) {
+                    acknowledgeData const &acknowledgeData = arg;
+                    return _createAcknowledgePacket(acknowledgeData);
+                } else if constexpr (std::is_same_v<T, soundData>) {
+                    soundData const &soundData = arg;
+                    return _createSoundPacket(soundData);
+                } else if constexpr (std::is_same_v<T, textData>) {
+                    textData const &data = arg;
+                    return _createTextPacket(data.entityId, data.score);
+                }
+            }, data);
     }
 
 }// namespace cmn

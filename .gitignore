@@ -44,3 +44,6 @@ r-type_server
 # perf files
 perf.data
 perf.data.old
+
+#valgrind files
+vgcore*

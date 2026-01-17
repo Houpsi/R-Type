@@ -11,6 +11,12 @@
 #include <iostream>
 
 namespace server {
+
+    std::map<std::string, cmn::EntityType> keyEnemyToEnum = {
+        { "plane_enemy" , cmn::EntityType::Plane },
+        { "crochet_enemy", cmn::EntityType::Crochet}
+    };
+
     bool LevelParser::createLevel(const std::string &fileConfigLevel, Level &baseLevel)
     {
         Level newLevel;
@@ -68,11 +74,12 @@ namespace server {
         const libconfig::Setting& wavesSetting = root["waves"];
         const int repeatWaves = root.lookup("waves_repeat");
         const int numDifferentWaves = wavesSetting.getLength();
+        newLevel.setCurrentWave(0);
 
         if (repeatWaves <= 0) {
             throw LevelParserException("Wave repeat is out of range");
         }
-        newLevel.setNumberWaves(static_cast<uint8_t>(repeatWaves));
+        newLevel.setRepeatWaves(static_cast<uint8_t>(repeatWaves));
 
         for (int i = 0; i < numDifferentWaves; ++i) {
             const libconfig::Setting &waveSetting = wavesSetting[i];
@@ -90,9 +97,9 @@ namespace server {
                 if (countEnemy <= 0) {
                     throw LevelParserException("Number of Enemy out of range");
                 }
-                newEnemy.count = static_cast<uint8_t>(countEnemy);
+                newEnemy.spawnRate = static_cast<uint8_t>(countEnemy);
                 _isValidEnemyType(type);
-                newEnemy.type = type;
+                newEnemy.type = _entityTypeFromString(type);
                 enemies.push_back(newEnemy);
             }
             if (timeOfWave <= 0) {
@@ -100,6 +107,16 @@ namespace server {
             }
             newLevel.addWave(timeOfWave, enemies);
         }
+        newLevel.calculateNumberTotalWave();
+    }
+
+    cmn::EntityType LevelParser::_entityTypeFromString(const std::string &type)
+    {
+        auto it = keyEnemyToEnum.find(type);
+        if (it != keyEnemyToEnum.end()) {
+            return it->second;
+        }
+        throw LevelParserException("Unknown type Enemy");
     }
 
     void LevelParser::_isValidEnemyType(const std::string& type)

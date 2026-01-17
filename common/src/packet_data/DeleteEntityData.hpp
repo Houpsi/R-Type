@@ -8,12 +8,12 @@
 #ifndef R_TYPE_DELETEENTITYDATA_HPP
 #define R_TYPE_DELETEENTITYDATA_HPP
 
-#include <SFML/Network/Packet.hpp>
+#include "SFML/Network/Packet.hpp"
 #include <cstdint>
 namespace cmn {
 
     using deleteEntityData = struct deleteEntityData {
-        uint64_t entityId;
+        uint32_t entityId;
     };
 
 }// namespace cmn

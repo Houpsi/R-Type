@@ -17,8 +17,11 @@
 #include "components/Score.hpp"
 #include "components/Sound.hpp"
 #include "components/Sprite.hpp"
+#include "constants/GameConstants.hpp"
+#include "entity_factory/EntityFactory.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
+#include <list>
 
 namespace cmn {
 
@@ -53,7 +56,7 @@ namespace cmn {
         for (auto &entity : ecs.getEntitiesWithComponent<ecs::InputPlayer>()) {
             if (entity->getId() == entityId) {
                 auto component = entity->getComponent<ecs::InputPlayer>();
-                Keys const key = static_cast<Keys>(input.key);
+                Keys const key = input.key;
                 for (const auto &function : functionArray) {
                     function(key, component);
                 }
@@ -76,22 +79,11 @@ namespace cmn {
 
     void DataTranslator::_injectNewEntity(ecs::EcsManager &ecs, newEntityData &newEntity)
     {
-        auto entity = ecs.createEntity(newEntity.entityId);
+        auto entity =  cmn::EntityFactory::createEntity(ecs,
+                        static_cast<EntityType>(newEntity.type),
+                        newEntity.posX, newEntity.posY,
+                        cmn::EntityFactory::Context::CLIENT, 0, newEntity.entityId);
 
-        entity->addComponent<ecs::Position>(newEntity.posX, newEntity.posY);
-        if (static_cast<EntityType>(newEntity.type) == EntityType::Player) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerSpriteSheet)), playerSpriteScale);
-            entity->addComponent<ecs::PlayerAnimation>();
-            entity->addComponent<ecs::InputPlayer>();
-        }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::Monster) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(monsterSpriteSheet)), monsterSpriteScale);
-            entity->addComponent<ecs::Animation>(monsterAnimationSize, monsterAnimationOffset, monsterAnimationNumberFrame);
-        }
-        if (static_cast<EntityType>(newEntity.type) == EntityType::PlayerProjectile) {
-            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(playerProjectileSpriteSheet)), playerProjectileScale);
-            entity->addComponent<ecs::Animation>(playerProjectileAnimationSize, playerProjectileAnimationOffset, playerProjectileAnimationNumberFrame);
-        }
     }
 
     void DataTranslator::_deleteEntity(ecs::EcsManager &ecs, deleteEntityData &deleteEntity)
@@ -118,6 +110,7 @@ namespace cmn {
     {
         auto entities = ecs.getEntitiesWithComponent<ecs::Score>();
         for (auto& entity : entities) {
+            std::cout << entity->getId()  << " - " << data.entityId  << " score :" << data.score << std::endl;
             if (entity->getId() == data.entityId) {
                 auto score = entity->getComponent<ecs::Score>();
                 if (!score) continue;
@@ -126,7 +119,6 @@ namespace cmn {
             }
         }
     }
-
 
     void DataTranslator::translate(ecs::EcsManager &ecs, packetData &data, const std::unordered_map<int, uint64_t>& playerIdEntityMap)
     {

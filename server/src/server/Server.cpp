@@ -6,11 +6,14 @@
 */
 #include "Server.hpp"
 
-#include "custom_packet/CustomPacket.hpp"
 #include "SFML/Network/TcpSocket.hpp"
+#include "constants/NetworkConstants.hpp"
+#include "custom_packet/CustomPacket.hpp"
+#include "packet_disassembler/PacketDisassembler.hpp"
+#include "packet_factory/PacketFactory.hpp"
+#include "packet_header/PacketHeader.hpp"
 #include <iostream>
 #include <thread>
-#include "packet_factory/PacketFactory.hpp"
 
 namespace server {
 
@@ -63,16 +66,16 @@ namespace server {
                 cmn::CustomPacket packet;
                 sf::Socket::Status const status = sock.receive(packet);
                 if (status != sf::Socket::Status::Done) {
-//                    std::cerr << "[ERROR]: failed to receive TCP packet" << "\n";
                     if (status == sf::Socket::Status::Disconnected || status == sf::Socket::Status::Error) {
-//                        std::cout << "[DISCONNECTION]: Client " << sock.getRemoteAddress().value() << ":" << sock.getRemotePort() << " disconnected." << "\n";
                         _socketSelector.remove(sock);
                         _sharedData->deletePlayer(sock.getRemotePort(), sock.getRemoteAddress().value());
                         it = _socketVector.erase(it);
                     }
                 }
-                _sharedData->addTcpReceivedPacket(packet);
-//                std::cout << "[RECEIVED]: TCP Packet received" << "\n";
+
+                auto data = cmn::PacketDisassembler::disassemble(packet);
+
+                _sharedData->addTcpReceivedPacket(data.second);
             }
         }
     }
@@ -81,8 +84,6 @@ namespace server {
     {
         sf::Socket::Status const status = _udpSocket.send(packet, clientIp, port);
         if (status != sf::Socket::Status::Done) {
-//            std::cerr << "[ERROR]: failed to send UDP packet to:"
-//            << clientIp << ":" << port << "\n";
             return 1;
         }
         return 0;
@@ -92,7 +93,6 @@ namespace server {
     {
         sf::Socket::Status const status = clientSocket.send(packet);
         if (status != sf::Socket::Status::Done) {
-//            std::cerr << "[ERROR]: failed to send TCP packet to server" << "\n";
             return 1;
         }
         return 0;
@@ -102,7 +102,6 @@ namespace server {
     {
         for (const auto &client : _socketVector) {
             if (sendTcp(packet, *client) == 1) {
-//                std::cerr << "[ERROR]: failed to send tcp message to a player" << "\n";
             }
         }
     }
@@ -116,28 +115,66 @@ namespace server {
                 continue;
             }
             if (sendUdp(packet, ip.value(), clientPort) == 1) {
-//                std::cerr << "[ERROR]: failed to send udp message to a player" << "\n";
             }
         }
     }
 
     void Server::_acceptConnection()
     {
-        static int idPlayer = 1;
+        static uint32_t idPlayer = 1;
         auto client = std::make_unique<sf::TcpSocket>();
 
         client->setBlocking(false);
 
         if (_listener.accept(*client) != sf::Socket::Status::Done) {
-//            std::cerr << "[ERROR]: failed to accept new TCP connection" << "\n";
             return;
         }
         _socketSelector.add(*client);
-        _sharedData->addPlayer(idPlayer, client->getRemotePort(), client->getRemoteAddress().value());
-        sendTcp(cmn::PacketFactory::createConnectionPacket(idPlayer), *client);
+        _sharedData->addPlayer(static_cast<int>(idPlayer), client->getRemotePort(), client->getRemoteAddress().value());
+        cmn::connectionData data = {idPlayer};
+        cmn::CustomPacket const packet = cmn::PacketFactory::createPacket(data, _reliablePackets);
+        sendTcp(packet, *client);
         _socketVector.push_back(std::move(client));
-//        std::cout << "[CONNECTION]: TCP connection accepted" << "\n";
         idPlayer++;
+    }
+
+    void Server::_resendTimedOutPackets()
+    {
+        auto now = std::chrono::steady_clock::now();
+
+        for (auto it = _reliablePackets.begin(); it != _reliablePackets.end(); ) {
+            auto& reliablePkt = it->second;
+
+            auto timeSinceLastSend = std::chrono::duration_cast<std::chrono::milliseconds>(
+                now - reliablePkt.lastSentTime
+            ).count();
+
+            if (timeSinceLastSend > cmn::ticksBeforeResending) {
+                if (reliablePkt.retryCount < cmn::reliabilityRetries) {
+                    broadcastUdp(reliablePkt.packet);
+                    reliablePkt.lastSentTime = now;
+                    reliablePkt.retryCount++;
+                    ++it;
+                } else {
+                    it = _reliablePackets.erase(it);
+                }
+            } else {
+                ++it;
+            }
+        }
+    }
+
+
+    void Server::_handleUdpReception(cmn::packetHeader header, cmn::packetData data)
+    {
+        if (header.protocolId == cmn::acknowledgeProtocolId) {
+            cmn::acknowledgeData const acknowledgeData = std::get<cmn::acknowledgeData>(data);
+            uint32_t const sequenceNbr = acknowledgeData.sequenceNbr;
+            _reliablePackets.erase(sequenceNbr);
+            return;
+        }
+        _sharedData->addUdpReceivedPacket(data);
+        _resendTimedOutPackets();
     }
 
     void Server::run()
@@ -148,23 +185,27 @@ namespace server {
 
         std::optional<sf::IpAddress> sender;
         unsigned short port = 0;
-        cmn::CustomPacket packet;
 
         while (true) {
-            auto udpPacket = _sharedData->getUdpPacketToSend();
-            if (udpPacket.has_value()) {
-                broadcastUdp(udpPacket.value());
+            cmn::CustomPacket packet;
+            auto udpData = _sharedData->getUdpPacketToSend();
+
+            if (udpData.has_value()) {
+                broadcastUdp(cmn::PacketFactory::createPacket(udpData.value(), _reliablePackets));
             }
-            auto tcpPacket = _sharedData->getTcpPacketToSend();
-            if (tcpPacket.has_value()) {
-                broadcastTcp(tcpPacket.value());
+
+            auto tcpData = _sharedData->getTcpPacketToSend();
+
+            if (tcpData.has_value()) {
+                broadcastTcp(cmn::PacketFactory::createPacket(tcpData.value(), _reliablePackets));
             }
+
             if (_udpSocket.receive(packet, sender, port) != sf::Socket::Status::Done) {
-//                std::cerr << "[ERROR]: failed to receive UDP packet" << "\n";
                 continue;
             }
-            _sharedData->addUdpReceivedPacket(packet);
-//            std::cout << "[RECEIVED]: UDP Packet received" << "\n";
+
+            auto data = cmn::PacketDisassembler::disassemble(packet);
+            _handleUdpReception(data.first, data.second);
         }
     }
 

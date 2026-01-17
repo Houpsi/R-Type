@@ -5,12 +5,15 @@
 ** ProtocolConstants
 */
 
-#ifndef R_TYPE_PROTOCOLCONSTANTS_HPP
-#define R_TYPE_PROTOCOLCONSTANTS_HPP
+#ifndef R_TYPE_NETWORKCONSTANTS_HPP
+#define R_TYPE_NETWORKCONSTANTS_HPP
 
 #include <cstdint>
 
 namespace cmn {
+
+    constexpr int ticksBeforeResending = 200;
+    constexpr uint32_t reliabilityRetries = 5;
 
     constexpr uint16_t connectionProtocolId = 0;
     constexpr uint16_t inputProtocolId = 1;
@@ -19,9 +22,10 @@ namespace cmn {
     constexpr uint16_t deleteEntityProtocolId = 4;
     constexpr uint16_t startGameProtocolId = 5;
     constexpr uint16_t soundProtocolId = 6;
-    constexpr uint16_t textProtocolId = 7;
+    constexpr uint16_t acknowledgeProtocolId = 7;
+    constexpr uint16_t textProtocolId = 8;
 
 
 }
 
-#endif// R_TYPE_PROTOCOLCONSTANTS_HPP
+#endif// R_TYPE_NETWORKCONSTANTS_HPP

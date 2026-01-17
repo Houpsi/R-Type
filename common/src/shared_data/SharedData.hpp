@@ -29,49 +29,49 @@ namespace cmn {
              * @brief Adds a received packet to the queue.
              * @param data The received packet data (PacketData).
              */
-            void addUdpReceivedPacket(const CustomPacket &packet);
+            void addUdpReceivedPacket(const packetData &data);
 
             /**
              * @brief Retrieves and removes the first received packet from the queue.
              * @return An optional containing the PacketData if available, otherwise std::nullopt.
              */
-            std::optional<CustomPacket> getUdpReceivedPacket();
+            std::optional<packetData> getUdpReceivedPacket();
 
             /**
              * @brief Adds a packet to be sent to the queue.
              * @param data The packet data (PacketData) to send.
              */
-            void addUdpPacketToSend(const CustomPacket &packet);
+            void addUdpPacketToSend(const packetData &data);
 
             /**
              * @brief Retrieves and removes the first packet to be sent from the queue.
              * @return An optional containing the PacketData if available, otherwise std::nullopt.
              */
-            std::optional<CustomPacket> getUdpPacketToSend();
+            std::optional<packetData> getUdpPacketToSend();
 
             /**
              * @brief Adds a received packet to the queue.
              * @param data The received packet data (PacketData).
              */
-            void addTcpReceivedPacket(const CustomPacket &packet);
+            void addTcpReceivedPacket(const packetData &data);
 
             /**
              * @brief Retrieves and removes the first received packet from the queue.
              * @return An optional containing the PacketData if available, otherwise std::nullopt.
              */
-            std::optional<CustomPacket> getTcpReceivedPacket();
+            std::optional<packetData> getTcpReceivedPacket();
 
             /**
              * @brief Adds a packet to be sent to the queue.
              * @param data The packet data (PacketData) to send.
              */
-            void addTcpPacketToSend(const CustomPacket &packet);
+            void addTcpPacketToSend(const packetData &data);
 
             /**
              * @brief Retrieves and removes the first packet to be sent from the queue.
              * @return An optional containing the PacketData if available, otherwise std::nullopt.
              */
-            std::optional<CustomPacket> getTcpPacketToSend();
+            std::optional<packetData> getTcpPacketToSend();
 
             /**
              * @brief Adds a new player to the list.
@@ -97,10 +97,10 @@ namespace cmn {
             bool getRunThread();
 
         private:
-            std::queue<CustomPacket> _udpReceivedQueue; ///< Queue for received packets (to be processed).
-            std::queue<CustomPacket> _udpSendQueue;     ///< Queue for packets to be sent.
-            std::queue<CustomPacket> _tcpReceivedQueue;  ///< Queue for packets to be sent.
-            std::queue<CustomPacket> _tcpSendQueue;     ///< Queue for packets to be sent.
+            std::queue<packetData> _udpReceivedQueue; ///< Queue for received packets (to be processed).
+            std::queue<packetData> _udpSendQueue;     ///< Queue for packets to be sent.
+            std::queue<packetData> _tcpReceivedQueue;  ///< Queue for packets to be sent.
+            std::queue<packetData> _tcpSendQueue;     ///< Queue for packets to be sent.
             std::mutex _mutex;                     ///< Mutex for synchronizing data access.
             bool _isRunning = true;
             /**

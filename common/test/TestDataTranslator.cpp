@@ -5,18 +5,18 @@
 ** TestDataTranslator
 */
 
-#include "constants/ProtocolConstants.hpp"
 #include "EcsManager.hpp"
 #include "components/Destroy.hpp"
 #include "components/InputPlayer.hpp"
 #include "components/Position.hpp"
 #include "components/Sprite.hpp"
+#include "constants/NetworkConstants.hpp"
 #include "data_translator/DataTranslator.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
 #include "enums/KeyState.hpp"
+#include "packet_data/InputData.hpp"
 #include "packet_data/PacketData.hpp"
-#include "packet_data/input_data/InputData.hpp"
 #include <gtest/gtest.h>
 
 namespace cmn {
@@ -34,8 +34,8 @@ namespace cmn {
 
         inputData inputData = {
             6,
-            static_cast<uint8_t>(Keys::Down),
-            static_cast<uint8_t>(KeyState::Pressed)
+            Keys::Down,
+            KeyState::Pressed
         };
 
         packetData data = inputData;
@@ -76,7 +76,7 @@ namespace cmn {
 
         newEntityData newEntityData = {
             .entityId=42,
-            .type=static_cast<uint8_t>(EntityType::Player),
+            .type=EntityType::Player,
             .posX=10.F,
             .posY=20.F
         };

@@ -10,13 +10,14 @@
 
 #include <cstdint>
 #include "SFML/Network/Packet.hpp"
+#include "enums/EntityType.hpp"
 
 namespace cmn {
 
     using newEntityData = struct newEntityData
     {
-        uint64_t entityId;
-        uint8_t type;
+        uint32_t entityId;
+        EntityType type;
         float posX;
         float posY;
     };

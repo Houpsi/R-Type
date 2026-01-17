@@ -8,12 +8,12 @@
 #ifndef R_TYPE_COLLISIONPACKET_HPP
 #define R_TYPE_COLLISIONPACKET_HPP
 
-#include <SFML/Network/Packet.hpp>
+#include "SFML/Network/Packet.hpp"
 #include <cstdint>
 
 namespace cmn {
 
-    using soundData = struct soundPacket {
+    using soundData = struct soundData {
         uint8_t soundId;
     };
 }// namespace cmn

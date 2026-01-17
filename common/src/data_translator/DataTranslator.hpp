@@ -8,10 +8,10 @@
 #ifndef R_TYPE_DATATRANSLATOR_HPP
 #define R_TYPE_DATATRANSLATOR_HPP
 
+#include "../packet_data/textPacket.hpp"
 #include "EcsManager.hpp"
 #include "packet_data/PacketData.hpp"
-#include "packet_data/sound_packet/SoundPacket.hpp"
-#include "packet_data/text_data/textPacket.hpp"
+#include "packet_data/SoundData.hpp"
 
 namespace cmn {
 
@@ -27,7 +27,6 @@ namespace cmn {
         static void _deleteEntity(ecs::EcsManager &ecs, deleteEntityData &deleteEntity);
         static void _soundEntity(ecs::EcsManager &ecs, soundData &sound);
 		static void _injectScore(ecs::EcsManager& ecs, textData& data);
-		static void _textEntity(ecs::EcsManager &ecs, textData &text);
 
     };
 

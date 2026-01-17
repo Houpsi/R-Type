@@ -12,13 +12,14 @@
 #include "custom_packet/CustomPacket.hpp"
 #include "packet_data/PacketData.hpp"
 #include <optional>
+#include "packet_header/PacketHeader.hpp"
 
 namespace cmn {
 
     class PacketDisassembler
     {
       public:
-        static std::optional<packetData> disassemble(CustomPacket &packet);
+        static std::pair<packetHeader, packetData> disassemble(CustomPacket &packet);
 
       private:
         static packetData _disassembleIntoConnectionData(cmn::BitUnpacker &unpacker);
@@ -26,9 +27,10 @@ namespace cmn {
         static packetData _disassembleIntoPositionData(BitUnpacker &unpacker);
         static packetData _disassembleIntoNewEntityData(BitUnpacker &unpacker);
         static packetData _disassembleIntoDeleteEntityData(BitUnpacker &unpacker);
-        static packetData _disassembleIntoStartGameData(BitUnpacker &unpacker);
+        static packetData _disassembleIntoStartGameData();
         static packetData _disassembleIntoSoundData(BitUnpacker &unpacker);
 		static packetData _disassembleIntoTextData(BitUnpacker &unpacker);
+        static packetData _disassembleIntoAcknowledgeData(BitUnpacker &unpacker);
 
     };
 

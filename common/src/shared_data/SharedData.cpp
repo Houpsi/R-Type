@@ -19,101 +19,100 @@ namespace cmn {
      * @brief Adds a packet to the received queue using a lock_guard for synchronization.
      * @param data The packet to add.
      */
-    void SharedData::addUdpReceivedPacket(const CustomPacket &packet)
+    void SharedData::addUdpReceivedPacket(const packetData &data)
     {
         std::lock_guard const lock(_mutex);
-//        std::cout << _udpReceivedQueue.size() << "\n";
-        _udpReceivedQueue.push(packet);
+        _udpReceivedQueue.push(data);
     }
 
     /**
      * @brief Retrieves the next packet from the received queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<CustomPacket> SharedData::getUdpReceivedPacket()
+    std::optional<packetData> SharedData::getUdpReceivedPacket()
     {
         std::lock_guard const lock(_mutex);
         if (_udpReceivedQueue.empty()) {
             return std::nullopt;
         }
-        CustomPacket packet = _udpReceivedQueue.front();
+        packetData data = _udpReceivedQueue.front();
         _udpReceivedQueue.pop();
-        return packet;
+        return data;
     }
 
     /**
      * @brief Adds a packet to the send queue using a lock_guard.
      * @param data The packet to add.
      */
-    void SharedData::addUdpPacketToSend(const CustomPacket &packet)
+    void SharedData::addUdpPacketToSend(const packetData &data)
     {
         std::lock_guard const lock(_mutex);
-        _udpSendQueue.push(packet);
+        _udpSendQueue.push(data);
     }
 
     /**
      * @brief Retrieves the next packet from the send queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<CustomPacket> SharedData::getUdpPacketToSend()
+    std::optional<packetData> SharedData::getUdpPacketToSend()
     {
         std::lock_guard const lock(_mutex);
         if (_udpSendQueue.empty()) {
             return std::nullopt;
         }
-        CustomPacket packet = _udpSendQueue.front();
+        packetData data = _udpSendQueue.front();
         _udpSendQueue.pop();
-        return packet;
+        return data;
     }
 
     /**
      * @brief Adds a packet to the received queue using a lock_guard for synchronization.
      * @param data The packet to add.
      */
-    void SharedData::addTcpReceivedPacket(const CustomPacket &packet)
+    void SharedData::addTcpReceivedPacket(const packetData &data)
     {
         std::lock_guard const lock(_mutex);
-        _tcpReceivedQueue.push(packet);
+        _tcpReceivedQueue.push(data);
     }
 
     /**
      * @brief Retrieves the next packet from the received queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<CustomPacket> SharedData::getTcpReceivedPacket()
+    std::optional<packetData> SharedData::getTcpReceivedPacket()
     {
         std::lock_guard const lock(_mutex);
         if (_tcpReceivedQueue.empty()) {
             return std::nullopt;
         }
-        CustomPacket packet = _tcpReceivedQueue.front();
+        packetData data = _tcpReceivedQueue.front();
         _tcpReceivedQueue.pop();
-        return packet;
+        return data;
     }
 
     /**
      * @brief Adds a packet to the send queue using a lock_guard.
      * @param data The packet to add.
      */
-    void SharedData::addTcpPacketToSend(const CustomPacket &packet)
+    void SharedData::addTcpPacketToSend(const packetData &data)
     {
         std::lock_guard const lock(_mutex);
-        _tcpSendQueue.push(packet);
+        _tcpSendQueue.push(data);
     }
 
     /**
      * @brief Retrieves the next packet from the send queue using a lock_guard.
      * @return The packet if the queue is not empty, otherwise std::nullopt.
      */
-    std::optional<CustomPacket> SharedData::getTcpPacketToSend()
+    std::optional<packetData> SharedData::getTcpPacketToSend()
     {
         std::lock_guard const lock(_mutex);
         if (_tcpSendQueue.empty()) {
             return std::nullopt;
         }
-        CustomPacket packet = _tcpSendQueue.front();
+        packetData data = _tcpSendQueue.front();
         _tcpSendQueue.pop();
-        return packet;
+        return data;
     }
 
     /**
