@@ -110,7 +110,6 @@ namespace cmn {
     {
         auto entities = ecs.getEntitiesWithComponent<ecs::Score>();
         for (auto& entity : entities) {
-            std::cout << entity->getId()  << " - " << data.entityId  << " score :" << data.score << std::endl;
             if (entity->getId() == data.entityId) {
                 auto score = entity->getComponent<ecs::Score>();
                 if (!score) continue;
