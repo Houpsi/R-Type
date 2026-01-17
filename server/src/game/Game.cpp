@@ -69,6 +69,7 @@ namespace server {
         sf::Clock fpsClock;
         sf::Clock clock;
         sf::Clock enemyClock;
+         sf::Clock powerUpClock;
         unsigned const seed = std::chrono::system_clock::now().time_since_epoch().count();
         std::minstd_rand0 generator(seed);
         float elapsedTime = 0.0F;
@@ -81,6 +82,7 @@ namespace server {
             if (data.has_value()) {
                 cmn::DataTranslator::translate(_ecs, data.value(), _playerIdEntityMap);
             }
+            _createBonus(powerUpClock, generator);
             _checkBossDeath(currentLevel, enemyClock);
             _createEnemy(currentLevel, enemyClock, generator);
             _checkSpaceBar();
@@ -187,7 +189,6 @@ namespace server {
      {
          for (auto const &entity : _ecs.getEntitiesWithComponent<ecs::Shoot>())
          {
-             auto input = entity->getComponent<ecs::InputPlayer>();
              const auto shoot = entity->getComponent<ecs::Shoot>();
              const auto collision= entity->getComponent<ecs::Collision>();
 
@@ -366,5 +367,32 @@ namespace server {
         _ecs.addSystem<ecs::VelocitySystem>();
         _ecs.addSystem<ecs::HealthSystem>();
     }
+
+
+    void Game::_createBonus(sf::Clock &bonusClock, std::minstd_rand0 &generator)
+     {
+         if (bonusClock.getElapsedTime().asSeconds() < _nextBonusSpawnDelay) {
+             return;
+         }
+         std::cout << "lalala" << std::endl;
+         auto randY = generator() % cmn::monsterMaxSpawnPositionHeight;
+         auto newBonus = cmn::EntityFactory::createEntity(_ecs,
+                             cmn::EntityType::PowerUp,
+                             cmn::monsterSpawnPositionWidth,
+                             static_cast<float>(randY),
+                             cmn::EntityFactory::Context::SERVER);
+
+         cmn::newEntityData bonusData = {
+             newBonus->getId(),
+             cmn::EntityType::PowerUp,
+             cmn::monsterSpawnPositionWidth,
+             static_cast<float>(randY)
+         };
+
+         _sharedData->addUdpPacketToSend(bonusData);
+
+         bonusClock.restart();
+         _nextBonusSpawnDelay = 10.0f + (generator() % 11);
+     }
 
 }

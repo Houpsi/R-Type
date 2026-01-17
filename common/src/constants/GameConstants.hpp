@@ -81,6 +81,16 @@ namespace cmn {
     constexpr uint16_t boss1SpawnPositionWidth = 1500;
     constexpr uint16_t boss1SpawnPositionHeight = 250;
 
+    constexpr sf::Vector2f pwShootSpriteScale = {2.0F, 2.0F};
+    constexpr std::string_view pwShootSpriteSheet = "./assets/r-typesheet2d.gif";
+    constexpr std::pair<uint8_t, uint8_t> pwShootAnimationSize = {24, 18};
+    constexpr uint8_t pwShootAnimationOffset = 0;
+    constexpr uint8_t pwShootAnimationNumberFrame = 6;
+    constexpr uint8_t pwShootCollisionWidth = 23;
+    constexpr uint8_t pwShootCollisionHeight = 18;
+    constexpr uint16_t pwShootProjectileSpeed = 200;
+    constexpr int8_t pwShootProjectileDirection = 0;
+
     constexpr uint16_t playerProjectileSpeed = 400;
     constexpr int8_t playerProjectileDirection = 1;
     constexpr sf::Vector2f playerProjectileScale = {1.0F, 1.0F};
@@ -121,6 +131,7 @@ namespace cmn {
 
     constexpr int idEntityForMusic = 5;
     constexpr int idThemeMusic = 2;
+    constexpr int idExplosionMusic = 3;
 
 
 }

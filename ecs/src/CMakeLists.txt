@@ -61,6 +61,7 @@ add_library(r-type_ecs_lib
         systems/SoundSystem.cpp
         systems/SoundSystem.hpp
         EcsConstant.hpp
+        components/PowerUp.hpp
 )
 
 target_include_directories(r-type_ecs_lib PUBLIC
