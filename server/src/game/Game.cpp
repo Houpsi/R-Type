@@ -73,6 +73,7 @@ namespace server {
 
             _createEnemy(currentLevel, enemyClock, generator);
             _checkSpaceBar();
+            _enemyShoot();
             if (elapsedTime > frameTimer) {
                 fpsClock.restart();
                 _sendPositions();
@@ -162,6 +163,47 @@ namespace server {
             }
         }
     }
+
+    void Game::_enemyShoot()
+     {
+         for (auto const &entity : _ecs.getEntitiesWithComponent<ecs::Shoot>())
+         {
+             auto input = entity->getComponent<ecs::InputPlayer>();
+             const auto shoot = entity->getComponent<ecs::Shoot>();
+             const auto collision= entity->getComponent<ecs::Collision>();
+
+             if (!shoot && !collision) { continue; }
+
+             if (collision && collision->getTypeCollision() == ecs::ENEMY)
+             {
+                 auto posCpn = entity->getComponent<ecs::Position>();
+                 shoot->setShootTimer(shoot->getShootTimer() + _ecs.getDeltaTime());
+
+                 if (shoot->getShootTimer() >= shoot->getCooldown()) {
+                     shoot->setShootTimer(0);
+
+                     float posX = posCpn->getX() - collision->getWidth() - 10;
+                     float posY = posCpn->getY() + 15;
+
+                     auto projectile = cmn::EntityFactory::createEntity(_ecs,
+                          cmn::EntityType::MonsterProjectile,
+                          posX,
+                          posY,
+                          cmn::EntityFactory::Context::SERVER);
+
+                     cmn::newEntityData data {
+                         projectile->getId(),
+                         cmn::EntityType::MonsterProjectile,
+                         posX,
+                         posY
+                     };
+                     _sharedData->addUdpPacketToSend(data);
+                     shoot->setTimeSinceLastShot(0);
+                     shoot->setShootTimer(0.f);
+                 }
+             }
+         }
+     }
 
     void Game::_createEnemy(Level &currentLevel, sf::Clock &enemyClock, std::minstd_rand0 &generator)
     {
@@ -302,7 +344,6 @@ namespace server {
         _ecs.addSystem<ecs::DestroySystem>();
         _ecs.addSystem<ecs::MovementSystem>();
         _ecs.addSystem<ecs::CollisionSystem>();
-        _ecs.addSystem<ecs::ShootSystem>();
         _ecs.addSystem<ecs::VelocitySystem>();
         _ecs.addSystem<ecs::HealthSystem>();
         _ecs.addSystem<ecs::ScoreTextSystem>();

@@ -35,6 +35,7 @@ namespace cmn {
         static void _initPlayer(ecs::EcsManager &ecs, std::shared_ptr<ecs::Entity> entity, Context context);
         static void _initEnemy(ecs::EcsManager &ecs, std::shared_ptr<ecs::Entity> entity, Context context, EntityType type);
         static void _initProjectile(ecs::EcsManager& ecs, std::shared_ptr<ecs::Entity> entity, Context context);
+        static void _initMonsterProjectile(ecs::EcsManager& ecs, std::shared_ptr<ecs::Entity> entity, Context context);
         static void _initBoss(ecs::EcsManager &ecs, std::shared_ptr<ecs::Entity> entity, Context context, int hp);
         static void _initBackground(ecs::EcsManager &ecs, std::shared_ptr<ecs::Entity> entity, Context context, EntityType type);
     };

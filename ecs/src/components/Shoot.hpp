@@ -15,7 +15,7 @@ namespace ecs {
      */
     class Shoot : public Component {
     public:
-        explicit Shoot(int damage, float cooldown): _damage(damage), _cooldown(cooldown) {};
+        explicit Shoot(int damage, float cooldown, float shootTimer = 0.0f): _damage(damage), _cooldown(cooldown), _shootTimer(shootTimer) {};
         ~Shoot() override = default;
 
         [[nodiscard]] int getDamage() const;
@@ -23,6 +23,9 @@ namespace ecs {
 
         [[nodiscard]] float getCooldown() const;
         void setCooldown(float cooldown);
+
+        [[nodiscard]] float getShootTimer() const;
+        void setShootTimer(float cooldown);
 
         float getTimeSinceLastShot() const;
         void setTimeSinceLastShot(float t);
@@ -32,6 +35,7 @@ namespace ecs {
         float _cooldown;
         int _damage;
         float _timeSinceLastShot = 0;
+        float _shootTimer;
     };
 }
 

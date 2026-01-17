@@ -40,6 +40,7 @@ namespace server {
         void _sendPositions();
         void _sendDestroy();
         void _sendText();
+        void _enemyShoot();
     };
 }
 

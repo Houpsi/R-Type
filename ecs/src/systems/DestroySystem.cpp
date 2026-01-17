@@ -9,14 +9,12 @@
 #include "components/Destroy.hpp"
 
 namespace ecs {
+    void DestroySystem::update(EcsManager &ecs)
+    {
+        auto &entities = ecs.getEntities();
 
-void DestroySystem::update(EcsManager &ecs)
-{
-    auto &entities = ecs.getEntities();
-
-    erase_if(entities, [](std::shared_ptr<Entity> &entity) {
-        return entity->getComponent<Destroy>();
-    });
-}
-
+        erase_if(entities, [](std::shared_ptr<Entity> &entity) {
+            return entity->getComponent<Destroy>();
+        });
+    }
 }

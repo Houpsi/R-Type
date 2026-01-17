@@ -6,7 +6,6 @@
 */
 
 #include "CollisionSystem.hpp"
-
 #include "components/Sound.hpp"
 
 namespace ecs
@@ -32,10 +31,12 @@ namespace ecs
         const auto &entities = ecs.getEntities();
         _buildQuadTree(entities);
 
-        for (const auto &entity : entities)
-        {
+        for (const auto &entity : entities) {
             auto collision = entity->getComponent<Collision>();
             auto position = entity->getComponent<Position>();
+
+            if (!collision || !position) continue;
+
             AABB bound{
                 position->getX(),
                 position->getY(),
@@ -47,6 +48,7 @@ namespace ecs
             for (const auto& other : closeEntities) {
                 auto otherCollision = other->getComponent<Collision>();
 
+                if (!otherCollision) continue;
                 if (entity == other)
                     continue;
                 if (_shouldIgnoreCollision(
@@ -62,6 +64,7 @@ namespace ecs
                         auto health = other->getComponent<Health>();
                         auto shoot = entity->getComponent<Shoot>();
 
+                        if (!health && !shoot) continue;
                         health->setHealth(health->getHealth() - shoot->getDamage());
                         entity->addComponent<Sound>(3, false);
                         entity->addComponent<Destroy>();
@@ -70,6 +73,12 @@ namespace ecs
                         typeB == ENEMY) {
                         entity->addComponent<Sound>(3, false);
                         entity->addComponent<Destroy>();
+                    }
+                    else if (typeA == ENEMY_PROJECTILE &&
+                        typeB == PLAYER) {
+                        entity->addComponent<Sound>(3, false);
+                        entity->addComponent<Destroy>();
+                        other->addComponent<Destroy>();
                     }
                 }
             }
@@ -94,6 +103,8 @@ namespace ecs
             return true;
         if (a == TypeCollision::ENEMY && b == TypeCollision::PLAYER)
             return true;
+        if (a == ENEMY_PROJECTILE && b == ENEMY)
+            return true;
 
         return false;
     }
@@ -114,7 +125,9 @@ namespace ecs
         const auto& colA = a.getComponent<Collision>();
 
         const auto& posB = b.getComponent<Position>();
-        const auto& colB = b.getComponent<Collision>();;
+        const auto& colB = b.getComponent<Collision>();
+
+        if (!posA || !colA || !posB || !colB) return false;
 
         return _isColliding(
             posA->getX(), posA->getY(), colA->getWidth(), colA->getHeight(),
