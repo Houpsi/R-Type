@@ -18,7 +18,7 @@ Inherits from std::exception
 
 |                | Name           |
 | -------------- | -------------- |
-| const char * | **[what](Classes/classserver_1_1LevelParser_1_1LevelParserException.md#function-what)**() const |
+| const char * | **[what](Classes/classserver_1_1LevelParser_1_1LevelParserException.md#function-what)**() const override |
 | | **[LevelParserException](Classes/classserver_1_1LevelParser_1_1LevelParserException.md#function-levelparserexception)**(const char * msg) |
 
 ## Public Functions Documentation
@@ -26,14 +26,14 @@ Inherits from std::exception
 ### function what
 
 ```cpp
-inline const char * what() const
+inline const char * what() const override
 ```
 
 
 ### function LevelParserException
 
 ```cpp
-inline LevelParserException(
+inline explicit LevelParserException(
     const char * msg
 )
 ```
@@ -41,4 +41,4 @@ inline LevelParserException(
 
 -------------------------------
 
-Updated on 2026-01-17 at 13:41:27 +0000
+Updated on 2026-01-17 at 14:46:01 +0000

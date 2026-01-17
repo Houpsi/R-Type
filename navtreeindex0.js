@@ -69,7 +69,6 @@ var NAVTREEINDEX0 =
 "LevelManager_8hpp.html":[2,0,1,0,2,1],
 "LevelManager_8hpp_source.html":[2,0,1,0,2,1],
 "LevelParser_8cpp.html":[2,0,1,0,3,0],
-"LevelParser_8cpp.html#aaca5c94c4d06ab56c2ca652af54fe561":[2,0,1,0,3,0,0],
 "LevelParser_8hpp.html":[2,0,1,0,3,1],
 "LevelParser_8hpp_source.html":[2,0,1,0,3,1],
 "Level_8cpp.html":[2,0,1,0,1,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX0 =
 "classecs_1_1Collision.html":[0,0,0,4],
 "classecs_1_1Collision.html#a4f634eb80be679f82de0444f6b16ea08":[1,0,0,4,7],
 "classecs_1_1Collision.html#a4f634eb80be679f82de0444f6b16ea08":[0,0,0,4,7],
-"classecs_1_1Collision.html#a5f4f79409390ad62db885ad409322332":[1,0,0,4,6]
+"classecs_1_1Collision.html#a5f4f79409390ad62db885ad409322332":[1,0,0,4,6],
+"classecs_1_1Collision.html#a5f4f79409390ad62db885ad409322332":[0,0,0,4,6]
 };

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['size_5fx_5fplayer_0',['SIZE_X_PLAYER',['../PlayerAnimationSystem_8cpp.html#a51bfb0c4a1a9b9e2b8f89e52f182ae6a',1,'PlayerAnimationSystem.cpp']]],
-  ['size_5fy_5fplayer_1',['SIZE_Y_PLAYER',['../PlayerAnimationSystem_8cpp.html#a74110b443678b755222c85d4e9e73b7b',1,'PlayerAnimationSystem.cpp']]],
-  ['spawnrate_2',['spawnRate',['../structtmpEnemy.html#a35ad10baa09fb33c1a0dae7930b34f9a',1,'tmpEnemy']]]
+  ['type_0',['type',['../structtmpEnemy.html#a9279925c45b6d1ae1be779b2fabe04a9',1,'tmpEnemy']]]
 ];

@@ -40,9 +40,7 @@ digraph "server/src/server/Server.cpp"
   Node1 -> Node17 [id="edge18_Node000001_Node000017",color="steelblue1",style="solid",tooltip=" "];
   Node17 [id="Node000017",label="packet_factory/PacketFactory.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node8 [id="edge19_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
-  Node1 -> Node18 [id="edge20_Node000001_Node000018",color="steelblue1",style="solid",tooltip=" "];
-  Node18 [id="Node000018",label="iostream",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
-  Node1 -> Node14 [id="edge21_Node000001_Node000014",color="steelblue1",style="solid",tooltip=" "];
-  Node1 -> Node19 [id="edge22_Node000001_Node000019",color="steelblue1",style="solid",tooltip=" "];
-  Node19 [id="Node000019",label="utility",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node14 [id="edge20_Node000001_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node18 [id="edge21_Node000001_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="utility",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
 }

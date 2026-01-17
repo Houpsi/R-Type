@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keyenemytoenum_0',['keyEnemyToEnum',['../namespaceserver.html#aaca5c94c4d06ab56c2ca652af54fe561',1,'server']]]
+  ['lastspawntime_0',['lastSpawnTime',['../structtmpEnemy.html#aba419a89bd7a92a1e914d7e037efefa9',1,'tmpEnemy']]]
 ];
