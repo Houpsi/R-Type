@@ -13,6 +13,7 @@ title: ecs
 | -------------- | -------------- |
 | class | **[ecs::VelocitySystem](Classes/classecs_1_1VelocitySystem.md)**  |
 | class | **[ecs::Velocity](Classes/classecs_1_1Velocity.md)**  |
+| class | **[ecs::Text](Classes/classecs_1_1Text.md)**  |
 | class | **[ecs::System](Classes/classecs_1_1System.md)**  |
 | class | **[ecs::SpriteAnimationSystem](Classes/classecs_1_1SpriteAnimationSystem.md)**  |
 | class | **[ecs::Sprite](Classes/classecs_1_1Sprite.md)**  |
@@ -20,6 +21,8 @@ title: ecs
 | class | **[ecs::SoundManager](Classes/classecs_1_1SoundManager.md)**  |
 | class | **[ecs::Sound](Classes/classecs_1_1Sound.md)**  |
 | class | **[ecs::Shoot](Classes/classecs_1_1Shoot.md)**  |
+| class | **[ecs::ScoreTextSystem](Classes/classecs_1_1ScoreTextSystem.md)**  |
+| class | **[ecs::Score](Classes/classecs_1_1Score.md)**  |
 | class | **[ecs::ResourceManager](Classes/classecs_1_1ResourceManager.md)**  |
 | class | **[ecs::RenderSystem](Classes/classecs_1_1RenderSystem.md)**  |
 | class | **[ecs::QuadTree](Classes/classecs_1_1QuadTree.md)**  |
@@ -78,6 +81,7 @@ title: ecs
 | constexpr uint16_t | **[windowHeight](Namespaces/namespaceecs.md#variable-windowheight)**  |
 | constexpr int | **[volumeMusic](Namespaces/namespaceecs.md#variable-volumemusic)**  |
 | constexpr int | **[up](Namespaces/namespaceecs.md#variable-up)**  |
+| constexpr int | **[scoreKillMonster](Namespaces/namespaceecs.md#variable-scorekillmonster)**  |
 | constexpr int | **[right](Namespaces/namespaceecs.md#variable-right)**  |
 | const std::string | **[protanopiaShader](Namespaces/namespaceecs.md#variable-protanopiashader)**  |
 | constexpr int | **[left](Namespaces/namespaceecs.md#variable-left)**  |
@@ -267,6 +271,13 @@ constexpr int up = 2;
 ```
 
 
+### variable scoreKillMonster
+
+```cpp
+static constexpr int scoreKillMonster = 100;
+```
+
+
 ### variable right
 
 ```cpp
@@ -368,4 +379,4 @@ static constexpr int MAX_DEPTH = 6;
 
 -------------------------------
 
-Updated on 2026-01-17 at 17:52:11 +0000
+Updated on 2026-01-17 at 21:25:42 +0000

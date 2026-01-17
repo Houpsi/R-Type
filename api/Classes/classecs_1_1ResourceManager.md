@@ -17,6 +17,7 @@ title: ecs::ResourceManager
 |                | Name           |
 | -------------- | -------------- |
 | sf::Texture & | **[getTexture](Classes/classecs_1_1ResourceManager.md#function-gettexture)**(const std::string & path) |
+| const sf::Font & | **[getFont](Classes/classecs_1_1ResourceManager.md#function-getfont)**(const std::string & path) |
 | | **[ResourceManager](Classes/classecs_1_1ResourceManager.md#function-resourcemanager)**() |
 
 ## Public Functions Documentation
@@ -25,6 +26,15 @@ title: ecs::ResourceManager
 
 ```cpp
 sf::Texture & getTexture(
+    const std::string & path
+)
+```
+
+
+### function getFont
+
+```cpp
+const sf::Font & getFont(
     const std::string & path
 )
 ```
@@ -39,4 +49,4 @@ ResourceManager()
 
 -------------------------------
 
-Updated on 2026-01-17 at 17:52:11 +0000
+Updated on 2026-01-17 at 21:25:42 +0000

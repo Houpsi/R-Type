@@ -34,6 +34,8 @@ title: Classes
     * **class [QuadTree](Classes/classecs_1_1QuadTree.md)** 
     * **class [RenderSystem](Classes/classecs_1_1RenderSystem.md)** 
     * **class [ResourceManager](Classes/classecs_1_1ResourceManager.md)** 
+    * **class [Score](Classes/classecs_1_1Score.md)** 
+    * **class [ScoreTextSystem](Classes/classecs_1_1ScoreTextSystem.md)** 
     * **class [Shoot](Classes/classecs_1_1Shoot.md)** 
     * **class [Sound](Classes/classecs_1_1Sound.md)** 
     * **class [SoundManager](Classes/classecs_1_1SoundManager.md)** 
@@ -41,6 +43,7 @@ title: Classes
     * **class [Sprite](Classes/classecs_1_1Sprite.md)** 
     * **class [SpriteAnimationSystem](Classes/classecs_1_1SpriteAnimationSystem.md)** 
     * **class [System](Classes/classecs_1_1System.md)** 
+    * **class [Text](Classes/classecs_1_1Text.md)** 
     * **class [Velocity](Classes/classecs_1_1Velocity.md)** 
     * **class [VelocitySystem](Classes/classecs_1_1VelocitySystem.md)** 
 * **namespace [server](Namespaces/namespaceserver.md)** 
@@ -59,4 +62,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2026-01-17 at 17:52:11 +0000
+Updated on 2026-01-17 at 21:25:42 +0000

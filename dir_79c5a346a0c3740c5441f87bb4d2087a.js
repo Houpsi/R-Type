@@ -20,12 +20,16 @@ var dir_79c5a346a0c3740c5441f87bb4d2087a =
     [ "PlayerAnimation.hpp", "PlayerAnimation_8hpp.html", "PlayerAnimation_8hpp" ],
     [ "Position.cpp", "Position_8cpp.html", null ],
     [ "Position.hpp", "Position_8hpp.html", "Position_8hpp" ],
+    [ "Score.cpp", "Score_8cpp.html", null ],
+    [ "Score.hpp", "Score_8hpp.html", "Score_8hpp" ],
     [ "Shoot.cpp", "Shoot_8cpp.html", null ],
     [ "Shoot.hpp", "Shoot_8hpp.html", "Shoot_8hpp" ],
     [ "Sound.cpp", "Sound_8cpp.html", null ],
     [ "Sound.hpp", "Sound_8hpp.html", "Sound_8hpp" ],
     [ "Sprite.cpp", "Sprite_8cpp.html", null ],
     [ "Sprite.hpp", "Sprite_8hpp.html", "Sprite_8hpp" ],
+    [ "Text.cpp", "Text_8cpp.html", null ],
+    [ "Text.hpp", "Text_8hpp.html", "Text_8hpp" ],
     [ "Velocity.cpp", "Velocity_8cpp.html", null ],
     [ "Velocity.hpp", "Velocity_8hpp.html", "Velocity_8hpp" ]
 ];

@@ -12,7 +12,7 @@ title: ecs::Component
 
 `#include <Component.hpp>`
 
-Inherited by [ecs::Animation](Classes/classecs_1_1Animation.md), [ecs::Background](Classes/classecs_1_1Background.md), [ecs::Collision](Classes/classecs_1_1Collision.md), [ecs::Destroy](Classes/classecs_1_1Destroy.md), [ecs::DummyComponent](Classes/classecs_1_1DummyComponent.md), [ecs::Enemy](Classes/classecs_1_1Enemy.md), [ecs::Health](Classes/classecs_1_1Health.md), [ecs::InputPlayer](Classes/classecs_1_1InputPlayer.md), [ecs::PlayerAnimation](Classes/classecs_1_1PlayerAnimation.md), [ecs::Position](Classes/classecs_1_1Position.md), [ecs::Shoot](Classes/classecs_1_1Shoot.md), [ecs::Sound](Classes/classecs_1_1Sound.md), [ecs::Sprite](Classes/classecs_1_1Sprite.md), [ecs::Velocity](Classes/classecs_1_1Velocity.md)
+Inherited by [ecs::Animation](Classes/classecs_1_1Animation.md), [ecs::Background](Classes/classecs_1_1Background.md), [ecs::Collision](Classes/classecs_1_1Collision.md), [ecs::Destroy](Classes/classecs_1_1Destroy.md), [ecs::DummyComponent](Classes/classecs_1_1DummyComponent.md), [ecs::Enemy](Classes/classecs_1_1Enemy.md), [ecs::Health](Classes/classecs_1_1Health.md), [ecs::InputPlayer](Classes/classecs_1_1InputPlayer.md), [ecs::PlayerAnimation](Classes/classecs_1_1PlayerAnimation.md), [ecs::Position](Classes/classecs_1_1Position.md), [ecs::Score](Classes/classecs_1_1Score.md), [ecs::Shoot](Classes/classecs_1_1Shoot.md), [ecs::Sound](Classes/classecs_1_1Sound.md), [ecs::Sprite](Classes/classecs_1_1Sprite.md), [ecs::Text](Classes/classecs_1_1Text.md), [ecs::Velocity](Classes/classecs_1_1Velocity.md)
 
 ## Public Functions
 
@@ -39,4 +39,4 @@ Component() =default
 
 -------------------------------
 
-Updated on 2026-01-17 at 17:52:11 +0000
+Updated on 2026-01-17 at 21:25:42 +0000

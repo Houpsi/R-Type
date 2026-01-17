@@ -27,11 +27,15 @@ digraph "Graphical Class Hierarchy"
   Node0 -> Node10 [id="edge11_Node000000_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node10 [id="Node000010",label="ecs::Position",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Position.html",tooltip=" "];
   Node0 -> Node11 [id="edge12_Node000000_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node11 [id="Node000011",label="ecs::Shoot",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Shoot.html",tooltip=" "];
+  Node11 [id="Node000011",label="ecs::Score",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Score.html",tooltip=" "];
   Node0 -> Node12 [id="edge13_Node000000_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node12 [id="Node000012",label="ecs::Sound",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Sound.html",tooltip=" "];
+  Node12 [id="Node000012",label="ecs::Shoot",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Shoot.html",tooltip=" "];
   Node0 -> Node13 [id="edge14_Node000000_Node000013",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node13 [id="Node000013",label="ecs::Sprite",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Sprite.html",tooltip=" "];
+  Node13 [id="Node000013",label="ecs::Sound",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Sound.html",tooltip=" "];
   Node0 -> Node14 [id="edge15_Node000000_Node000014",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node14 [id="Node000014",label="ecs::Velocity",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Velocity.html",tooltip=" "];
+  Node14 [id="Node000014",label="ecs::Sprite",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Sprite.html",tooltip=" "];
+  Node0 -> Node15 [id="edge16_Node000000_Node000015",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="ecs::Text",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Text.html",tooltip=" "];
+  Node0 -> Node16 [id="edge17_Node000000_Node000016",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="ecs::Velocity",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Velocity.html",tooltip=" "];
 }

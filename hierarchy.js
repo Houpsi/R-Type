@@ -15,9 +15,11 @@ var hierarchy =
       [ "ecs::InputPlayer", "classecs_1_1InputPlayer.html", null ],
       [ "ecs::PlayerAnimation", "classecs_1_1PlayerAnimation.html", null ],
       [ "ecs::Position", "classecs_1_1Position.html", null ],
+      [ "ecs::Score", "classecs_1_1Score.html", null ],
       [ "ecs::Shoot", "classecs_1_1Shoot.html", null ],
       [ "ecs::Sound", "classecs_1_1Sound.html", null ],
       [ "ecs::Sprite", "classecs_1_1Sprite.html", null ],
+      [ "ecs::Text", "classecs_1_1Text.html", null ],
       [ "ecs::Velocity", "classecs_1_1Velocity.html", null ]
     ] ],
     [ "ecs::EcsManager", "classecs_1_1EcsManager.html", null ],
@@ -43,6 +45,7 @@ var hierarchy =
       [ "ecs::MovementSystem", "classecs_1_1MovementSystem.html", null ],
       [ "ecs::PlayerAnimationSystem", "classecs_1_1PlayerAnimationSystem.html", null ],
       [ "ecs::RenderSystem", "classecs_1_1RenderSystem.html", null ],
+      [ "ecs::ScoreTextSystem", "classecs_1_1ScoreTextSystem.html", null ],
       [ "ecs::SoundSystem", "classecs_1_1SoundSystem.html", null ],
       [ "ecs::SpriteAnimationSystem", "classecs_1_1SpriteAnimationSystem.html", null ],
       [ "ecs::VelocitySystem", "classecs_1_1VelocitySystem.html", null ]

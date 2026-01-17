@@ -9,5 +9,7 @@ var searchData=
   ['testsinputplayer_2ecpp_6',['TestsInputPlayer.cpp',['../TestsInputPlayer_8cpp.html',1,'']]],
   ['testsposition_2ecpp_7',['TestsPosition.cpp',['../TestsPosition_8cpp.html',1,'']]],
   ['testssprite_2ecpp_8',['TestsSprite.cpp',['../TestsSprite_8cpp.html',1,'']]],
-  ['tmpenemy_2ehpp_9',['TmpEnemy.hpp',['../TmpEnemy_8hpp.html',1,'']]]
+  ['text_2ecpp_9',['Text.cpp',['../Text_8cpp.html',1,'']]],
+  ['text_2ehpp_10',['Text.hpp',['../Text_8hpp.html',1,'']]],
+  ['tmpenemy_2ehpp_11',['TmpEnemy.hpp',['../TmpEnemy_8hpp.html',1,'']]]
 ];

@@ -16,6 +16,8 @@ var dir_b6cc2f1b30b06e8d717dd3f4fede875e =
     [ "PlayerAnimationSystem.hpp", "PlayerAnimationSystem_8hpp.html", "PlayerAnimationSystem_8hpp" ],
     [ "RenderSystem.cpp", "RenderSystem_8cpp.html", "RenderSystem_8cpp" ],
     [ "RenderSystem.hpp", "RenderSystem_8hpp.html", "RenderSystem_8hpp" ],
+    [ "ScoreTextSystem.cpp", "ScoreTextSystem_8cpp.html", null ],
+    [ "ScoreTextSystem.hpp", "ScoreTextSystem_8hpp.html", "ScoreTextSystem_8hpp" ],
     [ "SoundSystem.cpp", "SoundSystem_8cpp.html", null ],
     [ "SoundSystem.hpp", "SoundSystem_8hpp.html", "SoundSystem_8hpp" ],
     [ "SpriteAnimationSystem.cpp", "SpriteAnimationSystem_8cpp.html", null ],

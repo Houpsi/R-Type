@@ -26,6 +26,8 @@ var annotated_dup =
       [ "QuadTree", "classecs_1_1QuadTree.html", "classecs_1_1QuadTree" ],
       [ "RenderSystem", "classecs_1_1RenderSystem.html", "classecs_1_1RenderSystem" ],
       [ "ResourceManager", "classecs_1_1ResourceManager.html", "classecs_1_1ResourceManager" ],
+      [ "Score", "classecs_1_1Score.html", "classecs_1_1Score" ],
+      [ "ScoreTextSystem", "classecs_1_1ScoreTextSystem.html", "classecs_1_1ScoreTextSystem" ],
       [ "Shoot", "classecs_1_1Shoot.html", "classecs_1_1Shoot" ],
       [ "Sound", "classecs_1_1Sound.html", "classecs_1_1Sound" ],
       [ "SoundManager", "classecs_1_1SoundManager.html", "classecs_1_1SoundManager" ],
@@ -33,6 +35,7 @@ var annotated_dup =
       [ "Sprite", "classecs_1_1Sprite.html", "classecs_1_1Sprite" ],
       [ "SpriteAnimationSystem", "classecs_1_1SpriteAnimationSystem.html", "classecs_1_1SpriteAnimationSystem" ],
       [ "System", "classecs_1_1System.html", "classecs_1_1System" ],
+      [ "Text", "classecs_1_1Text.html", "classecs_1_1Text" ],
       [ "Velocity", "classecs_1_1Velocity.html", "classecs_1_1Velocity" ],
       [ "VelocitySystem", "classecs_1_1VelocitySystem.html", "classecs_1_1VelocitySystem" ]
     ] ],

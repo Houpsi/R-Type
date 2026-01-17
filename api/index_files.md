@@ -40,12 +40,16 @@ title: Files
             * **file [ecs/src/components/PlayerAnimation.hpp](Files/PlayerAnimation_8hpp.md#file-playeranimation.hpp)** 
             * **file [ecs/src/components/Position.cpp](Files/Position_8cpp.md#file-position.cpp)** 
             * **file [ecs/src/components/Position.hpp](Files/Position_8hpp.md#file-position.hpp)** 
+            * **file [ecs/src/components/Score.cpp](Files/Score_8cpp.md#file-score.cpp)** 
+            * **file [ecs/src/components/Score.hpp](Files/Score_8hpp.md#file-score.hpp)** 
             * **file [ecs/src/components/Shoot.cpp](Files/Shoot_8cpp.md#file-shoot.cpp)** 
             * **file [ecs/src/components/Shoot.hpp](Files/Shoot_8hpp.md#file-shoot.hpp)** 
             * **file [ecs/src/components/Sound.cpp](Files/Sound_8cpp.md#file-sound.cpp)** 
             * **file [ecs/src/components/Sound.hpp](Files/Sound_8hpp.md#file-sound.hpp)** 
             * **file [ecs/src/components/Sprite.cpp](Files/Sprite_8cpp.md#file-sprite.cpp)** 
             * **file [ecs/src/components/Sprite.hpp](Files/Sprite_8hpp.md#file-sprite.hpp)** 
+            * **file [ecs/src/components/Text.cpp](Files/Text_8cpp.md#file-text.cpp)** 
+            * **file [ecs/src/components/Text.hpp](Files/Text_8hpp.md#file-text.hpp)** 
             * **file [ecs/src/components/Velocity.cpp](Files/Velocity_8cpp.md#file-velocity.cpp)** 
             * **file [ecs/src/components/Velocity.hpp](Files/Velocity_8hpp.md#file-velocity.hpp)** 
         * **dir [ecs/src/systems](Files/dir_b6cc2f1b30b06e8d717dd3f4fede875e.md#dir-ecs/src/systems)** 
@@ -65,6 +69,8 @@ title: Files
             * **file [ecs/src/systems/PlayerAnimationSystem.hpp](Files/PlayerAnimationSystem_8hpp.md#file-playeranimationsystem.hpp)** 
             * **file [ecs/src/systems/RenderSystem.cpp](Files/RenderSystem_8cpp.md#file-rendersystem.cpp)** 
             * **file [ecs/src/systems/RenderSystem.hpp](Files/RenderSystem_8hpp.md#file-rendersystem.hpp)** 
+            * **file [ecs/src/systems/ScoreTextSystem.cpp](Files/ScoreTextSystem_8cpp.md#file-scoretextsystem.cpp)** 
+            * **file [ecs/src/systems/ScoreTextSystem.hpp](Files/ScoreTextSystem_8hpp.md#file-scoretextsystem.hpp)** 
             * **file [ecs/src/systems/SoundSystem.cpp](Files/SoundSystem_8cpp.md#file-soundsystem.cpp)** 
             * **file [ecs/src/systems/SoundSystem.hpp](Files/SoundSystem_8hpp.md#file-soundsystem.hpp)** 
             * **file [ecs/src/systems/SpriteAnimationSystem.cpp](Files/SpriteAnimationSystem_8cpp.md#file-spriteanimationsystem.cpp)** 
@@ -110,4 +116,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2026-01-17 at 17:52:11 +0000
+Updated on 2026-01-17 at 21:25:42 +0000

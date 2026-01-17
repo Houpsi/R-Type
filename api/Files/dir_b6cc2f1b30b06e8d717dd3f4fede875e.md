@@ -19,6 +19,8 @@ title: ecs/src/systems
 | **[ecs/src/systems/SpriteAnimationSystem.cpp](Files/SpriteAnimationSystem_8cpp.md#file-spriteanimationsystem.cpp)**  |
 | **[ecs/src/systems/SoundSystem.hpp](Files/SoundSystem_8hpp.md#file-soundsystem.hpp)**  |
 | **[ecs/src/systems/SoundSystem.cpp](Files/SoundSystem_8cpp.md#file-soundsystem.cpp)**  |
+| **[ecs/src/systems/ScoreTextSystem.hpp](Files/ScoreTextSystem_8hpp.md#file-scoretextsystem.hpp)**  |
+| **[ecs/src/systems/ScoreTextSystem.cpp](Files/ScoreTextSystem_8cpp.md#file-scoretextsystem.cpp)**  |
 | **[ecs/src/systems/RenderSystem.hpp](Files/RenderSystem_8hpp.md#file-rendersystem.hpp)**  |
 | **[ecs/src/systems/RenderSystem.cpp](Files/RenderSystem_8cpp.md#file-rendersystem.cpp)**  |
 | **[ecs/src/systems/PlayerAnimationSystem.hpp](Files/PlayerAnimationSystem_8hpp.md#file-playeranimationsystem.hpp)**  |
@@ -43,4 +45,4 @@ title: ecs/src/systems
 
 -------------------------------
 
-Updated on 2026-01-17 at 17:52:11 +0000
+Updated on 2026-01-17 at 21:25:42 +0000
