@@ -34,11 +34,11 @@ namespace cmn {
     constexpr uint8_t monsterDamage = 100;
     constexpr sf::Vector2f monsterSpriteScale = {2.0F, 2.0F};
     constexpr std::string_view monsterSpriteSheet = "./assets/r-typesheet5.gif";
-    constexpr std::pair<uint8_t, uint8_t> monsterAnimationSize = {32, 36};
+    constexpr std::pair<uint8_t, uint8_t> monsterAnimationSize = {33, 24};
     constexpr uint8_t monsterAnimationOffset = 0;
     constexpr uint8_t monsterAnimationNumberFrame = 8;
-    constexpr uint8_t monsterCollisionHeight = 28;
-    constexpr uint8_t monsterCollisionWidth = 36;
+    constexpr uint8_t monsterCollisionWidth = 33;
+    constexpr uint8_t monsterCollisionHeight = 24;
     constexpr uint16_t monsterSpawnPositionWidth = 2020;
     constexpr uint16_t monsterMaxSpawnPositionHeight = 1081;
 
@@ -48,8 +48,8 @@ namespace cmn {
     constexpr std::pair<uint8_t, uint8_t> monster2AnimationSize = {64, 50};
     constexpr uint8_t monster2AnimationOffset = 0;
     constexpr uint8_t monster2AnimationNumberFrame = 4;
-    constexpr uint8_t monster2CollisionHeight = 64;
-    constexpr uint8_t monster2CollisionWidth = 50;
+    constexpr uint8_t monster2CollisionWidth = 64;
+    constexpr uint8_t monster2CollisionHeight = 50;
     constexpr uint16_t monster2SpawnPositionWidth = 2020;
     constexpr uint16_t monster2MaxSpawnPositionHeight = 1081;
 
@@ -60,8 +60,8 @@ namespace cmn {
     constexpr std::pair<uint8_t, uint8_t> monsterProjectileAnimationSize = { 32, 36 };
     constexpr uint8_t monsterProjectileAnimationOffset = 0;
     constexpr uint8_t monsterProjectileAnimationNumberFrame = 3;
-    constexpr uint8_t monsterProjectileCollisionHeight = 10;
-    constexpr uint8_t monsterProjectileCollisionWidth = 10;
+    constexpr uint8_t monsterProjectileCollisionWidth = 32;
+    constexpr uint8_t monsterProjectileCollisionHeight = 36;
 
     constexpr uint8_t boss1Health = 100;
     constexpr sf::Vector2f boss1SpriteScale = {2.0F, 2.0F};
@@ -69,8 +69,8 @@ namespace cmn {
     constexpr std::pair<uint8_t, uint8_t> boss1AnimationSize = {160, 209};
     constexpr uint8_t boss1AnimationOffset = 0;
     constexpr uint8_t boss1AnimationNumberFrame = 4;
-    constexpr uint8_t boss1CollisionHeight = 209;
     constexpr uint8_t boss1CollisionWidth = 160;
+    constexpr uint8_t boss1CollisionHeight = 209;
     constexpr uint16_t boss1SpawnPositionWidth = 1500;
     constexpr uint16_t boss1SpawnPositionHeight = 250;
 
@@ -82,8 +82,8 @@ namespace cmn {
     constexpr std::pair<uint8_t, uint8_t> playerProjectileAnimationSize = {32, 36};
     constexpr uint8_t playerProjectileAnimationOffset = 0;
     constexpr uint8_t playerProjectileAnimationNumberFrame = 3;
-    constexpr uint8_t playerProjectileCollisionHeight = 10;
-    constexpr uint8_t playerProjectileCollisionWidth = 10;
+    constexpr uint8_t playerProjectileCollisionWidth = 32;
+    constexpr uint8_t playerProjectileCollisionHeight = 36;
 
     constexpr sf::Vector2f backgroundSpriteScale = {1.0F, 1.0F};
     constexpr std::string_view pathBackgroundStars = "./assets/bg-stars.png";

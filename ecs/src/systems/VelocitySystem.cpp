@@ -19,24 +19,26 @@ namespace ecs {
             auto velocity = entity->getComponent<Velocity>()->getVelocity();
             auto collision = entity->getComponent<Collision>();
 
-            if (direction == 0) {
-                pos->setX(pos->getX() - (velocity * dt));
-            }
-            if (direction == 1) {
-                pos->setX(pos->getX() + (velocity * dt));
-            }
-            if (direction == 2) {
-                pos->setY(pos->getY() - (velocity * dt));
-            }
-            if (direction == 3) {
-                pos->setY(pos->getY() + (velocity * dt));
-            }
-            if (collision) {
-                if (pos->getX() < 0 - entity->getComponent<Collision>()->getWidth()) {
-                    entity->addComponent<Destroy>();
+            if (pos) {
+                if (direction == 0) {
+                    pos->setX(pos->getX() - (velocity * dt));
                 }
-                if (pos->getX() > ecs::windowWidth + entity->getComponent<Collision>()->getWidth() + 500) {
-                    entity->addComponent<Destroy>();
+                if (direction == 1) {
+                    pos->setX(pos->getX() + (velocity * dt));
+                }
+                if (direction == 2) {
+                    pos->setY(pos->getY() - (velocity * dt));
+                }
+                if (direction == 3) {
+                    pos->setY(pos->getY() + (velocity * dt));
+                }
+                if (collision) {
+                    if (pos->getX() < 0 - entity->getComponent<Collision>()->getWidth()) {
+                        entity->addComponent<Destroy>();
+                    }
+                    if (pos->getX() > ecs::windowWidth + entity->getComponent<Collision>()->getWidth() + 500) {
+                        entity->addComponent<Destroy>();
+                    }
                 }
             }
         }
