@@ -35,10 +35,20 @@ namespace cmn {
 
     packetData PacketDisassembler::_disassembleIntoPositionData(BitUnpacker &unpacker)
     {
-        uint32_t const entityId = unpacker.readUInt32();
-        float const positionX = unpacker.readFloat(0, windowWidth, xPositionFloatPrecision);
-        float const positionY = unpacker.readFloat(0, windowHeight, yPositionFloatPrecision);
-        positionData data = {entityId, positionX, positionY};
+        std::vector<uint32_t> entityId;
+        std::vector<float> posX;
+        std::vector<float> posY;
+
+        uint32_t const size = unpacker.readUInt32();
+
+
+        for (size_t i = 0; i < size; i++) {
+            entityId.push_back(unpacker.readUInt32());
+            posX.push_back(unpacker.readFloat(0, windowWidth, xPositionFloatPrecision));
+            posY.push_back(unpacker.readFloat(0, windowHeight, yPositionFloatPrecision));
+        }
+
+        positionData data = {entityId, posX, posY};
 
         return data;
     }

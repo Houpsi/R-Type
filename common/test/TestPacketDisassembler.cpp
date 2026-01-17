@@ -12,7 +12,6 @@
 #include "custom_packet/CustomPacket.hpp"
 #include "enums/EntityType.hpp"
 #include "enums/Key.hpp"
-#include "enums/KeyState.hpp"
 #include "packet_data/PacketData.hpp"
 #include "packet_disassembler/PacketDisassembler.hpp"
 #include "packet_factory/PacketFactory.hpp"
@@ -49,7 +48,7 @@ namespace cmn {
 
     TEST_F(PacketDisassemblerTest, DisassembleInputPacket)
     {
-        inputData inputDataPacket{10, Keys::Up, KeyState::Pressed};
+        inputData inputDataPacket{10, Keys::Up, true};
         CustomPacket packet = PacketFactory::createPacket(inputDataPacket, sequencePacketMap);
         auto [header, result] = PacketDisassembler::disassemble(packet);
 
@@ -63,7 +62,7 @@ namespace cmn {
         }, result);
         EXPECT_EQ(data.playerId, 10);
         EXPECT_EQ(data.key, Keys::Up);
-        EXPECT_EQ(data.keyState, KeyState::Pressed);
+        EXPECT_EQ(data.pressed, true);
         EXPECT_EQ(header.protocolId, inputProtocolId);
         EXPECT_FALSE(header.isReliable);
     }
@@ -76,7 +75,7 @@ namespace cmn {
         };
 
         for (auto key : keys) {
-            inputData inputDataPacket{5, key, KeyState::Pressed};
+            inputData inputDataPacket{5, key, true};
             CustomPacket packet = PacketFactory::createPacket(inputDataPacket, sequencePacketMap);
             auto [header, result] = PacketDisassembler::disassemble(packet);
 
@@ -92,9 +91,9 @@ namespace cmn {
         }
     }
 
-    TEST_F(PacketDisassemblerTest, DisassemblePositionPacket)
+    TEST_F(PacketDisassemblerTest, DisassemblePositionPacketSingleEntity)
     {
-        positionData posData{99, 123.45f, 678.90f};
+        positionData posData{{99}, {123.45f}, {678.90f}};
         CustomPacket packet = PacketFactory::createPacket(posData, sequencePacketMap);
         auto [header, result] = PacketDisassembler::disassemble(packet);
 
@@ -105,16 +104,55 @@ namespace cmn {
                 data = arg;
             }
         }, result);
-        EXPECT_EQ(data.entityId, 99);
-        EXPECT_NEAR(data.posX, 123.45f, 0.01f);
-        EXPECT_NEAR(data.posY, 678.90f, 0.01f);
+        ASSERT_EQ(data.entityId.size(), 1);
+        EXPECT_EQ(data.entityId[0], 99);
+        EXPECT_NEAR(data.posX[0], 123.45f, 0.01f);
+        EXPECT_NEAR(data.posY[0], 678.90f, 0.01f);
+        EXPECT_EQ(header.protocolId, positionProtocolId);
+        EXPECT_FALSE(header.isReliable);
+    }
+
+    TEST_F(PacketDisassemblerTest, DisassemblePositionPacketMultipleEntities)
+    {
+        positionData posData{
+            {10, 20, 30},
+            {100.0f, 200.0f, 300.0f},
+            {150.0f, 250.0f, 350.0f}
+        };
+        CustomPacket packet = PacketFactory::createPacket(posData, sequencePacketMap);
+        auto [header, result] = PacketDisassembler::disassemble(packet);
+
+        positionData data;
+        std::visit([&data](auto &&arg) {
+            using T = std::decay_t<decltype(arg)>;
+            if constexpr (std::is_same_v<T, positionData>) {
+                data = arg;
+            }
+        }, result);
+
+        ASSERT_EQ(data.entityId.size(), 3);
+        ASSERT_EQ(data.posX.size(), 3);
+        ASSERT_EQ(data.posY.size(), 3);
+
+        EXPECT_EQ(data.entityId[0], 10);
+        EXPECT_NEAR(data.posX[0], 100.0f, 0.01f);
+        EXPECT_NEAR(data.posY[0], 150.0f, 0.01f);
+
+        EXPECT_EQ(data.entityId[1], 20);
+        EXPECT_NEAR(data.posX[1], 200.0f, 0.01f);
+        EXPECT_NEAR(data.posY[1], 250.0f, 0.01f);
+
+        EXPECT_EQ(data.entityId[2], 30);
+        EXPECT_NEAR(data.posX[2], 300.0f, 0.01f);
+        EXPECT_NEAR(data.posY[2], 350.0f, 0.01f);
+
         EXPECT_EQ(header.protocolId, positionProtocolId);
         EXPECT_FALSE(header.isReliable);
     }
 
     TEST_F(PacketDisassemblerTest, DisassemblePositionPacketEdgeCases)
     {
-        std::vector<std::tuple<uint64_t, float, float>> positions = {
+        std::vector<std::tuple<uint32_t, float, float>> positions = {
             {1, 0.0f, 0.0f},
             {2, 1920.0f, 1080.0f},
             {3, 960.0f, 540.0f},
@@ -122,7 +160,7 @@ namespace cmn {
         };
 
         for (const auto& [entityId, x, y] : positions) {
-            positionData posData{static_cast<uint32_t>(entityId), x, y};
+            positionData posData{{entityId}, {x}, {y}};
             CustomPacket packet = PacketFactory::createPacket(posData, sequencePacketMap);
             auto [header, result] = PacketDisassembler::disassemble(packet);
 
@@ -134,9 +172,30 @@ namespace cmn {
                     data = arg;
                 }
             }, result);
-            EXPECT_NEAR(data.posX, x, 0.01f);
-            EXPECT_NEAR(data.posY, y, 0.01f);
+            ASSERT_EQ(data.posX.size(), 1);
+            ASSERT_EQ(data.posY.size(), 1);
+            EXPECT_NEAR(data.posX[0], x, 0.01f);
+            EXPECT_NEAR(data.posY[0], y, 0.01f);
         }
+    }
+
+    TEST_F(PacketDisassemblerTest, DisassemblePositionPacketEmpty)
+    {
+        positionData posData{{}, {}, {}};
+        CustomPacket packet = PacketFactory::createPacket(posData, sequencePacketMap);
+        auto [header, result] = PacketDisassembler::disassemble(packet);
+
+        positionData data;
+        std::visit([&data](auto &&arg) {
+            using T = std::decay_t<decltype(arg)>;
+            if constexpr (std::is_same_v<T, positionData>) {
+                data = arg;
+            }
+        }, result);
+
+        EXPECT_EQ(data.entityId.size(), 0);
+        EXPECT_EQ(data.posX.size(), 0);
+        EXPECT_EQ(data.posY.size(), 0);
     }
 
     TEST_F(PacketDisassemblerTest, DisassembleNewEntityPacketPlayer)
@@ -269,13 +328,13 @@ namespace cmn {
         }
 
         {
-            inputData inputDataPacket{5, Keys::Space, KeyState::Pressed};
+            inputData inputDataPacket{5, Keys::Space, true};
             auto packet = PacketFactory::createPacket(inputDataPacket, sequencePacketMap);
             auto [header, result] = PacketDisassembler::disassemble(packet);
         }
 
         {
-            positionData posData{30, 100.0f, 200.0f};
+            positionData posData{{30}, {100.0f}, {200.0f}};
             auto packet = PacketFactory::createPacket(posData, sequencePacketMap);
             auto [header, result] = PacketDisassembler::disassemble(packet);
         }
@@ -303,7 +362,7 @@ namespace cmn {
 
     TEST_F(PacketDisassemblerTest, DisassembleMultipleInputStates)
     {
-        std::vector<KeyState> states = {KeyState::Pressed, KeyState::Released};
+        std::vector<bool> states = {true, false};
 
         for (auto state : states) {
             inputData inputDataPacket{7, Keys::Left, state};
@@ -318,7 +377,7 @@ namespace cmn {
                     data = arg;
                 }
             }, result);
-            EXPECT_EQ(data.keyState, state);
+            EXPECT_EQ(data.pressed, state);
         }
     }
 
@@ -344,8 +403,8 @@ namespace cmn {
     TEST_F(PacketDisassemblerTest, DisassembleSequentialPackets)
     {
         connectionData connData{1};
-        inputData inputDataPacket{2, Keys::Up, KeyState::Pressed};
-        positionData posData{3, 10.0f, 20.0f};
+        inputData inputDataPacket{2, Keys::Up, true};
+        positionData posData{{3}, {10.0f}, {20.0f}};
         newEntityData newEntData{4, EntityType::Player, 30.0f, 40.0f};
         deleteEntityData delData{5};
         startGameData startData{};
