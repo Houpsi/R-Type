@@ -17,11 +17,7 @@ namespace ecs
 	public:
 		Text(const sf::Font& font,
 		 unsigned int size = 24,
-		 sf::Color color = sf::Color::White)
-		: _text(font, "", size)
-		{
-			_text.setFillColor(color);
-		}
+		 sf::Color color = sf::Color::White);
 
 		sf::Text& getText();
 		const sf::Text& getText() const;

@@ -9,6 +9,12 @@
 
 namespace ecs
 {
+    Text::Text(const sf::Font& font, unsigned int size, sf::Color color)
+    : _text(font, "", size)
+    {
+        _text.setFillColor(color);
+    }
+
 	sf::Text& Text::getText()
 	{
 		return _text;
