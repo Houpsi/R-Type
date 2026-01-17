@@ -406,7 +406,8 @@ namespace server {
              _createNewPlayers(_sharedData->getLobbyPlayers(_lobbyId), currentNbPlayerEntities);
              return;
          }
-        while (_readyPlayersId.size() != listPlayerIds.size() && _sharedData->getLobbyState(_lobbyId)) {
+        while (_readyPlayersId.size() != listPlayerIds.size() &&
+            _sharedData->getLobbyState(_lobbyId) == cmn::LobbyState::Waiting) {
             listPlayerIds = _sharedData->getLobbyPlayers(_lobbyId);
             if (listPlayerIds.empty()) {
                 std::cout << "[Game] No players in lobby " << _lobbyId <<", cancelling game start\n";
@@ -420,6 +421,7 @@ namespace server {
             auto data = _sharedData->getLobbyUdpReceivedPacket(_lobbyId);
 
             if (!data.has_value()) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(10));
                 continue;
             }
 
@@ -432,6 +434,11 @@ namespace server {
                     && !_isIdAlreadyPresent(_entityIdPlayerMap[entity->getId()])) {
                     _readyPlayersId.push_back(_entityIdPlayerMap[entity->getId()]);
                 }
+            }
+
+            if (_readyPlayersId.size() == listPlayerIds.size() && !listPlayerIds.empty()) {
+                std::cout << "[Game] All players ready! Starting game for lobby " << _lobbyId << std::endl;
+                _sharedData->setLobbyState(_lobbyId, cmn::LobbyState::Running);
             }
         }
     }

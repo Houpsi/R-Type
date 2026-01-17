@@ -351,10 +351,7 @@ namespace server {
             uint32_t const sequenceNbr = acknowledgeData.sequenceNbr;
 
             if (_lobbyReliablePackets.contains(lobbyId)) {
-                if (_lobbyReliablePackets[lobbyId].erase(sequenceNbr)) {
-                    std::cout << "[ACK] Lobby " << lobbyId
-                              << " received ACK for seq=" << sequenceNbr << std::endl;
-                }
+                _lobbyReliablePackets[lobbyId].erase(sequenceNbr);
             }
             return;
         }

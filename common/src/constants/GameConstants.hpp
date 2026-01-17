@@ -19,7 +19,7 @@
 
 namespace cmn {
 
-    constexpr int maxPlayers = 4;
+    constexpr int maxPlayers = 2;
 
     constexpr float playerHealth = 100;
     constexpr uint16_t playerSpeed = 250;

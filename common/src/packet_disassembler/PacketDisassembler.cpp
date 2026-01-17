@@ -108,7 +108,7 @@ namespace cmn {
     {
         uint32_t const lobbyId = unpacker.readUInt32();
         uint8_t const lobbyType = unpacker.readUInt8();
-        uint8_t const lobbyCode = unpacker.readUInt32();
+        uint32_t const lobbyCode = unpacker.readUInt32();
 
         joinLobbyData data = {lobbyId, lobbyType, lobbyCode};
 

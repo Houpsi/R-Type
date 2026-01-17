@@ -21,7 +21,8 @@ namespace client {
         Menu,
         Waiting,
         InGame,
-        GameOver
+        GameOver,
+        EnteringLobbyCode
     };
 
     class GameRenderer {
@@ -43,13 +44,17 @@ namespace client {
         ClientState _currentState = ClientState::Menu;
         uint32_t _playerId = 0;
         std::map<cmn::Keys, bool> _previousInputs;
+        std::map<cmn::Keys, bool> _previousMenuInputs;
+
+        std::string _lobbyCodeInput;
+        static constexpr size_t MAX_CODE_LENGTH = 6;
 
         void _handleEvents();
         void _initEcsSystem();
         void _initBackground();
         void _initKeyboard();
         void _checkGamePlayerInput();
-        void _checkMenuPlayerInput() const;
+        void _checkMenuPlayerInput();
         void _updateNetwork();
         void _initSound();
         void _initScore();
@@ -57,6 +62,8 @@ namespace client {
         void _updateGame(sf::Clock &inputClock, float elapsedTime, float deltaTime);
         void _resetGame();
         void _clearGameEntities();
+        void _handleCodeInput(const sf::Event::KeyPressed& keyEvent);
+
     };
 }
 

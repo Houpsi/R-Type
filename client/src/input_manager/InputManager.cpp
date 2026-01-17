@@ -88,6 +88,7 @@ namespace client {
             bindKey("menu_matchmaking",  cmn::Keys::MenuMatchmaking);
             bindKey("menu_lobby",        cmn::Keys::MenuLobby);
             bindKey("menu_leave",        cmn::Keys::MenuLeave);
+            bindKey("menu_join_lobby",        cmn::Keys::MenuJoinLobby);
 
             if (root.exists("shader")) {
                 const libconfig::Setting& shader = root["shader"];
@@ -115,6 +116,7 @@ namespace client {
         _bindings[cmn::Keys::MenuSolo]         = {sf::Keyboard::Key::Num1, sf::Keyboard::Key::Num1, 0, false, sf::Joystick::Axis::Z, 0.f};
         _bindings[cmn::Keys::MenuMatchmaking] = {sf::Keyboard::Key::Num2, sf::Keyboard::Key::Num2, 1, false, sf::Joystick::Axis::Z, 0.f};
         _bindings[cmn::Keys::MenuLobby]        = {sf::Keyboard::Key::Num3, sf::Keyboard::Key::Num3, 2, false, sf::Joystick::Axis::Z, 0.f};
+        _bindings[cmn::Keys::MenuJoinLobby]        = {sf::Keyboard::Key::Num4, sf::Keyboard::Key::Num4, 2, false, sf::Joystick::Axis::Z, 0.f};
         _bindings[cmn::Keys::MenuLeave]        = {sf::Keyboard::Key::Escape, sf::Keyboard::Key::Escape, 3, false, sf::Joystick::Axis::Z, 0.f};
     }
 

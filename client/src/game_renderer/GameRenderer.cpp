@@ -9,8 +9,10 @@
 
 #include "client/Client.hpp"
 #include "components/Destroy.hpp"
+#include "components/Score.hpp"
 #include "components/Sound.hpp"
 #include "constants/GameConstants.hpp"
+#include "constants/NetworkConstants.hpp"
 #include "entity_factory/EntityFactory.hpp"
 #include "enums/GameResultType.hpp"
 #include "enums/Key.hpp"
@@ -21,12 +23,10 @@
 #include "systems/InputSystem.hpp"
 #include "systems/PlayerAnimationSystem.hpp"
 #include "systems/RenderSystem.hpp"
+#include "systems/ScoreTextSystem.hpp"
 #include "systems/SoundSystem.hpp"
 #include "systems/SpriteAnimationSystem.hpp"
 #include "systems/VelocitySystem.hpp"
-#include "packet_factory/PacketFactory.hpp"
-#include "components/Score.hpp"
-#include "systems/ScoreTextSystem.hpp"
 #include <functional>
 
 namespace client {
@@ -129,9 +129,68 @@ namespace client {
             }
             else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
             {
-                if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {
+                if (_currentState == ClientState::EnteringLobbyCode) {
+                    _handleCodeInput(*keyPressed);
+                }
+                else if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {
                     _window.close();
                 }
+            }
+        }
+    }
+
+    void GameRenderer::_handleCodeInput(const sf::Event::KeyPressed& keyEvent)
+    {
+        if (keyEvent.scancode == sf::Keyboard::Scancode::Escape) {
+            std::cout << "[LOBBY] Code entry cancelled\n";
+            _lobbyCodeInput.clear();
+            _currentState = ClientState::Menu;
+            return;
+        }
+        if (keyEvent.scancode == sf::Keyboard::Scancode::Enter) {
+            if (!_lobbyCodeInput.empty()) {
+                uint32_t code = std::stoul(_lobbyCodeInput);
+                std::cout << "[LOBBY] Joining lobby with code: " << code << "\n";
+                cmn::requestJoinLobbyData data{_playerId, code};
+                _sharedData->addTcpPacketToSend(data);
+                _lobbyCodeInput.clear();
+                _currentState = ClientState::Menu;
+            }
+            return;
+        }
+        if (keyEvent.scancode == sf::Keyboard::Scancode::Backspace) {
+            if (!_lobbyCodeInput.empty()) {
+                _lobbyCodeInput.pop_back();
+            }
+            return;
+        }
+        if (_lobbyCodeInput.length() < MAX_CODE_LENGTH) {
+            static const std::map<sf::Keyboard::Scancode, char> numKeys = {
+                {sf::Keyboard::Scancode::Num0, '0'},
+                {sf::Keyboard::Scancode::Num1, '1'},
+                {sf::Keyboard::Scancode::Num2, '2'},
+                {sf::Keyboard::Scancode::Num3, '3'},
+                {sf::Keyboard::Scancode::Num4, '4'},
+                {sf::Keyboard::Scancode::Num5, '5'},
+                {sf::Keyboard::Scancode::Num6, '6'},
+                {sf::Keyboard::Scancode::Num7, '7'},
+                {sf::Keyboard::Scancode::Num8, '8'},
+                {sf::Keyboard::Scancode::Num9, '9'},
+                {sf::Keyboard::Scancode::Numpad0, '0'},
+                {sf::Keyboard::Scancode::Numpad1, '1'},
+                {sf::Keyboard::Scancode::Numpad2, '2'},
+                {sf::Keyboard::Scancode::Numpad3, '3'},
+                {sf::Keyboard::Scancode::Numpad4, '4'},
+                {sf::Keyboard::Scancode::Numpad5, '5'},
+                {sf::Keyboard::Scancode::Numpad6, '6'},
+                {sf::Keyboard::Scancode::Numpad7, '7'},
+                {sf::Keyboard::Scancode::Numpad8, '8'},
+                {sf::Keyboard::Scancode::Numpad9, '9'}
+            };
+            auto it = numKeys.find(keyEvent.scancode);
+            if (it != numKeys.end()) {
+                _lobbyCodeInput += it->second;
+                std::cout << "[LOBBY] Current code: " << _lobbyCodeInput << "\n";
             }
         }
     }
@@ -154,27 +213,56 @@ namespace client {
         }
     }
 
-    void GameRenderer::_checkMenuPlayerInput() const
+
+    void GameRenderer::_checkMenuPlayerInput()
     {
-        // TODO: implement a way to choose to join lobby with code and write the code
+        std::vector<std::pair<cmn::Keys, std::function<void()>>> menuActions;
+
         if (_currentState == ClientState::Menu) {
-            if (_inputManager.isActionTriggered(cmn::Keys::MenuSolo)) {
-                cmn::selectModeData data = {cmn::LobbyType::Solo, _playerId};
-                _sharedData->addTcpPacketToSend(data);
-            } else if (_inputManager.isActionTriggered(cmn::Keys::MenuMatchmaking)) {
-                cmn::selectModeData data = {cmn::LobbyType::Matchmaking, _playerId};
-                _sharedData->addTcpPacketToSend(data);
-            } else if (_inputManager.isActionTriggered(cmn::Keys::MenuLobby)) {
-                cmn::selectModeData data{cmn::LobbyType::Lobby, _playerId};
-                _sharedData->addTcpPacketToSend(data);
+            menuActions = {
+                {cmn::Keys::MenuSolo, [this]() {
+                    std::cout << "[MENU] Starting solo mode with id: " << _playerId << '\n';
+                    cmn::selectModeData data = {cmn::LobbyType::Solo, _playerId};
+                    _sharedData->addTcpPacketToSend(data);
+                }},
+                {cmn::Keys::MenuMatchmaking, [this]() {
+                    std::cout << "[MENU] Starting matchmaking mode with id: " << _playerId << '\n';
+                    cmn::selectModeData data = {cmn::LobbyType::Matchmaking, _playerId};
+                    _sharedData->addTcpPacketToSend(data);
+                }},
+                {cmn::Keys::MenuLobby, [this]() {
+                    std::cout << "[MENU] Creating lobby with id: " << _playerId << '\n';
+                    cmn::selectModeData data = {cmn::LobbyType::Lobby, _playerId};
+                    _sharedData->addTcpPacketToSend(data);
+                }},
+                {cmn::Keys::MenuJoinLobby, [this]() {
+                    std::cout << "[MENU] Entering lobby code entry mode\n";
+                    _lobbyCodeInput.clear();
+                    _currentState = ClientState::EnteringLobbyCode;
+                }}
+            };
+        }
+        else if (_currentState == ClientState::Waiting) {
+            menuActions = {
+                {cmn::Keys::MenuLeave, [this]() {
+                    std::cout << "[MENU] Leaving lobby with id: " << _playerId << '\n';
+                    cmn::leaveLobbyData data = {_playerId};
+                    _sharedData->addTcpPacketToSend(data);
+                }}
+            };
+        }
+
+        for (const auto& [key, action] : menuActions) {
+            bool const currentPressed = _inputManager.isActionTriggered(key);
+            bool const alreadyPressed = _previousMenuInputs[key];
+
+            if (currentPressed && !alreadyPressed) {
+                action();
             }
-        } else if (_currentState == ClientState::Waiting) {
-            if (_inputManager.isActionTriggered(cmn::Keys::MenuLeave)) {
-                cmn::leaveLobbyData data = {_playerId};
-                _sharedData->addTcpPacketToSend(data);
-            }
+            _previousMenuInputs[key] = currentPressed;
         }
     }
+
 
     void GameRenderer::_updateNetwork()
     {
@@ -213,8 +301,15 @@ namespace client {
                             std::cout << "[SYSTEM] Lobby code is: " << data.lobbyCode << "\n";
                         }
                     } else if constexpr (std::is_same_v<T, cmn::errorTcpData>) {
-                        //TODO: implement error id which are in constant
-                        //std::cout << "[SYSTEM] error" << "\n";
+                        cmn::errorTcpData data = arg;
+                        if (data.errorId == cmn::noExistentLobbyError) {
+                            std::cout << "no lobby exist" << std::endl;
+                        } else if (data.errorId == cmn::noWaitingLobby) {
+                            std::cout << "no waiting lobby" << std::endl;
+                        } else if (data.errorId == cmn::fullLobbyError) {
+                            std::cout << "full lobby" << std::endl;
+                        }
+
                     }
                 },data.value());
             }
@@ -271,10 +366,13 @@ namespace client {
         std::cout << "[GameRenderer] Resetting game state\n";
         _clearGameEntities();
         _currentState = ClientState::Menu;
-        while (_sharedData->getUdpReceivedPacket()) {
-        }
-        while (_sharedData->getTcpReceivedPacket()) {
-        }
+        _previousInputs.clear();
+        _previousMenuInputs.clear();
+        _lobbyCodeInput.clear();
+
+        while (_sharedData->getUdpReceivedPacket()) {}
+        while (_sharedData->getTcpReceivedPacket()) {}
+
         if (_sound) {
             auto soundCpn = _sound->getComponent<ecs::Sound>();
             if (soundCpn) {
@@ -302,6 +400,9 @@ namespace client {
             _handleEvents();
             switch (_currentState) {
                 case ClientState::Menu:
+                    _updateMenu(inputClock, elapsedTime, deltaTime);
+                    break;
+                case ClientState::EnteringLobbyCode:
                     _updateMenu(inputClock, elapsedTime, deltaTime);
                     break;
                 case ClientState::Waiting:

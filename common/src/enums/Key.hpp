@@ -16,6 +16,7 @@ namespace cmn {
         MenuSolo,
         MenuMatchmaking,
         MenuLobby,
+        MenuJoinLobby,
         MenuLeave,
         None,
     };
