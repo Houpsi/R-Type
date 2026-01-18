@@ -50,7 +50,7 @@ namespace server {
         void _resendTimedOutPackets();
         std::map<std::pair<uint16_t, sf::IpAddress>, uint32_t> _playerList;
         std::unordered_map<uint32_t, cmn::clientNetworkState> _clientStates;
-        static bool _shouldProcessPacket(const cmn::packetHeader &header, cmn::clientNetworkState state);
+        static bool _shouldProcessPacket(const cmn::packetHeader &header, cmn::clientNetworkState &state);
     };
 
 }// namespace server

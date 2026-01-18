@@ -47,7 +47,7 @@ namespace client {
             void _resendTimedOutPackets();
             void _sendAckPacket(cmn::packetHeader header);
             static bool _shouldProcessPacket(const cmn::packetHeader &header,
-                cmn::clientNetworkState state);
+                cmn::clientNetworkState &state);
             cmn::clientNetworkState _serverState;
     };
 }
