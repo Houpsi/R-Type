@@ -62,13 +62,13 @@ namespace cmn {
 
     constexpr uint16_t monsterProjectileSpeed = 400;
     constexpr int8_t monsterProjectileDirection = 0;
-    constexpr std::string_view monsterProjectileSpriteSheet = "./assets/r-typesheet30a.gif";
-    constexpr sf::Vector2f monsterProjectileScale = {1.0F, 1.0F};
-    constexpr std::pair<uint8_t, uint8_t> monsterProjectileAnimationSize = { 32, 36 };
+    constexpr std::string_view monsterProjectileSpriteSheet = "./assets/r-typesheet43c.gif";
+    constexpr sf::Vector2f monsterProjectileScale = {3.0F, 3.0F};
+    constexpr std::pair<uint8_t, uint8_t> monsterProjectileAnimationSize = { 17, 6 };
     constexpr uint8_t monsterProjectileAnimationOffset = 0;
-    constexpr uint8_t monsterProjectileAnimationNumberFrame = 3;
-    constexpr uint8_t monsterProjectileCollisionWidth = 32;
-    constexpr uint8_t monsterProjectileCollisionHeight = 36;
+    constexpr uint8_t monsterProjectileAnimationNumberFrame = 8;
+    constexpr uint8_t monsterProjectileCollisionWidth = 17;
+    constexpr uint8_t monsterProjectileCollisionHeight = 6;
     constexpr uint8_t monsterProjectileSoundId = 1;
     constexpr bool monsterProjectileLoop = false;
 
@@ -82,6 +82,8 @@ namespace cmn {
     constexpr uint8_t boss1CollisionHeight = 209;
     constexpr uint16_t boss1SpawnPositionWidth = 1500;
     constexpr uint16_t boss1SpawnPositionHeight = 250;
+    constexpr uint8_t bossSoundId = 1;
+
 
     constexpr uint16_t playerProjectileSpeed = 400;
     constexpr int8_t playerProjectileDirection = 1;

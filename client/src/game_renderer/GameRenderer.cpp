@@ -39,7 +39,7 @@ namespace client {
 
     void GameRenderer::_initEcsSystem()
     {
-        _gameEcs.addSystem<ecs::InputSystem>();
+       // _gameEcs.addSystem<ecs::InputSystem>();
         _gameEcs.addSystem<ecs::SoundSystem>();
         _gameEcs.addSystem<ecs::PlayerAnimationSystem>();
         _gameEcs.addSystem<ecs::SpriteAnimationSystem>();
@@ -49,7 +49,7 @@ namespace client {
         _gameEcs.addSystem<ecs::BackgroundSystem>();
         _gameEcs.addSystem<ecs::ScoreTextSystem>();
 
-        _menuEcs.addSystem<ecs::InputSystem>();
+        //_menuEcs.addSystem<ecs::InputSystem>();
         _menuEcs.addSystem<ecs::RenderSystem>(_window, _inputManager.getShaderName());
         _menuEcs.addSystem<ecs::DestroySystem>();
         _menuEcs.addSystem<ecs::BackgroundSystem>();
@@ -445,67 +445,64 @@ namespace client {
 
 
     void GameRenderer::_createMenuText(const std::string& content, float x, float y, unsigned int size, sf::Color color)
-{
-    auto entity = _menuEcs.createEntity();
+    {
+        auto entity = _menuEcs.createEntity();
 
-    entity->addComponent<ecs::Position>(x, y);
+        entity->addComponent<ecs::Position>(x, y);
 
-    auto font = _menuEcs.getResourceManager().getFont(cmn::fontPath.data());
-        entity->addComponent<ecs::Text>( _menuEcs.getResourceManager().getFont(cmn::fontPath.data()),
-                 size, color);
-        entity->getComponent<ecs::Text>()->setString(content);
-}
+        auto font = _menuEcs.getResourceManager().getFont(cmn::fontPath.data());
+            entity->addComponent<ecs::Text>( _menuEcs.getResourceManager().getFont(cmn::fontPath.data()),
+                    size, color);
+            entity->getComponent<ecs::Text>()->setString(content);
+    }
 
-void GameRenderer::_refreshMenuDisplay()
-{
-    for (auto& entity : _menuEcs.getEntities()) {
-        if (entity->getComponent<ecs::Text>()) {
-            entity->addComponent<ecs::Destroy>();
+    void GameRenderer::_refreshMenuDisplay()
+    {
+        for (auto& entity : _menuEcs.getEntities()) {
+            if (entity->getComponent<ecs::Text>()) {
+                entity->addComponent<ecs::Destroy>();
+            }
+        }
+        _menuEcs.updateSystems();
+
+        _dynamicTextEntity = nullptr;
+
+        float centerX = _window.getSize().x / 2.0f - 200;
+        float startY = 200.0f;
+
+        if (_currentState == ClientState::Menu) {
+            _createMenuText("R-TYPE", centerX + 50, 100, 60, sf::Color::Cyan);
+            _createMenuText("1. Play Solo", centerX, startY, 30);
+            _createMenuText("2. Matchmaking", centerX, startY + 50, 30);
+            _createMenuText("3. Create Private Lobby", centerX, startY + 100, 30);
+            _createMenuText("4. Join Lobby (Type Code)", centerX, startY + 150, 30);
+            _createMenuText("Esc. Quit", centerX, startY + 250, 20, sf::Color::Red);
+        }
+        else if (_currentState == ClientState::EnteringLobbyCode) {
+            _createMenuText("JOIN LOBBY", centerX + 50, 100, 50);
+            _createMenuText("Type the code:", centerX, startY, 30);
+            _createMenuText(_lobbyCodeInput + "_", centerX, startY + 50, 40, sf::Color::Yellow);
+            _dynamicTextEntity = _menuEcs.getEntities().back();
+            _createMenuText("Enter to Validate / Esc to Cancel", centerX - 50, startY + 150, 20);
+        }
+        else if (_currentState == ClientState::Waiting) {
+            _createMenuText("LOBBY WAITING ROOM", centerX - 50, 100, 50);
+            std::string codeStr = "Lobby Code: " + std::to_string(_currentLobbyCode);
+            _createMenuText(codeStr, centerX, startY, 40, sf::Color::Green);
+            _createMenuText("Waiting for other players...", centerX, startY + 100, 30);
+            _createMenuText("Press ENTER when Ready!", centerX, startY + 200, 30, sf::Color::Yellow);
+            _createMenuText("Esc. Leave Lobby", centerX, startY + 300, 20, sf::Color::Red);
+        } 
+    }
+
+    void GameRenderer::_updateDynamicMenuText()
+    {
+        if (_currentState == ClientState::EnteringLobbyCode && _dynamicTextEntity) {
+            auto textComp = _dynamicTextEntity->getComponent<ecs::Text>();
+            if (textComp) {
+                textComp->setString(_lobbyCodeInput + "_");
+            }
         }
     }
-    _menuEcs.updateSystems();
-
-    _dynamicTextEntity = nullptr;
-
-    float centerX = _window.getSize().x / 2.0f - 200;
-    float startY = 200.0f;
-
-    if (_currentState == ClientState::Menu) {
-        _createMenuText("R-TYPE", centerX + 50, 100, 60, sf::Color::Cyan);
-        _createMenuText("1. Play Solo", centerX, startY, 30);
-        _createMenuText("2. Matchmaking", centerX, startY + 50, 30);
-        _createMenuText("3. Create Private Lobby", centerX, startY + 100, 30);
-        _createMenuText("4. Join Lobby (Type Code)", centerX, startY + 150, 30);
-        _createMenuText("Esc. Quit", centerX, startY + 250, 20, sf::Color::Red);
-    }
-    else if (_currentState == ClientState::EnteringLobbyCode) {
-        _createMenuText("JOIN LOBBY", centerX + 50, 100, 50);
-        _createMenuText("Type the code:", centerX, startY, 30);
-        _createMenuText(_lobbyCodeInput + "_", centerX, startY + 50, 40, sf::Color::Yellow);
-        _dynamicTextEntity = _menuEcs.getEntities().back();
-        _createMenuText("Enter to Validate / Esc to Cancel", centerX - 50, startY + 150, 20);
-    }
-    else if (_currentState == ClientState::Waiting) {
-        _createMenuText("LOBBY WAITING ROOM", centerX - 50, 100, 50);
-        std::string codeStr = "Lobby Code: " + std::to_string(_currentLobbyCode);
-        _createMenuText(codeStr, centerX, startY, 40, sf::Color::Green);
-        _createMenuText("Waiting for other players...", centerX, startY + 100, 30);
-        _createMenuText("Press ENTER when Ready!", centerX, startY + 200, 30, sf::Color::Yellow);
-        _createMenuText("Esc. Leave Lobby", centerX, startY + 300, 20, sf::Color::Red);
-    } else if (_currentState == ClientState::GameOver) {
-        _createMenuText("PERDU", centerX - 50, 100, 50);
-    }
-}
-
-void GameRenderer::_updateDynamicMenuText()
-{
-    if (_currentState == ClientState::EnteringLobbyCode && _dynamicTextEntity) {
-        auto textComp = _dynamicTextEntity->getComponent<ecs::Text>();
-        if (textComp) {
-            textComp->setString(_lobbyCodeInput + "_");
-        }
-    }
-}
-
 
 }
