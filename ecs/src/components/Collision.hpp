@@ -20,7 +20,8 @@ namespace ecs {
         PLAYER_PROJECTILE,
         ENEMY_PROJECTILE,
         OBSTACLE,
-        POWER_UP
+        POWER_UP,
+        SCORE,
     };
 
 class Collision: public Component {

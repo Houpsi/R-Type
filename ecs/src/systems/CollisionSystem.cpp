@@ -114,6 +114,8 @@ namespace ecs
             return true;
         if (a == TypeCollision::POWER_UP && (b == TypeCollision::PLAYER_PROJECTILE || b == ENEMY_PROJECTILE))
             return true;
+        if (a == SCORE || b == SCORE)
+            return true;
         return false;
     }
 
