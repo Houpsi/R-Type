@@ -69,82 +69,121 @@ Table of Contents
 
 3. Protocol Overview
 
-    The communication flow begins with the client connecting to the server.
-    The server acknowledges the connection by assigning a unique Player ID
-    (Opcode 0).
-
-    Once the game loop begins (Opcode 5), the server streams entity updates
-    (Opcodes 2, 3, 4) to all clients. Clients are responsible for sending their
-    input states (Opcode 1) to the server to control their ship.
+    The communication lifecycle consists of three phases:
+        1. Connection: Client obtains a Player ID (Opcode 0).
+        2. Lobby: Clients select modes and join sessions (Opcodes 11-13).
+        3. Gameplay: Real-time exchange of input and entity states
+           (Opcodes 1-9).
 
 4. Packet Structure
 
-    Every packet consists of a 1-byte Operation Code (Opcode), followed
-    immediately by the payload specific to that command.
+    Every packet consists of a 41-bits Header, composed of:
 
-    [ Opcode (uint8) ] [ Payload (Variable Length) ... ]
+    -a 1-byte Operation Code (Opcode).
+
+    -a 4-bytes Sequence Number.
+
+    -a 1-bit Reliability boolean.
+
+    This header is then followed immediately by the payload specific to that
+    command.
+
+    [ Header ] [ Payload (Variable Length) ... ]
 
 5. Command Reference
 
-    | Opcode   | Sender | Command Name       | Payload Structure            |
-    | -------- | ------ | ------------------ | ---------------------------- |
-    | 0        | server | ASSIGN_ID          | {uint32_t: playedId}         |
-    | 1        | client | INPUT              | {uint32_t: playerId,         |
-    |          |        |                    |  uint8_t: key,               |
-    |          |        |                    |  uint8_t: keyState}          |
-    | 2        | server | POS_UPDATE         | {uint64_t: entityId,         |
-    |          |        |                    |  float: posX,                |
-    |          |        |                    |  float: posY}                |
-    | 3        | server | ENTITY_SPAWN       | {uint64_t: entityId,         |
-    |          |        |                    |  uint8_t: type               |
-    |          |        |                    |  float: posX,                |
-    |          |        |                    |  float: posY}                |
-    | 4        | server | ENTITY_DESTROY     | {uint64_t: entityId}         |
-    | 5        | server | GAME_START         | {}                           |
+    The following table defines the operation codes and their respective
+    payloads. All multi-byte values are uint32_t or float unless specified.
 
-    Description:
+    +--------+--------+------------------+------------------------------------+
+    | Opcode | Sender | Command Name     | Payload Structure                  |
+    +--------+--------+------------------+------------------------------------+
+    | System & Reliability                                                    |
+    +--------+--------+------------------+------------------------------------+
+    | 0x00   | Server | ASSIGN_ID        | {uint32: playerId}                 |
+    | 0x06   | Both   | ACKNOWLEDGE      | {uint32: sequenceNbr}              |
+    | 0x07   | Server | ERROR_TCP        | {uint8:  errorId}                  |
+    +--------+--------+------------------+------------------------------------+
+    | Lobby Management                                                        |
+    +--------+--------+------------------+------------------------------------+
+    | 0x0A   | Both   | LEAVE_LOBBY      | {uint32: playerId}                 |
+    | 0x0B   | Server | JOIN_LOBBY       | {uint32: lobbyId, u8: type, u32: c}|
+    | 0x0C   | Client | SELECT_MODE      | {uint8:  type, uint32: playerId}   |
+    | 0x0D   | Client | REQ_JOIN_LOBBY   | {uint32: playerId, uint32: code}   |
+    +--------+--------+------------------+------------------------------------+
+    | Gameplay & State                                                        |
+    +--------+--------+------------------+------------------------------------+
+    | 0x01   | Client | INPUT            | {uint32: pId, u8: key, bool: down} |
+    | 0x02   | Server | POS_UPDATE       | {u32[]: IDs, f32[]: Xs, f32[]: Ys} |
+    | 0x03   | Server | ENTITY_SPAWN     | {u32: id, u8: type, f32: x, f32: y}|
+    | 0x04   | Server | ENTITY_DESTROY   | {uint32: entityId}                 |
+    | 0x05   | Server | GAME_START       | { (None) }                         |
+    | 0x08   | Server | SOUND_TRIGGER    | {uint8:  soundId}                  |
+    | 0x09   | Server | TEXT_UPDATE      | {uint32: entityId, uint32: score}  |
+    | 0x0E   | Server | PLAYER_DEATH     | {uint32: playerId}                 |
+    | 0x0F   | Server | GAME_RESULT      | {bool:   isWin}                    |
+    +--------+--------+------------------+------------------------------------+
 
-    ASSIGN_ID (Opcode 0) Sent by the server to a newly connected client to
-    assign their ID.
+5.1 Command Descriptions
 
-        playerId (uint32_t): The unique identifier for the player.
+    5.1.1 System & Reliability
 
-    INPUT (Opcode 1) Sent by the client to update the server on key presses.
+        ASSIGN_ID (Opcode 0x00)
+            Sent by the server to a newly connected client. This ID must be
+            stored by the client for use in future identifying requests.
 
-        playerId (uint32_t): The ID of the client sending input.
+        ACKNOWLEDGE (Opcode 0x06)
+            Used to implement a reliability layer. The recipient returns this
+            packet to confirm receipt of a specific sequence number.
 
-        key (uint8_t): The key code (mapped in game logic).
+        ERROR_TCP (Opcode 0x07)
+            Sent by the server when a protocol or lobby error occurs.
+            errorId (uint8_t): Mapping to specific error strings.
 
-        state (uint8_t): 1 for Pressed, 0 for Released.
+    5.1.2 Lobby Management
 
-    POS_UPDATE (Opcode 2) Sent by the server to update the position of any
-    entity (player or mob).
+        LEAVE_LOBBY (Opcode 0x0A)
+            Notifies that a player is exiting the current lobby session.
 
-        entityId (uint64_t): The unique ID of the entity to move.
+        JOIN_LOBBY (Opcode 0x0B)
+            Server confirmation of lobby entry. Contains the lobby ID,
+            the visibility type, and the 4-byte join code.
 
-        posX (float): The new X coordinate.
+        SELECT_MODE (Opcode 0x0C)
+            Sent by the client to request a specific game mode/lobby type.
 
-        posY (float): The new Y coordinate.
+        REQ_JOIN_LOBBY (Opcode 0x0D)
+            Sent by a client to join a specific room via its lobbyCode.
 
-    ENTITY_SPAWN (Opcode 3) Sent by the server when a new entity is created.
+    5.1.3 Gameplay & State
 
-        entityId (uint64_t): The unique ID for the new entity.
+        INPUT (Opcode 0x01)
+            Reports key state changes (Pressed/Released) from client to server.
 
-        type (uint8_t): The type of entity (see Section 6).
+        POS_UPDATE (Opcode 0x02)
+            Batch synchronization of all moving entities. Uses parallel arrays
+            of IDs and coordinates to minimize packet headers.
 
-        posX (float): The starting X coordinate.
+        ENTITY_SPAWN (Opcode 0x03)
+            Broadcast when a new object (Player, NPC, or Bullet) is created.
 
-        posY (float): The starting Y coordinate.
+        ENTITY_DESTROY (Opcode 0x04)
+            Broadcast when an entity is removed from the game world.
 
-    ENTITY_DESTROY (Opcode 4) Sent by the server when an entity is removed
-    (destroyed or out of bounds).
+        GAME_START (Opcode 0x05)
+            Signal that the game session has officially begun.
 
-        entityId (uint64_t): The ID of the entity to remove.
+        SOUND_TRIGGER (Opcode 0x08)
+            Commands the client to play a specific audio asset by ID.
 
-    GAME_START (Opcode 5) Sent by the server to notify clients that the game
-    session is starting.
+        TEXT_UPDATE (Opcode 0x09)
+            Updates client-side text elements, primarily for score tracking.
 
-        Payload: None.
+        PLAYER_DEATH (Opcode 0x0E)
+            Notifies that a player entity has been destroyed.
+
+        GAME_RESULT (Opcode 0x0F)
+            Sent at session end. isWin (bool) determines victory or defeat.
 
 6. Entity Types
 
@@ -185,7 +224,7 @@ Authors' Addresses
 
 
     Axel Desert
-    Epitech Student, 2rd Year
+    Epitech Student, 3rd Year
 
     EMail: axel.desert@epitech.eu
 
