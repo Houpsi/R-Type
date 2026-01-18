@@ -117,7 +117,7 @@ namespace client {
         }
     }
 
-    bool Client::_shouldProcessPacket(const cmn::packetHeader& header, cmn::clientNetworkState state)
+    bool Client::_shouldProcessPacket(const cmn::packetHeader& header, cmn::clientNetworkState &state)
     {
         uint32_t const incomingSeq = header.sequenceNbr;
 

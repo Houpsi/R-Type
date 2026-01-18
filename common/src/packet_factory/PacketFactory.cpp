@@ -196,7 +196,7 @@ namespace cmn {
         packer.writeUInt32(data.entityId);
         packer.writeUInt32(data.score);
 
-        _udpSequenceNbr ++;
+        _udpSequenceNbr++;
         return _putInPacket(packer);
     }
 

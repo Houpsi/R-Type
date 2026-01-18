@@ -211,10 +211,17 @@ namespace server {
          for (auto& entity : _ecs.getEntitiesWithComponent<ecs::Score>()) {
              auto score = entity->getComponent<ecs::Score>();
 
-             if (!score) continue;
-             uint32_t const castScore = static_cast<uint32_t>(score->getScore());
-             cmn::textData data = {entity->getId(), castScore};
+             if (!score) {
+                 continue;
+             }
+
+             if (score->getScore() == _score) {
+                 continue;
+             }
+
+             cmn::textData data = {entity->getId(), score->getScore()};
              _sharedData->addLobbyUdpPacketToSend(_lobbyId, data);
+             _score = score->getScore();
          }
      }
 
@@ -290,14 +297,14 @@ namespace server {
      {
          for (auto const &entity : _ecs.getEntitiesWithComponent<ecs::Shoot>())
          {
-             auto input = entity->getComponent<ecs::InputPlayer>();
              const auto shoot = entity->getComponent<ecs::Shoot>();
              const auto collision= entity->getComponent<ecs::Collision>();
 
-             if (!shoot && !collision) { continue; }
+             if (!shoot && !collision) {
+                 continue;
+             }
 
-             if (collision && collision->getTypeCollision() == ecs::ENEMY)
-             {
+             if (collision && collision->getTypeCollision() == ecs::ENEMY) {
                  auto posCpn = entity->getComponent<ecs::Position>();
                  shoot->setShootTimer(shoot->getShootTimer() + _ecs.getDeltaTime());
 

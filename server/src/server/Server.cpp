@@ -14,6 +14,7 @@
 #include "packet_header/PacketHeader.hpp"
 
 #include <iostream>
+#include <iostream>
 #include <thread>
 #include <utility>
 
@@ -304,7 +305,7 @@ namespace server {
         }
     }
 
-    bool Server::_shouldProcessPacket(const cmn::packetHeader& header, cmn::clientNetworkState state) {
+    bool Server::_shouldProcessPacket(const cmn::packetHeader& header, cmn::clientNetworkState &state) {
         uint32_t const incomingSeq = header.sequenceNbr;
 
         if (state.processedSequences.contains(incomingSeq)) {

@@ -13,28 +13,26 @@
 namespace ecs {
     void MovementSystem::update(EcsManager &ecs)
     {
-        constexpr uint16_t windowWidth = 1920;
-
-        const float speed = 250.0F;
-        const float dt = ecs.getDeltaTime();
         for (auto const &entity : ecs.getEntitiesWithComponent<InputPlayer>()) {
             auto pos = entity->getComponent<Position>();
             auto input = entity->getComponent<InputPlayer>();
+            auto velocity = entity->getComponent<Velocity>();
+            float dirX = 0.0f;
+            float dirY = 0.0f;
 
-            if (input) {
-                if (input->getUp()) {
-                    pos->setY(pos->getY() - (speed * dt));
-                }
-                if (input->getDown()) {
-                    pos->setY(pos->getY() + (speed * dt));
-                }
-                if (input->getLeft()) {
-                    pos->setX(pos->getX() - (speed * dt));
-                }
-                if (input->getRight()) {
-                    pos->setX(pos->getX() + (speed * dt));
-                }
+            if (input->getUp()) {
+                dirY += ecs::dir::up;
             }
+            if (input->getDown()) {
+                dirY += ecs::dir::down;
+            }
+            if (input->getLeft()) {
+                dirX += ecs::dir::left;
+            }
+            if (input->getRight()) {
+                dirX += ecs::dir::right;
+            }
+            velocity->setDirection({dirX, dirY});
         }
     }
 }

@@ -54,7 +54,7 @@ namespace server {
         int _getPlayerIdFromSocket(const sf::TcpSocket &socket) const;
         int _getPlayerIdFromUdp(const sf::IpAddress &ip, unsigned short port) const;
         static bool _isSystemPacket(const cmn::packetData &data);
-        static bool _shouldProcessPacket(const cmn::packetHeader &header, cmn::clientNetworkState state);
+        static bool _shouldProcessPacket(const cmn::packetHeader &header, cmn::clientNetworkState &state);
 
         sf::TcpListener _listener;
         sf::UdpSocket _udpSocket;
