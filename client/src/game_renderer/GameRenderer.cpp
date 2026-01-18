@@ -327,9 +327,7 @@ namespace client {
                 _translator.translate(_gameEcs, data.value(), emptyMap);
             }
         } else {
-            if (_currentState != ClientState::GameOver)
-            {_handleTcp();
-            }
+            _handleTcp();
         }
     }
 
