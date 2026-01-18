@@ -41,7 +41,7 @@ var searchData=
   ['getresourcemanager_38',['getResourceManager',['../classecs_1_1EcsManager.html#a5ab3e315a5b5f8a6906823e26ed9fe6d',1,'ecs::EcsManager']]],
   ['getright_39',['getRight',['../classecs_1_1InputPlayer.html#a0e9a8be0bd3a41b3612a4992740efade',1,'ecs::InputPlayer']]],
   ['getscale_40',['getScale',['../classecs_1_1Sprite.html#a7e85936a6dc9f9be9a48bc337ef51f94',1,'ecs::Sprite']]],
-  ['getscore_41',['getScore',['../classecs_1_1Score.html#af071ef1729464a79d8775561cbcf1444',1,'ecs::Score']]],
+  ['getscore_41',['getScore',['../classecs_1_1Score.html#a27219fc94a325912649256af9ec30d6b',1,'ecs::Score']]],
   ['getshoottimer_42',['getShootTimer',['../classecs_1_1Shoot.html#ab3d07574c2a6936bbee324666e2a5f58',1,'ecs::Shoot']]],
   ['getspacebar_43',['getSpacebar',['../classecs_1_1InputPlayer.html#af008aec35361d37ba6176d39cb048494',1,'ecs::InputPlayer']]],
   ['getsprite_44',['getSprite',['../classecs_1_1Sprite.html#abc43c860f33035962979d7a14317b98d',1,'ecs::Sprite']]],

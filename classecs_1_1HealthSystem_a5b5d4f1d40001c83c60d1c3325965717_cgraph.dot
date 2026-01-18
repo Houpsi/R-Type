@@ -7,5 +7,5 @@ digraph "ecs::HealthSystem::update"
   rankdir="LR";
   Node1 [id="Node000001",label="ecs::HealthSystem::\lupdate",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="ecs::Score::addToScore",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Score.html#a0f10031f66cda70689ed0c2c067e9432",tooltip=" "];
+  Node2 [id="Node000002",label="ecs::Score::addToScore",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classecs_1_1Score.html#a461e97498312d2931c5d5d311e9f482e",tooltip=" "];
 }

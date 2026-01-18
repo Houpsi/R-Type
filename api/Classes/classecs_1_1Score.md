@@ -18,10 +18,9 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[setScore](Classes/classecs_1_1Score.md#function-setscore)**(int v) |
-| int | **[getScore](Classes/classecs_1_1Score.md#function-getscore)**() const |
-| void | **[addToScore](Classes/classecs_1_1Score.md#function-addtoscore)**(int v) |
-| | **[Score](Classes/classecs_1_1Score.md#function-score)**() |
+| void | **[setScore](Classes/classecs_1_1Score.md#function-setscore)**(uint32_t score) |
+| uint32_t | **[getScore](Classes/classecs_1_1Score.md#function-getscore)**() const |
+| void | **[addToScore](Classes/classecs_1_1Score.md#function-addtoscore)**(uint32_t points) |
 
 ## Additional inherited members
 
@@ -39,7 +38,7 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 
 ```cpp
 void setScore(
-    int v
+    uint32_t score
 )
 ```
 
@@ -47,7 +46,7 @@ void setScore(
 ### function getScore
 
 ```cpp
-int getScore() const
+uint32_t getScore() const
 ```
 
 
@@ -55,18 +54,11 @@ int getScore() const
 
 ```cpp
 void addToScore(
-    int v
+    uint32_t points
 )
-```
-
-
-### function Score
-
-```cpp
-inline Score()
 ```
 
 
 -------------------------------
 
-Updated on 2026-01-17 at 23:36:19 +0000
+Updated on 2026-01-18 at 00:13:20 +0000

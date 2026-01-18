@@ -41,10 +41,12 @@ digraph "ecs/src/systems/ScoreTextSystem.cpp"
   Node2 -> Node16 [id="edge20_Node000002_Node000016",color="steelblue1",style="solid",tooltip=" "];
   Node16 [id="Node000016",label="components/Score.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Score_8hpp.html",tooltip=" "];
   Node16 -> Node6 [id="edge21_Node000016_Node000006",color="steelblue1",style="solid",tooltip=" "];
-  Node2 -> Node17 [id="edge22_Node000002_Node000017",color="steelblue1",style="solid",tooltip=" "];
-  Node17 [id="Node000017",label="components/Text.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Text_8hpp.html",tooltip=" "];
-  Node17 -> Node6 [id="edge23_Node000017_Node000006",color="steelblue1",style="solid",tooltip=" "];
-  Node17 -> Node3 [id="edge24_Node000017_Node000003",color="steelblue1",style="solid",tooltip=" "];
-  Node17 -> Node18 [id="edge25_Node000017_Node000018",color="steelblue1",style="solid",tooltip=" "];
-  Node18 [id="Node000018",label="SFML/Graphics.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node16 -> Node17 [id="edge22_Node000016_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="cstdint",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node2 -> Node18 [id="edge23_Node000002_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="components/Text.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Text_8hpp.html",tooltip=" "];
+  Node18 -> Node6 [id="edge24_Node000018_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node18 -> Node3 [id="edge25_Node000018_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node18 -> Node19 [id="edge26_Node000018_Node000019",color="steelblue1",style="solid",tooltip=" "];
+  Node19 [id="Node000019",label="SFML/Graphics.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
 }

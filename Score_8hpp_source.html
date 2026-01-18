@@ -106,21 +106,21 @@ $(document).ready(function(){initNavTree('Score_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">*/</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef R_TYPE_CLIENT_SCORE_HPP</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">    #define R_TYPE_CLIENT_SCORE_HPP</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define R_TYPE_CLIENT_SCORE_HPP</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="Component_8hpp.html">Component.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceecs.html">ecs</a></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classecs_1_1Score.html">   14</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classecs_1_1Score.html">Score</a>: <span class="keyword">public</span> <a class="code hl_class" href="classecs_1_1Component.html">Component</a> {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classecs_1_1Score.html#a9e38a6595cef220fb5b4d7d71845ace1">   16</a></span>        <a class="code hl_function" href="classecs_1_1Score.html#a9e38a6595cef220fb5b4d7d71845ace1">Score</a>(): _score(0) {};</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classecs_1_1Score.html#a0f10031f66cda70689ed0c2c067e9432">addToScore</a>(<span class="keywordtype">int</span> v);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classecs_1_1Score.html#a815705ba597c16372bf9970dec6e55a9">setScore</a>(<span class="keywordtype">int</span> v);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classecs_1_1Score.html#af071ef1729464a79d8775561cbcf1444">getScore</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceecs.html">ecs</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classecs_1_1Score.html">   15</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classecs_1_1Score.html">Score</a>: <span class="keyword">public</span> <a class="code hl_class" href="classecs_1_1Component.html">Component</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classecs_1_1Score.html#a461e97498312d2931c5d5d311e9f482e">addToScore</a>(uint32_t points);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classecs_1_1Score.html#ac7afc33d0767f9baafc8816912add4a9">setScore</a>(uint32_t score);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        [[nodiscard]] uint32_t <a class="code hl_function" href="classecs_1_1Score.html#a27219fc94a325912649256af9ec30d6b">getScore</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">int</span> _score = 0;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        uint32_t _score = 0;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    };</div>
 </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>} <span class="comment">// ecs</span></div>
@@ -128,11 +128,10 @@ $(document).ready(function(){initNavTree('Score_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif </span><span class="comment">//R_TYPE_CLIENT_SCORE_HPP</span></div>
 <div class="ttc" id="aComponent_8hpp_html"><div class="ttname"><a href="Component_8hpp.html">Component.hpp</a></div></div>
 <div class="ttc" id="aclassecs_1_1Component_html"><div class="ttname"><a href="classecs_1_1Component.html">ecs::Component</a></div><div class="ttdef"><b>Definition</b> Component.hpp:12</div></div>
-<div class="ttc" id="aclassecs_1_1Score_html"><div class="ttname"><a href="classecs_1_1Score.html">ecs::Score</a></div><div class="ttdef"><b>Definition</b> Score.hpp:14</div></div>
-<div class="ttc" id="aclassecs_1_1Score_html_a0f10031f66cda70689ed0c2c067e9432"><div class="ttname"><a href="classecs_1_1Score.html#a0f10031f66cda70689ed0c2c067e9432">ecs::Score::addToScore</a></div><div class="ttdeci">void addToScore(int v)</div><div class="ttdef"><b>Definition</b> Score.cpp:11</div></div>
-<div class="ttc" id="aclassecs_1_1Score_html_a815705ba597c16372bf9970dec6e55a9"><div class="ttname"><a href="classecs_1_1Score.html#a815705ba597c16372bf9970dec6e55a9">ecs::Score::setScore</a></div><div class="ttdeci">void setScore(int v)</div><div class="ttdef"><b>Definition</b> Score.cpp:16</div></div>
-<div class="ttc" id="aclassecs_1_1Score_html_a9e38a6595cef220fb5b4d7d71845ace1"><div class="ttname"><a href="classecs_1_1Score.html#a9e38a6595cef220fb5b4d7d71845ace1">ecs::Score::Score</a></div><div class="ttdeci">Score()</div><div class="ttdef"><b>Definition</b> Score.hpp:16</div></div>
-<div class="ttc" id="aclassecs_1_1Score_html_af071ef1729464a79d8775561cbcf1444"><div class="ttname"><a href="classecs_1_1Score.html#af071ef1729464a79d8775561cbcf1444">ecs::Score::getScore</a></div><div class="ttdeci">int getScore() const</div><div class="ttdef"><b>Definition</b> Score.cpp:21</div></div>
+<div class="ttc" id="aclassecs_1_1Score_html"><div class="ttname"><a href="classecs_1_1Score.html">ecs::Score</a></div><div class="ttdef"><b>Definition</b> Score.hpp:15</div></div>
+<div class="ttc" id="aclassecs_1_1Score_html_a27219fc94a325912649256af9ec30d6b"><div class="ttname"><a href="classecs_1_1Score.html#a27219fc94a325912649256af9ec30d6b">ecs::Score::getScore</a></div><div class="ttdeci">uint32_t getScore() const</div><div class="ttdef"><b>Definition</b> Score.cpp:21</div></div>
+<div class="ttc" id="aclassecs_1_1Score_html_a461e97498312d2931c5d5d311e9f482e"><div class="ttname"><a href="classecs_1_1Score.html#a461e97498312d2931c5d5d311e9f482e">ecs::Score::addToScore</a></div><div class="ttdeci">void addToScore(uint32_t points)</div><div class="ttdef"><b>Definition</b> Score.cpp:11</div></div>
+<div class="ttc" id="aclassecs_1_1Score_html_ac7afc33d0767f9baafc8816912add4a9"><div class="ttname"><a href="classecs_1_1Score.html#ac7afc33d0767f9baafc8816912add4a9">ecs::Score::setScore</a></div><div class="ttdeci">void setScore(uint32_t score)</div><div class="ttdef"><b>Definition</b> Score.cpp:16</div></div>
 <div class="ttc" id="anamespaceecs_html"><div class="ttname"><a href="namespaceecs.html">ecs</a></div><div class="ttdef"><b>Definition</b> Animation.cpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

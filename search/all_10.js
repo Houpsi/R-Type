@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['score_0',['score',['../classecs_1_1Score.html#a9e38a6595cef220fb5b4d7d71845ace1',1,'ecs::Score::Score()'],['../classecs_1_1Score.html',1,'ecs::Score']]],
+  ['score_0',['Score',['../classecs_1_1Score.html',1,'ecs']]],
   ['score_2ecpp_1',['Score.cpp',['../Score_8cpp.html',1,'']]],
   ['score_2ehpp_2',['Score.hpp',['../Score_8hpp.html',1,'']]],
   ['scorekillmonster_3',['scoreKillMonster',['../namespaceecs.html#a9eae524de5e1b5241a65e7d8cec9d116',1,'ecs']]],
@@ -37,7 +37,7 @@ var searchData=
   ['setr_34',['setR',['../classecs_1_1InputPlayer.html#a020ea3f1ce17da9a548d1bc173efc9b6',1,'ecs::InputPlayer']]],
   ['setrepeatwaves_35',['setRepeatWaves',['../classserver_1_1Level.html#a79d91a8ed5b4206a5fa81554c97ec8ec',1,'server::Level']]],
   ['setright_36',['setRight',['../classecs_1_1InputPlayer.html#a68652975912b80ef420d0ca71425d577',1,'ecs::InputPlayer']]],
-  ['setscore_37',['setScore',['../classecs_1_1Score.html#a815705ba597c16372bf9970dec6e55a9',1,'ecs::Score']]],
+  ['setscore_37',['setScore',['../classecs_1_1Score.html#ac7afc33d0767f9baafc8816912add4a9',1,'ecs::Score']]],
   ['setshoottimer_38',['setShootTimer',['../classecs_1_1Shoot.html#af627ce469f3e6a5957af7e03c72bd5da',1,'ecs::Shoot']]],
   ['setspacebar_39',['setSpacebar',['../classecs_1_1InputPlayer.html#ad04ee195b092e0107c288aca4cce7d88',1,'ecs::InputPlayer']]],
   ['setstring_40',['setString',['../classecs_1_1Text.html#ae7abad748249396f377bffd81c100118',1,'ecs::Text']]],

@@ -57,9 +57,11 @@ digraph "ecs/src/systems/RenderSystem.hpp"
   Node1 -> Node22 [id="edge30_Node000001_Node000022",color="steelblue1",style="solid",tooltip=" "];
   Node22 [id="Node000022",label="components/Score.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Score_8hpp.html",tooltip=" "];
   Node22 -> Node7 [id="edge31_Node000022_Node000007",color="steelblue1",style="solid",tooltip=" "];
-  Node1 -> Node23 [id="edge32_Node000001_Node000023",color="steelblue1",style="solid",tooltip=" "];
-  Node23 [id="Node000023",label="components/Text.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Text_8hpp.html",tooltip=" "];
-  Node23 -> Node7 [id="edge33_Node000023_Node000007",color="steelblue1",style="solid",tooltip=" "];
-  Node23 -> Node13 [id="edge34_Node000023_Node000013",color="steelblue1",style="solid",tooltip=" "];
-  Node23 -> Node19 [id="edge35_Node000023_Node000019",color="steelblue1",style="solid",tooltip=" "];
+  Node22 -> Node23 [id="edge32_Node000022_Node000023",color="steelblue1",style="solid",tooltip=" "];
+  Node23 [id="Node000023",label="cstdint",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node24 [id="edge33_Node000001_Node000024",color="steelblue1",style="solid",tooltip=" "];
+  Node24 [id="Node000024",label="components/Text.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Text_8hpp.html",tooltip=" "];
+  Node24 -> Node7 [id="edge34_Node000024_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node24 -> Node13 [id="edge35_Node000024_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node24 -> Node19 [id="edge36_Node000024_Node000019",color="steelblue1",style="solid",tooltip=" "];
 }
