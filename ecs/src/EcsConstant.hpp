@@ -12,10 +12,13 @@
 
 namespace ecs {
 
-    constexpr int left = 0;
-    constexpr int right = 1;
-    constexpr int up = 2;
-    constexpr int down = 3;
+    namespace dir {
+        constexpr float left = -1.0f;
+        constexpr float right = 1.0f;
+        constexpr float up = -1.0f;
+        constexpr float down = 1.0f;
+        constexpr float neutral = 0.0f;
+    }
 
     constexpr int volumeMusic = 100;
     constexpr std::string_view folderSound = "./assets/sound/";
@@ -23,6 +26,8 @@ namespace ecs {
     constexpr int idExplosionMusic = 3;
     constexpr int idPowerUpMusic = 5;
 
+
+    static constexpr int scoreKillMonster = 100;
 
     static constexpr int MAX_ENTITIES = 6;
     static constexpr int MAX_DEPTH = 6;

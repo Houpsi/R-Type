@@ -13,21 +13,21 @@ namespace ecs {
 /**
  * @class Velocity class in function of the speed and the direction
  */
-class Velocity : public Component {
-    public:
-        explicit Velocity(float velocity, int direction): _velocity(velocity), _direction(direction) {};
-        ~Velocity() override = default;
+    class Velocity : public Component {
+        public:
+            explicit Velocity(float velocity, std::pair<float, float> direction): _velocity(velocity), _direction(direction) {};
+            ~Velocity() override = default;
 
-        float getVelocity() const;
-        void setVelocity(float velocity);
+            float getVelocity() const;
+            void setVelocity(float velocity);
 
-        int getDirection() const;
-        void setDirection(int direction);
+            std::pair<float, float> getDirection() const;
+            void setDirection(std::pair<float, float> direction);
 
-    private:
-        float _velocity;
-        int _direction;
-};
+        private:
+            float _velocity;
+            std::pair<float, float> _direction;
+    };
 }
 
 #endif //R_TYPE_CLIENT_VELOCITY_HPP

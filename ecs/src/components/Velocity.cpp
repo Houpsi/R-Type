@@ -5,6 +5,7 @@
 ** Velocity
 */
 
+#include <utility>
 #include "Velocity.hpp"
 
 namespace ecs {
@@ -18,12 +19,12 @@ namespace ecs {
         _velocity = velocity;
     }
 
-    int Velocity::getDirection() const
+    std::pair<float, float> Velocity::getDirection() const
     {
         return _direction;
     }
 
-    void Velocity::setDirection(int direction)
+    void Velocity::setDirection(std::pair <float, float> direction)
     {
         _direction = direction;
     }

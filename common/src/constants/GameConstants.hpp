@@ -9,6 +9,7 @@
 #define R_TYPE_GAMECONSTANTS_HPP
 
 #include "SFML/System/Vector2.hpp"
+#include "enums/EntityType.hpp"
 
 #include <array>
 #include <cstdint>
@@ -87,7 +88,7 @@ namespace cmn {
     constexpr uint8_t pwShootAnimationNumberFrame = 6;
     constexpr uint8_t pwShootCollisionWidth = 23;
     constexpr uint8_t pwShootCollisionHeight = 18;
-    constexpr uint16_t pwShootProjectileSpeed = 200;
+    constexpr uint16_t pwShootSpeed = 200;
     constexpr int8_t pwShootProjectileDirection = 0;
 
     constexpr uint16_t playerProjectileSpeed = 400;
@@ -130,8 +131,14 @@ namespace cmn {
 
     constexpr int idEntityForMusic = 5;
     constexpr int idThemeMusic = 2;
+
+    constexpr int idEntityForScore = 8;
     constexpr int idExplosionMusic = 3;
 
+    constexpr float positionScoreX = 20.f;
+    constexpr float positionScoreY = 20.f;
+    constexpr int sizeScore = 32;
+    constexpr std::string_view fontPath = "./assets/font/font.ttf";
 }
 
 #endif// R_TYPE_GAMECONSTANTS_HPP

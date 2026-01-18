@@ -20,18 +20,8 @@ namespace ecs {
             auto collision = entity->getComponent<Collision>();
 
             if (pos) {
-                if (direction == 0) {
-                    pos->setX(pos->getX() - (velocity * dt));
-                }
-                if (direction == 1) {
-                    pos->setX(pos->getX() + (velocity * dt));
-                }
-                if (direction == 2) {
-                    pos->setY(pos->getY() - (velocity * dt));
-                }
-                if (direction == 3) {
-                    pos->setY(pos->getY() + (velocity * dt));
-                }
+                pos->setX(pos->getX() + (direction.first * velocity * dt));
+                pos->setY(pos->getY() + (direction.second * velocity * dt));
                 if (collision) {
                     if (pos->getX() < 0 - entity->getComponent<Collision>()->getWidth()) {
                         entity->addComponent<Destroy>();

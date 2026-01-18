@@ -14,6 +14,8 @@
 #include "components/Sprite.hpp"
 #include "SFML/Graphics.hpp"
 #include <map>
+#include "components/Score.hpp"
+#include "components/Text.hpp"
 
 namespace ecs {
     enum class AccessibilityFilter : uint8_t {

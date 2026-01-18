@@ -11,6 +11,7 @@
 #include "EcsManager.hpp"
 #include "packet_data/PacketData.hpp"
 #include "packet_data/SoundData.hpp"
+#include "packet_data/TextData.hpp"
 
 namespace cmn {
 
@@ -25,6 +26,7 @@ namespace cmn {
         static void _injectNewEntity(ecs::EcsManager &ecs, newEntityData &newEntity);
         static void _deleteEntity(ecs::EcsManager &ecs, deleteEntityData &deleteEntity);
         static void _soundEntity(ecs::EcsManager &ecs, soundData &sound);
+        static void _injectScore(ecs::EcsManager& ecs, textData& data);
 
     };
 
