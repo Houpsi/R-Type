@@ -88,6 +88,9 @@ title: ecs
 | constexpr int | **[volumeMusic](Namespaces/namespaceecs.md#variable-volumemusic)**  |
 | constexpr int | **[scoreKillMonster](Namespaces/namespaceecs.md#variable-scorekillmonster)**  |
 | const std::string | **[protanopiaShader](Namespaces/namespaceecs.md#variable-protanopiashader)**  |
+| constexpr int | **[nbAmmoShotgun](Namespaces/namespaceecs.md#variable-nbammoshotgun)**  |
+| constexpr int | **[nbAmmoNormalGun](Namespaces/namespaceecs.md#variable-nbammonormalgun)**  |
+| constexpr int | **[nbAmmoGatling](Namespaces/namespaceecs.md#variable-nbammogatling)**  |
 | const std::string | **[invertShader](Namespaces/namespaceecs.md#variable-invertshader)**  |
 | constexpr std::array< std::string_view, 5 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
 | constexpr int | **[idPowerUpMusic](Namespaces/namespaceecs.md#variable-idpowerupmusic)**  |
@@ -295,6 +298,27 @@ const std::string protanopiaShader = R"(
 ```
 
 
+### variable nbAmmoShotgun
+
+```cpp
+constexpr int nbAmmoShotgun = 5;
+```
+
+
+### variable nbAmmoNormalGun
+
+```cpp
+constexpr int nbAmmoNormalGun = 99999;
+```
+
+
+### variable nbAmmoGatling
+
+```cpp
+constexpr int nbAmmoGatling = 20;
+```
+
+
 ### variable invertShader
 
 ```cpp
@@ -370,4 +394,4 @@ static constexpr int MAX_DEPTH = 6;
 
 -------------------------------
 
-Updated on 2026-01-18 at 21:46:45 +0000
+Updated on 2026-01-18 at 21:54:06 +0000

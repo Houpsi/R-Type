@@ -57,6 +57,7 @@ title: Classes
     * **class [Parser](Classes/classserver_1_1Parser.md)** 
     * **class [Server](Classes/classserver_1_1Server.md)** 
     * **class [ServerSharedData](Classes/classserver_1_1ServerSharedData.md)** 
+    * **class [ShootManager](Classes/classserver_1_1ShootManager.md)** 
 * **namespace [std](Namespaces/namespacestd.md)** 
 * **namespace [test](Namespaces/namespacetest.md)** 
 * **struct [tmpEnemy](Classes/structtmpEnemy.md)** 
@@ -65,4 +66,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2026-01-18 at 21:46:45 +0000
+Updated on 2026-01-18 at 21:54:06 +0000

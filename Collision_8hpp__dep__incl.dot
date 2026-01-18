@@ -26,4 +26,6 @@ digraph "ecs/src/components/Collision.hpp"
   Node10 [id="Node000010",label="ecs/src/systems/Velocity\lSystem.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$VelocitySystem_8cpp.html",tooltip=" "];
   Node9 -> Node5 [id="edge11_Node000009_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node1 -> Node5 [id="edge12_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node11 [id="edge13_Node000001_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="server/src/shoot_manager\l/ShootManager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ShootManager_8cpp.html",tooltip=" "];
 }

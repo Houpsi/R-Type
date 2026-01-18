@@ -47,7 +47,8 @@ var annotated_dup =
       [ "LobbyManager", "classserver_1_1LobbyManager.html", "classserver_1_1LobbyManager" ],
       [ "Parser", "classserver_1_1Parser.html", "classserver_1_1Parser" ],
       [ "Server", "classserver_1_1Server.html", "classserver_1_1Server" ],
-      [ "ServerSharedData", "classserver_1_1ServerSharedData.html", "classserver_1_1ServerSharedData" ]
+      [ "ServerSharedData", "classserver_1_1ServerSharedData.html", "classserver_1_1ServerSharedData" ],
+      [ "ShootManager", "classserver_1_1ShootManager.html", "classserver_1_1ShootManager" ]
     ] ],
     [ "tmpEnemy", "structtmpEnemy.html", "structtmpEnemy" ]
 ];

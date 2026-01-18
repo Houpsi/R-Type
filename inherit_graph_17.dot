@@ -5,5 +5,7 @@ digraph "Graphical Class Hierarchy"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node0 [id="Node000000",label="tmpEnemy",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$structtmpEnemy.html",tooltip=" "];
+  Node0 [id="Node000000",label="std::exception",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node0 -> Node1 [id="edge31_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="server::LevelParser\l::LevelParserException",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classserver_1_1LevelParser_1_1LevelParserException.html",tooltip=" "];
 }

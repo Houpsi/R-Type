@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['typecollision_0',['TypeCollision',['../namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1c',1,'ecs']]]
+  ['shootingtype_0',['ShootingType',['../classecs_1_1Shoot.html#a53c0d16ef902543e8f9ee4ac57fc9782',1,'ecs::Shoot']]]
 ];

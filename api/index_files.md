@@ -113,6 +113,9 @@ title: Files
         * **dir [server/src/server_shared_data](Files/dir_750895f871de6972115ebd7099323fe5.md#dir-server/src/server-shared-data)** 
             * **file [server/src/server_shared_data/ServerSharedData.cpp](Files/ServerSharedData_8cpp.md#file-servershareddata.cpp)** 
             * **file [server/src/server_shared_data/ServerSharedData.hpp](Files/ServerSharedData_8hpp.md#file-servershareddata.hpp)** 
+        * **dir [server/src/shoot_manager](Files/dir_d6dad296c56508b30a320f562b3773dd.md#dir-server/src/shoot-manager)** 
+            * **file [server/src/shoot_manager/ShootManager.cpp](Files/ShootManager_8cpp.md#file-shootmanager.cpp)** 
+            * **file [server/src/shoot_manager/ShootManager.hpp](Files/ShootManager_8hpp.md#file-shootmanager.hpp)** 
     * **dir [server/tests](Files/dir_fe4d34db5c9ea517d0ce62f66f339b65.md#dir-server/tests)** 
         * **file [server/tests/TestLevelManager.cpp](Files/TestLevelManager_8cpp.md#file-testlevelmanager.cpp)** 
         * **file [server/tests/TestLevelParser.cpp](Files/TestLevelParser_8cpp.md#file-testlevelparser.cpp)** 
@@ -123,4 +126,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2026-01-18 at 21:46:45 +0000
+Updated on 2026-01-18 at 21:54:06 +0000

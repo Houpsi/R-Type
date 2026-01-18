@@ -36,6 +36,7 @@ var hierarchy =
     [ "ecs::ResourceManager", "classecs_1_1ResourceManager.html", null ],
     [ "server::Server", "classserver_1_1Server.html", null ],
     [ "server::ServerSharedData", "classserver_1_1ServerSharedData.html", null ],
+    [ "server::ShootManager", "classserver_1_1ShootManager.html", null ],
     [ "ecs::SoundManager", "classecs_1_1SoundManager.html", null ],
     [ "ecs::System", "classecs_1_1System.html", [
       [ "ecs::BackgroundSystem", "classecs_1_1BackgroundSystem.html", null ],

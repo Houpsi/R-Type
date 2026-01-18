@@ -7,5 +7,6 @@ var dir_a063914ab482288b7b0e1b2fca86158c =
     [ "parser", "dir_0d2bd8aef9a1d5e03f22ed5477f85ed5.html", "dir_0d2bd8aef9a1d5e03f22ed5477f85ed5" ],
     [ "server", "dir_79d66a5bc5e2c314a2c5007d4cb52c17.html", "dir_79d66a5bc5e2c314a2c5007d4cb52c17" ],
     [ "server_shared_data", "dir_750895f871de6972115ebd7099323fe5.html", "dir_750895f871de6972115ebd7099323fe5" ],
+    [ "shoot_manager", "dir_d6dad296c56508b30a320f562b3773dd.html", "dir_d6dad296c56508b30a320f562b3773dd" ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ]
 ];

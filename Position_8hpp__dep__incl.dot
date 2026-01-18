@@ -32,4 +32,6 @@ digraph "ecs/src/components/Position.hpp"
   Node1 -> Node13 [id="edge14_Node000001_Node000013",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node13 [id="Node000013",label="ecs/tests/TestsPosition.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$TestsPosition_8cpp.html",tooltip=" "];
   Node1 -> Node6 [id="edge15_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node14 [id="edge16_Node000001_Node000014",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="server/src/shoot_manager\l/ShootManager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ShootManager_8cpp.html",tooltip=" "];
 }

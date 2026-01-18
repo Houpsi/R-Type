@@ -11,6 +11,7 @@ title: server
 
 |                | Name           |
 | -------------- | -------------- |
+| class | **[server::ShootManager](Classes/classserver_1_1ShootManager.md)**  |
 | class | **[server::ServerSharedData](Classes/classserver_1_1ServerSharedData.md)**  |
 | class | **[server::Server](Classes/classserver_1_1Server.md)**  |
 | class | **[server::Parser](Classes/classserver_1_1Parser.md)**  |
@@ -81,4 +82,4 @@ int code;
 
 -------------------------------
 
-Updated on 2026-01-18 at 21:46:45 +0000
+Updated on 2026-01-18 at 21:54:06 +0000
