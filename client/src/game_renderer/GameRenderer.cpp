@@ -316,16 +316,20 @@ namespace client {
                 if constexpr (std::is_same_v<T, cmn::gameResultData>) {
                     if (arg.gameResultType == static_cast<uint8_t>(cmn::GameResultType::Lose)) {
                         std::cout << "[GAME] Game lose" << '\n';
+                        _currentState = ClientState::GameOver;
                     } else {
                         std::cout << "[GAME] Game win" << '\n';
+                        _currentState = ClientState::Win;
                     }
-                    _currentState = ClientState::GameOver;
+                    
                 }
             }, data.value());
                 _translator.translate(_gameEcs, data.value(), emptyMap);
             }
         } else {
-            _handleTcp();
+            if (_currentState != ClientState::GameOver)
+            {_handleTcp();
+            }
         }
     }
 
@@ -402,6 +406,7 @@ namespace client {
             }
         }
         std::cout << "[GameRenderer] Game reset complete\n";
+
     }
 
     void GameRenderer::run()
@@ -416,14 +421,14 @@ namespace client {
         _initScore();
         while (_window.isOpen() && _sharedData->isGameRunning()) {
             const float deltaTime = _clock.restart().asSeconds();
-            _updateNetwork();
             _handleEvents();
+            _updateNetwork(); 
             if (_currentState == ClientState::GameOver) {
-                _window.clear();
-                _window.display();
-                std::this_thread::sleep_for(std::chrono::seconds(4));
-                _resetGame();
-            } else if (_currentState == ClientState::InGame) {
+                _updateEndGame(deltaTime);
+            } else if (_currentState == ClientState::Win) {
+                _updateEndGame(deltaTime);
+            }
+            else if (_currentState == ClientState::InGame) {
                 _updateGame(inputClock, elapsedTime, deltaTime);
             } else {
                 _updateMenu(inputClock, elapsedTime, deltaTime);
@@ -431,6 +436,17 @@ namespace client {
             elapsedTime = inputClock.getElapsedTime().asSeconds();
         }
         _window.close();
+    }
+
+    void GameRenderer::_updateEndGame(float deltaTime)
+    {  
+    _menuEcs.setDeltaTime(deltaTime);
+    _refreshMenuDisplay(); 
+    _gameOverTimer += deltaTime;
+        if (_gameOverTimer > 4.0f) {
+            _resetGame();
+            _gameOverTimer = 0.0f;
+        }
     }
 
 
@@ -482,8 +498,15 @@ namespace client {
             _createMenuText("Waiting for other players...", centerX, startY + 100, 30);
             _createMenuText("Press ENTER when Ready!", centerX, startY + 200, 30, sf::Color::Yellow);
             _createMenuText("Esc. Leave Lobby", centerX, startY + 300, 20, sf::Color::Red);
-        } 
+        } else if (_currentState == ClientState::GameOver) {
+            _createMenuText("Game over", centerX + 50, 100, 80, sf::Color::Red);
+            _createMenuText("Back to Menu", centerX, 300, 30, sf::Color::White); 
+        } else if (_currentState == ClientState::Win) {
+            _createMenuText("Win", centerX + 50, 100, 80, sf::Color::Green);
+            _createMenuText("Back to Menu", centerX, 300, 30, sf::Color::White); 
+        }
     }
+
 
     void GameRenderer::_updateDynamicMenuText()
     {

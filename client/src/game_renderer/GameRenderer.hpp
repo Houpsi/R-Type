@@ -22,7 +22,8 @@ namespace client {
         Waiting,
         InGame,
         GameOver,
-        EnteringLobbyCode
+        EnteringLobbyCode, 
+        Win
     };
 
     class GameRenderer {
@@ -51,6 +52,9 @@ namespace client {
         void _createMenuText(const std::string& content, float x, float y, unsigned int size, sf::Color color = sf::Color::White);
         void _refreshMenuDisplay();
         void _updateDynamicMenuText();
+        float _gameOverTimer = 0.0f;
+        void _updateEndGame(float deltaTime);
+
 
         std::string _lobbyCodeInput;
         static constexpr size_t MAX_CODE_LENGTH = 6;

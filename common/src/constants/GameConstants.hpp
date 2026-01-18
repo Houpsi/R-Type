@@ -75,12 +75,12 @@ namespace cmn {
 
     constexpr uint8_t boss1Health = 100;
     constexpr sf::Vector2f boss1SpriteScale = {2.0F, 2.0F};
-    constexpr std::string_view boss1SpriteSheet = "./assets/r-typesheet30c.gif";
-    constexpr std::pair<uint8_t, uint8_t> boss1AnimationSize = {160, 209};
+    constexpr std::string_view boss1SpriteSheet = "./assets/r-typesheet30e.gif";
+    constexpr std::pair<uint8_t, uint8_t> boss1AnimationSize = {161, 207};
     constexpr uint8_t boss1AnimationOffset = 0;
     constexpr uint8_t boss1AnimationNumberFrame = 4;
     constexpr uint8_t boss1CollisionWidth = 160;
-    constexpr uint8_t boss1CollisionHeight = 209;
+    constexpr uint8_t boss1CollisionHeight = 207;
     constexpr uint16_t boss1SpawnPositionWidth = 1500;
     constexpr uint16_t boss1SpawnPositionHeight = 250;
     constexpr uint8_t bossSoundId = 4;
