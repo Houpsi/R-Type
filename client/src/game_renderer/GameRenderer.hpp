@@ -45,6 +45,12 @@ namespace client {
         uint32_t _playerId = 0;
         std::map<cmn::Keys, bool> _previousInputs;
         std::map<cmn::Keys, bool> _previousMenuInputs;
+        ClientState _lastState = ClientState::GameOver;
+        std::shared_ptr<ecs::Entity> _dynamicTextEntity = nullptr;
+        uint32_t _currentLobbyCode = 0;
+        void _createMenuText(const std::string& content, float x, float y, unsigned int size, sf::Color color = sf::Color::White);
+        void _refreshMenuDisplay();
+        void _updateDynamicMenuText();
 
         std::string _lobbyCodeInput;
         static constexpr size_t MAX_CODE_LENGTH = 6;
