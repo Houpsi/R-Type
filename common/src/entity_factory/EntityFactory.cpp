@@ -151,8 +151,8 @@ namespace cmn {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::boss1SpriteSheet)), cmn::boss1SpriteScale);
             entity->addComponent<ecs::Animation>(cmn::boss1AnimationSize, cmn::boss1AnimationOffset, cmn::boss1AnimationNumberFrame);
             entity->addComponent<ecs::Sound>(bossSoundId, false);
-
         } else {
+            entity->addComponent<ecs::Shoot>(cmn::boss1Damage, cmn::boss1ShootCooldown, cmn::boss1ShootTimer);
             entity->addComponent<ecs::Health>(hp);
             entity->addComponent<ecs::Collision>(
                 ecs::TypeCollision::ENEMY,

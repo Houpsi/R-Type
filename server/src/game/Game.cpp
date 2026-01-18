@@ -104,6 +104,7 @@ namespace server {
             _createEnemy(currentLevel, enemyClock, generator);
             _checkSpaceBar();
             _enemyShoot();
+            _bossShoot(currentLevel);
             if (elapsedTime > frameTimer) {
                 fpsClock.restart();
                 _sendPositions();
@@ -271,6 +272,67 @@ namespace server {
 
                 if (input->getSpacebar()) {
                     _shootManager.shoot(_ecs, _sharedData, entity, _lobbyId);
+                }
+            }
+        }
+    }
+
+    void Game::_bossShoot(Level &currentLevel)
+    {
+        if (!currentLevel.hasBossSpawned()) {
+            return;
+        }
+        if (_currentIdBoss == -1) {
+            return;
+        }
+        auto boss = _ecs.getEntityById(_currentIdBoss);
+        if (!boss) {
+            return;
+        }
+        auto bossShootComp = boss->getComponent<ecs::Shoot>();
+        auto positionCpn = boss->getComponent<ecs::Position>();
+        auto collisionCpn = boss->getComponent<ecs::Collision>();
+
+        if (bossShootComp && positionCpn && collisionCpn) {
+            bossShootComp->setTimeSinceLastShot(bossShootComp->getTimeSinceLastShot() + _ecs.getDeltaTime());
+
+            if (bossShootComp->getTimeSinceLastShot() >= bossShootComp->getCooldown()) {
+                bossShootComp->setTimeSinceLastShot(0);
+
+                float const spawnX = positionCpn->getX() + (collisionCpn->getWidth() / 2.0f);
+                float const spawnY = positionCpn->getY() + (collisionCpn->getHeight() / 2.0f);
+
+                std::vector<float> yDirections = {
+                        ecs::dir::normalized45degreesUp,
+                        ecs::dir::normalized23degreesUp,
+                        ecs::dir::neutral,
+                        ecs::dir::normalized23degreesDown,
+                        ecs::dir::normalized45degreesDown
+                };
+
+                for (auto yDir : yDirections) {
+                    auto newProjectile = cmn::EntityFactory::createEntity(
+                            _ecs,
+                            cmn::EntityType::MonsterProjectile,
+                            spawnX,
+                            spawnY,
+                            cmn::EntityFactory::Context::SERVER,
+                            0,
+                            -1,
+                            {ecs::dir::left, yDir}
+                    );
+
+                    if (auto vel = newProjectile->getComponent<ecs::Velocity>()) {
+                        vel->setDirection({ecs::dir::left, yDir});
+                    }
+
+                    cmn::newEntityData newProjectileData = {
+                            newProjectile->getId(),
+                            cmn::EntityType::MonsterProjectile,
+                            spawnX,
+                            spawnY
+                    };
+                    _sharedData->addLobbyUdpPacketToSend(_lobbyId, newProjectileData);
                 }
             }
         }

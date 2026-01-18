@@ -57,6 +57,7 @@ namespace server {
         void _handleDisconnectedPlayers();
         void _sendGameEndState(cmn::GameResultType type) const;
         void _enemyShoot();
+        void _bossShoot(Level &currentLevel);
         void _sendText();
         void _createBonus(Level &currentLevel, sf::Clock &bonusClock, std::minstd_rand0 &generator);
         float _nextBonusSpawnDelay = 5.0f;
