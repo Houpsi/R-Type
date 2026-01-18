@@ -26,9 +26,11 @@ namespace server {
     void ShootManager::shoot(ecs::EcsManager &ecsManager, std::shared_ptr<ServerSharedData> &sharedData, const std::shared_ptr<ecs::Entity> &entity, int lobbyId)
     {
         const auto &shootComp = entity->getComponent<ecs::Shoot>();
-        shootComp->updateShootingType(ecsManager.getDeltaTime());
-        auto shootingType = shootComp->getActiveShootingType();
-        _shootMethods[shootingType](ecsManager, sharedData, entity);
+
+        if (shootComp) {
+            auto shootingType = shootComp->getActiveShootingType();
+            _shootMethods[shootingType](ecsManager, sharedData, entity);
+        }
         _gameLobbyId = lobbyId;
     }
 
@@ -63,14 +65,15 @@ namespace server {
     {
         const auto &shoot = entity->getComponent<ecs::Shoot>();
         if (shoot->getTimeSinceLastShot() >= cmn::shotgunCooldown) {
+            shoot->setTimeSinceLastShot(0);
+            shoot->updateShootingType();
+
             auto positionCpn = entity->getComponent<ecs::Position>();
             auto collisionCpn = entity->getComponent<ecs::Collision>();
 
-            shoot->setTimeSinceLastShot(0);
-
             float const posX = positionCpn->getX() + collisionCpn->getHeight();
             float const posY = entity->getComponent<ecs::Position>()->getY();
-            std::vector<float> yDirections = {ecs::dir::up, ecs::dir::neutral, ecs::dir::down};
+            std::vector<float> yDirections = {ecs::dir::normalized45degreesUp, ecs::dir::normalized23degreesUp, ecs::dir::neutral, ecs::dir::normalized23degreesDown, ecs::dir::normalized45degreesDown};
             for (auto yDirection : yDirections) {
                 auto newProjectile = cmn::EntityFactory::createEntity(
                         ecsManager,
@@ -92,10 +95,10 @@ namespace server {
     {
         const auto &shoot = entity->getComponent<ecs::Shoot>();
         if (shoot->getTimeSinceLastShot() >= cmn::gatlingCooldown) {
+            shoot->setTimeSinceLastShot(0);
+            shoot->updateShootingType();
             auto positionCpn = entity->getComponent<ecs::Position>();
             auto collisionCpn = entity->getComponent<ecs::Collision>();
-
-            shoot->setTimeSinceLastShot(0);
 
             float const posX = positionCpn->getX() + collisionCpn->getHeight();
             float const posY = entity->getComponent<ecs::Position>()->getY();

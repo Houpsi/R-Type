@@ -5,9 +5,9 @@
 ** Shoot
 */
 
-#include <vector>
 #include "Shoot.hpp"
-#include <limits>
+#include "EcsConstant.hpp"
+#include <random>
 
 namespace ecs {
     /**
@@ -82,10 +82,15 @@ namespace ecs {
         _shootTimer = t;
     }
 
-    void Shoot::setActiveShootingType(ShootingType type, float duration)
+    void Shoot::setActiveShootingType(ShootingType type)
     {
         _activeShootingType.first = type;
-        _activeShootingType.second = duration;
+        if (type == ShootingType::Shotgun) {
+            _activeShootingType.second = nbAmmoShotgun;
+        }
+        if (type == ShootingType::Gatling) {
+            _activeShootingType.second = nbAmmoGatling;
+        }
     }
 
     Shoot::ShootingType Shoot::getActiveShootingType() const
@@ -93,12 +98,24 @@ namespace ecs {
         return _activeShootingType.first;
     }
 
-    void Shoot::updateShootingType(float deltaTime)
+    void Shoot::updateShootingType()
     {
-        if (_activeShootingType.second <= 0) {
-            _activeShootingType.first = Shoot::ShootingType::Gatling;
-            _activeShootingType.second = std::numeric_limits<float>::infinity();
+        if (_activeShootingType.second == 0) {
+            _activeShootingType.first = Shoot::ShootingType::Normal;
+            _activeShootingType.second = nbAmmoNormalGun;
+        } else {
+            _activeShootingType.second -= 1;
         }
-        _activeShootingType.second -= deltaTime;
     }
+
+    Shoot::ShootingType Shoot::getRandomShootingType()
+    {
+        static std::random_device rand;
+        static std::mt19937 gen(rand());
+
+        std::uniform_int_distribution<> distrib(1, 2);
+        return static_cast<ShootingType>(distrib(gen));
+    }
+
+
 }

@@ -23,7 +23,7 @@ namespace ecs {
             Gatling,
         };
 
-        explicit Shoot(int damage, float cooldown, float shootTimer = 0.0f): _damage(damage), _cooldown(cooldown), _shootTimer(shootTimer) {};
+        explicit Shoot(int damage, float cooldown, float shootTimer = 0.0f): _damage(damage), _cooldown(cooldown), _shootTimer(shootTimer), _activeShootingType({ShootingType::Normal, 999}) {};
         ~Shoot() override = default;
 
         [[nodiscard]] int getDamage() const;
@@ -38,16 +38,17 @@ namespace ecs {
         float getTimeSinceLastShot() const;
         void setTimeSinceLastShot(float t);
 
-        void setActiveShootingType(ShootingType type, float duration);
+        void setActiveShootingType(ShootingType type);
         ShootingType getActiveShootingType() const;
-        void updateShootingType(float deltaTime);
+        void updateShootingType();
+        Shoot::ShootingType getRandomShootingType();
 
     private:
         float _cooldown;
         int _damage;
         float _timeSinceLastShot = 0;
         float _shootTimer;
-        std::pair<ShootingType, float> _activeShootingType;
+        std::pair<ShootingType, int> _activeShootingType;
     };
 }
 

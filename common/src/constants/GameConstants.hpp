@@ -143,6 +143,7 @@ namespace cmn {
     constexpr int idEntityForScore = 8;
     constexpr int idExplosionMusic = 3;
 
+
     constexpr float positionScoreX = 20.F;
     constexpr float positionScoreY = 20.F;
     constexpr int sizeScore = 32;

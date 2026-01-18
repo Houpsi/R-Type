@@ -9,6 +9,7 @@
 #define R_TYPE_ECSCONSTANT_HPP
 #include <array>
 #include <string_view>
+#include <cstdint>
 
 namespace ecs {
 
@@ -18,6 +19,10 @@ namespace ecs {
         constexpr float up = -1.0f;
         constexpr float down = 1.0f;
         constexpr float neutral = 0.0f;
+        constexpr float normalized45degreesUp = 0.5f;
+        constexpr float normalized23degreesUp = 0.25f;
+        constexpr float normalized45degreesDown = -0.5f;
+        constexpr float normalized23degreesDown = -0.25f;
     }
 
     constexpr int volumeMusic = 100;
@@ -25,6 +30,9 @@ namespace ecs {
     constexpr std::array<std::string_view, 5> idToSound = {"shoot", "theme", "explosion", "boss1", "power_up"};
     constexpr int idExplosionMusic = 3;
     constexpr int idPowerUpMusic = 5;
+    constexpr int nbAmmoShotgun = 5;
+    constexpr int nbAmmoGatling = 20;
+    constexpr int nbAmmoNormalGun = 99999;
 
 
     static constexpr int scoreKillMonster = 100;
@@ -37,5 +45,4 @@ namespace ecs {
 }
 
 
-
-#endif// R_TYPE_ECSCONSTANT_HPP
+#endif // R_TYPE_ECSCONSTANT_HPP

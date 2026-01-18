@@ -16,6 +16,11 @@ namespace ecs
         for (const auto &entity : entities) {
             auto collision = entity->getComponent<Collision>();
             auto position = entity->getComponent<Position>();
+
+            if (!collision || !position) {
+                continue;
+            };
+
             AABB bound = {position->getX(), position->getY(), collision->getWidth(), collision->getHeight()};
             _quadTree->insert(entity, bound);
         }
@@ -82,7 +87,10 @@ namespace ecs
                     } else if (typeA == PLAYER &&
                         typeB == POWER_UP) {
                         entity->addComponent<Sound>(idPowerUpMusic, false);
-                        //entity->addComponent<PowerUp>();
+                        auto shoot = entity->getComponent<Shoot>();
+                        if (shoot) {
+                            shoot->setActiveShootingType(shoot->getRandomShootingType());
+                        }
                         other->addComponent<Destroy>();
                     }
                 }

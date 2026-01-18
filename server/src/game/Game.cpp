@@ -45,7 +45,6 @@ namespace server {
 
     void Game::run()
     {
-         //TODO: handle that private lobby can launch a new game inside the previous one
         _initLevels();
         _waitForPlayers();
         cmn::startGameData data = {};
@@ -478,7 +477,6 @@ namespace server {
 
          auto scoreEntity = _ecs.createEntity(cmn::idEntityForScore);
          scoreEntity->addComponent<ecs::Position>(cmn::positionScoreX, cmn::positionScoreY);
-         scoreEntity->addComponent<ecs::Collision>(ecs::TypeCollision::PLAYER, cmn::playerWidth, cmn::playerHeight);
          scoreEntity->addComponent<ecs::Text>(
              _ecs.getResourceManager().getFont(cmn::fontPath.data()),
              cmn::sizeScore
