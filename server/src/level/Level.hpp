@@ -43,6 +43,8 @@ namespace server {
         void calculateNumberTotalWave();
         bool hasBossSpawned() const;
         void setBossSpawned(bool spawned);
+        void setBonusSpawnRate(float spawnRate);
+        float getBonusSpawnRate() const;
       private:
         uint8_t _levelId = 0;
         uint8_t _enemySpawnRate = 1;
@@ -56,6 +58,7 @@ namespace server {
         int _currentRepeat = 0;
         int _totalRepeatWaves = 0;
         bool _bossHasSpawned = false;
+        float _bonusSpawnRate = 15.0f;
     };
 
 }// namespace server

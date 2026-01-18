@@ -64,20 +64,25 @@ namespace ecs
                         auto health = other->getComponent<Health>();
                         auto shoot = entity->getComponent<Shoot>();
 
-                        if (!health && !shoot) continue;
+                        if (!health || !shoot) continue;
                         health->setHealth(health->getHealth() - shoot->getDamage());
                         entity->addComponent<Sound>(3, false);
                         entity->addComponent<Destroy>();
                     }
                     else if (typeA == PLAYER &&
                         typeB == ENEMY) {
-                        entity->addComponent<Sound>(3, false);
+                        entity->addComponent<Sound>(idExplosionMusic, false);
                         entity->addComponent<Destroy>();
                     }
                     else if (typeA == ENEMY_PROJECTILE &&
                         typeB == PLAYER) {
-                        entity->addComponent<Sound>(3, false);
+                        entity->addComponent<Sound>(idExplosionMusic, false);
                         entity->addComponent<Destroy>();
+                        other->addComponent<Destroy>();
+                    } else if (typeA == PLAYER &&
+                        typeB == POWER_UP) {
+                        entity->addComponent<Sound>(idPowerUpMusic, false);
+                        //entity->addComponent<PowerUp>();
                         other->addComponent<Destroy>();
                     }
                 }
@@ -105,7 +110,10 @@ namespace ecs
             return true;
         if (a == ENEMY_PROJECTILE && b == ENEMY)
             return true;
-
+        if ((a == TypeCollision::PLAYER_PROJECTILE || a == ENEMY_PROJECTILE) && b == TypeCollision::POWER_UP)
+            return true;
+        if (a == TypeCollision::POWER_UP && (b == TypeCollision::PLAYER_PROJECTILE || b == ENEMY_PROJECTILE))
+            return true;
         return false;
     }
 

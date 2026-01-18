@@ -56,6 +56,8 @@ namespace server {
         void _sendGameEndState(cmn::GameResultType type) const;
         void _enemyShoot();
         void _sendText();
+        void _createBonus(Level &currentLevel, sf::Clock &bonusClock, std::minstd_rand0 &generator);
+        float _nextBonusSpawnDelay = 5.0f;
         std::unordered_map<uint32_t, std::pair<float, float>> _entityPos;
         uint32_t _score = 0;
     };

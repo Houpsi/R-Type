@@ -44,7 +44,7 @@ namespace cmn {
             case EntityType::Plane:
                 _initEnemy(ecs, entity, context, type);
                 break;
-        case cmn::EntityType::PlayerProjectile:
+            case cmn::EntityType::PlayerProjectile:
                 _initProjectile(ecs, entity, context);
                 break;
             case cmn::EntityType::MonsterProjectile:
@@ -53,10 +53,13 @@ namespace cmn {
             case cmn::EntityType::Boss1:
                 _initBoss(ecs, entity, context, hp);
                 break;
+            case cmn::EntityType::PowerUp:
+                _initPowerUp(ecs, entity, context);
+                break;
             case cmn::EntityType::BackgroundPlanets:
             case cmn::EntityType::BackgroundStars:
                 _initBackground(ecs, entity, context, type);
-            break;
+                break;
             default:
                 break;
         }
@@ -147,7 +150,7 @@ namespace cmn {
         if (context == Context::CLIENT) {
             entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::boss1SpriteSheet)), cmn::boss1SpriteScale);
             entity->addComponent<ecs::Animation>(cmn::boss1AnimationSize, cmn::boss1AnimationOffset, cmn::boss1AnimationNumberFrame);
-          //  entity->addComponent<ecs::Sound>(playerProjectileSoundId, monsterProjectileLoop);
+            entity->addComponent<ecs::Sound>(bossSoundId, false);
 
         } else {
             entity->addComponent<ecs::Health>(hp);
@@ -157,6 +160,23 @@ namespace cmn {
                 cmn::boss1CollisionHeight * boss1SpriteScale.y
             );
         }
+    }
+
+    void EntityFactory::_initPowerUp(ecs::EcsManager &ecs, std::shared_ptr<ecs::Entity> entity, Context context)
+    {
+        if (context == Context::CLIENT) {
+            entity->addComponent<ecs::Sprite>(ecs.getResourceManager().getTexture(std::string(cmn::pwShootSpriteSheet)), cmn::pwShootSpriteScale);
+            entity->addComponent<ecs::Animation>(cmn::pwShootAnimationSize, cmn::pwShootAnimationOffset, cmn::pwShootAnimationNumberFrame);
+            entity->addComponent<ecs::Velocity>(pwShootSpeed,  std::make_pair(ecs::dir::left, ecs::dir::neutral));
+        } else {
+            entity->addComponent<ecs::Collision>(
+                ecs::TypeCollision::POWER_UP,
+                pwShootCollisionWidth,
+                pwShootCollisionHeight
+            );
+            entity->addComponent<ecs::Velocity>(pwShootSpeed,  std::make_pair(ecs::dir::left, ecs::dir::neutral));
+        }
+
     }
 
     void EntityFactory::_initBackground(ecs::EcsManager &ecs, std::shared_ptr<ecs::Entity> entity, Context context, EntityType type) {

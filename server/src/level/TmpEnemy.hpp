@@ -8,6 +8,7 @@
 
 #ifndef R_TYPE_TMPENEMY_HPP
 #define R_TYPE_TMPENEMY_HPP
+#include "enums/EntityType.hpp"
 
 struct tmpEnemy
 {

@@ -22,7 +22,10 @@ namespace ecs {
 
     constexpr int volumeMusic = 100;
     constexpr std::string_view folderSound = "./assets/sound/";
-    constexpr std::array<std::string_view, 3> idToSound = {"shoot", "theme", "explosion"};
+    constexpr std::array<std::string_view, 5> idToSound = {"shoot", "theme", "explosion", "boss1", "power_up"};
+    constexpr int idExplosionMusic = 3;
+    constexpr int idPowerUpMusic = 5;
+
 
     static constexpr int scoreKillMonster = 100;
 

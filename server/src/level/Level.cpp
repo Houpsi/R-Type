@@ -131,4 +131,14 @@ namespace server {
         _bossHasSpawned = spawned;
     }
 
+    float Level::getBonusSpawnRate() const
+    {
+        return _bonusSpawnRate;
+    }
+
+    void Level::setBonusSpawnRate(float spawnRate)
+    {
+        _bonusSpawnRate = spawnRate;
+    }
+
 }// namespace server

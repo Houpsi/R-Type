@@ -20,7 +20,8 @@ namespace cmn {
         PlayerProjectile,
         MonsterProjectile,
         BackgroundStars,
-        BackgroundPlanets
+        BackgroundPlanets,
+        PowerUp,
     };
 
 
