@@ -15,6 +15,7 @@ var searchData=
   ['position_12',['position',['../classecs_1_1Position.html#a3032218da5dfc46842b42a37e1bfcaf1',1,'ecs::Position::Position()'],['../classecs_1_1Position.html',1,'ecs::Position']]],
   ['position_2ecpp_13',['Position.cpp',['../Position_8cpp.html',1,'']]],
   ['position_2ehpp_14',['Position.hpp',['../Position_8hpp.html',1,'']]],
-  ['protanopia_15',['Protanopia',['../namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a8022a7ceb04a413d242483f01407dfba',1,'ecs']]],
-  ['protanopiashader_16',['protanopiaShader',['../namespaceecs.html#a9154e6a2f62e403336b1d820718bf519',1,'ecs']]]
+  ['power_5fup_15',['POWER_UP',['../namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca8408777e45e24ae8918afa8893c56986',1,'ecs']]],
+  ['protanopia_16',['Protanopia',['../namespaceecs.html#a174a2e96286873cbaf666e019a4f83f5a8022a7ceb04a413d242483f01407dfba',1,'ecs']]],
+  ['protanopiashader_17',['protanopiaShader',['../namespaceecs.html#a9154e6a2f62e403336b1d820718bf519',1,'ecs']]]
 ];

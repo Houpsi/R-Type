@@ -56,7 +56,8 @@ var namespaceecs =
       [ "ENEMY", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1cae9d74ed3fbdbf5b0952dce8e37f2f72f", null ],
       [ "PLAYER_PROJECTILE", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1cab709f9d3cbf19522f496f915127a3372", null ],
       [ "ENEMY_PROJECTILE", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca7369175c057f6e74931ff5a8f4c81c6c", null ],
-      [ "OBSTACLE", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca8ca56dc91e28869f29d69bc6d75ceb9d", null ]
+      [ "OBSTACLE", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca8ca56dc91e28869f29d69bc6d75ceb9d", null ],
+      [ "POWER_UP", "namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca8408777e45e24ae8918afa8893c56986", null ]
     ] ],
     [ "TEST", "namespaceecs.html#a1b87a463e5ee1a3be6f01db1b298fdf0", null ],
     [ "TEST", "namespaceecs.html#a7faae26c4b6dca9c37ebe1c68424c24f", null ],
@@ -71,7 +72,9 @@ var namespaceecs =
     [ "TEST", "namespaceecs.html#ad4997ede705c6001fc3e35fd035980a0", null ],
     [ "folderSound", "namespaceecs.html#a1b57c2380fa3729ef2b1840b37b213e3", null ],
     [ "highContrastShader", "namespaceecs.html#ae439b378537d9e351f383e3f70c6cd58", null ],
-    [ "idToSound", "namespaceecs.html#aa8796a8ab89583326fca41efab10136b", null ],
+    [ "idExplosionMusic", "namespaceecs.html#a74f88da9bbd02856174fa1dd8012651b", null ],
+    [ "idPowerUpMusic", "namespaceecs.html#a15de355a29aad2fc2fdbe18d756d2fee", null ],
+    [ "idToSound", "namespaceecs.html#ac81a3619922e9b737083d9211b294902", null ],
     [ "invertShader", "namespaceecs.html#a1e4284d107c2d84bcbc84b9fad729482", null ],
     [ "MAX_DEPTH", "namespaceecs.html#a0505af24dab235fc3b06a36f76518682", null ],
     [ "MAX_ENTITIES", "namespaceecs.html#a0b10355f6a3934015d874d3207ee0669", null ],

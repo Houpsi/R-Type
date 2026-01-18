@@ -94,16 +94,18 @@ digraph "server/src/lobby_manager/LobbyManager.cpp"
   Node36 -> Node25 [id="edge50_Node000036_Node000025",color="steelblue1",style="solid",tooltip=" "];
   Node36 -> Node39 [id="edge51_Node000036_Node000039",color="steelblue1",style="solid",tooltip=" "];
   Node39 [id="Node000039",label="TmpEnemy.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$TmpEnemy_8hpp.html",tooltip=" "];
-  Node35 -> Node13 [id="edge52_Node000035_Node000013",color="steelblue1",style="solid",tooltip=" "];
-  Node20 -> Node8 [id="edge53_Node000020_Node000008",color="steelblue1",style="solid",tooltip=" "];
-  Node20 -> Node40 [id="edge54_Node000020_Node000040",color="steelblue1",style="solid",tooltip=" "];
-  Node40 [id="Node000040",label="random",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
-  Node1 -> Node41 [id="edge55_Node000001_Node000041",color="steelblue1",style="solid",tooltip=" "];
-  Node41 [id="Node000041",label="packet_disassembler\l/PacketDisassembler.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node39 -> Node40 [id="edge52_Node000039_Node000040",color="steelblue1",style="solid",tooltip=" "];
+  Node40 [id="Node000040",label="enums/EntityType.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node35 -> Node13 [id="edge53_Node000035_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node20 -> Node8 [id="edge54_Node000020_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node20 -> Node41 [id="edge55_Node000020_Node000041",color="steelblue1",style="solid",tooltip=" "];
+  Node41 [id="Node000041",label="random",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node42 [id="edge56_Node000001_Node000042",color="steelblue1",style="solid",tooltip=" "];
-  Node42 [id="Node000042",label="packet_factory/PacketFactory.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node42 [id="Node000042",label="packet_disassembler\l/PacketDisassembler.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node43 [id="edge57_Node000001_Node000043",color="steelblue1",style="solid",tooltip=" "];
-  Node43 [id="Node000043",label="iostream",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node43 [id="Node000043",label="packet_factory/PacketFactory.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node44 [id="edge58_Node000001_Node000044",color="steelblue1",style="solid",tooltip=" "];
-  Node44 [id="Node000044",label="ranges",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node44 [id="Node000044",label="iostream",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node45 [id="edge59_Node000001_Node000045",color="steelblue1",style="solid",tooltip=" "];
+  Node45 [id="Node000045",label="ranges",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
 }

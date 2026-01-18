@@ -17,4 +17,6 @@ digraph "server/src/level/Level.hpp"
   Node6 [id="Node000006",label="vector",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node7 [id="edge6_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
   Node7 [id="Node000007",label="TmpEnemy.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$TmpEnemy_8hpp.html",tooltip=" "];
+  Node7 -> Node8 [id="edge7_Node000007_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="enums/EntityType.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
 }

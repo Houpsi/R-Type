@@ -144,30 +144,35 @@ $(document).ready(function(){initNavTree('Level_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classserver_1_1Level.html#a6b805b1f0260b7b0af95cbaf7e002bea">calculateNumberTotalWave</a>();</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classserver_1_1Level.html#a53d88ab496ca3c609ca10289ad531391">hasBossSpawned</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classserver_1_1Level.html#affb8ee7bcf3c554d6e4e4ea373bea652">setBossSpawned</a>(<span class="keywordtype">bool</span> spawned);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        uint8_t _levelId = 0;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        uint8_t _enemySpawnRate = 1;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">bool</span> _isBossPresent = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        std::string _nameLevel;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        uint32_t _playerSpeed = cmn::playerSpeed;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        uint8_t _repeatWaves;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        std::pair &lt;std::string, uint32_t&gt; _boss;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        std::vector&lt;std::pair &lt;uint16_t, std::list&lt;tmpEnemy&gt;&gt;&gt; _waves;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">int</span> _currentWave = 0;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">int</span> _currentRepeat = 0;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">int</span> _totalRepeatWaves = 0;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">bool</span> _bossHasSpawned = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    };</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classserver_1_1Level.html#a082caad224e11128abea36b14796a8db">setBonusSpawnRate</a>(<span class="keywordtype">float</span> spawnRate);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordtype">float</span> <a class="code hl_function" href="classserver_1_1Level.html#a41af4ff0c29352fbf2bb40eb71c4d986">getBonusSpawnRate</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        uint8_t _levelId = 0;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        uint8_t _enemySpawnRate = 1;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">bool</span> _isBossPresent = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        std::string _nameLevel;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        uint32_t _playerSpeed = cmn::playerSpeed;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        uint8_t _repeatWaves;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        std::pair &lt;std::string, uint32_t&gt; _boss;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        std::vector&lt;std::pair &lt;uint16_t, std::list&lt;tmpEnemy&gt;&gt;&gt; _waves;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">int</span> _currentWave = 0;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">int</span> _currentRepeat = 0;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">int</span> _totalRepeatWaves = 0;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">bool</span> _bossHasSpawned = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">float</span> _bonusSpawnRate = 15.0f;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    };</div>
 </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}<span class="comment">// namespace server</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif</span><span class="comment">// R_TYPE_LEVEL_HPP</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}<span class="comment">// namespace server</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#endif</span><span class="comment">// R_TYPE_LEVEL_HPP</span></div>
 <div class="ttc" id="aTmpEnemy_8hpp_html"><div class="ttname"><a href="TmpEnemy_8hpp.html">TmpEnemy.hpp</a></div></div>
 <div class="ttc" id="aclassserver_1_1Level_html"><div class="ttname"><a href="classserver_1_1Level.html">server::Level</a></div><div class="ttdef"><b>Definition</b> Level.hpp:20</div></div>
+<div class="ttc" id="aclassserver_1_1Level_html_a082caad224e11128abea36b14796a8db"><div class="ttname"><a href="classserver_1_1Level.html#a082caad224e11128abea36b14796a8db">server::Level::setBonusSpawnRate</a></div><div class="ttdeci">void setBonusSpawnRate(float spawnRate)</div><div class="ttdef"><b>Definition</b> Level.cpp:139</div></div>
 <div class="ttc" id="aclassserver_1_1Level_html_a09b90c0344af74969721c0311bcdaf7a"><div class="ttname"><a href="classserver_1_1Level.html#a09b90c0344af74969721c0311bcdaf7a">server::Level::isFinished</a></div><div class="ttdeci">bool isFinished() const</div><div class="ttdef"><b>Definition</b> Level.cpp:115</div></div>
 <div class="ttc" id="aclassserver_1_1Level_html_a2b645abac9aeacee96a4d24bf6aa8999"><div class="ttname"><a href="classserver_1_1Level.html#a2b645abac9aeacee96a4d24bf6aa8999">server::Level::addWave</a></div><div class="ttdeci">void addWave(uint16_t time, std::list&lt; tmpEnemy &gt; enemies)</div><div class="ttdef"><b>Definition</b> Level.cpp:79</div></div>
 <div class="ttc" id="aclassserver_1_1Level_html_a3d7f2bcd4fce9f6bf7938e5be9ad7317"><div class="ttname"><a href="classserver_1_1Level.html#a3d7f2bcd4fce9f6bf7938e5be9ad7317">server::Level::setPlayerSpeed</a></div><div class="ttdeci">void setPlayerSpeed(uint16_t playerSpeed)</div><div class="ttdef"><b>Definition</b> Level.cpp:74</div></div>
+<div class="ttc" id="aclassserver_1_1Level_html_a41af4ff0c29352fbf2bb40eb71c4d986"><div class="ttname"><a href="classserver_1_1Level.html#a41af4ff0c29352fbf2bb40eb71c4d986">server::Level::getBonusSpawnRate</a></div><div class="ttdeci">float getBonusSpawnRate() const</div><div class="ttdef"><b>Definition</b> Level.cpp:134</div></div>
 <div class="ttc" id="aclassserver_1_1Level_html_a53d88ab496ca3c609ca10289ad531391"><div class="ttname"><a href="classserver_1_1Level.html#a53d88ab496ca3c609ca10289ad531391">server::Level::hasBossSpawned</a></div><div class="ttdeci">bool hasBossSpawned() const</div><div class="ttdef"><b>Definition</b> Level.cpp:125</div></div>
 <div class="ttc" id="aclassserver_1_1Level_html_a564100aec5aaf2f7f6e287acd7f6b29d"><div class="ttname"><a href="classserver_1_1Level.html#a564100aec5aaf2f7f6e287acd7f6b29d">server::Level::nextWave</a></div><div class="ttdeci">void nextWave()</div><div class="ttdef"><b>Definition</b> Level.cpp:105</div></div>
 <div class="ttc" id="aclassserver_1_1Level_html_a6b805b1f0260b7b0af95cbaf7e002bea"><div class="ttname"><a href="classserver_1_1Level.html#a6b805b1f0260b7b0af95cbaf7e002bea">server::Level::calculateNumberTotalWave</a></div><div class="ttdeci">void calculateNumberTotalWave()</div><div class="ttdef"><b>Definition</b> Level.cpp:120</div></div>

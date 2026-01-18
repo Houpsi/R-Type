@@ -59,7 +59,7 @@ title: ecs
 
 |                | Name           |
 | -------------- | -------------- |
-| enum| **[TypeCollision](Namespaces/namespaceecs.md#enum-typecollision)** { PLAYER_PROJECTILE, PLAYER, OBSTACLE, ENEMY_PROJECTILE, ENEMY} |
+| enum| **[TypeCollision](Namespaces/namespaceecs.md#enum-typecollision)** { POWER_UP, PLAYER_PROJECTILE, PLAYER, OBSTACLE, ENEMY_PROJECTILE, ENEMY} |
 | using std::shared_ptr< [Entity](Classes/classecs_1_1Entity.md) > | **[EntityRef](Namespaces/namespaceecs.md#using-entityref)**  |
 | enum class uint8_t | **[AccessibilityFilter](Namespaces/namespaceecs.md#enum-accessibilityfilter)** { Protanopia, None = 0, Invert, HighContrast} |
 
@@ -89,7 +89,9 @@ title: ecs
 | constexpr int | **[scoreKillMonster](Namespaces/namespaceecs.md#variable-scorekillmonster)**  |
 | const std::string | **[protanopiaShader](Namespaces/namespaceecs.md#variable-protanopiashader)**  |
 | const std::string | **[invertShader](Namespaces/namespaceecs.md#variable-invertshader)**  |
-| constexpr std::array< std::string_view, 3 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
+| constexpr std::array< std::string_view, 5 > | **[idToSound](Namespaces/namespaceecs.md#variable-idtosound)**  |
+| constexpr int | **[idPowerUpMusic](Namespaces/namespaceecs.md#variable-idpowerupmusic)**  |
+| constexpr int | **[idExplosionMusic](Namespaces/namespaceecs.md#variable-idexplosionmusic)**  |
 | const std::string | **[highContrastShader](Namespaces/namespaceecs.md#variable-highcontrastshader)**  |
 | constexpr std::string_view | **[folderSound](Namespaces/namespaceecs.md#variable-foldersound)**  |
 | constexpr int | **[MAX_ENTITIES](Namespaces/namespaceecs.md#variable-max-entities)**  |
@@ -101,6 +103,7 @@ title: ecs
 
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
+| POWER_UP | |   |
 | PLAYER_PROJECTILE | |   |
 | PLAYER | |   |
 | OBSTACLE | |   |
@@ -308,7 +311,21 @@ const std::string invertShader = R"(
 ### variable idToSound
 
 ```cpp
-constexpr std::array< std::string_view, 3 > idToSound = {"shoot", "theme", "explosion"};
+constexpr std::array< std::string_view, 5 > idToSound = {"shoot", "theme", "explosion", "boss1", "power_up"};
+```
+
+
+### variable idPowerUpMusic
+
+```cpp
+constexpr int idPowerUpMusic = 5;
+```
+
+
+### variable idExplosionMusic
+
+```cpp
+constexpr int idExplosionMusic = 3;
 ```
 
 
@@ -353,4 +370,4 @@ static constexpr int MAX_DEPTH = 6;
 
 -------------------------------
 
-Updated on 2026-01-18 at 10:07:04 +0000
+Updated on 2026-01-18 at 11:25:11 +0000

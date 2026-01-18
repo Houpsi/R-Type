@@ -24,6 +24,7 @@ title: server::Level
 | void | **[setCurrentWave](Classes/classserver_1_1Level.md#function-setcurrentwave)**(int id) |
 | void | **[setBossSpawned](Classes/classserver_1_1Level.md#function-setbossspawned)**(bool spawned) |
 | void | **[setBoss](Classes/classserver_1_1Level.md#function-setboss)**(std::string boss, uint32_t healthBoss) |
+| void | **[setBonusSpawnRate](Classes/classserver_1_1Level.md#function-setbonusspawnrate)**(float spawnRate) |
 | void | **[nextWave](Classes/classserver_1_1Level.md#function-nextwave)**() |
 | bool | **[isFinished](Classes/classserver_1_1Level.md#function-isfinished)**() const |
 | bool | **[hasBossSpawned](Classes/classserver_1_1Level.md#function-hasbossspawned)**() const |
@@ -37,6 +38,7 @@ title: server::Level
 | uint8_t | **[getEnemySpawnRate](Classes/classserver_1_1Level.md#function-getenemyspawnrate)**() const |
 | int | **[getCurrentWaveId](Classes/classserver_1_1Level.md#function-getcurrentwaveid)**() const |
 | std::pair< std::string, uint32_t > | **[getBoss](Classes/classserver_1_1Level.md#function-getboss)**() const |
+| float | **[getBonusSpawnRate](Classes/classserver_1_1Level.md#function-getbonusspawnrate)**() const |
 | void | **[calculateNumberTotalWave](Classes/classserver_1_1Level.md#function-calculatenumbertotalwave)**() |
 | void | **[addWave](Classes/classserver_1_1Level.md#function-addwave)**(uint16_t time, std::list< [tmpEnemy](Classes/structtmpEnemy.md) > enemies) |
 | | **[Level](Classes/classserver_1_1Level.md#function-level)**() =default |
@@ -112,6 +114,15 @@ void setBossSpawned(
 void setBoss(
     std::string boss,
     uint32_t healthBoss
+)
+```
+
+
+### function setBonusSpawnRate
+
+```cpp
+void setBonusSpawnRate(
+    float spawnRate
 )
 ```
 
@@ -207,6 +218,13 @@ std::pair< std::string, uint32_t > getBoss() const
 ```
 
 
+### function getBonusSpawnRate
+
+```cpp
+float getBonusSpawnRate() const
+```
+
+
 ### function calculateNumberTotalWave
 
 ```cpp
@@ -233,4 +251,4 @@ Level() =default
 
 -------------------------------
 
-Updated on 2026-01-18 at 10:07:04 +0000
+Updated on 2026-01-18 at 11:25:11 +0000

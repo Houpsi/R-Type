@@ -2,7 +2,9 @@ var EcsConstant_8hpp =
 [
     [ "down", "EcsConstant_8hpp.html#a30713575381f37cc60fde9b5cf540d2c", null ],
     [ "folderSound", "EcsConstant_8hpp.html#a1b57c2380fa3729ef2b1840b37b213e3", null ],
-    [ "idToSound", "EcsConstant_8hpp.html#aa8796a8ab89583326fca41efab10136b", null ],
+    [ "idExplosionMusic", "EcsConstant_8hpp.html#a74f88da9bbd02856174fa1dd8012651b", null ],
+    [ "idPowerUpMusic", "EcsConstant_8hpp.html#a15de355a29aad2fc2fdbe18d756d2fee", null ],
+    [ "idToSound", "EcsConstant_8hpp.html#ac81a3619922e9b737083d9211b294902", null ],
     [ "left", "EcsConstant_8hpp.html#a607f05b657c18976d16a7cd2310bced2", null ],
     [ "MAX_DEPTH", "EcsConstant_8hpp.html#a0505af24dab235fc3b06a36f76518682", null ],
     [ "MAX_ENTITIES", "EcsConstant_8hpp.html#a0b10355f6a3934015d874d3207ee0669", null ],

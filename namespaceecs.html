@@ -204,6 +204,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca7369175c057f6e74931ff5a8f4c81c6c">ENEMY_PROJECTILE</a>
 , <br />
 &#160;&#160;<a class="el" href="namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca8ca56dc91e28869f29d69bc6d75ceb9d">OBSTACLE</a>
+, <a class="el" href="namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1ca8408777e45e24ae8918afa8893c56986">POWER_UP</a>
 <br />
  }</td></tr>
 <tr class="separator:a6614fb4da96ff1729ad9ec05a67c3d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -245,8 +246,12 @@ Variables</h2></td></tr>
 <tr class="separator:a5d022ba3aaad087186a14614dea11848"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b57c2380fa3729ef2b1840b37b213e3" id="r_a1b57c2380fa3729ef2b1840b37b213e3"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a1b57c2380fa3729ef2b1840b37b213e3">folderSound</a> = &quot;./assets/sound/&quot;</td></tr>
 <tr class="separator:a1b57c2380fa3729ef2b1840b37b213e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8796a8ab89583326fca41efab10136b" id="r_aa8796a8ab89583326fca41efab10136b"><td class="memItemLeft" align="right" valign="top">constexpr std::array&lt; std::string_view, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#aa8796a8ab89583326fca41efab10136b">idToSound</a> = {&quot;shoot&quot;, &quot;theme&quot;, &quot;explosion&quot;}</td></tr>
-<tr class="separator:aa8796a8ab89583326fca41efab10136b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac81a3619922e9b737083d9211b294902" id="r_ac81a3619922e9b737083d9211b294902"><td class="memItemLeft" align="right" valign="top">constexpr std::array&lt; std::string_view, 5 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#ac81a3619922e9b737083d9211b294902">idToSound</a> = {&quot;shoot&quot;, &quot;theme&quot;, &quot;explosion&quot;, &quot;boss1&quot;, &quot;power_up&quot;}</td></tr>
+<tr class="separator:ac81a3619922e9b737083d9211b294902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74f88da9bbd02856174fa1dd8012651b" id="r_a74f88da9bbd02856174fa1dd8012651b"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a74f88da9bbd02856174fa1dd8012651b">idExplosionMusic</a> = 3</td></tr>
+<tr class="separator:a74f88da9bbd02856174fa1dd8012651b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15de355a29aad2fc2fdbe18d756d2fee" id="r_a15de355a29aad2fc2fdbe18d756d2fee"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a15de355a29aad2fc2fdbe18d756d2fee">idPowerUpMusic</a> = 5</td></tr>
+<tr class="separator:a15de355a29aad2fc2fdbe18d756d2fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9eae524de5e1b5241a65e7d8cec9d116" id="r_a9eae524de5e1b5241a65e7d8cec9d116"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a9eae524de5e1b5241a65e7d8cec9d116">scoreKillMonster</a> = 100</td></tr>
 <tr class="separator:a9eae524de5e1b5241a65e7d8cec9d116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b10355f6a3934015d874d3207ee0669" id="r_a0b10355f6a3934015d874d3207ee0669"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceecs.html#a0b10355f6a3934015d874d3207ee0669">MAX_ENTITIES</a> = 6</td></tr>
@@ -325,6 +330,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a6614fb4da96ff1729ad9ec05a67c3d1cab709f9d3cbf19522f496f915127a3372" name="a6614fb4da96ff1729ad9ec05a67c3d1cab709f9d3cbf19522f496f915127a3372"></a>PLAYER_PROJECTILE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a6614fb4da96ff1729ad9ec05a67c3d1ca7369175c057f6e74931ff5a8f4c81c6c" name="a6614fb4da96ff1729ad9ec05a67c3d1ca7369175c057f6e74931ff5a8f4c81c6c"></a>ENEMY_PROJECTILE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a6614fb4da96ff1729ad9ec05a67c3d1ca8ca56dc91e28869f29d69bc6d75ceb9d" name="a6614fb4da96ff1729ad9ec05a67c3d1ca8ca56dc91e28869f29d69bc6d75ceb9d"></a>OBSTACLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6614fb4da96ff1729ad9ec05a67c3d1ca8408777e45e24ae8918afa8893c56986" name="a6614fb4da96ff1729ad9ec05a67c3d1ca8408777e45e24ae8918afa8893c56986"></a>POWER_UP&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -734,8 +740,8 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="aa8796a8ab89583326fca41efab10136b" name="aa8796a8ab89583326fca41efab10136b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8796a8ab89583326fca41efab10136b">&#9670;&#160;</a></span>idToSound</h2>
+<a id="a74f88da9bbd02856174fa1dd8012651b" name="a74f88da9bbd02856174fa1dd8012651b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f88da9bbd02856174fa1dd8012651b">&#9670;&#160;</a></span>idExplosionMusic</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,7 +750,51 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr std::array&lt;std::string_view, 3&gt; ecs::idToSound = {&quot;shoot&quot;, &quot;theme&quot;, &quot;explosion&quot;}</td>
+          <td class="memname">constexpr int ecs::idExplosionMusic = 3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15de355a29aad2fc2fdbe18d756d2fee" name="a15de355a29aad2fc2fdbe18d756d2fee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15de355a29aad2fc2fdbe18d756d2fee">&#9670;&#160;</a></span>idPowerUpMusic</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int ecs::idPowerUpMusic = 5</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac81a3619922e9b737083d9211b294902" name="ac81a3619922e9b737083d9211b294902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac81a3619922e9b737083d9211b294902">&#9670;&#160;</a></span>idToSound</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::array&lt;std::string_view, 5&gt; ecs::idToSound = {&quot;shoot&quot;, &quot;theme&quot;, &quot;explosion&quot;, &quot;boss1&quot;, &quot;power_up&quot;}</td>
         </tr>
       </table>
   </td>

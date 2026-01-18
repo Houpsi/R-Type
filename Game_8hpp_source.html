@@ -157,13 +157,15 @@ $(document).ready(function(){initNavTree('Game_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">void</span> _sendGameEndState(cmn::GameResultType <a class="code hl_variable" href="namespaceserver.html#a5640ecbbfe71e86018e7bfee49d9fbf9">type</a>) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">void</span> _enemyShoot();</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">void</span> _sendText();</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        std::unordered_map&lt;uint32_t, std::pair&lt;float, float&gt;&gt; _entityPos;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        uint32_t _score = 0;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    };</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">void</span> _createBonus(<a class="code hl_class" href="classserver_1_1Level.html">Level</a> &amp;currentLevel, sf::Clock &amp;bonusClock, std::minstd_rand0 &amp;generator);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">float</span> _nextBonusSpawnDelay = 5.0f;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        std::unordered_map&lt;uint32_t, std::pair&lt;float, float&gt;&gt; _entityPos;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        uint32_t _score = 0;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    };</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#endif </span><span class="comment">//R_TYPE_GAME_HPP</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#endif </span><span class="comment">//R_TYPE_GAME_HPP</span></div>
 <div class="ttc" id="aEcsManager_8hpp_html"><div class="ttname"><a href="EcsManager_8hpp.html">EcsManager.hpp</a></div></div>
 <div class="ttc" id="aLevelManager_8hpp_html"><div class="ttname"><a href="LevelManager_8hpp.html">LevelManager.hpp</a></div></div>
 <div class="ttc" id="aServerSharedData_8hpp_html"><div class="ttname"><a href="ServerSharedData_8hpp.html">ServerSharedData.hpp</a></div></div>
