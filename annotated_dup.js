@@ -44,8 +44,10 @@ var annotated_dup =
       [ "Level", "classserver_1_1Level.html", "classserver_1_1Level" ],
       [ "LevelManager", "classserver_1_1LevelManager.html", "classserver_1_1LevelManager" ],
       [ "LevelParser", "classserver_1_1LevelParser.html", "classserver_1_1LevelParser" ],
+      [ "LobbyManager", "classserver_1_1LobbyManager.html", "classserver_1_1LobbyManager" ],
       [ "Parser", "classserver_1_1Parser.html", "classserver_1_1Parser" ],
-      [ "Server", "classserver_1_1Server.html", "classserver_1_1Server" ]
+      [ "Server", "classserver_1_1Server.html", "classserver_1_1Server" ],
+      [ "ServerSharedData", "classserver_1_1ServerSharedData.html", "classserver_1_1ServerSharedData" ]
     ] ],
     [ "tmpEnemy", "structtmpEnemy.html", "structtmpEnemy" ]
 ];

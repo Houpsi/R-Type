@@ -53,8 +53,10 @@ title: Classes
     * **class [LevelManager](Classes/classserver_1_1LevelManager.md)** 
     * **class [LevelParser](Classes/classserver_1_1LevelParser.md)** 
         * **class [LevelParserException](Classes/classserver_1_1LevelParser_1_1LevelParserException.md)** 
+    * **class [LobbyManager](Classes/classserver_1_1LobbyManager.md)** 
     * **class [Parser](Classes/classserver_1_1Parser.md)** 
     * **class [Server](Classes/classserver_1_1Server.md)** 
+    * **class [ServerSharedData](Classes/classserver_1_1ServerSharedData.md)** 
 * **namespace [std](Namespaces/namespacestd.md)** 
 * **namespace [test](Namespaces/namespacetest.md)** 
 * **struct [tmpEnemy](Classes/structtmpEnemy.md)** 
@@ -63,4 +65,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2026-01-18 at 00:13:20 +0000
+Updated on 2026-01-18 at 10:07:04 +0000

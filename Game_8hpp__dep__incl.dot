@@ -8,5 +8,7 @@ digraph "server/src/game/Game.hpp"
   Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node2 [id="Node000002",label="server/src/game/Game.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Game_8cpp.html",tooltip=" "];
   Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="server/src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
+  Node3 [id="Node000003",label="server/src/lobby_manager\l/LobbyManager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$LobbyManager_8cpp.html",tooltip=" "];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="server/src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
 }

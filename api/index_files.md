@@ -98,6 +98,10 @@ title: Files
         * **dir [server/src/level_manager](Files/dir_1a61ab1baf9342b4b0090bc39c8718b8.md#dir-server/src/level-manager)** 
             * **file [server/src/level_manager/LevelManager.cpp](Files/LevelManager_8cpp.md#file-levelmanager.cpp)** 
             * **file [server/src/level_manager/LevelManager.hpp](Files/LevelManager_8hpp.md#file-levelmanager.hpp)** 
+        * **dir [server/src/lobby_manager](Files/dir_dc6f54b79483f9ea94549115b8465e91.md#dir-server/src/lobby-manager)** 
+            * **file [server/src/lobby_manager/Lobby.hpp](Files/Lobby_8hpp.md#file-lobby.hpp)** 
+            * **file [server/src/lobby_manager/LobbyManager.cpp](Files/LobbyManager_8cpp.md#file-lobbymanager.cpp)** 
+            * **file [server/src/lobby_manager/LobbyManager.hpp](Files/LobbyManager_8hpp.md#file-lobbymanager.hpp)** 
         * **dir [server/src/parser](Files/dir_0d2bd8aef9a1d5e03f22ed5477f85ed5.md#dir-server/src/parser)** 
             * **file [server/src/parser/LevelParser.cpp](Files/LevelParser_8cpp.md#file-levelparser.cpp)** 
             * **file [server/src/parser/LevelParser.hpp](Files/LevelParser_8hpp.md#file-levelparser.hpp)** 
@@ -106,6 +110,9 @@ title: Files
         * **dir [server/src/server](Files/dir_79d66a5bc5e2c314a2c5007d4cb52c17.md#dir-server/src/server)** 
             * **file [server/src/server/Server.cpp](Files/Server_8cpp.md#file-server.cpp)** 
             * **file [server/src/server/Server.hpp](Files/Server_8hpp.md#file-server.hpp)** 
+        * **dir [server/src/server_shared_data](Files/dir_750895f871de6972115ebd7099323fe5.md#dir-server/src/server-shared-data)** 
+            * **file [server/src/server_shared_data/ServerSharedData.cpp](Files/ServerSharedData_8cpp.md#file-servershareddata.cpp)** 
+            * **file [server/src/server_shared_data/ServerSharedData.hpp](Files/ServerSharedData_8hpp.md#file-servershareddata.hpp)** 
     * **dir [server/tests](Files/dir_fe4d34db5c9ea517d0ce62f66f339b65.md#dir-server/tests)** 
         * **file [server/tests/TestLevelManager.cpp](Files/TestLevelManager_8cpp.md#file-testlevelmanager.cpp)** 
         * **file [server/tests/TestLevelParser.cpp](Files/TestLevelParser_8cpp.md#file-testlevelparser.cpp)** 
@@ -116,4 +123,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2026-01-18 at 00:13:20 +0000
+Updated on 2026-01-18 at 10:07:04 +0000

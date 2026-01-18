@@ -15,6 +15,6 @@ var searchData=
   ['text_2ehpp_12',['Text.hpp',['../Text_8hpp.html',1,'']]],
   ['tmpenemy_13',['tmpEnemy',['../structtmpEnemy.html',1,'']]],
   ['tmpenemy_2ehpp_14',['TmpEnemy.hpp',['../TmpEnemy_8hpp.html',1,'']]],
-  ['type_15',['type',['../structtmpEnemy.html#a9279925c45b6d1ae1be779b2fabe04a9',1,'tmpEnemy']]],
+  ['type_15',['type',['../structtmpEnemy.html#a9279925c45b6d1ae1be779b2fabe04a9',1,'tmpEnemy::type'],['../namespaceserver.html#a5640ecbbfe71e86018e7bfee49d9fbf9',1,'server::type']]],
   ['typecollision_16',['TypeCollision',['../namespaceecs.html#a6614fb4da96ff1729ad9ec05a67c3d1c',1,'ecs']]]
 ];

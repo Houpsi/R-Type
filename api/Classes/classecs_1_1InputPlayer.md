@@ -20,17 +20,25 @@ Inherits from [ecs::Component](Classes/classecs_1_1Component.md)
 | -------------- | -------------- |
 | | **[~InputPlayer](Classes/classecs_1_1InputPlayer.md#function-~inputplayer)**() override =default |
 | void | **[setUp](Classes/classecs_1_1InputPlayer.md#function-setup)**(bool up) |
+| void | **[setTwo](Classes/classecs_1_1InputPlayer.md#function-settwo)**(bool two) |
+| void | **[setThree](Classes/classecs_1_1InputPlayer.md#function-setthree)**(bool three) |
 | void | **[setSpacebar](Classes/classecs_1_1InputPlayer.md#function-setspacebar)**(bool spacebar) |
 | void | **[setRight](Classes/classecs_1_1InputPlayer.md#function-setright)**(bool right) |
 | void | **[setR](Classes/classecs_1_1InputPlayer.md#function-setr)**(bool r) |
+| void | **[setOne](Classes/classecs_1_1InputPlayer.md#function-setone)**(bool one) |
 | void | **[setLeft](Classes/classecs_1_1InputPlayer.md#function-setleft)**(bool left) |
+| void | **[setFour](Classes/classecs_1_1InputPlayer.md#function-setfour)**(bool four) |
 | void | **[setEscape](Classes/classecs_1_1InputPlayer.md#function-setescape)**(bool escape) |
 | void | **[setDown](Classes/classecs_1_1InputPlayer.md#function-setdown)**(bool down) |
 | bool | **[getUp](Classes/classecs_1_1InputPlayer.md#function-getup)**() const |
+| bool | **[getTwo](Classes/classecs_1_1InputPlayer.md#function-gettwo)**() const |
+| bool | **[getThree](Classes/classecs_1_1InputPlayer.md#function-getthree)**() const |
 | bool | **[getSpacebar](Classes/classecs_1_1InputPlayer.md#function-getspacebar)**() const |
 | bool | **[getRight](Classes/classecs_1_1InputPlayer.md#function-getright)**() const |
 | bool | **[getReady](Classes/classecs_1_1InputPlayer.md#function-getready)**() const |
+| bool | **[getOne](Classes/classecs_1_1InputPlayer.md#function-getone)**() const |
 | bool | **[getLeft](Classes/classecs_1_1InputPlayer.md#function-getleft)**() const |
+| bool | **[getFour](Classes/classecs_1_1InputPlayer.md#function-getfour)**() const |
 | bool | **[getDown](Classes/classecs_1_1InputPlayer.md#function-getdown)**() const |
 | | **[InputPlayer](Classes/classecs_1_1InputPlayer.md#function-inputplayer)**() =default |
 
@@ -62,6 +70,24 @@ void setUp(
 ```
 
 
+### function setTwo
+
+```cpp
+void setTwo(
+    bool two
+)
+```
+
+
+### function setThree
+
+```cpp
+void setThree(
+    bool three
+)
+```
+
+
 ### function setSpacebar
 
 ```cpp
@@ -89,11 +115,29 @@ void setR(
 ```
 
 
+### function setOne
+
+```cpp
+void setOne(
+    bool one
+)
+```
+
+
 ### function setLeft
 
 ```cpp
 void setLeft(
     bool left
+)
+```
+
+
+### function setFour
+
+```cpp
+void setFour(
+    bool four
 )
 ```
 
@@ -123,6 +167,20 @@ bool getUp() const
 ```
 
 
+### function getTwo
+
+```cpp
+bool getTwo() const
+```
+
+
+### function getThree
+
+```cpp
+bool getThree() const
+```
+
+
 ### function getSpacebar
 
 ```cpp
@@ -144,10 +202,24 @@ bool getReady() const
 ```
 
 
+### function getOne
+
+```cpp
+bool getOne() const
+```
+
+
 ### function getLeft
 
 ```cpp
 bool getLeft() const
+```
+
+
+### function getFour
+
+```cpp
+bool getFour() const
 ```
 
 
@@ -167,4 +239,4 @@ InputPlayer() =default
 
 -------------------------------
 
-Updated on 2026-01-18 at 00:13:20 +0000
+Updated on 2026-01-18 at 10:07:04 +0000

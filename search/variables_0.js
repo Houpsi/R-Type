@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['down_0',['down',['../namespaceecs_1_1dir.html#a30713575381f37cc60fde9b5cf540d2c',1,'ecs::dir']]]
+  ['code_0',['code',['../namespaceserver.html#a132962816078d10639dd051028d8fa35',1,'server']]],
+  ['createdat_1',['createdAt',['../namespaceserver.html#a7d128fe2f4d2bf619cb7a2065101f37c',1,'server']]]
 ];

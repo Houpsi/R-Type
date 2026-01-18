@@ -7,5 +7,5 @@ digraph "main"
   rankdir="LR";
   Node1 [id="Node000001",label="main",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="server::Game::run",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classserver_1_1Game.html#ab56d9f3e42b375e1e0cf9bcb55e86522",tooltip=" "];
+  Node2 [id="Node000002",label="server::LobbyManager::run",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classserver_1_1LobbyManager.html#a09c2ba3289c287e48c4c4a5b5790e388",tooltip=" "];
 }

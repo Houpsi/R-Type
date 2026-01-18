@@ -66,7 +66,9 @@ digraph "ecs/src/ResourceManager.hpp"
   Node28 [id="Node000028",label="server/src/game/Game.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Game_8hpp.html",tooltip=" "];
   Node28 -> Node7 [id="edge33_Node000028_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node28 -> Node29 [id="edge34_Node000028_Node000029",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node29 [id="Node000029",label="server/src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
-  Node1 -> Node30 [id="edge35_Node000001_Node000030",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node30 [id="Node000030",label="ecs/src/ResourceManager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ResourceManager_8cpp.html",tooltip=" "];
+  Node29 [id="Node000029",label="server/src/lobby_manager\l/LobbyManager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$LobbyManager_8cpp.html",tooltip=" "];
+  Node28 -> Node30 [id="edge35_Node000028_Node000030",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node30 [id="Node000030",label="server/src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
+  Node1 -> Node31 [id="edge36_Node000001_Node000031",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node31 [id="Node000031",label="ecs/src/ResourceManager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$ResourceManager_8cpp.html",tooltip=" "];
 }

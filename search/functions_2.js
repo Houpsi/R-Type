@@ -8,5 +8,6 @@ var searchData=
   ['component_5',['Component',['../classecs_1_1Component.html#a03794632c30cbe13f476caacfd937b14',1,'ecs::Component']]],
   ['contains_6',['contains',['../classecs_1_1AABB.html#af5216e88bca1d29a509f371621b2c413',1,'ecs::AABB']]],
   ['createentity_7',['createentity',['../classecs_1_1EcsManager.html#a2a2e15d8e7a352cdb6ff1915bf60b7e8',1,'ecs::EcsManager::createEntity()'],['../classecs_1_1EcsManager.html#a7ad41c2a872c8b40cbb88708c8a47686',1,'ecs::EcsManager::createEntity(std::size_t id)']]],
-  ['createlevel_8',['createLevel',['../classserver_1_1LevelParser.html#aedd75c95fb917debd2408a156da11d54',1,'server::LevelParser']]]
+  ['createlevel_8',['createLevel',['../classserver_1_1LevelParser.html#aedd75c95fb917debd2408a156da11d54',1,'server::LevelParser']]],
+  ['createlobby_9',['createLobby',['../classserver_1_1ServerSharedData.html#a6cbd688552f6cf46bbe820d49cde4c2c',1,'server::ServerSharedData']]]
 ];

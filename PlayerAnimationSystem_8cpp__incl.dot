@@ -55,7 +55,9 @@ digraph "ecs/src/systems/PlayerAnimationSystem.cpp"
   Node20 -> Node21 [id="edge29_Node000020_Node000021",color="steelblue1",style="solid",tooltip=" "];
   Node21 [id="Node000021",label="iostream",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node1 -> Node22 [id="edge30_Node000001_Node000022",color="steelblue1",style="solid",tooltip=" "];
-  Node22 [id="Node000022",label="components/PlayerAnimation.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$PlayerAnimation_8hpp.html",tooltip=" "];
-  Node22 -> Node7 [id="edge31_Node000022_Node000007",color="steelblue1",style="solid",tooltip=" "];
-  Node22 -> Node19 [id="edge32_Node000022_Node000019",color="steelblue1",style="solid",tooltip=" "];
+  Node22 [id="Node000022",label="../../../common/src\l/constants/GameConstants.hpp",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node1 -> Node23 [id="edge31_Node000001_Node000023",color="steelblue1",style="solid",tooltip=" "];
+  Node23 [id="Node000023",label="components/PlayerAnimation.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$PlayerAnimation_8hpp.html",tooltip=" "];
+  Node23 -> Node7 [id="edge32_Node000023_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node23 -> Node19 [id="edge33_Node000023_Node000019",color="steelblue1",style="solid",tooltip=" "];
 }

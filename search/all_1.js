@@ -8,5 +8,7 @@ var searchData=
   ['backgroundsystem_2ehpp_5',['BackgroundSystem.hpp',['../BackgroundSystem_8hpp.html',1,'']]],
   ['bindports_6',['bindPorts',['../classserver_1_1Server.html#a87f3a0d51627c9783d7b1b6caf126933',1,'server::Server']]],
   ['broadcasttcp_7',['broadcastTcp',['../classserver_1_1Server.html#a594dd5e9ce088dc1b6b4df3826fa8f4c',1,'server::Server']]],
-  ['broadcastudp_8',['broadcastUdp',['../classserver_1_1Server.html#a23b87533f1ba7136ff8bca1decf29c4d',1,'server::Server']]]
+  ['broadcasttcptolobby_8',['broadcastTcpToLobby',['../classserver_1_1Server.html#a61cf2652ba101c9881c51b82d07ff0c2',1,'server::Server']]],
+  ['broadcastudp_9',['broadcastUdp',['../classserver_1_1Server.html#a23b87533f1ba7136ff8bca1decf29c4d',1,'server::Server']]],
+  ['broadcastudptolobby_10',['broadcastUdpToLobby',['../classserver_1_1Server.html#a59634878825e96ced8a368c275482d40',1,'server::Server']]]
 ];

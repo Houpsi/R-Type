@@ -63,5 +63,7 @@ digraph "ecs/src/EcsManager.hpp"
   Node27 [id="Node000027",label="server/src/game/Game.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Game_8hpp.html",tooltip=" "];
   Node27 -> Node6 [id="edge31_Node000027_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node27 -> Node28 [id="edge32_Node000027_Node000028",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node28 [id="Node000028",label="server/src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
+  Node28 [id="Node000028",label="server/src/lobby_manager\l/LobbyManager.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$LobbyManager_8cpp.html",tooltip=" "];
+  Node27 -> Node29 [id="edge33_Node000027_Node000029",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node29 [id="Node000029",label="server/src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
 }

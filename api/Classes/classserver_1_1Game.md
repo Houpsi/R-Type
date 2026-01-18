@@ -18,7 +18,7 @@ title: server::Game
 | -------------- | -------------- |
 | | **[~Game](Classes/classserver_1_1Game.md#function-~game)**() =default |
 | void | **[run](Classes/classserver_1_1Game.md#function-run)**() |
-| | **[Game](Classes/classserver_1_1Game.md#function-game)**(const std::shared_ptr< cmn::SharedData > & data) |
+| | **[Game](Classes/classserver_1_1Game.md#function-game)**(const std::shared_ptr< [ServerSharedData](Classes/classserver_1_1ServerSharedData.md) > & data, int lobbyId, cmn::LobbyType lobbyType) |
 
 ## Public Functions Documentation
 
@@ -40,11 +40,13 @@ void run()
 
 ```cpp
 explicit Game(
-    const std::shared_ptr< cmn::SharedData > & data
+    const std::shared_ptr< ServerSharedData > & data,
+    int lobbyId,
+    cmn::LobbyType lobbyType
 )
 ```
 
 
 -------------------------------
 
-Updated on 2026-01-18 at 00:13:20 +0000
+Updated on 2026-01-18 at 10:07:04 +0000
