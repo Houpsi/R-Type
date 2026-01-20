@@ -33,14 +33,7 @@ namespace server {
 
      Game::Game(const std::shared_ptr<ServerSharedData> &data, const int lobbyId, const cmn::LobbyType lobbyType)
     : _sharedData(data), _lobbyId(lobbyId), _lobbyType(lobbyType)
-     {
-         try {
-             ecs::EcsManager const manager {};
-             _ecs = manager;
-         } catch ([[maybe_unused]] std::exception &e) {
-             throw std::exception();
-         }
-     }
+     {}
 
 
     void Game::run()
